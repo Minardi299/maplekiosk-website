@@ -1,0 +1,117 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+@import "@fontsource-variable/bricolage-grotesque";
+@import "@fontsource-variable/dm-sans";
+@import "@fontsource/dm-mono/400.css";
+@import "@fontsource/dm-mono/500.css";
+@import "@fontsource/be-vietnam-pro/400.css";
+@import "@fontsource/be-vietnam-pro/500.css";
+@import "@fontsource/be-vietnam-pro/600.css";
+@import "@fontsource/be-vietnam-pro/700.css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+    --font-heading: 'Bricolage Grotesque Variable', sans-serif;
+    --font-sans: 'DM Sans Variable', sans-serif;
+    --font-mono: 'DM Mono', monospace;
+    --color-ring: var(--ring);
+    --color-input: var(--input);
+    --color-border: var(--border);
+    --color-destructive: var(--destructive);
+    --color-accent-foreground: var(--accent-foreground);
+    --color-accent: var(--accent);
+    --color-muted-foreground: var(--muted-foreground);
+    --color-muted: var(--muted);
+    --color-secondary-foreground: var(--secondary-foreground);
+    --color-secondary: var(--secondary);
+    --color-primary-foreground: var(--primary-foreground);
+    --color-primary: var(--primary);
+    --color-primary-hover: var(--primary-hover);
+    --color-popover-foreground: var(--popover-foreground);
+    --color-popover: var(--popover);
+    --color-card-foreground: var(--card-foreground);
+    --color-card: var(--card);
+    --color-foreground: var(--foreground);
+    --color-background: var(--background);
+    --color-ink: var(--ink);
+    --color-ink-foreground: var(--ink-foreground);
+    --color-ink-muted: var(--ink-muted);
+    --color-ink-faint: var(--ink-faint);
+    --radius-sm: calc(var(--radius) * 0.6);
+    --radius-md: calc(var(--radius) * 0.8);
+    --radius-lg: var(--radius);
+    --radius-xl: calc(var(--radius) * 1.4);
+    --radius-2xl: calc(var(--radius) * 1.8);
+    --radius-3xl: calc(var(--radius) * 2.2);
+    --radius-4xl: calc(var(--radius) * 2.6);
+}
+
+:root {
+    --background: #f8f9fb;
+    --foreground: #1d1a17;
+    --card: #ffffff;
+    --card-foreground: #1d1a17;
+    --popover: #ffffff;
+    --popover-foreground: #1d1a17;
+    --primary: #af1e2d;
+    --primary-hover: #8c1723;
+    --primary-foreground: #ffffff;
+    --secondary: #1d1a17;
+    --secondary-foreground: #f8f9fb;
+    --muted: #e9edf4;
+    --muted-foreground: #5d6372;
+    --accent: #e9edf4;
+    --accent-foreground: #1d1a17;
+    --destructive: oklch(0.577 0.245 27.325);
+    --border: rgb(29 26 23 / 0.12);
+    --input: rgb(29 26 23 / 0.15);
+    --ring: #af1e2d;
+    --radius: 0.625rem;
+    --ink: #171d52;
+    --ink-foreground: #f8f9fb;
+    --ink-muted: #aab4dd;
+    --ink-faint: #8791c4;
+    --container-max: 75rem;
+    --header-height: 4.5rem;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+    }
+  body {
+    @apply bg-background text-foreground;
+    }
+  html {
+    @apply font-sans scroll-smooth;
+    }
+  /* DM Sans and DM Mono have no Vietnamese subset */
+  html:lang(vi) {
+    font-family: 'Be Vietnam Pro', 'DM Sans Variable', sans-serif;
+  }
+  html:lang(vi) .font-mono {
+    font-family: 'DM Mono', 'Be Vietnam Pro', monospace;
+  }
+  ::selection {
+    background: var(--primary);
+    color: #fff;
+  }
+  input[type="range"] {
+    accent-color: var(--primary);
+    width: 100%;
+    cursor: pointer;
+  }
+}
+
+@layer components {
+  .site-container {
+    @apply mx-auto w-full px-5 sm:px-8 lg:px-10;
+    max-width: var(--container-max);
+  }
+  .section {
+    @apply py-16 sm:py-20 lg:py-24;
+    scroll-margin-top: var(--header-height);
+  }
+}

@@ -114,4 +114,35 @@
     @apply py-16 sm:py-20 lg:py-24;
     scroll-margin-top: var(--header-height);
   }
+  .legal-prose {
+    @apply text-[15px] leading-relaxed;
+  }
+  .legal-prose h2 {
+    @apply font-heading mt-10 mb-3 text-2xl font-semibold tracking-tight;
+  }
+  .legal-prose h3 {
+    @apply font-heading mt-6 mb-2 text-lg font-semibold;
+  }
+  .legal-prose p,
+  .legal-prose div {
+    @apply my-3;
+  }
+  .legal-prose ul,
+  .legal-prose ol {
+    @apply my-3 list-disc pl-6;
+  }
+  .legal-prose li {
+    @apply my-1.5;
+  }
+  .legal-prose a[href] {
+    @apply text-primary underline;
+  }
+  /* Zigzag tear along the bottom edge, cut with a mask */
+  .receipt-tear {
+    --tooth: 14px;
+    -webkit-mask: conic-gradient(from -45deg at bottom, #0000, #000 1deg 89deg, #0000 90deg)
+      50% / var(--tooth) 100%;
+    mask: conic-gradient(from -45deg at bottom, #0000, #000 1deg 89deg, #0000 90deg)
+      50% / var(--tooth) 100%;
+  }
 }

@@ -5,16 +5,12 @@ export const en = {
       desc: "Self-order kiosk for tea shops and quick-service counters in Montreal and the South Shore. No contract, 0% of your sales.",
     },
     features: {
-      title: "Features — MapleKiosk",
+      title: "Apps — MapleKiosk",
       desc: "Kiosk, counter station, kitchen screen, TV menus, delivery in one queue, loyalty.",
     },
     pricing: {
       title: "Pricing — MapleKiosk",
-      desc: "One price, all included. No contract, cancel any month, or buy it outright.",
-    },
-    calculator: {
-      title: "Payment cost calculator — MapleKiosk",
-      desc: "What your card payments really cost — Square, Clover, or your own acquirer, compared honestly.",
+      desc: "One price per app, SaaS or on-premise. No contract, cancel any month, or buy it outright.",
     },
     demo: {
       title: "Book a demo — MapleKiosk",
@@ -26,7 +22,7 @@ export const en = {
     },
     salons: {
       title: "Salons — MapleKiosk",
-      desc: "A phone assistant that answers, guides, and books while your hands are busy.",
+      desc: "A phone assistant for nail salons, spas, and beauty shops — it answers, guides, and books while your hands are busy.",
     },
     coffee: {
       title: "Cafés & boba — MapleKiosk",
@@ -42,7 +38,7 @@ export const en = {
   },
 
   nav: {
-    features: "Features",
+    features: "Apps",
     pricing: "Pricing",
     about: "About",
     cta: "See how it works",
@@ -75,6 +71,7 @@ export const en = {
     title: "Three counters, three different mornings",
     sub: "Pick yours.",
     cta: "Book 15 minutes",
+    demoShop: "Walk through the demo shop",
     doors: [
       {
         label: "Tea & coffee counters",
@@ -137,6 +134,19 @@ export const en = {
     cta: "Bring a statement — we'll check these numbers for real",
   },
 
+  lineCost: {
+    title: "What does the line cost you?",
+    sub: "The customers who look at the line and walk out never show up in a report. Put a number on them.",
+    walkouts: "Customers who walk away per day",
+    days: "Days open per month",
+    resultTag: "ESTIMATED SALES LOST PER MONTH",
+    payoff:
+      "If the kiosk caught even part of those orders while the line keeps moving — what would that change at the end of the month?",
+    honest:
+      "If this number is small, a kiosk won't pay for itself — and we'll tell you that too.",
+    cta: "Bring these numbers — we'll check them for real",
+  },
+
   chips: {
     title: "Terms we can write in big letters",
     items: [
@@ -158,7 +168,6 @@ export const en = {
       "A family of business apps and affordable AI services, thoughtfully built in Canada for the people who keep small business running.",
     product: "Product",
     legal: "Legal",
-    calculator: "Calculator",
     demo: "Book a demo",
     industries: "Industries",
     nails: "Nail & Beauty Salons",
@@ -203,6 +212,10 @@ export const en = {
       {
         q: "“86 the salmon.”",
         body: "Mark an item sold out once and it greys out on the kiosk and your TV menus instantly.",
+      },
+      {
+        q: "The phone rings mid-service — a table for four, Saturday.",
+        body: "An assistant answers every call in French or English, handles the questions, and books the table — while you keep plating.",
       },
     ],
   },
@@ -271,11 +284,15 @@ export const en = {
   },
 
   pricing: {
-    title: "One price. Everything the counter uses.",
-    price: "[PRICE]",
+    title: "One price per app. SaaS or on-premise.",
+    sub: "Every MapleKiosk app comes two ways — hosted by us (SaaS, billed monthly) or installed on your own servers (on-premise, one-time licence). Pick per app and mix and match.",
     per: "/month",
-    includes:
-      "Kiosk, counter station, kitchen screen, TV menus, loyalty. All included.",
+    apps: [
+      { name: "MapleCoffee", price: "$39", tag: "" },
+      { name: "MapleRES", price: "$49", tag: "" },
+      { name: "MapleSPA", price: "$44", tag: "Flagship app" },
+    ],
+    note: "Prices in USD, per app, before tax. AI integration services are quoted separately. Need several apps or a custom build? Talk to sales for a bundle.",
     buyTitle: "Or buy it outright",
     buyBody: "One payment, installed on site, yours for good.",
     buyCta: "Contact us",
@@ -308,11 +325,6 @@ export const en = {
     ],
   },
 
-  calcPage: {
-    intro:
-      "The same calculator we bring to every demo. Move the sliders to your numbers.",
-  },
-
   demo: {
     title: "15 minutes. Your menu, on a real kiosk.",
     sub: "We load your menu before we come — you play with it, you decide. Tuesday or Wednesday after the rush is perfect.",
@@ -340,37 +352,27 @@ export const en = {
   },
 
   salons: {
+    kicker: "For nail salons, spas & beauty shops",
     title: "The phone rings. Your hands are in acrylic.",
     sub: "An assistant answers every call, in French or English, walks the client through your services, and books the slot. It shows up in your schedule. Your tech never stops.",
+    bandTitle: "Your hands stay on the client. The assistant takes the calls.",
+    quotes: [
+      {
+        q: "“Anything for two, Saturday afternoon?”",
+        body: "The assistant checks your schedule, answers like a human, and books the slot — it shows up in your calendar.",
+      },
+      {
+        q: "No answer means she books the next salon on Google.",
+        body: "Every call gets picked up, in French or English — mid-set, mid-facial, mid-rush.",
+      },
+      {
+        q: "“How much for a gel refill?”",
+        body: "It knows your services and your prices, and it answers — then offers the booking.",
+      },
+    ],
     recording: "[RECORDING — a real 30-second call, to be produced]",
     disclosure:
       "The assistant is automated and says so at the start of every call. Call handling is being reviewed for Quebec privacy law (Law 25) before launch.",
-  },
-
-  privacy: {
-    title: "Privacy",
-    intro:
-      "This page will satisfy Quebec's Law 25 before launch. The blocks below are placeholders until the legal review is done.",
-    sections: [
-      {
-        title: "What we collect",
-        body: "[Demo form fields: name, business, city, phone. Calculator inputs are not stored — confirm before publishing.]",
-      },
-      {
-        title: "Privacy officer",
-        body: "[PERSON IN CHARGE OF PERSONAL INFORMATION PROTECTION + CONTACT EMAIL]",
-      },
-      { title: "Hosting", body: "[WHERE THE DATA IS HOSTED]" },
-      { title: "Cookies", body: "[TO CONFIRM — list cookies if any]" },
-    ],
-    review: "[HAVE A QUEBEC LAWYER REVIEW BEFORE PUBLISHING]",
-  },
-
-  legal: {
-    title: "Terms of service",
-    intro:
-      "[TERMS OF SERVICE — French-first legal text to be drafted and reviewed by a Quebec lawyer. The English version will be a courtesy translation.]",
-    review: "[HAVE A QUEBEC LAWYER REVIEW BEFORE PUBLISHING]",
   },
 
   notFound: {

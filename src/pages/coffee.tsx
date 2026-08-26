@@ -1,6 +1,7 @@
 import { PageMeta } from "@/components/page-meta"
 import { FinalCta } from "@/components/sections/final-cta"
 import { Hero } from "@/components/sections/hero"
+import { LineCost } from "@/components/sections/line-cost"
 import { useI18n } from "@/lib/i18n"
 
 export default function CoffeePage() {
@@ -36,7 +37,14 @@ export default function CoffeePage() {
             </div>
           ))}
         </div>
+        <a
+          href="/shop-demo/index.html"
+          className="text-[15px] font-semibold text-primary hover:text-primary-hover"
+        >
+          {t.router.demoShop} →
+        </a>
       </section>
+      <LineCost />
       <section className="border-t bg-muted">
         <div className="site-container section flex flex-col gap-10">
           <h2 className="font-heading text-3xl font-semibold tracking-tight sm:text-[38px]">

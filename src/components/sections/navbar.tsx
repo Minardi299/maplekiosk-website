@@ -1,14 +1,32 @@
-import { useEffect, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import { Link, useLocation } from "react-router"
-import { MenuIcon, XIcon } from "lucide-react"
+import { ChevronDownIcon, MenuIcon, XIcon } from "lucide-react"
 import { CtaLink } from "@/components/cta-link"
 import { Button } from "@/components/ui/button"
-import { LANGS, LANG_LABELS, useI18n, type Lang } from "@/lib/i18n"
+import { LANGS, LANG_LABELS, LANG_NAMES, useI18n, type Lang } from "@/lib/i18n"
 import { SITE } from "@/lib/site"
 
 function LangSwitch() {
   const { lang } = useI18n()
   const { pathname } = useLocation()
+  const [open, setOpen] = useState(false)
+  const ref = useRef<HTMLDivElement>(null)
+  useEffect(() => setOpen(false), [pathname])
+  useEffect(() => {
+    if (!open) return
+    const onPointerDown = (e: PointerEvent) => {
+      if (!ref.current?.contains(e.target as Node)) setOpen(false)
+    }
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setOpen(false)
+    }
+    document.addEventListener("pointerdown", onPointerDown)
+    document.addEventListener("keydown", onKeyDown)
+    return () => {
+      document.removeEventListener("pointerdown", onPointerDown)
+      document.removeEventListener("keydown", onKeyDown)
+    }
+  }, [open])
   const prefix = LANGS.find(
     (l) => l !== "en" && (pathname === `/${l}` || pathname.startsWith(`/${l}/`)),
   )
@@ -18,21 +36,37 @@ function LangSwitch() {
   const target = (l: Lang) =>
     l === "en" ? base : base === "/" ? `/${l}` : `/${l}${base}`
   return (
-    <div className="flex shrink-0 overflow-hidden rounded-lg border text-[13px]">
-      {LANGS.map((l) => (
-        <Link
-          key={l}
-          to={target(l)}
-          aria-current={lang === l ? "true" : undefined}
-          className={
-            lang === l
-              ? "bg-secondary px-2.5 py-1.5 font-semibold text-secondary-foreground"
-              : "px-2.5 py-1.5 text-muted-foreground hover:text-foreground"
-          }
-        >
-          {LANG_LABELS[l]}
-        </Link>
-      ))}
+    <div ref={ref} className="relative shrink-0 text-[13px]">
+      <button
+        type="button"
+        aria-expanded={open}
+        aria-haspopup="menu"
+        onClick={() => setOpen((o) => !o)}
+        className="flex items-center gap-1 rounded-lg border px-2.5 py-1.5 font-semibold hover:bg-muted"
+      >
+        {LANG_LABELS[lang]}
+        <ChevronDownIcon
+          className={open ? "size-3.5 rotate-180" : "size-3.5"}
+        />
+      </button>
+      {open && (
+        <div className="absolute left-0 z-50 mt-1.5 flex min-w-32 flex-col overflow-hidden rounded-lg border bg-popover py-1 shadow-lg xl:right-0 xl:left-auto">
+          {LANGS.map((l) => (
+            <Link
+              key={l}
+              to={target(l)}
+              aria-current={lang === l ? "true" : undefined}
+              className={
+                lang === l
+                  ? "px-3 py-2 font-semibold"
+                  : "px-3 py-2 text-muted-foreground hover:bg-muted hover:text-foreground"
+              }
+            >
+              {LANG_NAMES[l]}
+            </Link>
+          ))}
+        </div>
+      )}
     </div>
   )
 }
@@ -43,7 +77,7 @@ export function Navbar() {
   const location = useLocation()
   useEffect(() => setOpen(false), [location])
   const links = [
-    { to: "/fonctionnalites", label: t.nav.features },
+    { to: "/apps", label: t.nav.features },
     { to: "/tarifs", label: t.nav.pricing },
     { to: "/a-propos", label: t.nav.about },
   ]

@@ -1,37 +1,79 @@
 # MapleKiosk website
 
 Marketing site for MapleKiosk — the Quebec redesign of maplekiosk.ca.
+Repo: https://github.com/Minardi299/maplekiosk-website
 
 ## Stack
 
-- React Router 7, SPA mode with prerender (same setup as boba-website)
+- React Router 7, SPA mode with prerender (same setup as aloha-website and culac)
 - Tailwind CSS 4. All design tokens live in `src/index.css`
 - Fonts: Bricolage Grotesque (headings), DM Sans (body), DM Mono (numbers)
-- pnpm
+- pnpm, pinned by the `packageManager` field in `package.json`
+- Brand assets (`public/favicon.ico`, `public/MapleKiosk_rectangle.png`) come from maplekiosk.ca
+
+## Pages
+
+| Path | Job |
+|---|---|
+| `/` | The funnel: hero (problem) → industry router → money diagram → teach band → payments calculator → terms chips → final CTA |
+| `/apps` | Product components, framed as answers for the already-interested owner |
+| `/tarifs` | One price, buy-outright option, FAQ |
+| `/coffee` | Cafés & boba: boba hero, counter quote cards, line-cost calculator, morning timeline |
+| `/restaurants` | Restaurants & fast food: delivery-tablet pain, "86 the salmon" card, phone-assistant card |
+| `/salons` | Nail salons, spas & beauty shops: the AI phone assistant (MapleSPA door, footer link only) |
+| `/demo` | The only conversion page: book 15 minutes |
+| `/a-propos` | Founder trust page |
+| `/confidentialite`, `/conditions` | Legal, imported verbatim from maplekiosk.ca (see below) |
+
+Removed on purpose: `/calculateur` (the payments calculator lives on the home page) and `/fonctionnalites` (renamed to `/apps`). Old links hit the 404 page; no redirects.
+
+`/shop-demo/index.html` is a standalone interactive 3D coffee-shop demo (static files in `public/shop-demo/`, imported from the Claude Design project "Interactive Coffee Shop Demo"). It is linked from `/coffee` and `/restaurants`, is English-only, and loads React, three.js, and a Google font from CDNs at runtime — it needs internet. Its 18 GLB props are KayKit "Restaurant Bits" (CC0). To update it, re-import the `.dc.html` from the design project; for the salon variant, copy the folder and edit.
+
+## Content rules
+
+The sales research in `~/mess-around/sale` (SPIN selling, the landing handoff) drives the copy. The short version:
+
+- Problem first, product second. Each page states the owner's pain before it shows a feature.
+- The calculators price the owner's own problem, and each one must be able to say "don't buy" (at low volume the payments calculator recommends Square).
+- Never promise a POS replacement. The wedge is "keep your register, add the kiosk."
+- The AI phone assistant (life-like voice; answers inquiries, takes bookings) is a real feature — claim it for restaurants and salons. Say "assistant" in headlines and disclose the automation. Forecasting, inventory, and coursing are not built — do not claim them.
+- No invented numbers, testimonials, or customer names. Unknown facts stay bracketed: [LIKE THIS].
+- Brand names (Square, Clover) appear only next to published rates. Criticize the nameless pricing model, never a brand.
+- When porting content from maplekiosk.ca, take structure and translations only — rewrite to this site's voice and positioning.
 
 ## Languages
 
 English is the default, at `/`. Mirrors are at `/fr`, `/vi`, and `/ru`.
 All copy lives in `src/lib/strings/en.ts`, `fr.ts`, `vi.ts`, `ru.ts`.
-`en.ts` defines the shape. The other files must keep the same keys.
+`en.ts` defines the shape. The other files must keep the same keys, so every string change touches all four files.
 
 ## Commands
 
 - `pnpm dev` — dev server
-- `pnpm build` — type-check, build, prerender all 36 pages
+- `pnpm build` — type-check, build, prerender all 40 pages
 - `pnpm lint` — oxlint
 - `pnpm preview` — serve the build on port 4173
 
+## CI, packages, and releases
+
+Same workflow setup as aloha-website and culac:
+
+- `ci.yml` — lint + build on every push and PR; uploads `build/client` as the `static-site` artifact.
+- `release.yml` — every push to main refreshes the rolling `latest` release with `maplekiosk-website-latest.zip` (the static build). A `v*` tag (or manual dispatch) creates a versioned release.
+- `docker.yml` — builds the nginx image (`Dockerfile` + `docker/nginx.conf`) and pushes `ghcr.io/minardi299/maplekiosk-website` tagged `latest` + commit SHA, with semver tags on `v*`.
+
 ## Before launch
 
-1. Replace every bracketed placeholder: [PRICE], [TÉLÉPHONE], [COURRIEL], [BUSINESS NAME — BROSSARD], [PHOTO], [SCREENSHOT], and the legal blocks. Search the string files for `[`.
+1. Replace every bracketed placeholder: [TÉLÉPHONE], [COURRIEL], [BUSINESS NAME — BROSSARD], [PHOTO], [SCREENSHOT], the salons call recording. Search the string files for `[`. Pricing is now real, imported from maplekiosk.ca: MapleCoffee $39, MapleRES $49, MapleSPA $44 — USD, per app, monthly SaaS.
 2. Set real contact info in `src/lib/site.ts`. The demo form sends mail to `SITE.email`.
-3. Have a Quebec lawyer review `/confidentialite` (Law 25) and `/conditions`.
-4. English is the default language on request. Confirm this against Bill 96 advice before launch — the earlier plan had French first.
+3. Legal: `/conditions` (EULA) and `/confidentialite` (privacy policy) are imported verbatim from maplekiosk.ca, dated July 22, 2026, in `src/lib/legal.ts`. Flags for a lawyer: New York governing law for a Quebec market, no mention of Quebec's Law 25, English-only text (Bill 96 expects French-first), and the original's own "[Mailing address and phone number to be added]" bracket.
+4. English is the default language on request. Confirm this against Bill 96 advice before launch — the handoff's original rule was French first.
 5. The Bricolage/DM fonts have no Cyrillic subset. Russian pages fall back to the system font. Vietnamese body text uses Be Vietnam Pro.
-6. `/salons` is drafted and linked only from the footer. The handoff asks for a Law 25 review before this page goes live — remove the footer link if you want it fully unlinked until then.
-7. hreflang alternate links are in place and point to `https://maplekiosk.ca`. Update `SITE.url` in `src/lib/site.ts` if the domain changes.
+6. `/salons` is built out and linked from the footer Industries column. The handoff still requires a Law 25 review of call handling and a real 30-second call recording before this page goes live.
+7. hreflang alternate links point to `https://maplekiosk.ca`. Update `SITE.url` in `src/lib/site.ts` if the domain changes.
+8. The line-cost calculator on `/coffee` has no "don't buy" threshold yet. Prices are known now ($39–49/mo), so a threshold can be added when wanted.
 
 ## Deploy
 
-`wrangler.jsonc` is set up for Cloudflare (`maplekiosk-website`), serving `build/client`.
+- `wrangler.jsonc` is set up for Cloudflare (`maplekiosk-website`), serving `build/client`.
+- Or use the release zip / the ghcr.io nginx image — both contain the same static build.

@@ -9,20 +9,56 @@ export default function SalonsPage() {
   return (
     <>
       <PageMeta title={t.meta.salons.title} desc={t.meta.salons.desc} />
-      <section className="site-container section flex max-w-3xl flex-col gap-6">
-        <h1 className="font-heading text-4xl font-semibold tracking-tight text-balance sm:text-5xl">
-          {s.title}
-        </h1>
-        <p className="text-lg leading-relaxed">{s.sub}</p>
-        <div className="flex items-center justify-center rounded-2xl border bg-muted p-10">
-          <Placeholder>{s.recording}</Placeholder>
+      <section className="bg-ink text-ink-foreground">
+        <div className="site-container flex max-w-4xl flex-col gap-6 py-14 sm:py-16 lg:py-20">
+          <span className="font-mono text-xs tracking-[0.1em] text-ink-muted uppercase">
+            {s.kicker}
+          </span>
+          <h1 className="font-heading text-4xl leading-[1.12] font-semibold tracking-tight text-balance sm:text-5xl lg:text-[54px]">
+            {s.title}
+          </h1>
+          <p className="max-w-[34em] text-lg leading-relaxed sm:text-[21px]">
+            {s.sub}
+          </p>
+          <div className="mt-1 flex flex-wrap gap-3.5">
+            <CtaLink to={path("/demo")} size="lg">
+              {t.router.cta}
+            </CtaLink>
+          </div>
         </div>
-        <p className="text-[15px] leading-relaxed text-muted-foreground">
-          {s.disclosure}
-        </p>
-        <CtaLink to={path("/demo")} size="lg" className="mt-2 self-start">
-          {t.router.cta}
-        </CtaLink>
+      </section>
+      <section className="site-container section flex flex-col gap-10">
+        <h2 className="max-w-2xl font-heading text-3xl font-semibold tracking-tight text-balance sm:text-[38px]">
+          {s.bandTitle}
+        </h2>
+        <div className="grid gap-6 md:grid-cols-3">
+          {s.quotes.map((quote) => (
+            <div
+              key={quote.q}
+              className="flex flex-col gap-3.5 rounded-2xl border bg-card p-7"
+            >
+              <p className="font-heading text-xl leading-snug font-semibold text-balance">
+                {quote.q}
+              </p>
+              <p className="text-[15px] leading-relaxed text-muted-foreground">
+                {quote.body}
+              </p>
+            </div>
+          ))}
+        </div>
+      </section>
+      <section className="border-t bg-muted">
+        <div className="site-container section flex max-w-3xl flex-col gap-6">
+          <div className="flex items-center justify-center rounded-2xl border bg-card p-10">
+            <Placeholder>{s.recording}</Placeholder>
+          </div>
+          <p className="text-[15px] leading-relaxed text-muted-foreground">
+            {s.disclosure}
+          </p>
+          <CtaLink to={path("/demo")} size="lg" className="mt-2 self-start">
+            {t.router.cta}
+          </CtaLink>
+        </div>
       </section>
     </>
   )

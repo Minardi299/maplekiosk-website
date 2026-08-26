@@ -7,16 +7,12 @@ export const vi: Strings = {
       desc: "Kiosk tự đặt món cho quán trà sữa và quầy phục vụ nhanh ở Montréal và Bờ Nam. Không hợp đồng, 0% trên doanh thu.",
     },
     features: {
-      title: "Tính năng — MapleKiosk",
+      title: "Ứng dụng — MapleKiosk",
       desc: "Kiosk, máy thu ngân, màn hình bếp, menu trên TV, giao hàng về một hàng chờ, khách hàng thân thiết.",
     },
     pricing: {
       title: "Bảng giá — MapleKiosk",
-      desc: "Một mức giá, trọn gói. Không hợp đồng, hủy bất cứ tháng nào, hoặc mua đứt.",
-    },
-    calculator: {
-      title: "Máy tính phí thanh toán — MapleKiosk",
-      desc: "Phí quẹt thẻ thật sự tốn bao nhiêu — Square, Clover hay acquirer riêng của bạn, so sánh trung thực.",
+      desc: "Một mức giá cho mỗi ứng dụng, SaaS hoặc cài tại chỗ. Không hợp đồng, hủy bất cứ tháng nào, hoặc mua đứt.",
     },
     demo: {
       title: "Đặt lịch demo — MapleKiosk",
@@ -28,7 +24,7 @@ export const vi: Strings = {
     },
     salons: {
       title: "Tiệm nail & spa — MapleKiosk",
-      desc: "Trợ lý điện thoại trả lời, tư vấn và đặt lịch trong khi tay bạn đang bận.",
+      desc: "Trợ lý điện thoại cho tiệm nail, spa và cửa hàng làm đẹp — trả lời, tư vấn và đặt lịch trong khi tay bạn đang bận.",
     },
     coffee: {
       title: "Cà phê & trà sữa — MapleKiosk",
@@ -53,7 +49,7 @@ export const vi: Strings = {
   },
 
   nav: {
-    features: "Tính năng",
+    features: "Ứng dụng",
     pricing: "Bảng giá",
     about: "Về chúng tôi",
     cta: "Đưa menu của tôi vào bản demo miễn phí",
@@ -86,6 +82,7 @@ export const vi: Strings = {
     title: "Ba quầy hàng, ba buổi sáng khác nhau",
     sub: "Chọn quầy của bạn.",
     cta: "Đặt 15 phút",
+    demoShop: "Tham quan cửa hàng demo",
     doors: [
       {
         label: "Quán trà & cà phê",
@@ -148,6 +145,19 @@ export const vi: Strings = {
     cta: "Mang theo một bản sao kê — chúng tôi kiểm tra những con số này cho thật",
   },
 
+  lineCost: {
+    title: "Hàng chờ đang tốn của bạn bao nhiêu?",
+    sub: "Khách nhìn hàng chờ rồi bỏ đi không hiện trong bất kỳ báo cáo nào. Hãy đặt một con số cho họ.",
+    walkouts: "Số khách bỏ đi mỗi ngày",
+    days: "Số ngày mở cửa mỗi tháng",
+    resultTag: "DOANH THU MẤT ƯỚC TÍNH MỖI THÁNG",
+    payoff:
+      "Nếu kiosk giữ lại được dù chỉ một phần số đơn đó trong khi hàng chờ vẫn chạy — cuối tháng sẽ khác đi bao nhiêu?",
+    honest:
+      "Nếu con số này nhỏ, kiosk sẽ không tự trả được tiền cho chính nó — và chúng tôi cũng sẽ nói thẳng với bạn như vậy.",
+    cta: "Mang những con số này theo — chúng tôi sẽ kiểm tra thật",
+  },
+
   chips: {
     title: "Những điều khoản có thể viết bằng chữ to",
     items: [
@@ -169,7 +179,6 @@ export const vi: Strings = {
       "Một bộ ứng dụng doanh nghiệp và dịch vụ AI vừa túi tiền, được xây dựng cẩn thận tại Canada cho những người giữ cho doanh nghiệp nhỏ vận hành.",
     product: "Sản phẩm",
     legal: "Pháp lý",
-    calculator: "Máy tính phí",
     demo: "Đặt lịch demo",
     industries: "Ngành nghề",
     nails: "Tiệm nail & làm đẹp",
@@ -214,6 +223,10 @@ export const vi: Strings = {
       {
         q: "“Hết món cá hồi.”",
         body: "Đánh dấu một món hết một lần và nó lập tức chuyển xám trên kiosk và thực đơn TV của bạn.",
+      },
+      {
+        q: "Điện thoại reo giữa giờ phục vụ — bàn cho bốn người, tối thứ Bảy.",
+        body: "Trợ lý trả lời mọi cuộc gọi bằng tiếng Pháp hoặc tiếng Anh, giải đáp thắc mắc và đặt bàn — trong khi bạn vẫn phục vụ.",
       },
     ],
   },
@@ -282,11 +295,15 @@ export const vi: Strings = {
   },
 
   pricing: {
-    title: "Một mức giá. Mọi thứ quầy hàng cần.",
-    price: "[GIÁ]",
+    title: "Một mức giá cho mỗi ứng dụng. SaaS hoặc cài đặt tại chỗ.",
+    sub: "Mọi ứng dụng MapleKiosk đều có hai lựa chọn — chúng tôi lưu trữ (SaaS, tính phí hằng tháng) hoặc cài trên máy chủ của bạn (tại chỗ, mua bản quyền một lần). Chọn theo từng ứng dụng và kết hợp tuỳ ý.",
     per: "/tháng",
-    includes:
-      "Kiosk, máy thu ngân, màn hình bếp, menu TV, khách hàng thân thiết. Trọn gói.",
+    apps: [
+      { name: "MapleCoffee", price: "$39", tag: "" },
+      { name: "MapleRES", price: "$49", tag: "" },
+      { name: "MapleSPA", price: "$44", tag: "Ứng dụng chủ lực" },
+    ],
+    note: "Giá tính bằng USD, cho mỗi ứng dụng, chưa thuế. Dịch vụ tích hợp AI được báo giá riêng. Cần nhiều ứng dụng hoặc bản dựng riêng? Trao đổi với bộ phận bán hàng để có gói ưu đãi.",
     buyTitle: "Hoặc mua đứt",
     buyBody: "Trả một lần, lắp đặt tại chỗ, là của bạn mãi mãi.",
     buyCta: "Liên hệ",
@@ -319,11 +336,6 @@ export const vi: Strings = {
     ],
   },
 
-  calcPage: {
-    intro:
-      "Đúng chiếc máy tính chúng tôi mang đến mỗi buổi demo. Kéo thanh trượt về số liệu của bạn.",
-  },
-
   demo: {
     title: "15 phút. Menu của bạn, trên một kiosk thật.",
     sub: "Chúng tôi nạp menu trước khi đến — bạn dùng thử, bạn quyết định. Thứ Ba hoặc thứ Tư sau giờ cao điểm là đẹp nhất.",
@@ -351,40 +363,27 @@ export const vi: Strings = {
   },
 
   salons: {
+    kicker: "Cho tiệm nail, spa và cửa hàng làm đẹp",
     title: "Điện thoại reo. Tay bạn đang trong lớp bột acrylic.",
     sub: "Một trợ lý trả lời mọi cuộc gọi, bằng tiếng Pháp hoặc tiếng Anh, tư vấn dịch vụ cho khách và đặt lịch. Lịch hẹn hiện thẳng vào sổ của bạn. Thợ của bạn không phải dừng tay.",
+    bandTitle: "Tay bạn vẫn ở với khách. Trợ lý lo phần nghe điện thoại.",
+    quotes: [
+      {
+        q: "“Có chỗ cho hai người chiều thứ Bảy không?”",
+        body: "Trợ lý kiểm tra lịch, trả lời như người thật và đặt chỗ — lịch hẹn hiện ngay trong sổ của bạn.",
+      },
+      {
+        q: "Không ai bắt máy — khách đặt luôn tiệm kế bên trên Google.",
+        body: "Mọi cuộc gọi đều được trả lời, bằng tiếng Pháp hoặc tiếng Anh — dù bạn đang làm móng, đang chăm sóc da hay đang đông khách.",
+      },
+      {
+        q: "“Dặm gel giá bao nhiêu?”",
+        body: "Nó biết dịch vụ và bảng giá của bạn, trả lời rõ ràng — rồi mời khách đặt lịch.",
+      },
+    ],
     recording: "[GHI ÂM — một cuộc gọi thật 30 giây, sẽ sản xuất]",
     disclosure:
       "Trợ lý là tự động và nói rõ điều đó ở đầu mỗi cuộc gọi. Việc xử lý cuộc gọi đang được rà soát theo luật riêng tư Québec (Luật 25) trước khi ra mắt.",
-  },
-
-  privacy: {
-    title: "Quyền riêng tư",
-    intro:
-      "Trang này sẽ đáp ứng Luật 25 của Québec trước khi ra mắt. Các khối bên dưới là chỗ dành sẵn cho đến khi rà soát pháp lý xong.",
-    sections: [
-      {
-        title: "Chúng tôi thu thập gì",
-        body: "[Các trường của form demo: tên, quán, thành phố, điện thoại. Số liệu máy tính phí không được lưu — xác nhận trước khi đăng.]",
-      },
-      {
-        title: "Người phụ trách bảo vệ thông tin cá nhân",
-        body: "[NGƯỜI PHỤ TRÁCH + EMAIL]",
-      },
-      { title: "Lưu trữ", body: "[NƠI LƯU TRỮ DỮ LIỆU]" },
-      {
-        title: "Cookie",
-        body: "[CẦN XÁC NHẬN — liệt kê cookie nếu có]",
-      },
-    ],
-    review: "[NHỜ LUẬT SƯ QUÉBEC RÀ SOÁT TRƯỚC KHI ĐĂNG]",
-  },
-
-  legal: {
-    title: "Điều khoản sử dụng",
-    intro:
-      "[ĐIỀU KHOẢN SỬ DỤNG — văn bản pháp lý soạn bằng tiếng Pháp trước, luật sư Québec rà soát. Bản tiếng Việt là bản dịch tham khảo.]",
-    review: "[NHỜ LUẬT SƯ QUÉBEC RÀ SOÁT TRƯỚC KHI ĐĂNG]",
   },
 
   notFound: {

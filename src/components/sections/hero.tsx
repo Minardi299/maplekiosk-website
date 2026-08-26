@@ -22,7 +22,8 @@ export function Hero() {
           </div>
         </div>
         <div className="flex w-full max-w-[380px] flex-col gap-3.5 justify-self-center lg:justify-self-end">
-          <div className="rotate-[1.2deg] rounded-2xl border bg-card p-7 text-card-foreground shadow-[0_20px_40px_-24px_rgba(29,26,23,0.28)]">
+          <div className="rotate-[1.2deg] drop-shadow-[0_16px_20px_rgba(0,0,0,0.35)]">
+            <div className="receipt-tear bg-card p-7 pb-10 text-card-foreground">
             <div className="mb-3.5 flex items-baseline justify-between border-b-[1.5px] border-dashed border-foreground/20 pb-3.5">
               <span className="font-heading text-xl font-semibold">
                 {ticket.name}
@@ -51,10 +52,8 @@ export function Hero() {
               <span>{ticket.totalLabel}</span>
               <span className="font-mono">{ticket.total}</span>
             </div>
+            </div>
           </div>
-          <p className="px-3 text-center text-sm leading-relaxed text-ink-muted">
-            {ticket.caption}
-          </p>
         </div>
       </div>
     </section>

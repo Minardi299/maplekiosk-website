@@ -2,7 +2,7 @@ import { useState } from "react"
 import { CtaLink } from "@/components/cta-link"
 import { useI18n } from "@/lib/i18n"
 
-function Slider({
+export function Slider({
   id,
   label,
   value,
@@ -27,7 +27,7 @@ function Slider({
         <label htmlFor={id} className="text-base font-semibold">
           {label}
         </label>
-        <span className="font-mono text-xl text-white">{display}</span>
+        <span className="font-mono text-xl">{display}</span>
       </div>
       <input
         id={id}

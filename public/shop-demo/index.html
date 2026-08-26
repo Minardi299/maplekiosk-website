@@ -1,0 +1,760 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+html,body{margin:0;padding:0;background:#7ba3d6;overflow:hidden}
+a{color:#b9432c;text-decoration:none} a:hover{color:#8f2f1d;text-decoration:underline}
+@keyframes mkpulse{0%{transform:scale(1);opacity:.55}70%{transform:scale(2.1);opacity:0}100%{transform:scale(2.1);opacity:0}}
+@keyframes toastin{from{transform:translateY(12px);opacity:0}to{transform:translateY(0);opacity:1}}
+input:focus{outline:2px solid #b9432c;outline-offset:1px}
+::-webkit-scrollbar{width:8px}::-webkit-scrollbar-thumb{background:#d6cbb4;border-radius:4px}
+</style>
+<script type="module">
+import * as THREE from 'https://esm.sh/three@0.160.0';
+import { GLTFLoader } from 'https://esm.sh/three@0.160.0/examples/jsm/loaders/GLTFLoader.js';
+import { RoundedBoxGeometry } from 'https://esm.sh/three@0.160.0/examples/jsm/geometries/RoundedBoxGeometry.js';
+window.THREE = THREE; window.GLTFLoader = GLTFLoader; window.RoundedBoxGeometry = RoundedBoxGeometry;
+window.dispatchEvent(new Event('three-ready'));
+</script>
+</helmet>
+<div style="position:fixed;inset:0;overflow:hidden;font-family:'Manrope',sans-serif;background:radial-gradient(120% 130% at 32% 18%, #eaf3fd 0%, #b9d3f0 45%, #4e7ec2 100%)">
+  <div ref="{{ mountRef }}" style="position:absolute;inset:0;cursor:grab"></div>
+  <div style="position:absolute;inset:0;pointer-events:none">
+    <sc-for list="{{ markers }}" as="mk" hint-placeholder-count="5">
+      <div ref="{{ mk.mref }}" onClick="{{ mk.pick }}" style="position:absolute;left:0;top:0;pointer-events:auto;cursor:pointer;width:0;height:0"><div style="position:relative;transform:translate(-50%,-50%);display:flex;flex-direction:column;align-items:center;gap:7px"><div style="position:relative;width:34px;height:34px"><div style="{{ mk.pulseStyle }}"></div><div style="{{ mk.dotStyle }}">{{ mk.n }}</div></div><div style="background:rgba(43,36,28,.88);color:#f5f1e8;font-size:12px;font-weight:700;padding:4px 10px;border-radius:99px;white-space:nowrap">{{ mk.label }}</div></div></div>
+    </sc-for>
+  </div>
+  <a href="/coffee" style="position:absolute;top:18px;left:20px;background:#fffdfa;border:1px solid #e4dbc8;border-radius:14px;padding:10px 16px;display:flex;align-items:center;gap:10px;box-shadow:0 6px 24px rgba(80,60,30,.12);text-decoration:none"><span style="font-size:20px">🍁</span><div><div style="font-weight:800;font-size:15px;color:#2f2a23;line-height:1.1">MapleCoffee</div><div style="font-size:11px;color:#8a7f6d;font-weight:600">Interactive demo · your shop, one portal</div></div></a>
+  <div style="position:absolute;top:18px;right:20px"><a href="https://coffee.maplekiosk.ca/touch" target="_blank" style="background:#2f2a23;color:#f5f1e8;font-size:12.5px;font-weight:700;padding:10px 16px;border-radius:99px;display:inline-block">Open the real portal ↗</a></div>
+  <sc-if value="{{ hintVisible }}" hint-placeholder-val="{{ true }}">
+    <div style="position:absolute;bottom:24px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:8px;pointer-events:none">
+      <div style="background:rgba(43,36,28,.9);color:#f5f1e8;padding:11px 20px;border-radius:99px;font-size:13.5px;font-weight:600;box-shadow:0 8px 30px rgba(50,35,15,.3)">Tap a numbered spot — or click a device — to manage it in the portal</div>
+      <div style="background:rgba(43,36,28,.6);color:#e8ddc8;padding:6px 14px;border-radius:99px;font-size:11.5px;font-weight:600">🖱 drag to look around · scroll to zoom · keys 1–5 jump · Esc back</div>
+    </div>
+  </sc-if>
+  <sc-if value="{{ panelOpen }}" hint-placeholder-val="{{ false }}">
+    <button onClick="{{ goBack }}" style="position:absolute;top:78px;left:20px;background:#fffdfa;border:1px solid #e4dbc8;border-radius:99px;padding:9px 18px;font-family:inherit;font-size:13px;font-weight:700;color:#2f2a23;cursor:pointer;box-shadow:0 4px 16px rgba(80,60,30,.14)">‹ Back to shop <span style="opacity:.5;font-weight:600">esc</span></button>
+    <div style="position:absolute;top:0;right:0;bottom:0;width:min(460px,44vw);background:#f5f1e8;border-left:1px solid #e4dbc8;box-shadow:-16px 0 50px rgba(60,45,20,.18);display:flex;flex-direction:column">
+      <div style="padding:18px 22px 14px;border-bottom:1px solid #e4dbc8;display:flex;align-items:center;gap:12px">
+        <span style="font-size:24px">{{ panelEmoji }}</span>
+        <div style="flex:1;min-width:0"><div style="font-weight:800;font-size:18px;color:#2f2a23">{{ panelTitle }}</div><a href="{{ portalLink }}" target="_blank" style="font-size:12px;font-weight:700">Open this page in the portal ↗</a></div>
+        <sc-if value="{{ showConfig }}" hint-placeholder-val="{{ false }}"><button onClick="{{ save }}" style="background:#b9432c;color:#fff;border:none;border-radius:10px;padding:9px 14px;font-family:inherit;font-size:12.5px;font-weight:700;cursor:pointer">Save changes</button></sc-if>
+      </div>
+      <div style="flex:1;overflow-y:auto;padding:18px 22px 30px;display:flex;flex-direction:column;gap:16px">
+        <sc-if value="{{ showTv }}" hint-placeholder-val="{{ false }}">
+          <div style="background:#fff8ec;border:1px solid #eadfc6;border-radius:12px;padding:10px 14px;font-size:12.5px;color:#6f6450;font-weight:600">👈 Live preview: the TV on the wall is playing this loop. Edit below and watch it change.</div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap">
+            <sc-for list="{{ tvTabs }}" as="t" hint-placeholder-count="2"><button onClick="{{ t.pick }}" style="{{ t.style }}"><span style="display:block;font-weight:800;font-size:13.5px;white-space:nowrap">📺 {{ t.name }}</span><span style="display:block;font-size:11px;opacity:.75;font-weight:600;white-space:nowrap">{{ t.sub }}</span></button></sc-for>
+            <button onClick="{{ addTv }}" style="background:transparent;border:1.5px dashed #c9bda2;border-radius:12px;padding:10px 14px;font-family:inherit;font-size:13px;font-weight:700;color:#8a7f6d;cursor:pointer">＋ Add TV</button>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:6px"><label style="font-size:12px;font-weight:800;color:#8a7f6d;text-transform:uppercase;letter-spacing:.06em">TV name</label><input value="{{ tvName }}" onChange="{{ setTvName }}" style="background:#fffdfa;border:1px solid #e4dbc8;border-radius:10px;padding:11px 13px;font-family:inherit;font-size:15px;font-weight:700;color:#2f2a23"></div>
+          <div style="display:flex;justify-content:space-between;align-items:center"><a href="{{ tvWallLink }}" target="_blank" style="font-size:13px;font-weight:700">Open on wall ↗</a><button onClick="{{ deleteTv }}" style="background:none;border:none;font-family:inherit;font-size:13px;font-weight:700;color:#a05446;cursor:pointer;padding:0">Delete TV</button></div>
+          <div style="display:flex;flex-direction:column;gap:8px">
+            <div style="display:flex;justify-content:space-between;align-items:baseline"><label style="font-size:12px;font-weight:800;color:#8a7f6d;text-transform:uppercase;letter-spacing:.06em">Plays in order</label><span style="font-size:12px;font-weight:700;color:#b9432c">▶ {{ nowPlaying }}</span></div>
+            <sc-for list="{{ playlist }}" as="row" hint-placeholder-count="2">
+              <div style="display:flex;align-items:center;gap:10px;background:#fffdfa;border:1px solid #e4dbc8;border-radius:12px;padding:9px 12px">
+                <span style="width:22px;height:22px;border-radius:50%;background:#efe6d2;color:#6f6450;font-size:11.5px;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0">{{ row.n }}</span>
+                <span style="flex:1;font-size:14px;font-weight:700;color:#2f2a23">{{ row.emoji }} {{ row.label }}</span>
+                <input type="number" min="2" max="120" value="{{ row.sec }}" onChange="{{ row.setSec }}" style="width:52px;background:#f5f1e8;border:1px solid #e4dbc8;border-radius:8px;padding:6px 6px;font-family:inherit;font-size:13px;font-weight:700;color:#2f2a23;text-align:center">
+                <span style="font-size:11px;color:#8a7f6d;font-weight:700">sec</span>
+                <span style="display:flex;gap:4px"><button onClick="{{ row.up }}" style="background:#efe6d2;border:none;border-radius:7px;width:26px;height:26px;cursor:pointer;font-size:11px;color:#2f2a23">▲</button><button onClick="{{ row.down }}" style="background:#efe6d2;border:none;border-radius:7px;width:26px;height:26px;cursor:pointer;font-size:11px;color:#2f2a23">▼</button><button onClick="{{ row.rm }}" style="background:#f3e2dc;border:none;border-radius:7px;width:26px;height:26px;cursor:pointer;font-size:12px;color:#a05446">✕</button></span>
+              </div>
+            </sc-for>
+            <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center"><span style="font-size:12px;font-weight:800;color:#8a7f6d">Add screen:</span><button onClick="{{ addMenu }}" style="background:#fffdfa;border:1px solid #e4dbc8;border-radius:99px;padding:7px 13px;font-family:inherit;font-size:12.5px;font-weight:700;color:#2f2a23;cursor:pointer">🍽 Menu Board</button><button onClick="{{ addPromo }}" style="background:#fffdfa;border:1px solid #e4dbc8;border-radius:99px;padding:7px 13px;font-family:inherit;font-size:12.5px;font-weight:700;color:#2f2a23;cursor:pointer">✨ Promo</button><button onClick="{{ addSlide }}" style="background:#fffdfa;border:1px solid #e4dbc8;border-radius:99px;padding:7px 13px;font-family:inherit;font-size:12.5px;font-weight:700;color:#2f2a23;cursor:pointer">🖼 Photo slideshow</button></div>
+          </div>
+          <a href="https://coffee.maplekiosk.ca/touch/promo-setup" target="_blank" style="font-size:13px;font-weight:700">✨ Customize the Promo screen →</a>
+        </sc-if>
+        <sc-if value="{{ showKiosk }}" hint-placeholder-val="{{ false }}">
+          <div style="background:#fff8ec;border:1px solid #eadfc6;border-radius:12px;padding:10px 14px;font-size:12.5px;color:#6f6450;font-weight:600">👈 Live preview: the kiosk is idling on its attract loop. Edit below and watch it change.</div>
+          <div style="display:flex;flex-direction:column;gap:6px"><label style="font-size:12px;font-weight:800;color:#8a7f6d;text-transform:uppercase;letter-spacing:.06em">Kiosk name</label><input value="{{ kName }}" onChange="{{ setKName }}" style="background:#fffdfa;border:1px solid #e4dbc8;border-radius:10px;padding:11px 13px;font-family:inherit;font-size:15px;font-weight:700;color:#2f2a23"></div>
+          <div style="display:flex;justify-content:space-between;align-items:center"><a href="https://coffee.maplekiosk.ca/pos/kiosk/Kiosk%201" target="_blank" style="font-size:13px;font-weight:700">Open kiosk ↗</a><button style="background:none;border:none;font-family:inherit;font-size:13px;font-weight:700;color:#a05446;cursor:pointer;padding:0">Delete kiosk</button></div>
+          <div style="display:flex;flex-direction:column;gap:8px">
+            <div style="display:flex;justify-content:space-between;background:#fffdfa;border:1px solid #e4dbc8;border-radius:12px;padding:11px 13px"><span style="font-size:13.5px;font-weight:800;color:#2f2a23">💳 Card reader</span><span style="font-size:13px;color:#8a7f6d;font-weight:600">Use this browser's pairing</span></div>
+            <div style="display:flex;justify-content:space-between;background:#fffdfa;border:1px solid #e4dbc8;border-radius:12px;padding:11px 13px"><span style="font-size:13.5px;font-weight:800;color:#2f2a23">🖨 Receipt printer</span><span style="font-size:13px;color:#8a7f6d;font-weight:600">Shop default (receipt)</span></div>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:8px">
+            <label style="font-size:12px;font-weight:800;color:#8a7f6d;text-transform:uppercase;letter-spacing:.06em">After an order</label>
+            <sc-for list="{{ receiptOpts }}" as="o" hint-placeholder-count="3"><button onClick="{{ o.pick }}" style="{{ o.style }}"><span style="{{ o.dotStyle }}"></span>{{ o.label }}</button></sc-for>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:6px"><label style="font-size:12px;font-weight:800;color:#8a7f6d;text-transform:uppercase;letter-spacing:.06em">Attract after (seconds)</label><input type="number" min="-1" max="600" value="{{ attract }}" onChange="{{ setAttract }}" style="background:#fffdfa;border:1px solid #e4dbc8;border-radius:10px;padding:11px 13px;font-family:inherit;font-size:15px;font-weight:700;color:#2f2a23;width:110px"><span style="font-size:12px;color:#8a7f6d;font-weight:600">-1 uses the default (30s). 0 means this machine never attracts.</span></div>
+          <div style="display:flex;flex-direction:column;gap:8px">
+            <label style="font-size:12px;font-weight:800;color:#8a7f6d;text-transform:uppercase;letter-spacing:.06em">Plays while idle</label>
+            <sc-for list="{{ playlist }}" as="row" hint-placeholder-count="2">
+              <div style="display:flex;align-items:center;gap:10px;background:#fffdfa;border:1px solid #e4dbc8;border-radius:12px;padding:9px 12px">
+                <span style="width:22px;height:22px;border-radius:50%;background:#efe6d2;color:#6f6450;font-size:11.5px;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0">{{ row.n }}</span>
+                <span style="flex:1;font-size:14px;font-weight:700;color:#2f2a23">{{ row.emoji }} {{ row.label }}</span>
+                <input type="number" min="2" max="120" value="{{ row.sec }}" onChange="{{ row.setSec }}" style="width:52px;background:#f5f1e8;border:1px solid #e4dbc8;border-radius:8px;padding:6px 6px;font-family:inherit;font-size:13px;font-weight:700;color:#2f2a23;text-align:center">
+                <span style="font-size:11px;color:#8a7f6d;font-weight:700">sec</span>
+                <span style="display:flex;gap:4px"><button onClick="{{ row.up }}" style="background:#efe6d2;border:none;border-radius:7px;width:26px;height:26px;cursor:pointer;font-size:11px;color:#2f2a23">▲</button><button onClick="{{ row.down }}" style="background:#efe6d2;border:none;border-radius:7px;width:26px;height:26px;cursor:pointer;font-size:11px;color:#2f2a23">▼</button><button onClick="{{ row.rm }}" style="background:#f3e2dc;border:none;border-radius:7px;width:26px;height:26px;cursor:pointer;font-size:12px;color:#a05446">✕</button></span>
+              </div>
+            </sc-for>
+            <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center"><span style="font-size:12px;font-weight:800;color:#8a7f6d">Add screen:</span><button onClick="{{ addMenu }}" style="background:#fffdfa;border:1px solid #e4dbc8;border-radius:99px;padding:7px 13px;font-family:inherit;font-size:12.5px;font-weight:700;color:#2f2a23;cursor:pointer">🍽 Menu Board</button><button onClick="{{ addPromo }}" style="background:#fffdfa;border:1px solid #e4dbc8;border-radius:99px;padding:7px 13px;font-family:inherit;font-size:12.5px;font-weight:700;color:#2f2a23;cursor:pointer">✨ Promo</button><button onClick="{{ addSlide }}" style="background:#fffdfa;border:1px solid #e4dbc8;border-radius:99px;padding:7px 13px;font-family:inherit;font-size:12.5px;font-weight:700;color:#2f2a23;cursor:pointer">🖼 Photo slideshow</button></div>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:8px">
+            <label style="font-size:12px;font-weight:800;color:#8a7f6d;text-transform:uppercase;letter-spacing:.06em">Slideshow photos</label>
+            <span style="font-size:12px;color:#8a7f6d;font-weight:600">Shown on every kiosk that plays the Photo slideshow screen.</span>
+            <div style="display:flex;gap:10px;flex-wrap:wrap">
+              <sc-for list="{{ photos }}" as="p" hint-placeholder-count="4"><div style="{{ p.style }}"><button onClick="{{ p.rm }}" style="position:absolute;top:-7px;right:-7px;width:20px;height:20px;border-radius:50%;background:#2f2a23;color:#f5f1e8;border:none;font-size:10px;cursor:pointer;line-height:1">✕</button></div></sc-for>
+              <button onClick="{{ addPhoto }}" style="width:64px;height:64px;border-radius:12px;border:1.5px dashed #c9bda2;background:transparent;color:#8a7f6d;font-family:inherit;font-size:11px;font-weight:700;cursor:pointer">＋ Add<br>photos</button>
+            </div>
+          </div>
+        </sc-if>
+        <sc-if value="{{ showPos }}" hint-placeholder-val="{{ false }}">
+          <div style="background:#fff8ec;border:1px solid #eadfc6;border-radius:12px;padding:10px 14px;font-size:12.5px;color:#6f6450;font-weight:600">👈 Ring up an order — watch the register, the customer screen and the kitchen react in real time.</div>
+          <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px">
+            <sc-for list="{{ prodBtns }}" as="p" hint-placeholder-count="9"><button onClick="{{ p.add }}" style="{{ p.style }}"><span style="display:block;font-size:20px">{{ p.emoji }}</span><span style="display:block;font-size:12px;font-weight:800;color:#fff">{{ p.name }}</span><span style="display:block;font-size:11px;color:rgba(255,255,255,.85);font-weight:700">${{ p.price }}</span></button></sc-for>
+          </div>
+          <div style="background:#fffdfa;border:1px solid #e4dbc8;border-radius:14px;padding:14px;display:flex;flex-direction:column;gap:8px">
+            <div style="display:flex;justify-content:space-between;align-items:baseline"><span style="font-size:12px;font-weight:800;color:#8a7f6d;text-transform:uppercase;letter-spacing:.06em">Order #{{ orderNo }}</span><span style="font-size:12px;color:#8a7f6d;font-weight:600">{{ orderHint }}</span></div>
+            <sc-for list="{{ orderRows }}" as="r" hint-placeholder-count="1">
+              <div style="display:flex;align-items:center;gap:8px;font-size:14px;font-weight:700;color:#2f2a23"><span style="color:#b9432c">{{ r.qty }}×</span><span style="flex:1">{{ r.name }}</span><span style="color:#6f6450">${{ r.amt }}</span><button onClick="{{ r.rm }}" style="background:#f3e2dc;border:none;border-radius:7px;width:24px;height:24px;cursor:pointer;font-size:11px;color:#a05446">✕</button></div>
+            </sc-for>
+            <div style="border-top:1px dashed #e4dbc8;padding-top:8px;display:flex;justify-content:space-between;font-size:15px;font-weight:800;color:#2f2a23"><span>Total</span><span>${{ orderTotal }}</span></div>
+            <div style="display:flex;gap:8px"><button onClick="{{ charge }}" style="flex:1;background:#b9432c;color:#fff;border:none;border-radius:11px;padding:12px;font-family:inherit;font-size:14px;font-weight:800;cursor:pointer">💳 Charge ${{ orderTotal }}</button><button onClick="{{ clearOrder }}" style="background:#efe6d2;color:#6f6450;border:none;border-radius:11px;padding:12px 14px;font-family:inherit;font-size:13px;font-weight:700;cursor:pointer">Clear</button></div>
+          </div>
+          <a href="https://coffee.maplekiosk.ca/coffee/today" target="_blank" style="font-size:13px;font-weight:700">Try the full counter station live ↗</a>
+        </sc-if>
+        <sc-if value="{{ showKds }}" hint-placeholder-val="{{ false }}">
+          <div style="background:#fff8ec;border:1px solid #eadfc6;border-radius:12px;padding:10px 14px;font-size:12.5px;color:#6f6450;font-weight:600">👈 These tickets are live on the kitchen screen. Bump one when it's handed off.</div>
+          <sc-for list="{{ ticketRows }}" as="tk" hint-placeholder-count="2">
+            <div style="background:#fffdfa;border:1px solid #e4dbc8;border-radius:14px;overflow:hidden">
+              <div style="{{ tk.headStyle }}"><span>#{{ tk.id }}</span><span>⏱ {{ tk.time }}</span></div>
+              <div style="padding:10px 14px;display:flex;flex-direction:column;gap:4px">
+                <sc-for list="{{ tk.lines }}" as="l" hint-placeholder-count="1"><span style="font-size:13.5px;font-weight:700;color:#2f2a23">{{ l }}</span></sc-for>
+                <button onClick="{{ tk.bump }}" style="margin-top:6px;background:#2f6b46;color:#fff;border:none;border-radius:10px;padding:9px;font-family:inherit;font-size:13px;font-weight:800;cursor:pointer">✅ Bump — handed off</button>
+              </div>
+            </div>
+          </sc-for>
+          <sc-if value="{{ noTickets }}" hint-placeholder-val="{{ false }}">
+            <div style="text-align:center;padding:20px 0;display:flex;flex-direction:column;gap:10px;align-items:center"><span style="font-size:38px">🍳</span><span style="font-size:14px;font-weight:700;color:#6f6450">No tickets right now.</span><button onClick="{{ jumpPos }}" style="background:#2f2a23;color:#f5f1e8;border:none;border-radius:11px;padding:11px 18px;font-family:inherit;font-size:13px;font-weight:700;cursor:pointer">Ring one up at the counter →</button></div>
+          </sc-if>
+          <div style="display:flex;gap:14px"><a href="https://coffee.maplekiosk.ca/touch/kds-setup" target="_blank" style="font-size:13px;font-weight:700">⚙ Setup ↗</a><a href="https://coffee.maplekiosk.ca/pos/kitchen" target="_blank" style="font-size:13px;font-weight:700">Run the unnamed board ↗</a></div>
+        </sc-if>
+        <sc-if value="{{ showCust }}" hint-placeholder-val="{{ false }}">
+          <div style="background:#fff8ec;border:1px solid #eadfc6;border-radius:12px;padding:10px 14px;font-size:12.5px;color:#6f6450;font-weight:600">👈 Tap a customer — the counter screen greets them with their status and points.</div>
+          <div style="display:flex;gap:8px"><input value="{{ custQ }}" onChange="{{ setCustQ }}" placeholder="Search customers…" style="flex:1;background:#fffdfa;border:1px solid #e4dbc8;border-radius:10px;padding:11px 13px;font-family:inherit;font-size:14px;font-weight:600;color:#2f2a23"><button onClick="{{ addCust }}" style="background:#2f2a23;color:#f5f1e8;border:none;border-radius:10px;padding:0 14px;font-family:inherit;font-size:12.5px;font-weight:700;cursor:pointer">＋ New</button></div>
+          <sc-for list="{{ custRows }}" as="cu" hint-placeholder-count="5">
+            <button onClick="{{ cu.pick }}" style="{{ cu.style }}">
+              <span style="{{ cu.avStyle }}">{{ cu.init }}</span>
+              <span style="flex:1;text-align:left;min-width:0"><span style="display:block;font-size:14px;font-weight:800;color:#2f2a23">{{ cu.name }}</span><span style="display:block;font-size:12px;color:#8a7f6d;font-weight:600">{{ cu.phone }} · {{ cu.orders }} orders</span></span>
+              <span style="{{ cu.tierStyle }}">{{ cu.tier }}</span>
+            </button>
+          </sc-for>
+        </sc-if>
+      </div>
+    </div>
+  </sc-if>
+  <sc-if value="{{ toastOn }}" hint-placeholder-val="{{ false }}">
+    <div style="position:absolute;bottom:28px;right:min(480px,46vw);background:#2f6b46;color:#fff;padding:11px 20px;border-radius:99px;font-size:13.5px;font-weight:700;box-shadow:0 8px 30px rgba(20,60,35,.35);animation:toastin .25s ease">{{ toastMsg }}</div>
+  </sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;autoOrbit&quot;: {&quot;editor&quot;: &quot;boolean&quot;, &quot;default&quot;: true, &quot;tsType&quot;: &quot;boolean&quot;, &quot;section&quot;: &quot;Demo behavior&quot;}, &quot;previewSpeed&quot;: {&quot;editor&quot;: &quot;range&quot;, &quot;default&quot;: 1, &quot;min&quot;: 0.5, &quot;max&quot;: 4, &quot;step&quot;: 0.5, &quot;unit&quot;: &quot;×&quot;, &quot;tsType&quot;: &quot;number&quot;, &quot;section&quot;: &quot;Demo behavior&quot;}}">
+class Component extends DCLogic {
+  state = {
+    active: null, hint: true, toast: '', curTv: 0, tick: 0,
+    tvs: [
+      { name: 'TV 1', screens: [{ t: 'menu', sec: 8 }, { t: 'promo', sec: 6 }] },
+      { name: 'TV 2', screens: [{ t: 'promo', sec: 8 }] }
+    ],
+    kiosk: { name: 'Kiosk 1', receipt: 0, attract: -1, screens: [{ t: 'promo', sec: 6 }, { t: 'slide', sec: 8 }] },
+    photos: [['#d97b4f','#7a3b2e'],['#3e6b4f','#1e3a2a'],['#c9a227','#8a6a12'],['#5a7d9a','#2b4257']],
+    order: [], orderNo: 44,
+    tickets: [{ id: 42, lines: ['1× Maple Latte', '1× Croissant'], t0: Date.now() - 95000 }, { id: 43, lines: ['2× Cold Brew'], t0: Date.now() - 21000 }],
+    customers: [
+      { name: 'Ava Laurent', phone: '(416) 555-1001', tier: 'VIP', orders: 12, pts: 340 },
+      { name: 'Huy H Nguyen', phone: '(623) 734-3232', tier: 'Member', orders: 3, pts: 45 },
+      { name: 'Mia Santos', phone: '(437) 555-3003', tier: 'Gold', orders: 27, pts: 810 },
+      { name: 'Noah Bell', phone: '(647) 555-2002', tier: 'Silver', orders: 9, pts: 220 },
+      { name: 'Tung', phone: '(418) 717-3979', tier: 'Member', orders: 1, pts: 10 }
+    ],
+    selCust: -1, custQ: '',
+    nowLabel: ''
+  };
+  refs2 = {};
+  ref(name) { if (!this.refs2[name]) this.refs2[name] = React.createRef(); return this.refs2[name]; }
+  META = { menu: ['🍽','Menu Board'], promo: ['✨','Promo'], slide: ['🖼','Photo slideshow'] };
+  PRODUCTS = [['☕','Latte',4.75,'#a05446'],['🥛','Flat White',4.95,'#8a6a4a'],['🧋','Matcha Latte',5.25,'#3e6b4f'],['🍁','Maple Latte',5.5,'#b9432c'],['🧊','Cold Brew',4.25,'#5a7d9a'],['☕','Drip',3.25,'#6f6450'],['🥐','Croissant',3.5,'#c9862c'],['🍪','Cookie',2.75,'#7a5a3a'],['🫖','Chai',4.85,'#996b2f']];
+
+  componentDidMount() {
+    const boot = () => this.initScene();
+    if (window.THREE) boot(); else window.addEventListener('three-ready', boot, { once: true });
+    this.onKey = (e) => {
+      if (e.key === 'Escape') { this.setState({ active: null }); this.applyOffsetSoon(); }
+      const map = { 1: 'tv', 2: 'kiosk', 3: 'pos', 4: 'kds', 5: 'cust' };
+      if (map[e.key] && !/INPUT/.test(document.activeElement?.tagName || '')) { this.setState({ active: map[e.key], hint: false, nowLabel: '' }); this.applyOffsetSoon(); }
+    };
+    window.addEventListener('keydown', this.onKey);
+  }
+  componentWillUnmount() { cancelAnimationFrame(this.raf); window.removeEventListener('keydown', this.onKey); window.removeEventListener('resize', this.onResize); if (this.renderer) this.renderer.dispose(); }
+
+  initScene() {
+    const T = window.THREE, mount = this.refs2.mount.current;
+    if (!mount || this.renderer) return;
+    this.T = T;
+    const scene = this.scene = new T.Scene();
+    const cam = this.cam = new T.PerspectiveCamera(30, 1, 0.1, 120);
+    const renderer = this.renderer = new T.WebGLRenderer({ antialias: true, alpha: true, preserveDrawingBuffer: true });
+    renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+    renderer.shadowMap.enabled = true; renderer.shadowMap.type = T.PCFSoftShadowMap;
+    renderer.toneMapping = T.ACESFilmicToneMapping; renderer.toneMappingExposure = 1.12;
+    mount.appendChild(renderer.domElement);
+
+    scene.add(new T.HemisphereLight(0xfff8ec, 0xd9c3a0, 0.85));
+    const sun = new T.DirectionalLight(0xfff1d6, 2.2);
+    sun.position.set(9, 15, 7); sun.castShadow = true;
+    sun.shadow.mapSize.set(2048, 2048); sun.shadow.bias = -0.0004; sun.shadow.radius = 5;
+    Object.assign(sun.shadow.camera, { left: -12, right: 12, top: 12, bottom: -12, far: 50 });
+    sun.shadow.camera.updateProjectionMatrix();
+    scene.add(sun);
+    const fill = new T.DirectionalLight(0xcfe0ff, 0.5); fill.position.set(-7, 9, -5); scene.add(fill);
+
+    const mat = (c, rough = 0.7) => new T.MeshStandardMaterial({ color: c, roughness: rough, metalness: 0 });
+    // rounded edges on the hand-built props so they match the modelled ones
+    const RB = window.RoundedBoxGeometry;
+    const boxGeo = (w, h, d, opt) => {
+      if (opt.mats || !RB) return new T.BoxGeometry(w, h, d);
+      const r = Math.min(Math.min(w, h, d) * 0.18, 0.07);
+      return new RB(w, h, d, 2, r);
+    };
+    const box = (w, h, d, c, x, y, z, opt = {}) => {
+      const m = new T.Mesh(boxGeo(w, h, d, opt), opt.mats || mat(c, opt.rough ?? 0.7));
+      m.position.set(x, y, z); m.castShadow = opt.cast !== false; m.receiveShadow = true;
+      if (opt.pick) m.userData.pick = opt.pick;
+      (opt.parent || scene).add(m); return m;
+    };
+    const cyl = (r, h, c, x, y, z, opt = {}) => {
+      const m = new T.Mesh(new T.CylinderGeometry(opt.rTop ?? r, r, h, 32), mat(c, opt.rough ?? 0.7));
+      m.position.set(x, y, z); m.castShadow = true; m.receiveShadow = true;
+      if (opt.pick) m.userData.pick = opt.pick;
+      (opt.parent || scene).add(m); return m;
+    };
+    const sph = (r, c, x, y, z, sy = 1, opt = {}) => {
+      const m = new T.Mesh(new T.SphereGeometry(r, 20, 16), mat(c, opt.rough ?? 0.85));
+      m.position.set(x, y, z); m.scale.y = sy; m.castShadow = true; (opt.parent || scene).add(m); return m;
+    };
+
+    // ---- floating island ----
+    const EXT = '#c96a52', INT = '#f6efdf', INT2 = '#efe6d0';
+    box(15.6, 0.9, 12.6, '#a8795333', 0, -0.77, 0, { mats: [mat('#b98d63'), mat('#b98d63'), mat('#b98d63'), mat('#8f6a45'), mat('#b98d63'), mat('#b98d63')], cast: false });
+    box(15, 0.28, 12, '#e9d6ae', 0, -0.18, 0, { cast: false, rough: 0.55 });
+    for (let i = 0; i < 7; i++) box(15, 0.02, 0.05, '#d8c092', 0, -0.03, -5 + i * 1.7, { cast: false });
+    // soft blob shadow under island
+    const shC = document.createElement('canvas'); shC.width = shC.height = 256;
+    const shX = shC.getContext('2d'), g0 = shX.createRadialGradient(128, 128, 20, 128, 128, 126);
+    g0.addColorStop(0, 'rgba(20,40,80,.42)'); g0.addColorStop(1, 'rgba(20,40,80,0)');
+    shX.fillStyle = g0; shX.fillRect(0, 0, 256, 256);
+    const shT = new T.CanvasTexture(shC);
+    const blob = new T.Mesh(new T.PlaneGeometry(26, 22), new T.MeshBasicMaterial({ map: shT, transparent: true, depthWrite: false }));
+    blob.rotation.x = -Math.PI / 2; blob.position.y = -1.45; scene.add(blob);
+    // walls (interior cream, exterior terracotta) — face order [+x,-x,+y,-y,+z,-z]
+    box(15, 5.5, 0.45, EXT, 0, 2.53, -5.78, { cast: false, mats: [mat(EXT), mat(EXT), mat(EXT, 0.6), mat(EXT), mat(INT, 0.85), mat(EXT)] });
+    box(0.45, 5.5, 12, EXT, -7.28, 2.53, 0, { cast: false, mats: [mat(INT2, 0.85), mat(EXT), mat(EXT, 0.6), mat(EXT), mat(EXT), mat(EXT)] });
+    box(15, 0.55, 0.5, '#b9432c', 0, 0.1, -5.76, { cast: false });
+    // window in back wall (right side)
+    box(3.0, 2.2, 0.55, '#fffdfa', 4.6, 3.3, -5.78, { cast: false, rough: 0.4 });
+    const pane = new T.Mesh(new T.PlaneGeometry(2.6, 1.8), new T.MeshStandardMaterial({ color: '#eaf4ff', emissive: '#dcecff', emissiveIntensity: 1.5, roughness: 0.2 }));
+    pane.position.set(4.6, 3.3, -5.49); scene.add(pane);
+    box(0.09, 1.8, 0.06, '#fffdfa', 4.6, 3.3, -5.47, { cast: false }); box(2.6, 0.09, 0.06, '#fffdfa', 4.6, 3.3, -5.47, { cast: false });
+    // picture frames
+    box(0.95, 1.2, 0.07, '#8a6a4a', -3.3, 3.6, -5.52, { cast: false });
+    box(0.79, 1.04, 0.08, '#d97b4f', -3.3, 3.6, -5.51, { cast: false });
+    box(1.2, 0.9, 0.07, '#8a6a4a', -4.9, 3.4, -5.52, { cast: false });
+    box(1.04, 0.74, 0.08, '#3e6b4f', -4.9, 3.4, -5.51, { cast: false });
+    // ---- counter: KayKit counters (loaded async) unified by a dark slab top ----
+    box(6.6, 0.1, 1.55, '#3b352d', 1.2, 1.16, 0.3, { rough: 0.35 });
+    // espresso machine
+    const em = new T.Group(); em.position.set(-0.5, 1.21, 0.1); scene.add(em);
+    box(1.2, 0.16, 0.8, '#35302a', 0, 0.08, 0, { parent: em, rough: 0.4 });
+    box(1.05, 0.5, 0.62, '#4a443c', 0, 0.42, 0, { parent: em, rough: 0.45 });
+    box(1.15, 0.12, 0.72, '#d9d2c4', 0, 0.72, 0, { parent: em, rough: 0.3 });
+    cyl(0.05, 0.18, '#d9d2c4', -0.25, 0.24, 0.34, { parent: em }); cyl(0.05, 0.18, '#d9d2c4', 0.25, 0.24, 0.34, { parent: em });
+    box(0.3, 0.08, 0.3, '#b9432c', 0, 0.82, 0, { parent: em });
+    cyl(0.09, 0.12, '#f5f1e8', -0.25, 0.14, 0.55, { parent: em }); cyl(0.09, 0.12, '#f5f1e8', 0.25, 0.14, 0.55, { parent: em });
+    // pastry case (glass hood over KayKit plates, filled in loadProps)
+    const glass = new T.Mesh(new T.BoxGeometry(1.5, 0.6, 0.9), new T.MeshStandardMaterial({ color: '#dceef2', roughness: 0.08, transparent: true, opacity: 0.28 }));
+    glass.position.set(3.9, 1.51, 0.25); scene.add(glass);
+    // POS terminal
+    box(0.5, 0.09, 0.34, '#2b2620', 2.5, 1.26, 0.62, { pick: 'pos' });
+    this.posGroup = new T.Group(); this.posGroup.position.set(2.5, 1.57, 0.6); this.posGroup.rotation.set(-0.28, 0.5, 0); scene.add(this.posGroup);
+    box(0.62, 0.45, 0.05, '#22201c', 0, 0, 0, { parent: this.posGroup, pick: 'pos', rough: 0.35 });
+    this.posTex = this.makeTex(512, 360);
+    const posScr = new T.Mesh(new T.PlaneGeometry(0.56, 0.4), new T.MeshBasicMaterial({ map: this.posTex.tex }));
+    posScr.position.z = 0.028; posScr.userData.pick = 'pos'; this.posGroup.add(posScr);
+    // customer display
+    const cg = new T.Group(); cg.position.set(0.9, 1.24, 0.92); cg.rotation.set(0.12, Math.PI + 0.15, 0); scene.add(cg);
+    box(0.3, 0.06, 0.2, '#22201c', 0, 0, 0, { parent: cg, pick: 'cust' });
+    box(0.52, 0.36, 0.04, '#22201c', 0, 0.28, 0, { parent: cg, pick: 'cust', rough: 0.35 });
+    this.custTex = this.makeTex(512, 320);
+    const custScr = new T.Mesh(new T.PlaneGeometry(0.47, 0.31), new T.MeshBasicMaterial({ map: this.custTex.tex }));
+    custScr.position.set(0, 0.28, 0.022); custScr.userData.pick = 'cust'; cg.add(custScr);
+    // wall TV
+    box(3.6, 2.1, 0.16, '#1c1a17', 1.5, 3.45, -5.47, { pick: 'tv', rough: 0.35 });
+    this.tvTex = this.makeTex(1024, 576);
+    const tvScr = new T.Mesh(new T.PlaneGeometry(3.36, 1.9), new T.MeshBasicMaterial({ map: this.tvTex.tex }));
+    tvScr.position.set(1.5, 3.45, -5.38); tvScr.userData.pick = 'tv'; scene.add(tvScr);
+    // kiosk
+    const kg = new T.Group(); kg.position.set(-4.6, 0, 2.3); kg.rotation.y = 0.85; scene.add(kg);
+    cyl(0.5, 0.14, '#35302a', 0, 0.07, 0, { parent: kg, pick: 'kiosk', rough: 0.4 });
+    cyl(0.09, 1.5, '#4a443c', 0, 0.85, 0, { parent: kg, pick: 'kiosk' });
+    const kf = box(1.02, 1.6, 0.09, '#b9432c', 0, 1.95, 0.06, { parent: kg, pick: 'kiosk', rough: 0.45 }); kf.rotation.x = -0.1;
+    this.kioskTex = this.makeTex(640, 1024);
+    const kScr = new T.Mesh(new T.PlaneGeometry(0.88, 1.44), new T.MeshBasicMaterial({ map: this.kioskTex.tex }));
+    kScr.position.set(0, 1.95, 0.115); kScr.rotation.x = -0.1; kScr.userData.pick = 'kiosk'; kg.add(kScr);
+    box(0.5, 0.12, 0.3, '#35302a', 0.12, 1.1, 0.3, { parent: kg, pick: 'kiosk' });
+    // KDS on left wall
+    box(0.14, 1.15, 2.0, '#1c1a17', -6.98, 3.1, -2.5, { pick: 'kds', rough: 0.35 });
+    this.kdsTex = this.makeTex(1024, 576);
+    const kdsScr = new T.Mesh(new T.PlaneGeometry(1.86, 1.02), new T.MeshBasicMaterial({ map: this.kdsTex.tex }));
+    kdsScr.position.set(-6.89, 3.1, -2.5); kdsScr.rotation.y = Math.PI / 2; kdsScr.userData.pick = 'kds'; scene.add(kdsScr);
+    // rug (tables, chairs and stools are KayKit models placed in loadProps)
+    const rug = new T.Mesh(new T.CircleGeometry(2.6, 40), mat('#d97b4f', 0.95));
+    rug.rotation.x = -Math.PI / 2; rug.position.set(0.6, 0.01, 3.4); rug.receiveShadow = true; scene.add(rug);
+    this.loadProps(scene);
+    // pendant lamps
+    [-0.5, 1.2, 2.9].forEach((x) => {
+      cyl(0.015, 1.3, '#35302a', x, 4.75, 0.4);
+      cyl(0.3, 0.32, '#b9432c', x, 4.0, 0.4, { rTop: 0.1, rough: 0.4 });
+      const b = new T.Mesh(new T.SphereGeometry(0.09, 12, 10), new T.MeshStandardMaterial({ color: '#ffe9c4', emissive: '#ffca7a', emissiveIntensity: 2.2 }));
+      b.position.set(x, 3.88, 0.4); scene.add(b);
+    });
+
+    this.anchors = {
+      tv: new T.Vector3(1.5, 3.45, -5.3), kiosk: new T.Vector3(-4.6, 2.1, 2.6),
+      pos: new T.Vector3(2.5, 1.75, 0.6), kds: new T.Vector3(-6.85, 3.1, -2.5),
+      cust: new T.Vector3(0.9, 1.78, 0.97)
+    };
+    this.views = {
+      home:  { t: [0, 1.3, -0.5], az: 0.72, el: 0.55, d: 20 },
+      tv:    { t: [1.5, 3.4, -5.3], az: 0.06, el: 0.05, d: 4.8 },
+      kiosk: { t: [-4.6, 1.7, 2.4], az: 0.95, el: 0.1, d: 3.6 },
+      pos:   { t: [2.5, 1.4, 0.55], az: 0.6, el: 0.32, d: 3.4 },
+      kds:   { t: [-6.85, 3.0, -2.5], az: 1.42, el: 0.08, d: 4.2 },
+      cust:  { t: [0.9, 1.43, 0.92], az: 2.6, el: 0.28, d: 3.0 }
+    };
+    this.curPos = new T.Vector3(); this.curTgt = new T.Vector3(0, 1.3, -0.5);
+    this.orb = { az: 0, el: 0, d: 0 };
+    const h = this.views.home; this.curPos.copy(this.viewPos(h)); cam.position.copy(this.curPos); cam.lookAt(this.curTgt);
+
+    const el2 = renderer.domElement;
+    let down = null, dragged = false;
+    el2.addEventListener('pointerdown', (e) => { down = [e.clientX, e.clientY]; dragged = false; mount.style.cursor = 'grabbing'; });
+    window.addEventListener('pointermove', (e) => {
+      if (!down) return;
+      const dx = e.clientX - down[0], dy = e.clientY - down[1];
+      if (Math.abs(dx) + Math.abs(dy) > 4) dragged = true;
+      if (dragged && !this.state.active) {
+        this.orb.az = Math.max(-0.55, Math.min(0.75, this.orb.az + dx * 0.004));
+        this.orb.el = Math.max(-0.28, Math.min(0.35, this.orb.el + dy * 0.003));
+      }
+      down = [e.clientX, e.clientY];
+    });
+    window.addEventListener('pointerup', () => { down = null; mount.style.cursor = 'grab'; });
+    el2.addEventListener('wheel', (e) => { if (!this.state.active) { e.preventDefault(); this.orb.d = Math.max(-7, Math.min(8, this.orb.d + e.deltaY * 0.01)); } }, { passive: false });
+    this.ray = new T.Raycaster(); this.ptr = new T.Vector2();
+    el2.addEventListener('click', (e) => {
+      if (dragged) return;
+      const r = el2.getBoundingClientRect();
+      this.ptr.set(((e.clientX - r.left) / r.width) * 2 - 1, -((e.clientY - r.top) / r.height) * 2 + 1);
+      this.ray.setFromCamera(this.ptr, cam);
+      const hits = this.ray.intersectObjects(scene.children, true);
+      for (const hit of hits) {
+        let o = hit.object;
+        while (o) { if (o.userData.pick) { this.setState({ active: o.userData.pick, hint: false, nowLabel: '' }); this.applyOffsetSoon(); return; } o = o.parent; }
+      }
+    });
+
+    this.onResize = () => {
+      const w = mount.clientWidth, h2 = mount.clientHeight;
+      renderer.setSize(w, h2); cam.aspect = w / h2; cam.updateProjectionMatrix(); this.applyOffset();
+    };
+    this.onResize(); window.addEventListener('resize', this.onResize);
+    this.t0 = performance.now(); this.lastKeys = {};
+    const loop = () => { this.raf = requestAnimationFrame(loop); this.frame(); };
+    loop();
+  }
+
+  async loadProps(scene) {
+    const T = this.T;
+    if (!window.GLTFLoader) return;
+    const loader = new window.GLTFLoader();
+    const load = (n) => new Promise((res, rej) => loader.load('models/' + n + '.glb', g => res(g.scene), undefined, rej));
+    const names = ['cabinet', 'cabinet2', 'sink', 'fridge', 'oven', 'stove', 'tableSmall', 'chair', 'chair2', 'menu', 'plate', 'plateSmall', 'pot', 'pan', 'bowl', 'crate', 'crateBuns', 'cuttingBoard', 'dishrack', 'counterA', 'hood', 'ketchup', 'mustard', 'foodDinner'];
+    const lib = {};
+    await Promise.all(names.map(async n => { try { lib[n] = await load(n); } catch (e) { console.warn('model failed:', n, e); } }));
+    const place = (n, h, x, z, ry = 0, y = 0) => {
+      const src = lib[n]; if (!src) return null;
+      const obj = src.clone(true);
+      obj.traverse(o => { if (o.isMesh) { o.castShadow = true; o.receiveShadow = true; } });
+      const bb = new T.Box3().setFromObject(obj);
+      obj.scale.setScalar(h / Math.max(0.001, bb.max.y - bb.min.y));
+      obj.rotation.y = ry;
+      const bb2 = new T.Box3().setFromObject(obj);
+      const c = bb2.getCenter(new T.Vector3());
+      const g = new T.Group();
+      obj.position.set(-c.x, -bb2.min.y, -c.z);
+      g.add(obj); g.position.set(x, y, z); scene.add(g); return g;
+    };
+    // counter row (under the slab top)
+    [-1.55, -0.18, 1.2, 2.58, 3.95].forEach((x, i) => place(i % 2 ? 'cabinet2' : 'cabinet', 1.12, x, 0.3, Math.PI));
+    // kitchen wall (left, under KDS)
+    // surface heights below come from each model's own top face, not its total height
+    place('sink', 1.12, -6.3, 0.3, Math.PI / 2);
+    place('dishrack', 0.32, -6.45, 0.72, Math.PI / 2, 0.762);
+    place('counterA', 1.12, -6.3, -2.6, Math.PI / 2);
+    place('stove', 0.12, -6.3, -2.6, Math.PI / 2, 0.933);
+    place('pan', 0.1, -6.25, -2.75, 0.4, 1.053);
+    place('pot', 0.34, -6.3, -1.2, 0, 1.12);
+    place('oven', 1.12, -6.3, -1.2, Math.PI / 2);
+    place('hood', 0.95, -6.55, -1.15, Math.PI / 2, 2.35);
+    place('fridge', 2.25, -6.25, -4.4, Math.PI / 2);
+    // café seating — real tables and chairs
+    [[4.9, 2.6, 0.2], [-2.4, 4.3, -0.4], [1.5, 4.6, 0.6]].forEach(([x, z, ry]) => {
+      place('tableSmall', 1.05, x, z, ry);
+      place('chair', 1.0, x + 0.78, z + 0.2, ry - 1.9);
+      place('chair2', 1.0, x - 0.76, z - 0.14, ry + 1.3);
+    });
+    // dressing
+    place('menu', 0.32, 0.35, 0.75, -0.3, 1.21);
+    place('plate', 0.07, 1.7, 0.55, 0, 1.21);
+    place('cuttingBoard', 0.06, 3.2, 0.45, 0.4, 1.21);
+    place('bowl', 0.1, 2.05, 0.35, 0.3, 1.21);
+    place('ketchup', 0.26, 5.05, 2.75, 0.3, 1.034);
+    place('mustard', 0.26, 5.18, 2.6, -0.5, 1.034);
+    // pastry case contents (on the counter slab)
+    place('plateSmall', 0.05, 3.55, 0.15, 0.2, 1.21);
+    place('foodDinner', 0.26, 3.95, 0.3, -0.4, 1.21);
+    place('plateSmall', 0.05, 4.3, 0.12, 0.7, 1.21);
+    place('crate', 0.5, 6.4, -4.7, 0.1);
+    place('crateBuns', 0.42, 6.35, -4.6, 0.5, 0.5);
+  }
+
+  viewPos(v) {
+    const T = this.T;
+    return new T.Vector3(
+      v.t[0] + v.d * Math.cos(v.el) * Math.sin(v.az),
+      v.t[1] + v.d * Math.sin(v.el),
+      v.t[2] + v.d * Math.cos(v.el) * Math.cos(v.az));
+  }
+  applyOffset() {
+    const mount = this.refs2.mount.current; if (!mount || !this.cam) return;
+    const w = mount.clientWidth, h = mount.clientHeight;
+    if (this.state.active) { const P = Math.min(460, w * 0.44); this.cam.setViewOffset(w + P, h, P, 0, w, h); }
+    else this.cam.clearViewOffset();
+  }
+  applyOffsetSoon() { setTimeout(() => this.applyOffset(), 0); }
+
+  makeTex(w, h) {
+    const c = document.createElement('canvas'); c.width = w; c.height = h;
+    const tex = new this.T.CanvasTexture(c); tex.colorSpace = this.T.SRGBColorSpace;
+    return { c, ctx: c.getContext('2d'), tex };
+  }
+  currentScreen(screens, elapsed) {
+    const speed = this.props.previewSpeed ?? 1;
+    if (!screens.length) return { t: 'promo', i: 0 };
+    const total = screens.reduce((a, s) => a + Math.max(2, s.sec), 0);
+    let t = (elapsed * speed / 1000) % total;
+    for (let i = 0; i < screens.length; i++) { const d = Math.max(2, screens[i].sec); if (t < d) return { t: screens[i].t, i }; t -= d; }
+    return { t: screens[0].t, i: 0 };
+  }
+
+  frame() {
+    const T = this.T, cam = this.cam, mount = this.refs2.mount.current;
+    if (!mount) return;
+    const now = performance.now(), el = now - this.t0;
+    const vk = this.state.active || 'home';
+    const v = { ...this.views[vk] };
+    if (vk === 'home') {
+      if (this.props.autoOrbit ?? true) v.az += Math.sin(el / 9000) * 0.05;
+      v.az += this.orb.az; v.el = Math.max(0.12, v.el + this.orb.el); v.d += this.orb.d;
+    }
+    const dp = this.viewPos(v), dt = new T.Vector3(...v.t);
+    this.curPos.lerp(dp, 0.07); this.curTgt.lerp(dt, 0.07);
+    cam.position.copy(this.curPos); cam.lookAt(this.curTgt);
+
+    const w = mount.clientWidth, hh = mount.clientHeight;
+    for (const k of ['tv', 'kiosk', 'pos', 'kds', 'cust']) {
+      const elm = this.refs2['m_' + k]?.current; if (!elm) continue;
+      if (this.state.active) { elm.style.display = 'none'; continue; }
+      elm.style.display = 'block';
+      const p = this.anchors[k].clone().project(cam);
+      elm.style.transform = `translate(${(p.x * 0.5 + 0.5) * w}px, ${(-p.y * 0.5 + 0.5) * hh}px)`;
+    }
+
+    const s = this.state;
+    const tv = s.tvs[s.curTv] || s.tvs[0];
+    const cs = this.currentScreen(tv ? tv.screens : [], el);
+    const photoIdx = Math.floor(el / 3000) % Math.max(1, s.photos.length);
+    const tvKey = cs.t + cs.i + (cs.t === 'slide' ? photoIdx : '') + s.curTv + s.photos.length;
+    if (this.lastKeys.tv !== tvKey) { this.lastKeys.tv = tvKey; this.drawScreen(this.tvTex, cs.t, photoIdx, false); }
+    if (tv && s.active === 'tv') {
+      const label = this.META[cs.t][0] + ' ' + this.META[cs.t][1];
+      if (s.nowLabel !== label) this.setState({ nowLabel: label });
+    }
+    const kcs = this.currentScreen(s.kiosk.screens, el + 2500);
+    const kKey = kcs.t + kcs.i + (kcs.t === 'slide' ? photoIdx : '') + s.photos.length;
+    if (this.lastKeys.kiosk !== kKey) { this.lastKeys.kiosk = kKey; this.drawScreen(this.kioskTex, kcs.t, photoIdx, true); }
+    const oKey = s.order.map(o => o.name + o.qty).join(',') + '#' + s.orderNo;
+    if (this.lastKeys.pos !== oKey) { this.lastKeys.pos = oKey; this.drawPos(); }
+    const cKey = oKey + '|' + s.selCust;
+    if (this.lastKeys.cust !== cKey) { this.lastKeys.cust = cKey; this.drawCust(); }
+    const sec = Math.floor(now / 1000);
+    const kdKey = s.tickets.map(t2 => t2.id).join(',') + '|' + sec;
+    if (this.lastKeys.kds !== kdKey) { this.lastKeys.kds = kdKey; this.drawKds(); if (s.active === 'kds' && s.tick !== sec) this.setState({ tick: sec }); }
+
+    this.renderer.render(this.scene, cam);
+  }
+
+  drawScreen(tx, type, photoIdx, portrait) {
+    if (type === 'menu') this.drawMenu(tx, portrait);
+    else if (type === 'slide') this.drawSlide(tx, photoIdx);
+    else this.drawPromo(tx, portrait);
+    tx.tex.needsUpdate = true;
+  }
+  drawMenu(tx, portrait) {
+    const { ctx, c } = tx, W = c.width, H = c.height;
+    ctx.fillStyle = '#26211c'; ctx.fillRect(0, 0, W, H);
+    ctx.fillStyle = '#b9432c'; ctx.fillRect(0, 0, W, portrait ? 90 : 70);
+    ctx.fillStyle = '#f5f1e8'; ctx.font = `800 ${portrait ? 40 : 36}px Manrope, sans-serif`; ctx.textAlign = 'center';
+    ctx.fillText('🍁 MAPLE COFFEE · MENU', W / 2, portrait ? 60 : 48);
+    const items = [['Latte', '4.75'], ['Cappuccino', '4.50'], ['Flat White', '4.95'], ['Cold Brew', '4.25'], ['Matcha Latte', '5.25'], ['Maple Latte', '5.50'], ['Drip Coffee', '3.25'], ['Chai', '4.85']];
+    ctx.textAlign = 'left'; ctx.font = `700 ${portrait ? 34 : 32}px Manrope, sans-serif`;
+    const cols = portrait ? 1 : 2, colW = W / cols, top = portrait ? 150 : 130, lh = portrait ? 92 : 88;
+    items.forEach(([n, p], i) => {
+      const col = i % cols, row = Math.floor(i / cols);
+      const x = 60 + col * colW, y = top + row * lh;
+      if (y > H - 30) return;
+      ctx.fillStyle = '#f5f1e8'; ctx.fillText(n, x, y);
+      ctx.fillStyle = '#d9a05e'; ctx.textAlign = 'right'; ctx.fillText('$' + p, x + colW - 120, y); ctx.textAlign = 'left';
+      ctx.strokeStyle = 'rgba(245,241,232,.15)'; ctx.beginPath(); ctx.moveTo(x, y + 22); ctx.lineTo(x + colW - 120, y + 22); ctx.stroke();
+    });
+  }
+  drawPromo(tx, portrait) {
+    const { ctx, c } = tx, W = c.width, H = c.height;
+    ctx.fillStyle = '#f5f1e8'; ctx.fillRect(0, 0, W, H);
+    ctx.fillStyle = '#eadfc6'; for (let i = 0; i < 6; i++) ctx.fillRect(0, i * H / 3, W, 3);
+    ctx.fillStyle = '#b9432c'; ctx.beginPath(); ctx.arc(portrait ? W / 2 : W * 0.76, portrait ? H * 0.3 : H * 0.42, portrait ? 130 : 120, 0, 7); ctx.fill();
+    ctx.fillStyle = '#fff'; ctx.textAlign = 'center'; ctx.font = `800 ${portrait ? 44 : 40}px Manrope, sans-serif`;
+    ctx.fillText('NEW', portrait ? W / 2 : W * 0.76, portrait ? H * 0.28 : H * 0.4);
+    ctx.font = `700 ${portrait ? 30 : 28}px Manrope, sans-serif`;
+    ctx.fillText('this week', portrait ? W / 2 : W * 0.76, portrait ? H * 0.28 + 44 : H * 0.4 + 40);
+    ctx.fillStyle = '#2f2a23'; ctx.textAlign = portrait ? 'center' : 'left';
+    const tX = portrait ? W / 2 : 70;
+    ctx.font = `800 ${portrait ? 64 : 72}px Manrope, sans-serif`; ctx.fillText('Maple Latte', tX, portrait ? H * 0.55 : H * 0.42);
+    ctx.font = `700 ${portrait ? 44 : 46}px Manrope, sans-serif`; ctx.fillStyle = '#b9432c';
+    ctx.fillText('$5.50 · oat milk +0', tX, portrait ? H * 0.55 + 70 : H * 0.42 + 70);
+    ctx.fillStyle = '#6f6450'; ctx.font = `600 30px Manrope, sans-serif`;
+    ctx.fillText(portrait ? 'Tap below to order 👇' : 'Real maple. Double shot. Zero regrets. 🍁', tX, portrait ? H * 0.55 + 130 : H * 0.42 + 130);
+    if (portrait) {
+      ctx.fillStyle = '#2f2a23'; this.rr(ctx, W / 2 - 190, H * 0.78, 380, 110, 55); ctx.fill();
+      ctx.fillStyle = '#f5f1e8'; ctx.font = '800 44px Manrope, sans-serif'; ctx.textAlign = 'center';
+      ctx.fillText('Order here', W / 2, H * 0.78 + 70);
+    }
+  }
+  drawSlide(tx, idx) {
+    const { ctx, c } = tx, W = c.width, H = c.height;
+    const n = Math.max(1, this.state.photos.length);
+    const ph = this.state.photos[idx % n] || ['#555', '#222'];
+    const g = ctx.createLinearGradient(0, 0, W, H); g.addColorStop(0, ph[0]); g.addColorStop(1, ph[1]);
+    ctx.fillStyle = g; ctx.fillRect(0, 0, W, H);
+    ctx.fillStyle = 'rgba(255,255,255,.14)'; ctx.beginPath(); ctx.arc(W * 0.3, H * 0.35, H * 0.28, 0, 7); ctx.fill();
+    ctx.beginPath(); ctx.arc(W * 0.72, H * 0.62, H * 0.2, 0, 7); ctx.fill();
+    ctx.font = `${Math.round(H * 0.16)}px serif`; ctx.textAlign = 'center'; ctx.fillText('☕', W * 0.3, H * 0.42);
+    this.state.photos.forEach((_, i) => {
+      ctx.fillStyle = i === idx % n ? '#fff' : 'rgba(255,255,255,.4)';
+      ctx.beginPath(); ctx.arc(W / 2 + (i - (this.state.photos.length - 1) / 2) * 34, H - 40, 8, 0, 7); ctx.fill();
+    });
+  }
+  drawPos() {
+    const { ctx, c } = this.posTex, W = c.width, H = c.height;
+    const s = this.state;
+    ctx.fillStyle = '#f5f1e8'; ctx.fillRect(0, 0, W, H);
+    ctx.fillStyle = '#fffdfa'; ctx.fillRect(0, 0, W * 0.44, H);
+    ctx.fillStyle = '#2f2a23'; ctx.font = '800 26px Manrope, sans-serif'; ctx.textAlign = 'left';
+    ctx.fillText('Order #' + s.orderNo, 18, 40);
+    ctx.font = '600 21px Manrope, sans-serif';
+    if (s.order.length) {
+      s.order.slice(0, 5).forEach((o, i) => { ctx.fillStyle = '#6f6450'; ctx.fillText(`${o.qty}× ${o.name}`, 18, 84 + i * 34); });
+      const tot = s.order.reduce((a, o) => a + o.qty * o.price, 0).toFixed(2);
+      ctx.fillStyle = '#b9432c'; ctx.fillRect(14, H - 66, W * 0.44 - 28, 48);
+      ctx.fillStyle = '#fff'; ctx.font = '800 23px Manrope, sans-serif'; ctx.fillText('Charge $' + tot, 24, H - 34);
+    } else { ctx.fillStyle = '#b9a98c'; ctx.fillText('No items yet…', 18, 84); }
+    this.PRODUCTS.slice(0, 9).forEach((p, i) => {
+      ctx.fillStyle = p[3]; this.rr(ctx, W * 0.47 + (i % 3) * (W * 0.175), 20 + Math.floor(i / 3) * 110, W * 0.16, 94, 10); ctx.fill();
+      ctx.font = '34px serif'; ctx.textAlign = 'center';
+      ctx.fillText(p[0], W * 0.47 + (i % 3) * (W * 0.175) + W * 0.08, 76 + Math.floor(i / 3) * 110);
+      ctx.textAlign = 'left';
+    });
+  }
+  drawCust() {
+    const { ctx, c } = this.custTex, W = c.width, H = c.height;
+    const s = this.state;
+    ctx.fillStyle = '#26211c'; ctx.fillRect(0, 0, W, H);
+    ctx.textAlign = 'center';
+    if (s.order.length) {
+      ctx.fillStyle = '#f5f1e8'; ctx.font = '800 30px Manrope, sans-serif'; ctx.fillText('Your order', W / 2, 46);
+      ctx.font = '600 24px Manrope, sans-serif'; ctx.fillStyle = '#d9cbb0';
+      s.order.slice(0, 3).forEach((o, i) => ctx.fillText(`${o.qty}× ${o.name}  $${(o.qty * o.price).toFixed(2)}`, W / 2, 92 + i * 38));
+      const tot = s.order.reduce((a, o) => a + o.qty * o.price, 0).toFixed(2);
+      ctx.fillStyle = '#d9a05e'; ctx.font = '800 34px Manrope, sans-serif'; ctx.fillText('Total  $' + tot, W / 2, H - 46);
+    } else if (s.selCust >= 0) {
+      const cu = s.customers[s.selCust];
+      ctx.fillStyle = '#d9a05e'; ctx.font = '800 26px Manrope, sans-serif'; ctx.fillText('✨ ' + cu.tier + (cu.tier === 'VIP' ? '' : ' Member'), W / 2, 60);
+      ctx.fillStyle = '#f5f1e8'; ctx.font = '800 40px Manrope, sans-serif'; ctx.fillText('Welcome back,', W / 2, 130);
+      ctx.fillText(cu.name.split(' ')[0] + '!', W / 2, 182);
+      ctx.fillStyle = '#8fae8a'; ctx.font = '700 26px Manrope, sans-serif'; ctx.fillText('🍁 ' + cu.pts + ' points', W / 2, H - 50);
+    } else {
+      ctx.fillStyle = '#f5f1e8'; ctx.font = '800 42px Manrope, sans-serif'; ctx.fillText('🍁 Welcome!', W / 2, H / 2 - 10);
+      ctx.fillStyle = '#b9a98c'; ctx.font = '600 24px Manrope, sans-serif'; ctx.fillText('Maple Coffee Shop', W / 2, H / 2 + 36);
+    }
+    this.custTex.tex.needsUpdate = true;
+  }
+  drawKds() {
+    const { ctx, c } = this.kdsTex, W = c.width, H = c.height;
+    ctx.fillStyle = '#211d19'; ctx.fillRect(0, 0, W, H);
+    const tk = this.state.tickets.slice(0, 3);
+    if (!tk.length) {
+      ctx.fillStyle = '#8a7f6d'; ctx.font = '700 40px Manrope, sans-serif'; ctx.textAlign = 'center';
+      ctx.fillText('🍳 All caught up', W / 2, H / 2);
+    }
+    tk.forEach((t2, i) => {
+      const age = (Date.now() - t2.t0) / 1000;
+      const col = age > 120 ? '#b9432c' : age > 45 ? '#c9a227' : '#3e6b4f';
+      const x = 24 + i * (W / 3);
+      ctx.fillStyle = '#fffdfa'; this.rr(ctx, x, 24, W / 3 - 44, H - 48, 14); ctx.fill();
+      ctx.fillStyle = col; this.rr(ctx, x, 24, W / 3 - 44, 62, 14); ctx.fill(); ctx.fillRect(x, 60, W / 3 - 44, 26);
+      ctx.fillStyle = '#fff'; ctx.font = '800 30px Manrope, sans-serif'; ctx.textAlign = 'left';
+      ctx.fillText(`#${t2.id} · ${this.fmtAge(t2.t0)}`, x + 20, 66);
+      ctx.fillStyle = '#2f2a23'; ctx.font = '600 27px Manrope, sans-serif';
+      t2.lines.slice(0, 6).forEach((l, j) => ctx.fillText(l, x + 20, 140 + j * 44));
+    });
+    this.kdsTex.tex.needsUpdate = true;
+  }
+  rr(ctx, x, y, w, h, r) { ctx.beginPath(); ctx.roundRect(x, y, w, h, r); }
+  fmtAge(t0) { const a = Math.max(0, Math.floor((Date.now() - t0) / 1000)); return Math.floor(a / 60) + ':' + String(a % 60).padStart(2, '0'); }
+
+  edit(fn) { this.setState(fn); this.lastKeys = {}; }
+  activeList() { return this.state.active === 'kiosk' ? this.state.kiosk.screens : (this.state.tvs[this.state.curTv]?.screens || []); }
+  setList(screens) {
+    if (this.state.active === 'kiosk') this.edit(s => ({ kiosk: { ...s.kiosk, screens } }));
+    else this.edit(s => ({ tvs: s.tvs.map((t, i) => i === s.curTv ? { ...t, screens } : t) }));
+  }
+  toast(msg) { this.setState({ toast: msg }); clearTimeout(this.toastT); this.toastT = setTimeout(() => this.setState({ toast: '' }), 2000); }
+
+  renderVals() {
+    const s = this.state, META = this.META;
+    const pick = (k) => () => { this.setState({ active: k, hint: false, nowLabel: '' }); this.applyOffsetSoon(); };
+    const list = this.activeList();
+    const playlist = list.map((row, i) => ({
+      n: i + 1, emoji: META[row.t][0], label: META[row.t][1], sec: row.sec,
+      setSec: (e) => { const v = parseInt(e.target.value) || 2; const L = [...this.activeList()]; L[i] = { ...L[i], sec: v }; this.setList(L); },
+      up: () => { if (!i) return; const L = [...this.activeList()]; [L[i - 1], L[i]] = [L[i], L[i - 1]]; this.setList(L); },
+      down: () => { const L = [...this.activeList()]; if (i >= L.length - 1) return; [L[i + 1], L[i]] = [L[i], L[i + 1]]; this.setList(L); },
+      rm: () => this.setList(this.activeList().filter((_, j) => j !== i))
+    }));
+    const addScreen = (t) => () => this.setList([...this.activeList(), { t, sec: 6 }]);
+    const tabStyle = (sel) => ({
+      background: sel ? '#2f2a23' : '#fffdfa', color: sel ? '#f5f1e8' : '#2f2a23',
+      border: sel ? '1px solid #2f2a23' : '1px solid #e4dbc8', borderRadius: '12px', padding: '10px 14px',
+      fontFamily: 'inherit', textAlign: 'left', cursor: 'pointer'
+    });
+    const tv = s.tvs[s.curTv];
+    const markerDefs = [
+      ['tv', 1, '📺 Wall TV', '#b9432c', '0s'], ['kiosk', 2, '🖥️ Self-order kiosk', '#b9432c', '.4s'],
+      ['pos', 3, '🧑‍🍳 Counter station', '#2f6b46', '.8s'], ['kds', 4, '🍳 Kitchen display', '#2f6b46', '1.2s'],
+      ['cust', 5, '🙋 Customer screen', '#c9862c', '1.6s']
+    ];
+    const total = s.order.reduce((a, o) => a + o.qty * o.price, 0);
+    const tierCol = { VIP: '#b9432c', Gold: '#c9862c', Silver: '#8a8a8a', Member: '#2f6b46' };
+    const custFiltered = s.customers.map((cu, i) => ({ cu, i })).filter(({ cu }) => cu.name.toLowerCase().includes(s.custQ.toLowerCase()));
+    return {
+      mountRef: this.ref('mount'),
+      markers: markerDefs.map(([k, n, label, col, delay]) => ({
+        n, label, pick: pick(k), mref: this.ref('m_' + k),
+        pulseStyle: { position: 'absolute', inset: 0, borderRadius: '50%', background: col, animation: `mkpulse 2.2s ${delay} ease-out infinite` },
+        dotStyle: { position: 'absolute', inset: 0, borderRadius: '50%', background: col, color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 800, fontSize: '15px', boxShadow: '0 4px 14px rgba(60,35,15,.4)', border: '2px solid #fff' }
+      })),
+      goBack: () => { this.setState({ active: null }); this.applyOffsetSoon(); },
+      hintVisible: s.hint && !s.active,
+      panelOpen: !!s.active,
+      showTv: s.active === 'tv', showKiosk: s.active === 'kiosk', showPos: s.active === 'pos', showKds: s.active === 'kds', showCust: s.active === 'cust',
+      showConfig: s.active === 'tv' || s.active === 'kiosk',
+      panelEmoji: { tv: '📺', kiosk: '🖥️', pos: '🧑‍🍳', kds: '🍳', cust: '👤' }[s.active] || '',
+      panelTitle: { tv: 'Wall TVs', kiosk: 'Kiosk setup', pos: 'Counter Station', kds: 'Kitchen displays', cust: 'Customers' }[s.active] || '',
+      portalLink: { tv: 'https://coffee.maplekiosk.ca/touch/tv-setup', kiosk: 'https://coffee.maplekiosk.ca/touch/kiosk-setup', pos: 'https://coffee.maplekiosk.ca/coffee/today', kds: 'https://coffee.maplekiosk.ca/kds', cust: 'https://coffee.maplekiosk.ca/touch/customers' }[s.active] || '#',
+      tvTabs: s.tvs.map((t, i) => ({ name: t.name, sub: t.screens.length + (t.screens.length === 1 ? ' screen' : ' screens'), style: tabStyle(i === s.curTv), pick: () => this.edit(() => ({ curTv: i })) })),
+      addTv: () => this.edit(st => ({ tvs: [...st.tvs, { name: 'TV ' + (st.tvs.length + 1), screens: [{ t: 'menu', sec: 8 }] }], curTv: st.tvs.length })),
+      deleteTv: () => this.edit(st => st.tvs.length <= 1 ? {} : { tvs: st.tvs.filter((_, i) => i !== st.curTv), curTv: 0 }),
+      tvName: tv ? tv.name : '', setTvName: (e) => this.edit(st => ({ tvs: st.tvs.map((t, i) => i === st.curTv ? { ...t, name: e.target.value } : t) })),
+      tvWallLink: 'https://coffee.maplekiosk.ca/touch/tv/' + encodeURIComponent(tv ? tv.name : 'TV 1'),
+      nowPlaying: s.nowLabel || '…',
+      playlist, addMenu: addScreen('menu'), addPromo: addScreen('promo'), addSlide: addScreen('slide'),
+      kName: s.kiosk.name, setKName: (e) => this.edit(st => ({ kiosk: { ...st.kiosk, name: e.target.value } })),
+      attract: s.kiosk.attract, setAttract: (e) => this.edit(st => ({ kiosk: { ...st.kiosk, attract: parseInt(e.target.value) || 0 } })),
+      receiptOpts: ['Ask if they want a receipt', 'Always print a receipt', "Don't mention receipts"].map((label, i) => ({
+        label,
+        style: { display: 'flex', alignItems: 'center', gap: '10px', background: i === s.kiosk.receipt ? '#fdf3e3' : '#fffdfa', border: i === s.kiosk.receipt ? '1.5px solid #b9432c' : '1px solid #e4dbc8', borderRadius: '12px', padding: '11px 13px', fontFamily: 'inherit', fontSize: '13.5px', fontWeight: 700, color: '#2f2a23', cursor: 'pointer', textAlign: 'left' },
+        dotStyle: { width: '14px', height: '14px', borderRadius: '50%', flexShrink: 0, background: i === s.kiosk.receipt ? '#b9432c' : '#fff', border: i === s.kiosk.receipt ? '3px solid #f3cdb2' : '2px solid #c9bda2' },
+        pick: () => this.edit(st => ({ kiosk: { ...st.kiosk, receipt: i } }))
+      })),
+      photos: s.photos.map((ph, i) => ({
+        style: { position: 'relative', width: '64px', height: '64px', borderRadius: '12px', background: `linear-gradient(135deg, ${ph[0]}, ${ph[1]})`, boxShadow: 'inset 0 0 0 1px rgba(0,0,0,.08)' },
+        rm: () => this.edit(st => ({ photos: st.photos.filter((_, j) => j !== i) }))
+      })),
+      addPhoto: () => this.edit(st => ({ photos: [...st.photos, [['#d97b4f','#3e6b4f','#c9a227','#5a7d9a','#a05446'][st.photos.length % 5], '#2f2a23']] })),
+      prodBtns: this.PRODUCTS.map(([emoji, name, price, col]) => ({
+        emoji, name, price: price.toFixed(2),
+        style: { background: col, border: 'none', borderRadius: '12px', padding: '10px 4px', fontFamily: 'inherit', cursor: 'pointer', boxShadow: '0 3px 0 rgba(0,0,0,.18)' },
+        add: () => this.edit(st => {
+          const ex = st.order.find(o => o.name === name);
+          return { order: ex ? st.order.map(o => o.name === name ? { ...o, qty: o.qty + 1 } : o) : [...st.order, { name, price, qty: 1 }] };
+        })
+      })),
+      orderNo: s.orderNo,
+      orderHint: s.order.length ? 'showing on register + customer screen' : 'tap items above to add',
+      orderRows: s.order.map((o, i) => ({ qty: o.qty, name: o.name, amt: (o.qty * o.price).toFixed(2), rm: () => this.edit(st => ({ order: st.order.filter((_, j) => j !== i) })) })),
+      orderTotal: total.toFixed(2),
+      charge: () => {
+        if (!s.order.length) { this.toast('Add an item first ☕'); return; }
+        this.edit(st => ({
+          tickets: [...st.tickets, { id: st.orderNo, lines: st.order.map(o => `${o.qty}× ${o.name}`), t0: Date.now() }],
+          order: [], orderNo: st.orderNo + 1
+        }));
+        this.toast(`Order #${s.orderNo} paid · sent to the kitchen 🍳`);
+      },
+      clearOrder: () => this.edit(() => ({ order: [] })),
+      ticketRows: s.tickets.map((t2, i) => ({
+        id: t2.id, time: this.fmtAge(t2.t0), lines: t2.lines,
+        headStyle: { display: 'flex', justifyContent: 'space-between', padding: '9px 14px', fontSize: '13.5px', fontWeight: 800, color: '#fff', background: (Date.now() - t2.t0) / 1000 > 120 ? '#b9432c' : (Date.now() - t2.t0) / 1000 > 45 ? '#c9a227' : '#3e6b4f' },
+        bump: () => { this.edit(st => ({ tickets: st.tickets.filter((_, j) => j !== i) })); this.toast(`#${t2.id} bumped ✅`); }
+      })),
+      noTickets: s.tickets.length === 0,
+      jumpPos: pick('pos'),
+      custQ: s.custQ, setCustQ: (e) => this.setState({ custQ: e.target.value }),
+      addCust: () => { this.edit(st => ({ customers: [...st.customers, { name: 'Walk-in Guest', phone: '—', tier: 'Member', orders: 0, pts: 0 }] })); this.toast('Customer added 👤'); },
+      custRows: custFiltered.map(({ cu, i }) => ({
+        name: cu.name, phone: cu.phone, orders: cu.orders, tier: cu.tier,
+        init: cu.name.split(' ').map(x => x[0]).slice(0, 2).join('').toUpperCase(),
+        style: { display: 'flex', alignItems: 'center', gap: '12px', background: i === s.selCust ? '#fdf3e3' : '#fffdfa', border: i === s.selCust ? '1.5px solid #b9432c' : '1px solid #e4dbc8', borderRadius: '12px', padding: '10px 13px', fontFamily: 'inherit', cursor: 'pointer', width: '100%' },
+        avStyle: { width: '38px', height: '38px', borderRadius: '50%', background: tierCol[cu.tier], color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '13px', fontWeight: 800, flexShrink: 0 },
+        tierStyle: { background: tierCol[cu.tier] + '22', color: tierCol[cu.tier], fontSize: '11px', fontWeight: 800, padding: '4px 10px', borderRadius: '99px', flexShrink: 0 },
+        pick: () => this.edit(() => ({ selCust: i }))
+      })),
+      save: () => this.toast('Changes saved ✓'),
+      toastOn: !!s.toast, toastMsg: s.toast
+    };
+  }
+}
+</script>
+</body>
+</html>

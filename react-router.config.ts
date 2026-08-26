@@ -2,9 +2,8 @@ import type { Config } from "@react-router/dev/config"
 
 const pages = [
   "",
-  "/fonctionnalites",
+  "/apps",
   "/tarifs",
-  "/calculateur",
   "/demo",
   "/a-propos",
   "/salons",

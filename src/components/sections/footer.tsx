@@ -5,9 +5,8 @@ import { SITE } from "@/lib/site"
 export function Footer() {
   const { t, path } = useI18n()
   const product = [
-    { to: "/fonctionnalites", label: t.nav.features },
+    { to: "/apps", label: t.nav.features },
     { to: "/tarifs", label: t.nav.pricing },
-    { to: "/calculateur", label: t.footer.calculator },
     { to: "/demo", label: t.footer.demo },
     { to: "/a-propos", label: t.nav.about },
   ]

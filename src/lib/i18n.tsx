@@ -14,6 +14,12 @@ export const LANG_LABELS: Record<Lang, string> = {
   vi: "VI",
   ru: "RU",
 }
+export const LANG_NAMES: Record<Lang, string> = {
+  en: "English",
+  fr: "Français",
+  vi: "Tiếng Việt",
+  ru: "Русский",
+}
 export const STRINGS: Record<Lang, Strings> = { en, fr, vi, ru }
 export const LOCALES: Record<Lang, string> = {
   en: "en-CA",

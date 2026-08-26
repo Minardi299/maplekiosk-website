@@ -7,16 +7,12 @@ export const fr: Strings = {
       desc: "Borne de commande pour salons de thé et comptoirs rapides à Montréal et sur la Rive-Sud. Sans contrat, 0 % sur vos ventes.",
     },
     features: {
-      title: "Fonctionnalités — MapleKiosk",
+      title: "Applications — MapleKiosk",
       desc: "Borne, station comptoir, écran cuisine, menus télé, livraison dans une seule file, fidélité.",
     },
     pricing: {
       title: "Tarifs — MapleKiosk",
-      desc: "Un prix, tout inclus. Sans contrat, annulez n'importe quel mois, ou achetez-la une fois pour toutes.",
-    },
-    calculator: {
-      title: "Calculateur de frais de paiement — MapleKiosk",
-      desc: "Ce que vos paiements par carte coûtent vraiment — Square, Clover ou votre propre acquéreur, comparés honnêtement.",
+      desc: "Un prix par application, SaaS ou sur site. Sans contrat, annulez n'importe quel mois, ou achetez-la une fois pour toutes.",
     },
     demo: {
       title: "Réserver une démo — MapleKiosk",
@@ -28,7 +24,7 @@ export const fr: Strings = {
     },
     salons: {
       title: "Salons — MapleKiosk",
-      desc: "Un assistant téléphonique qui répond, guide et réserve pendant que vos mains travaillent.",
+      desc: "Un assistant téléphonique pour salons d'ongles, spas et instituts de beauté — il répond, guide et réserve pendant que vos mains travaillent.",
     },
     coffee: {
       title: "Cafés & boba — MapleKiosk",
@@ -53,7 +49,7 @@ export const fr: Strings = {
   },
 
   nav: {
-    features: "Fonctionnalités",
+    features: "Applications",
     pricing: "Tarifs",
     about: "À propos",
     cta: "Chargez mon menu dans une démo gratuite",
@@ -87,6 +83,7 @@ export const fr: Strings = {
     title: "Trois comptoirs, trois matins différents",
     sub: "Choisissez le vôtre.",
     cta: "Réserver 15 minutes",
+    demoShop: "Visitez la boutique démo",
     doors: [
       {
         label: "Salons de thé & cafés",
@@ -149,6 +146,19 @@ export const fr: Strings = {
     cta: "Apportez un relevé — on vérifie ces chiffres pour vrai",
   },
 
+  lineCost: {
+    title: "Combien vous coûte la file ?",
+    sub: "Les clients qui regardent la file et repartent n'apparaissent dans aucun rapport. Mettez un chiffre dessus.",
+    walkouts: "Clients qui repartent par jour",
+    days: "Jours d'ouverture par mois",
+    resultTag: "VENTES PERDUES ESTIMÉES PAR MOIS",
+    payoff:
+      "Si la borne rattrapait ne serait-ce qu'une partie de ces commandes pendant que la file avance — qu'est-ce que ça changerait à la fin du mois ?",
+    honest:
+      "Si ce chiffre est petit, une borne ne se paiera pas toute seule — et on vous le dira aussi.",
+    cta: "Apportez ces chiffres — on les vérifie pour vrai",
+  },
+
   chips: {
     title: "Des conditions qu'on peut écrire en grosses lettres",
     items: [
@@ -170,7 +180,6 @@ export const fr: Strings = {
       "Une famille d'applications d'affaires et des services d'IA abordables, conçus avec soin au Canada pour ceux qui font vivre les petites entreprises.",
     product: "Produit",
     legal: "Légal",
-    calculator: "Calculateur",
     demo: "Réserver une démo",
     industries: "Secteurs",
     nails: "Salons d'ongles et de beauté",
@@ -215,6 +224,10 @@ export const fr: Strings = {
       {
         q: "« En rupture, le saumon. »",
         body: "Marquez un article en rupture une seule fois et il devient grisé sur la borne et vos menus télé, instantanément.",
+      },
+      {
+        q: "Le téléphone sonne en plein service — une table pour quatre, samedi.",
+        body: "Un assistant répond à chaque appel, en français ou en anglais, répond aux questions et réserve la table — pendant que vous continuez le service.",
       },
     ],
   },
@@ -283,11 +296,15 @@ export const fr: Strings = {
   },
 
   pricing: {
-    title: "Un prix. Tout ce que le comptoir utilise.",
-    price: "[PRIX]",
+    title: "Un prix par application. SaaS ou sur site.",
+    sub: "Chaque application MapleKiosk est offerte de deux façons — hébergée par nous (SaaS, facturée mensuellement) ou installée sur vos propres serveurs (sur site, licence unique). Choisissez par application et combinez à votre guise.",
     per: "/mois",
-    includes:
-      "Borne, station comptoir, écran cuisine, menus télé, fidélité. Tout inclus.",
+    apps: [
+      { name: "MapleCoffee", price: "39 $", tag: "" },
+      { name: "MapleRES", price: "49 $", tag: "" },
+      { name: "MapleSPA", price: "44 $", tag: "Application phare" },
+    ],
+    note: "Prix en USD, par application, avant taxes. Les services d'intégration d'IA sont facturés séparément. Besoin de plusieurs applications ou d'un projet sur mesure ? Parlez aux ventes pour un forfait.",
     buyTitle: "Ou achetez-la une fois pour toutes",
     buyBody: "Un seul paiement, installée sur place, à vous pour de bon.",
     buyCta: "Nous contacter",
@@ -320,11 +337,6 @@ export const fr: Strings = {
     ],
   },
 
-  calcPage: {
-    intro:
-      "Le même calculateur qu'on apporte à chaque démo. Glissez les curseurs jusqu'à vos chiffres.",
-  },
-
   demo: {
     title: "15 minutes. Votre menu, sur une vraie borne.",
     sub: "On charge votre menu avant de venir — vous jouez avec, vous décidez. Mardi ou mercredi après le rush, c'est parfait.",
@@ -352,40 +364,27 @@ export const fr: Strings = {
   },
 
   salons: {
+    kicker: "Pour salons d'ongles, spas et instituts de beauté",
     title: "Le téléphone sonne. Vos mains sont dans l'acrylique.",
     sub: "Un assistant répond à chaque appel, en français ou en anglais, guide la cliente dans vos services et réserve le créneau. Il apparaît dans votre horaire. Votre technicienne ne s'arrête jamais.",
+    bandTitle: "Vos mains restent sur la cliente. L'assistant prend les appels.",
+    quotes: [
+      {
+        q: "« Une place pour deux, samedi après-midi ? »",
+        body: "L'assistant vérifie votre horaire, répond comme un humain et réserve le créneau — il apparaît dans votre calendrier.",
+      },
+      {
+        q: "Pas de réponse ? Elle réserve au prochain salon sur Google.",
+        body: "Chaque appel est pris, en français ou en anglais — en pleine pose, en plein soin, en plein rush.",
+      },
+      {
+        q: "« C'est combien, un remplissage gel ? »",
+        body: "Il connaît vos services et vos prix, et il répond — puis propose la réservation.",
+      },
+    ],
     recording: "[ENREGISTREMENT — un vrai appel de 30 secondes, à produire]",
     disclosure:
       "L'assistant est automatisé et le dit au début de chaque appel. Le traitement des appels est en révision pour la Loi 25 avant le lancement.",
-  },
-
-  privacy: {
-    title: "Confidentialité",
-    intro:
-      "Cette page satisfera la Loi 25 du Québec avant le lancement. Les blocs ci-dessous sont des espaces réservés jusqu'à la révision juridique.",
-    sections: [
-      {
-        title: "Ce qu'on collecte",
-        body: "[Champs du formulaire de démo : nom, commerce, ville, téléphone. Les entrées du calculateur ne sont pas conservées — à confirmer avant publication.]",
-      },
-      {
-        title: "Responsable de la protection des renseignements personnels",
-        body: "[RESPONSABLE + COURRIEL]",
-      },
-      { title: "Hébergement", body: "[LIEU D'HÉBERGEMENT DES DONNÉES]" },
-      {
-        title: "Témoins (cookies)",
-        body: "[À CONFIRMER — lister les témoins s'il y en a]",
-      },
-    ],
-    review: "[FAIRE RÉVISER PAR UN JURISTE QUÉBÉCOIS AVANT PUBLICATION]",
-  },
-
-  legal: {
-    title: "Conditions d'utilisation",
-    intro:
-      "[CONDITIONS D'UTILISATION — texte juridique rédigé en français d'abord et révisé par un juriste québécois.]",
-    review: "[FAIRE RÉVISER PAR UN JURISTE QUÉBÉCOIS AVANT PUBLICATION]",
   },
 
   notFound: {

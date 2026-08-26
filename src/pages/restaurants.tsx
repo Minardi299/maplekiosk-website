@@ -34,7 +34,7 @@ export default function RestaurantsPage() {
             {r.bandTitle}
           </h2>
         </div>
-        <div className="grid gap-6 md:grid-cols-2">
+        <div className="grid gap-6 md:grid-cols-3">
           {r.quotes.map((quote) => (
             <div
               key={quote.q}
@@ -49,6 +49,12 @@ export default function RestaurantsPage() {
             </div>
           ))}
         </div>
+        <a
+          href="/shop-demo/index.html"
+          className="text-[15px] font-semibold text-primary hover:text-primary-hover"
+        >
+          {t.router.demoShop} →
+        </a>
       </section>
       <FinalCta />
     </>

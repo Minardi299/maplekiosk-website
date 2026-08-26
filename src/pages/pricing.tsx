@@ -1,6 +1,6 @@
+import { Link } from "react-router"
 import { CtaLink } from "@/components/cta-link"
 import { PageMeta } from "@/components/page-meta"
-import { Placeholder } from "@/components/placeholder"
 import { FinalCta } from "@/components/sections/final-cta"
 import { TermsChips } from "@/components/sections/terms-chips"
 import { useI18n } from "@/lib/i18n"
@@ -8,39 +8,68 @@ import { useI18n } from "@/lib/i18n"
 export default function PricingPage() {
   const { t, path } = useI18n()
   const p = t.pricing
+  const doors = [
+    { to: "/coffee", label: t.footer.coffee },
+    { to: "/restaurants", label: t.footer.restaurants },
+    { to: "/salons", label: t.footer.nails },
+  ]
   return (
     <>
       <PageMeta title={t.meta.pricing.title} desc={t.meta.pricing.desc} />
       <section className="site-container section flex flex-col gap-12">
-        <h1 className="max-w-2xl font-heading text-4xl font-semibold tracking-tight text-balance sm:text-5xl">
-          {p.title}
-        </h1>
-        <div className="grid gap-6 lg:grid-cols-[3fr_2fr]">
-          <div className="flex flex-col gap-4 rounded-2xl border bg-card p-8 sm:p-10">
-            <div className="flex items-baseline gap-2">
-              <Placeholder className="text-3xl font-medium sm:text-4xl">
-                {p.price}
-              </Placeholder>
-              <span className="text-xl text-muted-foreground">{p.per}</span>
-            </div>
-            <p className="max-w-md text-lg leading-relaxed">{p.includes}</p>
-            <CtaLink to={path("/demo")} size="lg" className="mt-2 self-start">
-              {t.nav.cta}
-            </CtaLink>
-          </div>
-          <div className="flex flex-col gap-4 rounded-2xl border-[1.5px] border-secondary p-8 sm:p-10">
-            <h2 className="font-heading text-2xl font-semibold">
-              {p.buyTitle}
-            </h2>
-            <p className="leading-relaxed text-muted-foreground">{p.buyBody}</p>
-            <CtaLink
-              to={path("/demo")}
-              variant="outline"
-              className="mt-auto self-start"
+        <div className="flex max-w-2xl flex-col gap-3">
+          <h1 className="font-heading text-4xl font-semibold tracking-tight text-balance sm:text-5xl">
+            {p.title}
+          </h1>
+          <p className="text-lg leading-relaxed text-muted-foreground">
+            {p.sub}
+          </p>
+        </div>
+        <div className="grid gap-6 md:grid-cols-3">
+          {p.apps.map((app, i) => (
+            <div
+              key={app.name}
+              className="flex flex-col gap-3 rounded-2xl border bg-card p-7 sm:p-8"
             >
-              {p.buyCta}
-            </CtaLink>
-          </div>
+              <div className="flex flex-wrap items-center justify-between gap-2">
+                <span className="font-mono text-[11px] tracking-[0.08em] text-muted-foreground uppercase">
+                  {doors[i].label}
+                </span>
+                {app.tag && (
+                  <span className="rounded-md bg-primary px-2 py-0.5 font-mono text-[11px] tracking-[0.08em] text-primary-foreground uppercase">
+                    {app.tag}
+                  </span>
+                )}
+              </div>
+              <h2 className="font-heading text-2xl font-semibold">
+                {app.name}
+              </h2>
+              <div className="flex items-baseline gap-1">
+                <span className="font-mono text-4xl">{app.price}</span>
+                <span className="text-lg text-muted-foreground">{p.per}</span>
+              </div>
+              <Link
+                to={path(doors[i].to)}
+                className="mt-auto pt-1 text-[15px] font-semibold text-primary hover:text-primary-hover"
+              >
+                {doors[i].label} →
+              </Link>
+            </div>
+          ))}
+        </div>
+        <p className="max-w-3xl text-sm leading-relaxed text-muted-foreground">
+          {p.note}
+        </p>
+        <div className="flex flex-col gap-4 rounded-2xl border-[1.5px] border-secondary p-8 sm:p-10">
+          <h2 className="font-heading text-2xl font-semibold">{p.buyTitle}</h2>
+          <p className="leading-relaxed text-muted-foreground">{p.buyBody}</p>
+          <CtaLink
+            to={path("/demo")}
+            variant="outline"
+            className="mt-auto self-start"
+          >
+            {p.buyCta}
+          </CtaLink>
         </div>
       </section>
       <TermsChips />

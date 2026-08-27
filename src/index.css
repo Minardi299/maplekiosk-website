@@ -12,6 +12,10 @@
 
 @custom-variant dark (&:is(.dark *));
 
+@theme {
+    --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+}
+
 @theme inline {
     --font-heading: 'Bricolage Grotesque Variable', sans-serif;
     --font-sans: 'DM Sans Variable', sans-serif;
@@ -137,6 +141,64 @@
   .legal-prose a[href] {
     @apply text-primary underline;
   }
+  /* ===== FAQ accordion open/close ===== */
+  /* Chromium-only for now; other browsers keep the instant snap */
+  .faq-item::details-content {
+    interpolate-size: allow-keywords;
+    block-size: 0;
+    overflow-y: clip;
+    opacity: 0;
+    transition:
+      block-size 200ms var(--ease-out),
+      opacity 200ms var(--ease-out),
+      content-visibility 200ms allow-discrete;
+  }
+  .faq-item[open]::details-content {
+    block-size: auto;
+    opacity: 1;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .faq-item::details-content {
+      transition:
+        opacity 200ms var(--ease-out),
+        content-visibility 200ms allow-discrete;
+    }
+  }
+
+  /* ===== Day timeline rail draw-in ===== */
+  @media (scripting: enabled) {
+    .day-rail [data-slot="timeline-separator"] {
+      transform-origin: top;
+      scale: 1 0;
+      transition: scale 300ms linear calc(var(--beat) * 300ms);
+    }
+    .day-rail [data-slot="timeline-indicator"] {
+      opacity: 0;
+      scale: 0.5;
+      transition:
+        opacity 200ms var(--ease-out) calc(var(--beat) * 300ms),
+        scale 200ms var(--ease-out) calc(var(--beat) * 300ms);
+    }
+    .day-rail[data-visible] [data-slot="timeline-separator"] {
+      scale: 1 1;
+    }
+    .day-rail[data-visible] [data-slot="timeline-indicator"] {
+      opacity: 1;
+      scale: 1;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .day-rail [data-slot="timeline-separator"] {
+        scale: 1 1;
+        transition: none;
+      }
+      .day-rail [data-slot="timeline-indicator"] {
+        opacity: 1;
+        scale: 1;
+        transition: none;
+      }
+    }
+  }
+
   /* Zigzag tear along the bottom edge, cut with a mask */
   .receipt-tear {
     --tooth: 14px;

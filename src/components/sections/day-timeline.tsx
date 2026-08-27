@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState, type CSSProperties } from "react"
+import type { CSSProperties } from "react"
 import { FeatureTip } from "@/components/feature-tip"
 import {
   Timeline,
@@ -11,27 +11,12 @@ import {
   TimelineTitle,
 } from "@/components/reui/timeline"
 import { useI18n } from "@/lib/i18n"
+import { useVisibleOnce } from "@/lib/use-visible-once"
 
 export function DayTimeline() {
   const { t } = useI18n()
   const d = t.day
-  const railRef = useRef<HTMLDivElement>(null)
-  const [visible, setVisible] = useState(false)
-  useEffect(() => {
-    const el = railRef.current
-    if (!el) return
-    const io = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setVisible(true)
-          io.disconnect()
-        }
-      },
-      { rootMargin: "-100px 0px" },
-    )
-    io.observe(el)
-    return () => io.disconnect()
-  }, [])
+  const { ref: railRef, visible } = useVisibleOnce()
   return (
     <section className="border-y bg-card">
       <div className="site-container section flex flex-col gap-10">

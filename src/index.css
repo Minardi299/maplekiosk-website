@@ -199,6 +199,48 @@
     }
   }
 
+  /* ===== Money diagram flow reveal ===== */
+  @media (scripting: enabled) {
+    .money-flow .flow-item {
+      opacity: 0;
+      translate: -6px 0;
+      transition:
+        opacity 300ms var(--ease-out) calc(var(--step) * 100ms),
+        translate 300ms var(--ease-out) calc(var(--step) * 100ms);
+    }
+    .money-flow .flow-branch {
+      opacity: 0;
+      translate: 0 -4px;
+      transition:
+        opacity 300ms var(--ease-out) calc(var(--step) * 100ms),
+        translate 300ms var(--ease-out) calc(var(--step) * 100ms);
+    }
+    .money-flow .flow-drop {
+      transform-origin: top;
+      scale: 1 0;
+      transition: scale 200ms var(--ease-out) calc(var(--step) * 100ms);
+    }
+    .money-flow[data-visible] .flow-item,
+    .money-flow[data-visible] .flow-branch {
+      opacity: 1;
+      translate: 0 0;
+    }
+    .money-flow[data-visible] .flow-drop {
+      scale: 1 1;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .money-flow .flow-item,
+      .money-flow .flow-branch {
+        translate: 0 0;
+        transition: opacity 300ms var(--ease-out);
+      }
+      .money-flow .flow-drop {
+        scale: 1 1;
+        transition: none;
+      }
+    }
+  }
+
   /* Zigzag tear along the bottom edge, cut with a mask */
   .receipt-tear {
     --tooth: 14px;

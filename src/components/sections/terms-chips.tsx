@@ -14,7 +14,7 @@ export function TermsChips() {
         <h2 className="terms-title relative w-fit font-heading text-3xl font-semibold tracking-tight text-balance sm:text-[38px]">
           {t.chips.title}
         </h2>
-        <ol className="flex flex-col divide-y border-y">
+        <ol className="flex flex-col divide-y">
           {t.chips.items.map((chip, i) => (
             <li
               key={chip}

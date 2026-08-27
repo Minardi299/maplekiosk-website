@@ -199,6 +199,32 @@
     }
   }
 
+  /* ===== Money diagram flow pulse ===== */
+  .flow-arrows {
+    display: inline-flex;
+    gap: 2.5px;
+    font-size: 1.25rem;
+    line-height: 1;
+    font-weight: 600;
+    color: var(--muted-foreground);
+  }
+  .flow-arrows > span {
+    opacity: 0.25;
+    animation: flow-pulse 1.2s linear infinite;
+  }
+  .flow-arrows > span:nth-child(2) {
+    animation-delay: 150ms;
+  }
+  .flow-arrows > span:nth-child(3) {
+    animation-delay: 300ms;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .flow-arrows > span {
+      animation: none;
+      opacity: 0.6;
+    }
+  }
+
   /* ===== Money diagram flow reveal ===== */
   @media (scripting: enabled) {
     .money-flow .flow-item {
@@ -248,5 +274,18 @@
       50% / var(--tooth) 100%;
     mask: conic-gradient(from -45deg at bottom, #0000, #000 1deg 89deg, #0000 90deg)
       50% / var(--tooth) 100%;
+  }
+}
+
+@keyframes flow-pulse {
+  0% {
+    opacity: 0.25;
+  }
+  25% {
+    opacity: 1;
+  }
+  55%,
+  100% {
+    opacity: 0.25;
   }
 }

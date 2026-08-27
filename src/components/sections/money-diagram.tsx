@@ -6,6 +6,16 @@ function step(n: number) {
   return { "--step": n } as CSSProperties
 }
 
+function FlowArrows({ at }: { at: number }) {
+  return (
+    <span aria-hidden className="flow-item flow-arrows" style={step(at)}>
+      <span>›</span>
+      <span>›</span>
+      <span>›</span>
+    </span>
+  )
+}
+
 function FlowBox({ at, children }: { at: number; children: string }) {
   return (
     <span
@@ -40,18 +50,14 @@ export function MoneyDiagram() {
           </div>
           <div className="flex flex-wrap items-center gap-3 text-[15px] font-medium">
             <FlowBox at={0}>{d.you}</FlowBox>
-            <span className="flow-item text-muted-foreground" style={step(1)}>
-              →
-            </span>
+            <FlowArrows at={1} />
             <span
               className="flow-item min-w-40 flex-1 rounded-lg bg-secondary px-3.5 py-2.5 text-center leading-snug text-secondary-foreground"
               style={step(2)}
             >
               {d.othersBox}
             </span>
-            <span className="flow-item text-muted-foreground" style={step(3)}>
-              →
-            </span>
+            <FlowArrows at={3} />
             <FlowBox at={4}>{d.bank}</FlowBox>
           </div>
           <p className="text-[15px] leading-relaxed text-muted-foreground">
@@ -65,18 +71,14 @@ export function MoneyDiagram() {
           <div className="flex flex-col">
             <div className="flex flex-wrap items-center gap-3 text-[15px] font-medium">
               <FlowBox at={0}>{d.you}</FlowBox>
-              <span className="flow-item text-muted-foreground" style={step(1)}>
-                →
-              </span>
+              <FlowArrows at={1} />
               <span
                 className="flow-item min-w-40 flex-1 rounded-lg border-[1.5px] border-secondary px-3.5 py-2.5 text-center leading-snug"
                 style={step(2)}
               >
                 {d.acqBox}
               </span>
-              <span className="flow-item text-muted-foreground" style={step(3)}>
-                →
-              </span>
+              <FlowArrows at={3} />
               <FlowBox at={4}>{d.bank}</FlowBox>
             </div>
             <div className="flex flex-col items-center sm:ml-[38%] sm:items-start">

@@ -43,7 +43,7 @@ export function FeatureTip({
           <Popover.Popup
             onPointerEnter={onEnter}
             onPointerLeave={onLeave}
-            className="max-w-[19rem] rounded-xl border bg-popover p-4 text-[14px] leading-relaxed text-popover-foreground shadow-lg"
+            className="max-w-[19rem] origin-(--transform-origin) rounded-xl border bg-popover p-4 text-[14px] leading-relaxed text-popover-foreground shadow-lg transition-[scale,opacity] duration-150 ease-out data-[starting-style]:scale-95 data-[starting-style]:opacity-0 data-[ending-style]:scale-95 data-[ending-style]:opacity-0 motion-reduce:data-[starting-style]:scale-100 motion-reduce:data-[ending-style]:scale-100"
           >
             {detail}
           </Popover.Popup>

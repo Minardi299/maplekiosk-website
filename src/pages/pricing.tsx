@@ -61,12 +61,11 @@ export default function PricingPage() {
         <p className="max-w-3xl text-sm leading-relaxed text-muted-foreground">
           {p.note}
         </p>
-        <div className="flex flex-col gap-4 rounded-2xl border-[1.5px] border-secondary p-8 sm:p-10">
+        <div className="flex flex-col gap-4 rounded-2xl border bg-card p-8 sm:p-10">
           <h2 className="font-heading text-2xl font-semibold">{p.buyTitle}</h2>
           <p className="leading-relaxed text-muted-foreground">{p.buyBody}</p>
           <CtaLink
             href={`mailto:${SITE.email}`}
-            variant="outline"
             className="mt-auto self-start"
           >
             {p.buyCta}
@@ -83,7 +82,7 @@ export default function PricingPage() {
             {p.faq.map((item) => (
               <details
                 key={item.q}
-                className="group rounded-xl border bg-card px-6 py-4"
+                className="faq-item group rounded-xl border bg-card px-6 py-4"
               >
                 <summary className="cursor-pointer list-none text-base font-semibold select-none">
                   <span className="mr-2 inline-block text-primary transition-transform group-open:rotate-90">

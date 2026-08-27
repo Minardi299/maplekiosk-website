@@ -2,7 +2,6 @@ import { PageMeta } from "@/components/page-meta"
 import { DayTimeline } from "@/components/sections/day-timeline"
 import { FinalCta } from "@/components/sections/final-cta"
 import { Hero } from "@/components/sections/hero"
-import { LineCost } from "@/components/sections/line-cost"
 import { useI18n } from "@/lib/i18n"
 
 export default function CoffeePage() {
@@ -35,7 +34,7 @@ export default function CoffeePage() {
           ))}
         </div>
       </section>
-      <LineCost />
+      {/* <LineCost /> */}
       <DayTimeline />
       <FinalCta title={t.day.question} notes={t.day.also} />
     </>

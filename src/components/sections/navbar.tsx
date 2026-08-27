@@ -46,11 +46,14 @@ function LangSwitch() {
       >
         {LANG_LABELS[lang]}
         <ChevronDownIcon
-          className={open ? "size-3.5 rotate-180" : "size-3.5"}
+          className={
+            "size-3.5 transition-transform duration-200 ease-out" +
+            (open ? " rotate-180" : "")
+          }
         />
       </button>
       {open && (
-        <div className="absolute left-0 z-50 mt-1.5 flex min-w-32 flex-col overflow-hidden rounded-lg border bg-popover py-1 shadow-lg xl:right-0 xl:left-auto">
+        <div className="absolute left-0 z-50 mt-1.5 flex min-w-32 origin-top-left flex-col overflow-hidden rounded-lg border bg-popover py-1 shadow-lg transition-[scale,opacity] duration-150 ease-out starting:scale-95 starting:opacity-0 motion-reduce:starting:scale-100 xl:right-0 xl:left-auto xl:origin-top-right">
           {LANGS.map((l) => (
             <Link
               key={l}
@@ -120,7 +123,7 @@ export function Navbar() {
         </Button>
       </div>
       {open && (
-        <div className="border-t bg-background xl:hidden">
+        <div className="border-t bg-background transition-[translate,opacity] duration-200 ease-out starting:-translate-y-1 starting:opacity-0 motion-reduce:starting:translate-y-0 xl:hidden">
           <nav className="site-container flex flex-col gap-1 py-4">
             {links.map((l) => (
               <Link

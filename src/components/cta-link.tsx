@@ -6,7 +6,7 @@ const styles = {
   primary:
     "bg-primary text-primary-foreground hover:bg-primary-hover",
   outline:
-    "border-[1.5px] border-secondary text-foreground hover:bg-secondary hover:text-secondary-foreground",
+    "border border-border bg-background text-foreground hover:bg-muted hover:text-foreground",
 }
 
 export function CtaLink({
@@ -23,7 +23,7 @@ export function CtaLink({
   href?: string
 }) {
   const cls = cn(
-    "inline-flex items-center justify-center rounded-lg text-center font-semibold transition-colors",
+    "inline-flex items-center justify-center rounded-lg text-center font-semibold transition-[color,background-color,translate] duration-150 ease-out active:translate-y-px",
     size === "lg" ? "px-7 py-4 text-base" : "px-5 py-3 text-[15px]",
     styles[variant],
     className,

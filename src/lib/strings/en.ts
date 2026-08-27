@@ -141,7 +141,7 @@ export const en = {
   },
 
   chips: {
-    title: "Terms we can write in big letters",
+    title: "Terms we can promise",
     items: [
       "No contract",
       "No terminal lease",
@@ -350,9 +350,9 @@ export const en = {
   },
 
   about: {
-    title: "Built in Longueuil. Installed by the person who wrote it.",
+    title: "Built in Montreal. Installed by the person who wrote it.",
     paras: [
-      "MapleKiosk is built in Longueuil by Minh: a developer who writes the software, loads your menu, and comes to install the kiosk himself.",
+      "MapleKiosk is built in Montreal by Minh: a developer who writes the software, loads your menu, and comes to install the kiosk himself.",
       "The product runs today in bubble-tea shops in the United States. The first local installs are next, that's why the demo is free and the trial costs nothing.",
       "The terms. No contract, no lease, no payment bundle, exist for one reason: we'd rather you stay by choice.",
     ],

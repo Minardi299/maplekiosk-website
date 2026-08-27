@@ -2,9 +2,9 @@
 export const SITE = {
   url: "https://maplekiosk.ca",
   name: "MapleKiosk",
-  place: "Longueuil, QC",
+  place: "Montreal, QC",
   phone: "[TÉLÉPHONE]",
-  email: "[COURRIEL]",
+  email: "minh@maplekiosk.ca",
   legalName: "MapleKiosk Inc.",
   // static file outside the SPA — link with reloadDocument so the router doesn't swallow it
   demoUrl: "/shop-demo/index.html",

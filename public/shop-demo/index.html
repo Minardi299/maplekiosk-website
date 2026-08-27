@@ -51,7 +51,7 @@ window.dispatchEvent(new Event('three-ready'));
       </div>
       <div style="flex:1;overflow-y:auto;padding:18px 22px 30px;display:flex;flex-direction:column;gap:16px">
         <sc-if value="{{ showTv }}" hint-placeholder-val="{{ false }}">
-          <div style="background:#fff8ec;border:1px solid #eadfc6;border-radius:12px;padding:10px 14px;font-size:12.5px;color:#6f6450;font-weight:600">👈 Live preview: the TV on the wall is playing this loop. Edit below and watch it change.</div>
+          <div style="background:#fff8ec;border:1px solid #eadfc6;border-radius:12px;padding:10px 14px;font-size:12.5px;color:#6f6450;font-weight:600">👈 Live preview: each TV on the wall plays its own loop. Edit below and watch it change.</div>
           <div style="display:flex;gap:8px;flex-wrap:wrap">
             <sc-for list="{{ tvTabs }}" as="t" hint-placeholder-count="2"><button onClick="{{ t.pick }}" style="{{ t.style }}"><span style="display:block;font-weight:800;font-size:13.5px;white-space:nowrap">📺 {{ t.name }}</span><span style="display:block;font-size:11px;opacity:.75;font-weight:600;white-space:nowrap">{{ t.sub }}</span></button></sc-for>
             <button onClick="{{ addTv }}" style="background:transparent;border:1.5px dashed #c9bda2;border-radius:12px;padding:10px 14px;font-family:inherit;font-size:13px;font-weight:700;color:#8a7f6d;cursor:pointer">＋ Add TV</button>
@@ -74,9 +74,13 @@ window.dispatchEvent(new Event('three-ready'));
           <a href="https://coffee.maplekiosk.ca/touch/promo-setup" target="_blank" style="font-size:13px;font-weight:700">✨ Customize the Promo screen →</a>
         </sc-if>
         <sc-if value="{{ showKiosk }}" hint-placeholder-val="{{ false }}">
-          <div style="background:#fff8ec;border:1px solid #eadfc6;border-radius:12px;padding:10px 14px;font-size:12.5px;color:#6f6450;font-weight:600">👈 Live preview: the kiosk is idling on its attract loop. Edit below and watch it change.</div>
+          <div style="background:#fff8ec;border:1px solid #eadfc6;border-radius:12px;padding:10px 14px;font-size:12.5px;color:#6f6450;font-weight:600">👈 Live preview: the kiosks are idling on their attract loops. Edit below and watch them change.</div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap">
+            <sc-for list="{{ kioskTabs }}" as="t" hint-placeholder-count="2"><button onClick="{{ t.pick }}" style="{{ t.style }}"><span style="display:block;font-weight:800;font-size:13.5px;white-space:nowrap">🖥️ {{ t.name }}</span><span style="display:block;font-size:11px;opacity:.75;font-weight:600;white-space:nowrap">{{ t.sub }}</span></button></sc-for>
+            <button onClick="{{ addKiosk }}" style="background:transparent;border:1.5px dashed #c9bda2;border-radius:12px;padding:10px 14px;font-family:inherit;font-size:13px;font-weight:700;color:#8a7f6d;cursor:pointer">＋ Add kiosk</button>
+          </div>
           <div style="display:flex;flex-direction:column;gap:6px"><label style="font-size:12px;font-weight:800;color:#8a7f6d;text-transform:uppercase;letter-spacing:.06em">Kiosk name</label><input value="{{ kName }}" onChange="{{ setKName }}" style="background:#fffdfa;border:1px solid #e4dbc8;border-radius:10px;padding:11px 13px;font-family:inherit;font-size:15px;font-weight:700;color:#2f2a23"></div>
-          <div style="display:flex;justify-content:space-between;align-items:center"><a href="https://coffee.maplekiosk.ca/pos/kiosk/Kiosk%201" target="_blank" style="font-size:13px;font-weight:700">Open kiosk ↗</a><button style="background:none;border:none;font-family:inherit;font-size:13px;font-weight:700;color:#a05446;cursor:pointer;padding:0">Delete kiosk</button></div>
+          <div style="display:flex;justify-content:space-between;align-items:center"><a href="{{ kioskLink }}" target="_blank" style="font-size:13px;font-weight:700">Open kiosk ↗</a><button onClick="{{ deleteKiosk }}" style="background:none;border:none;font-family:inherit;font-size:13px;font-weight:700;color:#a05446;cursor:pointer;padding:0">Delete kiosk</button></div>
           <div style="display:flex;flex-direction:column;gap:8px">
             <div style="display:flex;justify-content:space-between;background:#fffdfa;border:1px solid #e4dbc8;border-radius:12px;padding:11px 13px"><span style="font-size:13.5px;font-weight:800;color:#2f2a23">💳 Card reader</span><span style="font-size:13px;color:#8a7f6d;font-weight:600">Use this browser's pairing</span></div>
             <div style="display:flex;justify-content:space-between;background:#fffdfa;border:1px solid #e4dbc8;border-radius:12px;padding:11px 13px"><span style="font-size:13.5px;font-weight:800;color:#2f2a23">🖨 Receipt printer</span><span style="font-size:13px;color:#8a7f6d;font-weight:600">Shop default (receipt)</span></div>
@@ -199,7 +203,11 @@ class Component extends DCLogic {
       { name: 'TV 1', screens: [{ t: 'menu', sec: 8 }, { t: 'promo', sec: 6 }] },
       { name: 'TV 2', screens: [{ t: 'promo', sec: 8 }] }
     ],
-    kiosk: { name: 'Kiosk 1', receipt: 0, attract: -1, screens: [{ t: 'promo', sec: 6 }, { t: 'slide', sec: 8 }] },
+    curKiosk: 0,
+    kiosks: [
+      { name: 'Kiosk 1', receipt: 0, attract: -1, screens: [{ t: 'promo', sec: 6 }, { t: 'slide', sec: 8 }] },
+      { name: 'Kiosk 2', receipt: 0, attract: -1, screens: [{ t: 'menu', sec: 8 }, { t: 'promo', sec: 6 }] }
+    ],
     photos: [['#d97b4f','#7a3b2e'],['#3e6b4f','#1e3a2a'],['#c9a227','#8a6a12'],['#5a7d9a','#2b4257']],
     order: [], orderNo: 44,
     tickets: [{ id: 42, lines: ['1× Maple Latte', '1× Croissant'], t0: Date.now() - 95000 }, { id: 43, lines: ['2× Cold Brew'], t0: Date.now() - 21000 }],
@@ -293,16 +301,6 @@ class Component extends DCLogic {
     box(15, 5.5, 0.45, EXT, 0, 2.53, -5.78, { cast: false, mats: [mat(EXT), mat(EXT), mat(EXT, 0.6), mat(EXT), mat(INT, 0.85), mat(EXT)] });
     box(0.45, 5.5, 12, EXT, -7.28, 2.53, 0, { cast: false, mats: [mat(INT2, 0.85), mat(EXT), mat(EXT, 0.6), mat(EXT), mat(EXT), mat(EXT)] });
     box(15, 0.55, 0.5, '#b9432c', 0, 0.1, -5.76, { cast: false });
-    // window in back wall (right side)
-    box(3.0, 2.2, 0.55, '#fffdfa', 4.6, 3.3, -5.78, { cast: false, rough: 0.4 });
-    const pane = new T.Mesh(new T.PlaneGeometry(2.6, 1.8), new T.MeshStandardMaterial({ color: '#eaf4ff', emissive: '#dcecff', emissiveIntensity: 1.5, roughness: 0.2 }));
-    pane.position.set(4.6, 3.3, -5.49); scene.add(pane);
-    box(0.09, 1.8, 0.06, '#fffdfa', 4.6, 3.3, -5.47, { cast: false }); box(2.6, 0.09, 0.06, '#fffdfa', 4.6, 3.3, -5.47, { cast: false });
-    // picture frames
-    box(0.95, 1.2, 0.07, '#8a6a4a', -3.3, 3.6, -5.52, { cast: false });
-    box(0.79, 1.04, 0.08, '#d97b4f', -3.3, 3.6, -5.51, { cast: false });
-    box(1.2, 0.9, 0.07, '#8a6a4a', -4.9, 3.4, -5.52, { cast: false });
-    box(1.04, 0.74, 0.08, '#3e6b4f', -4.9, 3.4, -5.51, { cast: false });
     // ---- counter: KayKit counters (loaded async) unified by a dark slab top ----
     box(6.6, 0.1, 1.55, '#3b352d', 1.2, 1.16, 0.3, { rough: 0.35 });
     // espresso machine
@@ -316,34 +314,64 @@ class Component extends DCLogic {
     // pastry case (glass hood over KayKit plates, filled in loadProps)
     const glass = new T.Mesh(new T.BoxGeometry(1.5, 0.6, 0.9), new T.MeshStandardMaterial({ color: '#dceef2', roughness: 0.08, transparent: true, opacity: 0.28 }));
     glass.position.set(3.9, 1.51, 0.25); scene.add(glass);
-    // POS terminal
-    box(0.5, 0.09, 0.34, '#2b2620', 2.5, 1.26, 0.62, { pick: 'pos' });
-    this.posGroup = new T.Group(); this.posGroup.position.set(2.5, 1.57, 0.6); this.posGroup.rotation.set(-0.28, 0.5, 0); scene.add(this.posGroup);
+    // POS terminal (screen faces the worker behind the counter)
+    box(0.5, 0.09, 0.34, '#2b2620', 2.5, 1.26, 0.5, { pick: 'pos' });
+    this.posGroup = new T.Group(); this.posGroup.position.set(2.5, 1.57, 0.52); this.posGroup.rotation.set(0.28, Math.PI + 0.5, 0); scene.add(this.posGroup);
     box(0.62, 0.45, 0.05, '#22201c', 0, 0, 0, { parent: this.posGroup, pick: 'pos', rough: 0.35 });
     this.posTex = this.makeTex(512, 360);
     const posScr = new T.Mesh(new T.PlaneGeometry(0.56, 0.4), new T.MeshBasicMaterial({ map: this.posTex.tex }));
     posScr.position.z = 0.028; posScr.userData.pick = 'pos'; this.posGroup.add(posScr);
-    // customer display
-    const cg = new T.Group(); cg.position.set(0.9, 1.24, 0.92); cg.rotation.set(0.12, Math.PI + 0.15, 0); scene.add(cg);
+    // customer display (faces the customers, beside the register)
+    const cg = new T.Group(); cg.position.set(1.8, 1.24, 0.74); cg.rotation.set(-0.12, 0.15, 0); scene.add(cg);
     box(0.3, 0.06, 0.2, '#22201c', 0, 0, 0, { parent: cg, pick: 'cust' });
     box(0.52, 0.36, 0.04, '#22201c', 0, 0.28, 0, { parent: cg, pick: 'cust', rough: 0.35 });
     this.custTex = this.makeTex(512, 320);
     const custScr = new T.Mesh(new T.PlaneGeometry(0.47, 0.31), new T.MeshBasicMaterial({ map: this.custTex.tex }));
     custScr.position.set(0, 0.28, 0.022); custScr.userData.pick = 'cust'; cg.add(custScr);
-    // wall TV
-    box(3.6, 2.1, 0.16, '#1c1a17', 1.5, 3.45, -5.47, { pick: 'tv', rough: 0.35 });
-    this.tvTex = this.makeTex(1024, 576);
-    const tvScr = new T.Mesh(new T.PlaneGeometry(3.36, 1.9), new T.MeshBasicMaterial({ map: this.tvTex.tex }));
-    tvScr.position.set(1.5, 3.45, -5.38); tvScr.userData.pick = 'tv'; scene.add(tvScr);
-    // kiosk
-    const kg = new T.Group(); kg.position.set(-4.6, 0, 2.3); kg.rotation.y = 0.85; scene.add(kg);
-    cyl(0.5, 0.14, '#35302a', 0, 0.07, 0, { parent: kg, pick: 'kiosk', rough: 0.4 });
-    cyl(0.09, 1.5, '#4a443c', 0, 0.85, 0, { parent: kg, pick: 'kiosk' });
-    const kf = box(1.02, 1.6, 0.09, '#b9432c', 0, 1.95, 0.06, { parent: kg, pick: 'kiosk', rough: 0.45 }); kf.rotation.x = -0.1;
-    this.kioskTex = this.makeTex(640, 1024);
-    const kScr = new T.Mesh(new T.PlaneGeometry(0.88, 1.44), new T.MeshBasicMaterial({ map: this.kioskTex.tex }));
-    kScr.position.set(0, 1.95, 0.115); kScr.rotation.x = -0.1; kScr.userData.pick = 'kiosk'; kg.add(kScr);
-    box(0.5, 0.12, 0.3, '#35302a', 0.12, 1.1, 0.3, { parent: kg, pick: 'kiosk' });
+    // wall TVs, side by side (each renders its own playlist)
+    this.tvTexes = [];
+    [-1.9, 1.9].forEach((x) => {
+      box(3.6, 2.1, 0.16, '#1c1a17', x, 3.45, -5.47, { pick: 'tv', rough: 0.35 });
+      const tx = this.makeTex(1024, 576); this.tvTexes.push(tx);
+      const tvScr = new T.Mesh(new T.PlaneGeometry(3.36, 1.9), new T.MeshBasicMaterial({ map: tx.tex }));
+      tvScr.position.set(x, 3.45, -5.38); tvScr.userData.pick = 'tv'; scene.add(tvScr);
+    });
+    // hand-built peripherals in the KayKit style (the pack has no printer/terminal models)
+    const mkTerminal = (parent, x, y, z, pickKey, ry = 0) => {
+      const g = new T.Group(); g.position.set(x, y, z); g.rotation.y = ry; parent.add(g);
+      box(0.2, 0.05, 0.16, '#35302a', 0, 0.025, 0, { parent: g, pick: pickKey });
+      const head = box(0.18, 0.26, 0.05, '#22201c', 0, 0.19, -0.01, { parent: g, pick: pickKey, rough: 0.35 });
+      head.rotation.x = -0.3;
+      const scr2 = new T.Mesh(new T.PlaneGeometry(0.13, 0.1), new T.MeshBasicMaterial({ color: '#cfe8d6' }));
+      scr2.position.set(0, 0.04, 0.028); head.add(scr2);
+      return g;
+    };
+    const mkPrinter = (parent, x, y, z, pickKey, ry = 0) => {
+      const g = new T.Group(); g.position.set(x, y, z); g.rotation.y = ry; parent.add(g);
+      box(0.32, 0.16, 0.26, '#d9d2c4', 0, 0.08, 0, { parent: g, pick: pickKey, rough: 0.5 });
+      box(0.26, 0.035, 0.1, '#35302a', 0, 0.165, -0.03, { parent: g, pick: pickKey });
+      const paper = box(0.14, 0.12, 0.01, '#fffdfa', 0, 0.19, 0.045, { parent: g, cast: false, rough: 0.9 });
+      paper.rotation.x = 0.4;
+      return g;
+    };
+    mkTerminal(scene, 2.98, 1.21, 0.74, 'pos', -0.15);
+    mkPrinter(scene, 2.95, 1.21, 0.26, 'pos', 0.2);
+    // kiosks against the left wall, on the open stretch left of the sink
+    this.kioskTexes = [];
+    [3.9, 2.4].forEach((z) => {
+      const kg = new T.Group(); kg.position.set(-6.5, 0, z); kg.rotation.y = Math.PI / 2; scene.add(kg);
+      cyl(0.5, 0.14, '#35302a', 0, 0.07, 0, { parent: kg, pick: 'kiosk', rough: 0.4 });
+      cyl(0.09, 1.5, '#4a443c', 0, 0.85, 0, { parent: kg, pick: 'kiosk' });
+      const kf = box(1.02, 1.6, 0.09, '#b9432c', 0, 1.95, 0.06, { parent: kg, pick: 'kiosk', rough: 0.45 }); kf.rotation.x = -0.1;
+      const tx = this.makeTex(640, 1024); this.kioskTexes.push(tx);
+      const kScr = new T.Mesh(new T.PlaneGeometry(0.88, 1.44), new T.MeshBasicMaterial({ map: tx.tex }));
+      kScr.position.set(0, 1.95, 0.115); kScr.rotation.x = -0.1; kScr.userData.pick = 'kiosk'; kg.add(kScr);
+      // side stand with payment terminal and receipt printer
+      box(0.07, 1.0, 0.07, '#4a443c', 0.74, 0.5, 0.12, { parent: kg, pick: 'kiosk' });
+      box(0.5, 0.05, 0.42, '#35302a', 0.74, 1.02, 0.12, { parent: kg, pick: 'kiosk', rough: 0.4 });
+      mkPrinter(kg, 0.74, 1.045, 0.04, 'kiosk');
+      mkTerminal(kg, 0.74, 1.045, 0.28, 'kiosk');
+    });
     // KDS on left wall
     box(0.14, 1.15, 2.0, '#1c1a17', -6.98, 3.1, -2.5, { pick: 'kds', rough: 0.35 });
     this.kdsTex = this.makeTex(1024, 576);
@@ -352,6 +380,7 @@ class Component extends DCLogic {
     // rug (tables, chairs and stools are KayKit models placed in loadProps)
     const rug = new T.Mesh(new T.CircleGeometry(2.6, 40), mat('#d97b4f', 0.95));
     rug.rotation.x = -Math.PI / 2; rug.position.set(0.6, 0.01, 3.4); rug.receiveShadow = true; scene.add(rug);
+    this.TABLES = [[4.9, 2.6, 0.2], [-2.4, 4.3, -0.4], [1.5, 4.6, 0.6]];
     this.loadProps(scene);
     // pendant lamps
     [-0.5, 1.2, 2.9].forEach((x) => {
@@ -362,17 +391,17 @@ class Component extends DCLogic {
     });
 
     this.anchors = {
-      tv: new T.Vector3(1.5, 3.45, -5.3), kiosk: new T.Vector3(-4.6, 2.1, 2.6),
-      pos: new T.Vector3(2.5, 1.75, 0.6), kds: new T.Vector3(-6.85, 3.1, -2.5),
-      cust: new T.Vector3(0.9, 1.78, 0.97)
+      tv: new T.Vector3(0, 3.45, -5.3), kiosk: new T.Vector3(-6.45, 2.35, 3.15),
+      pos: new T.Vector3(2.5, 1.75, 0.5), kds: new T.Vector3(-6.85, 3.1, -2.5),
+      cust: new T.Vector3(1.8, 1.78, 0.8)
     };
     this.views = {
       home:  { t: [0, 1.3, -0.5], az: 0.72, el: 0.55, d: 20 },
-      tv:    { t: [1.5, 3.4, -5.3], az: 0.06, el: 0.05, d: 4.8 },
-      kiosk: { t: [-4.6, 1.7, 2.4], az: 0.95, el: 0.1, d: 3.6 },
-      pos:   { t: [2.5, 1.4, 0.55], az: 0.6, el: 0.32, d: 3.4 },
+      tv:    { t: [0, 3.4, -5.3], az: 0.06, el: 0.05, d: 8.2 },
+      kiosk: { t: [-6.4, 1.7, 3.15], az: 1.15, el: 0.1, d: 4.6 },
+      pos:   { t: [2.5, 1.45, 0.5], az: 2.65, el: 0.35, d: 3.2 },
       kds:   { t: [-6.85, 3.0, -2.5], az: 1.42, el: 0.08, d: 4.2 },
-      cust:  { t: [0.9, 1.43, 0.92], az: 2.6, el: 0.28, d: 3.0 }
+      cust:  { t: [1.8, 1.4, 0.78], az: 0.35, el: 0.3, d: 3.0 }
     };
     this.curPos = new T.Vector3(); this.curTgt = new T.Vector3(0, 1.3, -0.5);
     this.orb = { az: 0, el: 0, d: 0 };
@@ -451,20 +480,29 @@ class Component extends DCLogic {
     place('hood', 0.95, -6.55, -1.15, Math.PI / 2, 2.35);
     place('fridge', 2.25, -6.25, -4.4, Math.PI / 2);
     // café seating: real tables and chairs
-    [[4.9, 2.6, 0.2], [-2.4, 4.3, -0.4], [1.5, 4.6, 0.6]].forEach(([x, z, ry]) => {
-      place('tableSmall', 1.05, x, z, ry);
+    const qrTex = this.makeQrTex();
+    this.TABLES.forEach(([x, z, ry]) => {
+      const tg = place('tableSmall', 1.05, x, z, ry);
       place('chair', 1.0, x + 0.78, z + 0.2, ry - 1.9);
       place('chair2', 1.0, x - 0.76, z - 0.14, ry + 1.3);
+      // menu QR on both faces of the table's own menu board
+      // (board center measured at model-local (0.01, -0.176), top 1.05, thickness ~0.04)
+      if (tg) [1, -1].forEach((side) => {
+        const lx = 0.01, lz = -0.176 + side * 0.032;
+        const face = new T.Mesh(new T.PlaneGeometry(0.16, 0.19), new T.MeshBasicMaterial({ map: qrTex }));
+        face.position.set(lx * Math.cos(ry) + lz * Math.sin(ry), 0.85, -lx * Math.sin(ry) + lz * Math.cos(ry));
+        face.rotation.y = ry + (side < 0 ? Math.PI : 0);
+        tg.add(face);
+      });
     });
     // dressing
     place('menu', 0.32, 0.35, 0.75, -0.3, 1.21);
-    place('plate', 0.07, 1.7, 0.55, 0, 1.21);
-    place('cuttingBoard', 0.06, 3.2, 0.45, 0.4, 1.21);
+    place('plate', 0.07, 0.85, 0.5, 0, 1.21);
+    place('plateSmall', 0.05, 1.15, 0.42, 0.2, 1.21);
     place('bowl', 0.1, 2.05, 0.35, 0.3, 1.21);
-    // pastry case contents (on the counter slab)
-    place('plateSmall', 0.05, 3.55, 0.15, 0.2, 1.21);
-    place('foodDinner', 0.26, 3.95, 0.3, -0.4, 1.21);
-    place('plateSmall', 0.05, 4.3, 0.12, 0.7, 1.21);
+    // pastry case contents, kept inside the glass (x 3.2..4.6, z -0.15..0.65)
+    place('cuttingBoard', 0.06, 3.6, 0.15, 0.15, 1.21);
+    place('foodDinner', 0.26, 4.3, 0.28, -0.4, 1.21);
     place('crate', 0.5, 6.4, -4.7, 0.1);
     place('crateBuns', 0.42, 6.35, -4.6, 0.5, 0.5);
   }
@@ -488,6 +526,37 @@ class Component extends DCLogic {
     const c = document.createElement('canvas'); c.width = w; c.height = h;
     const tex = new this.T.CanvasTexture(c); tex.colorSpace = this.T.SRGBColorSpace;
     return { c, ctx: c.getContext('2d'), tex };
+  }
+  drawOff(tx) {
+    const { ctx, c } = tx;
+    ctx.fillStyle = '#14110e'; ctx.fillRect(0, 0, c.width, c.height);
+    ctx.fillStyle = '#4a443c'; ctx.font = '600 40px Manrope, sans-serif'; ctx.textAlign = 'center';
+    ctx.fillText('standby', c.width / 2, c.height / 2);
+    tx.tex.needsUpdate = true;
+  }
+  makeQrTex() {
+    const c = document.createElement('canvas'); c.width = 220; c.height = 264;
+    const x = c.getContext('2d');
+    x.fillStyle = '#fffdfa'; x.fillRect(0, 0, 220, 264);
+    const N = 21, cell = 180 / N, ox = 20, oy = 16;
+    let seed = 41;
+    const rnd = () => (seed = (seed * 1103515245 + 12345) & 0x7fffffff) / 0x7fffffff;
+    const inFinder = (q, r) => (q < 7 && r < 7) || (q > N - 8 && r < 7) || (q < 7 && r > N - 8);
+    x.fillStyle = '#2b241c';
+    for (let r = 0; r < N; r++) for (let q = 0; q < N; q++) {
+      if (inFinder(q, r)) continue;
+      if (rnd() < 0.45) x.fillRect(ox + q * cell, oy + r * cell, cell - 1, cell - 1);
+    }
+    const finder = (fx, fy) => {
+      x.fillStyle = '#2b241c'; x.fillRect(ox + fx * cell, oy + fy * cell, cell * 7, cell * 7);
+      x.fillStyle = '#fffdfa'; x.fillRect(ox + (fx + 1) * cell, oy + (fy + 1) * cell, cell * 5, cell * 5);
+      x.fillStyle = '#2b241c'; x.fillRect(ox + (fx + 2) * cell, oy + (fy + 2) * cell, cell * 3, cell * 3);
+    };
+    finder(0, 0); finder(N - 7, 0); finder(0, N - 7);
+    x.font = '800 22px Manrope, sans-serif'; x.textAlign = 'center'; x.fillStyle = '#b9432c';
+    x.fillText('SCAN FOR MENU', 110, 236);
+    const tex = new this.T.CanvasTexture(c); tex.colorSpace = this.T.SRGBColorSpace;
+    return tex;
   }
   currentScreen(screens, elapsed) {
     const speed = this.props.previewSpeed ?? 1;
@@ -522,18 +591,35 @@ class Component extends DCLogic {
     }
 
     const s = this.state;
-    const tv = s.tvs[s.curTv] || s.tvs[0];
-    const cs = this.currentScreen(tv ? tv.screens : [], el);
     const photoIdx = Math.floor(el / 3000) % Math.max(1, s.photos.length);
-    const tvKey = cs.t + cs.i + (cs.t === 'slide' ? photoIdx : '') + s.curTv + s.photos.length;
-    if (this.lastKeys.tv !== tvKey) { this.lastKeys.tv = tvKey; this.drawScreen(this.tvTex, cs.t, photoIdx, false); }
-    if (tv && s.active === 'tv') {
-      const label = this.META[cs.t][0] + ' ' + this.META[cs.t][1];
+    this.tvTexes.forEach((tx, i) => {
+      const tvi = s.tvs[i];
+      if (!tvi || !tvi.screens.length) {
+        if (this.lastKeys['tv' + i] !== 'off') { this.lastKeys['tv' + i] = 'off'; this.drawOff(tx); }
+        return;
+      }
+      const cs = this.currentScreen(tvi.screens, el + i * 1900);
+      const key = cs.t + cs.i + (cs.t === 'slide' ? photoIdx : '') + s.photos.length;
+      if (this.lastKeys['tv' + i] !== key) { this.lastKeys['tv' + i] = key; this.drawScreen(tx, cs.t, photoIdx, false); }
+    });
+    if (s.active === 'tv' && s.tvs[s.curTv]) {
+      let label = 'nothing';
+      if (s.tvs[s.curTv].screens.length) {
+        const cs = this.currentScreen(s.tvs[s.curTv].screens, el + s.curTv * 1900);
+        label = this.META[cs.t][0] + ' ' + this.META[cs.t][1];
+      }
       if (s.nowLabel !== label) this.setState({ nowLabel: label });
     }
-    const kcs = this.currentScreen(s.kiosk.screens, el + 2500);
-    const kKey = kcs.t + kcs.i + (kcs.t === 'slide' ? photoIdx : '') + s.photos.length;
-    if (this.lastKeys.kiosk !== kKey) { this.lastKeys.kiosk = kKey; this.drawScreen(this.kioskTex, kcs.t, photoIdx, true); }
+    this.kioskTexes.forEach((tx, i) => {
+      const ki = s.kiosks[i];
+      if (!ki || !ki.screens.length) {
+        if (this.lastKeys['kiosk' + i] !== 'off') { this.lastKeys['kiosk' + i] = 'off'; this.drawOff(tx); }
+        return;
+      }
+      const kcs = this.currentScreen(ki.screens, el + 2500 + i * 1700);
+      const kKey = kcs.t + kcs.i + (kcs.t === 'slide' ? photoIdx : '') + s.photos.length;
+      if (this.lastKeys['kiosk' + i] !== kKey) { this.lastKeys['kiosk' + i] = kKey; this.drawScreen(tx, kcs.t, photoIdx, true); }
+    });
     const oKey = s.order.map(o => o.name + o.qty).join(',') + '#' + s.orderNo
       + '|' + (s.pay ? s.pay.mode + s.pay.cash : 'none');
     if (this.lastKeys.pos !== oKey) { this.lastKeys.pos = oKey; this.drawPos(); }
@@ -768,9 +854,9 @@ class Component extends DCLogic {
   fmtAge(t0) { const a = Math.max(0, Math.floor((Date.now() - t0) / 1000)); return Math.floor(a / 60) + ':' + String(a % 60).padStart(2, '0'); }
 
   edit(fn) { this.setState(fn); this.lastKeys = {}; }
-  activeList() { return this.state.active === 'kiosk' ? this.state.kiosk.screens : (this.state.tvs[this.state.curTv]?.screens || []); }
+  activeList() { return this.state.active === 'kiosk' ? (this.state.kiosks[this.state.curKiosk]?.screens || []) : (this.state.tvs[this.state.curTv]?.screens || []); }
   setList(screens) {
-    if (this.state.active === 'kiosk') this.edit(s => ({ kiosk: { ...s.kiosk, screens } }));
+    if (this.state.active === 'kiosk') this.edit(s => ({ kiosks: s.kiosks.map((k, i) => i === s.curKiosk ? { ...k, screens } : k) }));
     else this.edit(s => ({ tvs: s.tvs.map((t, i) => i === s.curTv ? { ...t, screens } : t) }));
   }
   toast(msg) { this.setState({ toast: msg }); clearTimeout(this.toastT); this.toastT = setTimeout(() => this.setState({ toast: '' }), 2000); }
@@ -793,8 +879,9 @@ class Component extends DCLogic {
       fontFamily: 'inherit', textAlign: 'left', cursor: 'pointer'
     });
     const tv = s.tvs[s.curTv];
+    const kk = s.kiosks[s.curKiosk] || s.kiosks[0];
     const markerDefs = [
-      ['tv', 1, '📺 Wall TV', '#b9432c', '0s'], ['kiosk', 2, '🖥️ Self-order kiosk', '#b9432c', '.4s'],
+      ['tv', 1, '📺 Wall TV', '#b9432c', '0s'], ['kiosk', 2, '🖥️ Self-order kiosks', '#b9432c', '.4s'],
       ['pos', 3, '🧑‍🍳 Counter station', '#2f6b46', '.8s'], ['kds', 4, '🍳 Kitchen display', '#2f6b46', '1.2s'],
       ['cust', 5, '🙋 Customer screen', '#c9862c', '1.6s']
     ];
@@ -818,7 +905,7 @@ class Component extends DCLogic {
       showTv: s.active === 'tv', showKiosk: s.active === 'kiosk', showPos: s.active === 'pos' && !s.pay, showPay: s.active === 'pos' && !!s.pay, showKds: s.active === 'kds', showCust: s.active === 'cust',
       showConfig: s.active === 'tv' || s.active === 'kiosk',
       panelEmoji: { tv: '📺', kiosk: '🖥️', pos: '🧑‍🍳', kds: '🍳', cust: '👤' }[s.active] || '',
-      panelTitle: { tv: 'Wall TVs', kiosk: 'Kiosk setup', pos: 'Counter Station', kds: 'Kitchen displays', cust: 'Customers' }[s.active] || '',
+      panelTitle: { tv: 'Wall TVs', kiosk: 'Self-order kiosks', pos: 'Counter Station', kds: 'Kitchen displays', cust: 'Customers' }[s.active] || '',
       portalLink: { tv: 'https://coffee.maplekiosk.ca/touch/tv-setup', kiosk: 'https://coffee.maplekiosk.ca/touch/kiosk-setup', pos: 'https://coffee.maplekiosk.ca/coffee/today', kds: 'https://coffee.maplekiosk.ca/kds', cust: 'https://coffee.maplekiosk.ca/touch/customers' }[s.active] || '#',
       tvTabs: s.tvs.map((t, i) => ({ name: t.name, sub: t.screens.length + (t.screens.length === 1 ? ' screen' : ' screens'), style: tabStyle(i === s.curTv), pick: () => this.edit(() => ({ curTv: i })) })),
       addTv: () => this.edit(st => ({ tvs: [...st.tvs, { name: 'TV ' + (st.tvs.length + 1), screens: [{ t: 'menu', sec: 8 }] }], curTv: st.tvs.length })),
@@ -827,13 +914,17 @@ class Component extends DCLogic {
       tvWallLink: 'https://coffee.maplekiosk.ca/touch/tv/' + encodeURIComponent(tv ? tv.name : 'TV 1'),
       nowPlaying: s.nowLabel || '…',
       playlist, addMenu: addScreen('menu'), addPromo: addScreen('promo'), addSlide: addScreen('slide'),
-      kName: s.kiosk.name, setKName: (e) => this.edit(st => ({ kiosk: { ...st.kiosk, name: e.target.value } })),
-      attract: s.kiosk.attract, setAttract: (e) => this.edit(st => ({ kiosk: { ...st.kiosk, attract: parseInt(e.target.value) || 0 } })),
+      kioskTabs: s.kiosks.map((k, i) => ({ name: k.name, sub: k.screens.length + (k.screens.length === 1 ? ' screen' : ' screens'), style: tabStyle(i === s.curKiosk), pick: () => this.edit(() => ({ curKiosk: i })) })),
+      addKiosk: () => this.edit(st => ({ kiosks: [...st.kiosks, { name: 'Kiosk ' + (st.kiosks.length + 1), receipt: 0, attract: -1, screens: [{ t: 'promo', sec: 6 }] }], curKiosk: st.kiosks.length })),
+      deleteKiosk: () => this.edit(st => st.kiosks.length <= 1 ? {} : { kiosks: st.kiosks.filter((_, i) => i !== st.curKiosk), curKiosk: 0 }),
+      kioskLink: 'https://coffee.maplekiosk.ca/pos/kiosk/' + encodeURIComponent(kk.name),
+      kName: kk.name, setKName: (e) => this.edit(st => ({ kiosks: st.kiosks.map((k, i) => i === st.curKiosk ? { ...k, name: e.target.value } : k) })),
+      attract: kk.attract, setAttract: (e) => this.edit(st => ({ kiosks: st.kiosks.map((k, i) => i === st.curKiosk ? { ...k, attract: parseInt(e.target.value) || 0 } : k) })),
       receiptOpts: ['Ask if they want a receipt', 'Always print a receipt', "Don't mention receipts"].map((label, i) => ({
         label,
-        style: { display: 'flex', alignItems: 'center', gap: '10px', background: i === s.kiosk.receipt ? '#fdf3e3' : '#fffdfa', border: i === s.kiosk.receipt ? '1.5px solid #b9432c' : '1px solid #e4dbc8', borderRadius: '12px', padding: '11px 13px', fontFamily: 'inherit', fontSize: '13.5px', fontWeight: 700, color: '#2f2a23', cursor: 'pointer', textAlign: 'left' },
-        dotStyle: { width: '14px', height: '14px', borderRadius: '50%', flexShrink: 0, background: i === s.kiosk.receipt ? '#b9432c' : '#fff', border: i === s.kiosk.receipt ? '3px solid #f3cdb2' : '2px solid #c9bda2' },
-        pick: () => this.edit(st => ({ kiosk: { ...st.kiosk, receipt: i } }))
+        style: { display: 'flex', alignItems: 'center', gap: '10px', background: i === kk.receipt ? '#fdf3e3' : '#fffdfa', border: i === kk.receipt ? '1.5px solid #b9432c' : '1px solid #e4dbc8', borderRadius: '12px', padding: '11px 13px', fontFamily: 'inherit', fontSize: '13.5px', fontWeight: 700, color: '#2f2a23', cursor: 'pointer', textAlign: 'left' },
+        dotStyle: { width: '14px', height: '14px', borderRadius: '50%', flexShrink: 0, background: i === kk.receipt ? '#b9432c' : '#fff', border: i === kk.receipt ? '3px solid #f3cdb2' : '2px solid #c9bda2' },
+        pick: () => this.edit(st => ({ kiosks: st.kiosks.map((k, j) => j === st.curKiosk ? { ...k, receipt: i } : k) }))
       })),
       photos: s.photos.map((ph, i) => ({
         style: { position: 'relative', width: '64px', height: '64px', borderRadius: '12px', background: `linear-gradient(135deg, ${ph[0]}, ${ph[1]})`, boxShadow: 'inset 0 0 0 1px rgba(0,0,0,.08)' },

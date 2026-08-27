@@ -36,7 +36,7 @@ window.dispatchEvent(new Event('three-ready'));
     </sc-for>
   </div>
   <a href="/coffee" style="position:absolute;top:18px;left:20px;background:#fffdfa;border:1px solid #e4dbc8;border-radius:14px;padding:10px 16px;display:flex;align-items:center;gap:10px;box-shadow:0 6px 24px rgba(80,60,30,.12);text-decoration:none"><span style="font-size:20px">🍁</span><div><div style="font-weight:800;font-size:15px;color:#2f2a23;line-height:1.1">MapleCoffee</div><div style="font-size:11px;color:#8a7f6d;font-weight:600">Interactive demo · your shop, one portal</div></div></a>
-  <div style="position:absolute;top:18px;right:20px"><a href="https://coffee.maplekiosk.ca/touch" target="_blank" style="background:#2f2a23;color:#f5f1e8;font-size:12.5px;font-weight:700;padding:10px 16px;border-radius:99px;display:inline-block">Open the real portal ↗</a></div>
+  <div style="position:absolute;top:18px;right:20px"><a href="https://coffee.maplekiosk.ca/touch" target="_blank" style="background:#2f2a23;color:#f5f1e8;font-size:12.5px;font-weight:700;padding:10px 16px;border-radius:99px;display:inline-block">Open the real portal <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:13px;height:13px;vertical-align:-2px;flex-shrink:0"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></a></div>
   <sc-if value="{{ hintVisible }}" hint-placeholder-val="{{ true }}">
     <div style="position:absolute;bottom:24px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:8px;pointer-events:none">
       <div style="background:rgba(43,36,28,.6);color:#e8ddc8;padding:6px 14px;border-radius:99px;font-size:11.5px;font-weight:600">Drag to look around · scroll to zoom · keys 1–5 jump · Esc back</div>
@@ -47,45 +47,45 @@ window.dispatchEvent(new Event('three-ready'));
     <div style="{{ panelStyle }}">
       <div style="padding:18px 22px 14px;border-bottom:1px solid #e4dbc8;display:flex;align-items:center;gap:12px">
         <sc-if value="{{ isMobile }}" hint-placeholder-val="{{ false }}"><button onClick="{{ goBack }}" aria-label="Back to shop" style="background:#efe6d2;border:none;border-radius:10px;width:34px;height:34px;font-size:18px;color:#2f2a23;cursor:pointer;flex-shrink:0">‹</button></sc-if>
-        <span style="font-size:24px">{{ panelEmoji }}</span>
-        <div style="flex:1;min-width:0"><div style="font-weight:800;font-size:18px;color:#2f2a23">{{ panelTitle }}</div><a href="{{ portalLink }}" target="_blank" style="font-size:12px;font-weight:700">Open this page in the portal ↗</a></div>
+        <span style="display:flex;color:#b9432c"><sc-if value="{{ headTv }}" hint-placeholder-val="{{ false }}"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:22px;height:22px;vertical-align:-2px;flex-shrink:0"><rect width="20" height="15" x="2" y="7" rx="2" ry="2"/><polyline points="17 2 12 7 7 2"/></svg></sc-if><sc-if value="{{ headKiosk }}" hint-placeholder-val="{{ false }}"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:22px;height:22px;vertical-align:-2px;flex-shrink:0"><rect width="20" height="14" x="2" y="3" rx="2"/><line x1="8" x2="16" y1="21" y2="21"/><line x1="12" x2="12" y1="17" y2="21"/></svg></sc-if><sc-if value="{{ headPos }}" hint-placeholder-val="{{ false }}"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:22px;height:22px;vertical-align:-2px;flex-shrink:0"><path d="M17 21a1 1 0 0 0 1-1v-5.35c0-.457.316-.844.727-1.041a4 4 0 0 0-2.134-7.589 5 5 0 0 0-9.186 0 4 4 0 0 0-2.134 7.588c.411.198.727.585.727 1.041V20a1 1 0 0 0 1 1Z"/><path d="M6 17h12"/></svg></sc-if><sc-if value="{{ headKds }}" hint-placeholder-val="{{ false }}"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:22px;height:22px;vertical-align:-2px;flex-shrink:0"><path d="M2 12h20"/><path d="M20 12v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-8"/><path d="m4 8 16-4"/><path d="m8.86 6.78-.45-1.81a2 2 0 0 1 1.45-2.43l1.94-.48a2 2 0 0 1 2.43 1.46l.45 1.8"/></svg></sc-if><sc-if value="{{ headCust }}" hint-placeholder-val="{{ false }}"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:22px;height:22px;vertical-align:-2px;flex-shrink:0"><circle cx="12" cy="8" r="5"/><path d="M20 21a8 8 0 0 0-16 0"/></svg></sc-if></span>
+        <div style="flex:1;min-width:0"><div style="font-weight:800;font-size:18px;color:#2f2a23">{{ panelTitle }}</div><a href="{{ portalLink }}" target="_blank" style="font-size:12px;font-weight:700">Open this page in the portal <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:12px;height:12px;vertical-align:-2px;flex-shrink:0"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></a></div>
         <sc-if value="{{ showConfig }}" hint-placeholder-val="{{ false }}"><button onClick="{{ save }}" style="background:#b9432c;color:#fff;border:none;border-radius:10px;padding:9px 14px;font-family:inherit;font-size:12.5px;font-weight:700;cursor:pointer">Save changes</button></sc-if>
       </div>
       <div style="flex:1;overflow-y:auto;padding:18px 22px 30px;display:flex;flex-direction:column;gap:16px">
         <sc-if value="{{ showTv }}" hint-placeholder-val="{{ false }}">
-          <div style="background:#fff8ec;border:1px solid #eadfc6;border-radius:12px;padding:10px 14px;font-size:12.5px;color:#6f6450;font-weight:600">👈 Live preview: each TV on the wall plays its own loop. Edit below and watch it change.</div>
+          <div style="background:#fff8ec;border:1px solid #eadfc6;border-radius:12px;padding:10px 14px;font-size:12.5px;color:#6f6450;font-weight:600">Live preview: each TV on the wall plays its own loop. Edit below and watch it change.</div>
           <div style="display:flex;gap:8px;flex-wrap:wrap">
-            <sc-for list="{{ tvTabs }}" as="t" hint-placeholder-count="2"><button onClick="{{ t.pick }}" style="{{ t.style }}"><span style="display:block;font-weight:800;font-size:13.5px;white-space:nowrap">📺 {{ t.name }}</span><span style="display:block;font-size:11px;opacity:.75;font-weight:600;white-space:nowrap">{{ t.sub }}</span></button></sc-for>
+            <sc-for list="{{ tvTabs }}" as="t" hint-placeholder-count="2"><button onClick="{{ t.pick }}" style="{{ t.style }}"><span style="display:block;font-weight:800;font-size:13.5px;white-space:nowrap"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px;vertical-align:-2px;flex-shrink:0"><rect width="20" height="15" x="2" y="7" rx="2" ry="2"/><polyline points="17 2 12 7 7 2"/></svg> {{ t.name }}</span><span style="display:block;font-size:11px;opacity:.75;font-weight:600;white-space:nowrap">{{ t.sub }}</span></button></sc-for>
             <button onClick="{{ addTv }}" style="background:transparent;border:1.5px dashed #c9bda2;border-radius:12px;padding:10px 14px;font-family:inherit;font-size:13px;font-weight:700;color:#8a7f6d;cursor:pointer">＋ Add TV</button>
           </div>
           <div style="display:flex;flex-direction:column;gap:6px"><label style="font-size:12px;font-weight:800;color:#8a7f6d;text-transform:uppercase;letter-spacing:.06em">TV name</label><input value="{{ tvName }}" onChange="{{ setTvName }}" style="background:#fffdfa;border:1px solid #e4dbc8;border-radius:10px;padding:11px 13px;font-family:inherit;font-size:15px;font-weight:700;color:#2f2a23"></div>
-          <div style="display:flex;justify-content:space-between;align-items:center"><a href="{{ tvWallLink }}" target="_blank" style="font-size:13px;font-weight:700">Open on wall ↗</a><button onClick="{{ deleteTv }}" style="background:none;border:none;font-family:inherit;font-size:13px;font-weight:700;color:#a05446;cursor:pointer;padding:0">Delete TV</button></div>
+          <div style="display:flex;justify-content:space-between;align-items:center"><a href="{{ tvWallLink }}" target="_blank" style="font-size:13px;font-weight:700">Open on wall <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:13px;height:13px;vertical-align:-2px;flex-shrink:0"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></a><button onClick="{{ deleteTv }}" style="background:none;border:none;font-family:inherit;font-size:13px;font-weight:700;color:#a05446;cursor:pointer;padding:0">Delete TV</button></div>
           <div style="display:flex;flex-direction:column;gap:8px">
             <div style="display:flex;justify-content:space-between;align-items:baseline"><label style="font-size:12px;font-weight:800;color:#8a7f6d;text-transform:uppercase;letter-spacing:.06em">Plays in order</label><span style="font-size:12px;font-weight:700;color:#b9432c">▶ {{ nowPlaying }}</span></div>
             <sc-for list="{{ playlist }}" as="row" hint-placeholder-count="2">
               <div style="display:flex;align-items:center;gap:10px;background:#fffdfa;border:1px solid #e4dbc8;border-radius:12px;padding:9px 12px">
                 <span style="width:22px;height:22px;border-radius:50%;background:#efe6d2;color:#6f6450;font-size:11.5px;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0">{{ row.n }}</span>
-                <span style="flex:1;font-size:14px;font-weight:700;color:#2f2a23">{{ row.emoji }} {{ row.label }}</span>
+                <span style="flex:1;font-size:14px;font-weight:700;color:#2f2a23">{{ row.label }}</span>
                 <input type="number" min="2" max="120" value="{{ row.sec }}" onChange="{{ row.setSec }}" style="width:52px;background:#f5f1e8;border:1px solid #e4dbc8;border-radius:8px;padding:6px 6px;font-family:inherit;font-size:13px;font-weight:700;color:#2f2a23;text-align:center">
                 <span style="font-size:11px;color:#8a7f6d;font-weight:700">sec</span>
                 <span style="display:flex;gap:4px"><button onClick="{{ row.up }}" style="background:#efe6d2;border:none;border-radius:7px;width:26px;height:26px;cursor:pointer;font-size:11px;color:#2f2a23">▲</button><button onClick="{{ row.down }}" style="background:#efe6d2;border:none;border-radius:7px;width:26px;height:26px;cursor:pointer;font-size:11px;color:#2f2a23">▼</button><button onClick="{{ row.rm }}" style="background:#f3e2dc;border:none;border-radius:7px;width:26px;height:26px;cursor:pointer;font-size:12px;color:#a05446">✕</button></span>
               </div>
             </sc-for>
-            <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center"><span style="font-size:12px;font-weight:800;color:#8a7f6d">Add screen:</span><button onClick="{{ addMenu }}" style="background:#fffdfa;border:1px solid #e4dbc8;border-radius:99px;padding:7px 13px;font-family:inherit;font-size:12.5px;font-weight:700;color:#2f2a23;cursor:pointer">🍽 Menu Board</button><button onClick="{{ addPromo }}" style="background:#fffdfa;border:1px solid #e4dbc8;border-radius:99px;padding:7px 13px;font-family:inherit;font-size:12.5px;font-weight:700;color:#2f2a23;cursor:pointer">✨ Promo</button><button onClick="{{ addSlide }}" style="background:#fffdfa;border:1px solid #e4dbc8;border-radius:99px;padding:7px 13px;font-family:inherit;font-size:12.5px;font-weight:700;color:#2f2a23;cursor:pointer">🖼 Photo slideshow</button></div>
+            <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center"><span style="font-size:12px;font-weight:800;color:#8a7f6d">Add screen:</span><button onClick="{{ addMenu }}" style="background:#fffdfa;border:1px solid #e4dbc8;border-radius:99px;padding:7px 13px;font-family:inherit;font-size:12.5px;font-weight:700;color:#2f2a23;cursor:pointer"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:13px;height:13px;vertical-align:-2px;flex-shrink:0"><path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"/><path d="M7 2v20"/><path d="M21 15V2a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7"/></svg> Menu Board</button><button onClick="{{ addPromo }}" style="background:#fffdfa;border:1px solid #e4dbc8;border-radius:99px;padding:7px 13px;font-family:inherit;font-size:12.5px;font-weight:700;color:#2f2a23;cursor:pointer"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:13px;height:13px;vertical-align:-2px;flex-shrink:0"><path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z"/></svg> Promo</button><button onClick="{{ addSlide }}" style="background:#fffdfa;border:1px solid #e4dbc8;border-radius:99px;padding:7px 13px;font-family:inherit;font-size:12.5px;font-weight:700;color:#2f2a23;cursor:pointer"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:13px;height:13px;vertical-align:-2px;flex-shrink:0"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/></svg> Photo slideshow</button></div>
           </div>
-          <a href="https://coffee.maplekiosk.ca/touch/promo-setup" target="_blank" style="font-size:13px;font-weight:700">✨ Customize the Promo screen →</a>
+          <a href="https://coffee.maplekiosk.ca/touch/promo-setup" target="_blank" style="font-size:13px;font-weight:700"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:13px;height:13px;vertical-align:-2px;flex-shrink:0"><path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z"/></svg> Customize the Promo screen →</a>
         </sc-if>
         <sc-if value="{{ showKiosk }}" hint-placeholder-val="{{ false }}">
-          <div style="background:#fff8ec;border:1px solid #eadfc6;border-radius:12px;padding:10px 14px;font-size:12.5px;color:#6f6450;font-weight:600">👈 Live preview: the kiosks are idling on their attract loops. Edit below and watch them change.</div>
+          <div style="background:#fff8ec;border:1px solid #eadfc6;border-radius:12px;padding:10px 14px;font-size:12.5px;color:#6f6450;font-weight:600">Live preview: the kiosks are idling on their attract loops. Edit below and watch them change.</div>
           <div style="display:flex;gap:8px;flex-wrap:wrap">
-            <sc-for list="{{ kioskTabs }}" as="t" hint-placeholder-count="2"><button onClick="{{ t.pick }}" style="{{ t.style }}"><span style="display:block;font-weight:800;font-size:13.5px;white-space:nowrap">🖥️ {{ t.name }}</span><span style="display:block;font-size:11px;opacity:.75;font-weight:600;white-space:nowrap">{{ t.sub }}</span></button></sc-for>
+            <sc-for list="{{ kioskTabs }}" as="t" hint-placeholder-count="2"><button onClick="{{ t.pick }}" style="{{ t.style }}"><span style="display:block;font-weight:800;font-size:13.5px;white-space:nowrap"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px;vertical-align:-2px;flex-shrink:0"><rect width="20" height="14" x="2" y="3" rx="2"/><line x1="8" x2="16" y1="21" y2="21"/><line x1="12" x2="12" y1="17" y2="21"/></svg> {{ t.name }}</span><span style="display:block;font-size:11px;opacity:.75;font-weight:600;white-space:nowrap">{{ t.sub }}</span></button></sc-for>
             <button onClick="{{ addKiosk }}" style="background:transparent;border:1.5px dashed #c9bda2;border-radius:12px;padding:10px 14px;font-family:inherit;font-size:13px;font-weight:700;color:#8a7f6d;cursor:pointer">＋ Add kiosk</button>
           </div>
           <div style="display:flex;flex-direction:column;gap:6px"><label style="font-size:12px;font-weight:800;color:#8a7f6d;text-transform:uppercase;letter-spacing:.06em">Kiosk name</label><input value="{{ kName }}" onChange="{{ setKName }}" style="background:#fffdfa;border:1px solid #e4dbc8;border-radius:10px;padding:11px 13px;font-family:inherit;font-size:15px;font-weight:700;color:#2f2a23"></div>
-          <div style="display:flex;justify-content:space-between;align-items:center"><a href="{{ kioskLink }}" target="_blank" style="font-size:13px;font-weight:700">Open kiosk ↗</a><button onClick="{{ deleteKiosk }}" style="background:none;border:none;font-family:inherit;font-size:13px;font-weight:700;color:#a05446;cursor:pointer;padding:0">Delete kiosk</button></div>
+          <div style="display:flex;justify-content:space-between;align-items:center"><a href="{{ kioskLink }}" target="_blank" style="font-size:13px;font-weight:700">Open kiosk <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:13px;height:13px;vertical-align:-2px;flex-shrink:0"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></a><button onClick="{{ deleteKiosk }}" style="background:none;border:none;font-family:inherit;font-size:13px;font-weight:700;color:#a05446;cursor:pointer;padding:0">Delete kiosk</button></div>
           <div style="display:flex;flex-direction:column;gap:8px">
-            <div style="display:flex;justify-content:space-between;background:#fffdfa;border:1px solid #e4dbc8;border-radius:12px;padding:11px 13px"><span style="font-size:13.5px;font-weight:800;color:#2f2a23">💳 Card reader</span><span style="font-size:13px;color:#8a7f6d;font-weight:600">Use this browser's pairing</span></div>
-            <div style="display:flex;justify-content:space-between;background:#fffdfa;border:1px solid #e4dbc8;border-radius:12px;padding:11px 13px"><span style="font-size:13.5px;font-weight:800;color:#2f2a23">🖨 Receipt printer</span><span style="font-size:13px;color:#8a7f6d;font-weight:600">Shop default (receipt)</span></div>
+            <div style="display:flex;justify-content:space-between;background:#fffdfa;border:1px solid #e4dbc8;border-radius:12px;padding:11px 13px"><span style="font-size:13.5px;font-weight:800;color:#2f2a23"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px;vertical-align:-2px;flex-shrink:0"><rect width="20" height="14" x="2" y="5" rx="2"/><line x1="2" x2="22" y1="10" y2="10"/></svg> Card reader</span><span style="font-size:13px;color:#8a7f6d;font-weight:600">Use this browser's pairing</span></div>
+            <div style="display:flex;justify-content:space-between;background:#fffdfa;border:1px solid #e4dbc8;border-radius:12px;padding:11px 13px"><span style="font-size:13.5px;font-weight:800;color:#2f2a23"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px;vertical-align:-2px;flex-shrink:0"><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><path d="M6 9V3a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v6"/><rect x="6" y="14" width="12" height="8" rx="1"/></svg> Receipt printer</span><span style="font-size:13px;color:#8a7f6d;font-weight:600">Shop default (receipt)</span></div>
           </div>
           <div style="display:flex;flex-direction:column;gap:8px">
             <label style="font-size:12px;font-weight:800;color:#8a7f6d;text-transform:uppercase;letter-spacing:.06em">After an order</label>
@@ -97,13 +97,13 @@ window.dispatchEvent(new Event('three-ready'));
             <sc-for list="{{ playlist }}" as="row" hint-placeholder-count="2">
               <div style="display:flex;align-items:center;gap:10px;background:#fffdfa;border:1px solid #e4dbc8;border-radius:12px;padding:9px 12px">
                 <span style="width:22px;height:22px;border-radius:50%;background:#efe6d2;color:#6f6450;font-size:11.5px;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0">{{ row.n }}</span>
-                <span style="flex:1;font-size:14px;font-weight:700;color:#2f2a23">{{ row.emoji }} {{ row.label }}</span>
+                <span style="flex:1;font-size:14px;font-weight:700;color:#2f2a23">{{ row.label }}</span>
                 <input type="number" min="2" max="120" value="{{ row.sec }}" onChange="{{ row.setSec }}" style="width:52px;background:#f5f1e8;border:1px solid #e4dbc8;border-radius:8px;padding:6px 6px;font-family:inherit;font-size:13px;font-weight:700;color:#2f2a23;text-align:center">
                 <span style="font-size:11px;color:#8a7f6d;font-weight:700">sec</span>
                 <span style="display:flex;gap:4px"><button onClick="{{ row.up }}" style="background:#efe6d2;border:none;border-radius:7px;width:26px;height:26px;cursor:pointer;font-size:11px;color:#2f2a23">▲</button><button onClick="{{ row.down }}" style="background:#efe6d2;border:none;border-radius:7px;width:26px;height:26px;cursor:pointer;font-size:11px;color:#2f2a23">▼</button><button onClick="{{ row.rm }}" style="background:#f3e2dc;border:none;border-radius:7px;width:26px;height:26px;cursor:pointer;font-size:12px;color:#a05446">✕</button></span>
               </div>
             </sc-for>
-            <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center"><span style="font-size:12px;font-weight:800;color:#8a7f6d">Add screen:</span><button onClick="{{ addMenu }}" style="background:#fffdfa;border:1px solid #e4dbc8;border-radius:99px;padding:7px 13px;font-family:inherit;font-size:12.5px;font-weight:700;color:#2f2a23;cursor:pointer">🍽 Menu Board</button><button onClick="{{ addPromo }}" style="background:#fffdfa;border:1px solid #e4dbc8;border-radius:99px;padding:7px 13px;font-family:inherit;font-size:12.5px;font-weight:700;color:#2f2a23;cursor:pointer">✨ Promo</button><button onClick="{{ addSlide }}" style="background:#fffdfa;border:1px solid #e4dbc8;border-radius:99px;padding:7px 13px;font-family:inherit;font-size:12.5px;font-weight:700;color:#2f2a23;cursor:pointer">🖼 Photo slideshow</button></div>
+            <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center"><span style="font-size:12px;font-weight:800;color:#8a7f6d">Add screen:</span><button onClick="{{ addMenu }}" style="background:#fffdfa;border:1px solid #e4dbc8;border-radius:99px;padding:7px 13px;font-family:inherit;font-size:12.5px;font-weight:700;color:#2f2a23;cursor:pointer"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:13px;height:13px;vertical-align:-2px;flex-shrink:0"><path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"/><path d="M7 2v20"/><path d="M21 15V2a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7"/></svg> Menu Board</button><button onClick="{{ addPromo }}" style="background:#fffdfa;border:1px solid #e4dbc8;border-radius:99px;padding:7px 13px;font-family:inherit;font-size:12.5px;font-weight:700;color:#2f2a23;cursor:pointer"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:13px;height:13px;vertical-align:-2px;flex-shrink:0"><path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z"/></svg> Promo</button><button onClick="{{ addSlide }}" style="background:#fffdfa;border:1px solid #e4dbc8;border-radius:99px;padding:7px 13px;font-family:inherit;font-size:12.5px;font-weight:700;color:#2f2a23;cursor:pointer"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:13px;height:13px;vertical-align:-2px;flex-shrink:0"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/></svg> Photo slideshow</button></div>
           </div>
           <div style="display:flex;flex-direction:column;gap:8px">
             <label style="font-size:12px;font-weight:800;color:#8a7f6d;text-transform:uppercase;letter-spacing:.06em">Slideshow photos</label>
@@ -115,7 +115,7 @@ window.dispatchEvent(new Event('three-ready'));
           </div>
         </sc-if>
         <sc-if value="{{ showPos }}" hint-placeholder-val="{{ false }}">
-          <div style="background:#fff8ec;border:1px solid #eadfc6;border-radius:12px;padding:10px 14px;font-size:12.5px;color:#6f6450;font-weight:600">👈 Ring up an order: watch the register, the customer screen and the kitchen react in real time.</div>
+          <div style="background:#fff8ec;border:1px solid #eadfc6;border-radius:12px;padding:10px 14px;font-size:12.5px;color:#6f6450;font-weight:600">Ring up an order: watch the register, the customer screen and the kitchen react in real time.</div>
           <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px">
             <sc-for list="{{ prodBtns }}" as="p" hint-placeholder-count="9"><button onClick="{{ p.add }}" style="{{ p.style }}"><span style="display:block;font-size:20px">{{ p.emoji }}</span><span style="display:block;font-size:12px;font-weight:800;color:#fff">{{ p.name }}</span><span style="display:block;font-size:11px;color:rgba(255,255,255,.85);font-weight:700">${{ p.price }}</span></button></sc-for>
           </div>
@@ -125,12 +125,12 @@ window.dispatchEvent(new Event('three-ready'));
               <div style="display:flex;align-items:center;gap:8px;font-size:14px;font-weight:700;color:#2f2a23"><span style="color:#b9432c">{{ r.qty }}×</span><span style="flex:1">{{ r.name }}</span><span style="color:#6f6450">${{ r.amt }}</span><button onClick="{{ r.rm }}" style="background:#f3e2dc;border:none;border-radius:7px;width:24px;height:24px;cursor:pointer;font-size:11px;color:#a05446">✕</button></div>
             </sc-for>
             <div style="border-top:1px dashed #e4dbc8;padding-top:8px;display:flex;justify-content:space-between;font-size:15px;font-weight:800;color:#2f2a23"><span>Total</span><span>${{ orderTotal }}</span></div>
-            <div style="display:flex;gap:8px"><button onClick="{{ charge }}" style="flex:1;background:#b9432c;color:#fff;border:none;border-radius:11px;padding:12px;font-family:inherit;font-size:14px;font-weight:800;cursor:pointer">💳 Charge ${{ orderTotal }}</button><button onClick="{{ clearOrder }}" style="background:#efe6d2;color:#6f6450;border:none;border-radius:11px;padding:12px 14px;font-family:inherit;font-size:13px;font-weight:700;cursor:pointer">Clear</button></div>
+            <div style="display:flex;gap:8px"><button onClick="{{ charge }}" style="flex:1;background:#b9432c;color:#fff;border:none;border-radius:11px;padding:12px;font-family:inherit;font-size:14px;font-weight:800;cursor:pointer"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px;vertical-align:-2px;flex-shrink:0"><rect width="20" height="14" x="2" y="5" rx="2"/><line x1="2" x2="22" y1="10" y2="10"/></svg> Charge ${{ orderTotal }}</button><button onClick="{{ clearOrder }}" style="background:#efe6d2;color:#6f6450;border:none;border-radius:11px;padding:12px 14px;font-family:inherit;font-size:13px;font-weight:700;cursor:pointer">Clear</button></div>
           </div>
-          <a href="https://coffee.maplekiosk.ca/coffee/today" target="_blank" style="font-size:13px;font-weight:700">Try the full counter station live ↗</a>
+          <a href="https://coffee.maplekiosk.ca/coffee/today" target="_blank" style="font-size:13px;font-weight:700">Try the full counter station live <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:13px;height:13px;vertical-align:-2px;flex-shrink:0"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></a>
         </sc-if>
         <sc-if value="{{ showPay }}" hint-placeholder-val="{{ false }}">
-          <div style="background:#fff8ec;border:1px solid #eadfc6;border-radius:12px;padding:10px 14px;font-size:12.5px;color:#6f6450;font-weight:600">👈 Take the payment: card, or cash with change due. The register and the customer screen follow along.</div>
+          <div style="background:#fff8ec;border:1px solid #eadfc6;border-radius:12px;padding:10px 14px;font-size:12.5px;color:#6f6450;font-weight:600">Take the payment: card, or cash with change due. The register and the customer screen follow along.</div>
           <div style="background:#fffdfa;border:1px solid #e4dbc8;border-radius:14px;padding:14px;display:flex;flex-direction:column;gap:7px">
             <div style="font-size:12px;font-weight:800;color:#8a7f6d;text-transform:uppercase;letter-spacing:.06em">Payment · order #{{ orderNo }}</div>
             <sc-for list="{{ orderRows }}" as="r" hint-placeholder-count="1">
@@ -163,23 +163,23 @@ window.dispatchEvent(new Event('three-ready'));
           </div>
         </sc-if>
         <sc-if value="{{ showKds }}" hint-placeholder-val="{{ false }}">
-          <div style="background:#fff8ec;border:1px solid #eadfc6;border-radius:12px;padding:10px 14px;font-size:12.5px;color:#6f6450;font-weight:600">👈 These tickets are live on the kitchen screen. Bump one when it's handed off.</div>
+          <div style="background:#fff8ec;border:1px solid #eadfc6;border-radius:12px;padding:10px 14px;font-size:12.5px;color:#6f6450;font-weight:600">These tickets are live on the kitchen screen. Bump one when it's handed off.</div>
           <sc-for list="{{ ticketRows }}" as="tk" hint-placeholder-count="2">
             <div style="background:#fffdfa;border:1px solid #e4dbc8;border-radius:14px;overflow:hidden">
               <div style="{{ tk.headStyle }}"><span>#{{ tk.id }}</span><span>⏱ {{ tk.time }}</span></div>
               <div style="padding:10px 14px;display:flex;flex-direction:column;gap:4px">
                 <sc-for list="{{ tk.lines }}" as="l" hint-placeholder-count="1"><span style="font-size:13.5px;font-weight:700;color:#2f2a23">{{ l }}</span></sc-for>
-                <button onClick="{{ tk.bump }}" style="margin-top:6px;background:#2f6b46;color:#fff;border:none;border-radius:10px;padding:9px;font-family:inherit;font-size:13px;font-weight:800;cursor:pointer">✅ Bump: handed off</button>
+                <button onClick="{{ tk.bump }}" style="margin-top:6px;background:#2f6b46;color:#fff;border:none;border-radius:10px;padding:9px;font-family:inherit;font-size:13px;font-weight:800;cursor:pointer"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px;vertical-align:-2px;flex-shrink:0"><path d="M20 6 9 17l-5-5"/></svg> Bump: handed off</button>
               </div>
             </div>
           </sc-for>
           <sc-if value="{{ noTickets }}" hint-placeholder-val="{{ false }}">
-            <div style="text-align:center;padding:20px 0;display:flex;flex-direction:column;gap:10px;align-items:center"><span style="font-size:38px">🍳</span><span style="font-size:14px;font-weight:700;color:#6f6450">No tickets right now.</span><button onClick="{{ jumpPos }}" style="background:#2f2a23;color:#f5f1e8;border:none;border-radius:11px;padding:11px 18px;font-family:inherit;font-size:13px;font-weight:700;cursor:pointer">Ring one up at the counter →</button></div>
+            <div style="text-align:center;padding:20px 0;display:flex;flex-direction:column;gap:10px;align-items:center"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:38px;height:38px;vertical-align:-2px;flex-shrink:0;color:#8a7f6d"><path d="M2 12h20"/><path d="M20 12v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-8"/><path d="m4 8 16-4"/><path d="m8.86 6.78-.45-1.81a2 2 0 0 1 1.45-2.43l1.94-.48a2 2 0 0 1 2.43 1.46l.45 1.8"/></svg><span style="font-size:14px;font-weight:700;color:#6f6450">No tickets right now.</span><button onClick="{{ jumpPos }}" style="background:#2f2a23;color:#f5f1e8;border:none;border-radius:11px;padding:11px 18px;font-family:inherit;font-size:13px;font-weight:700;cursor:pointer">Ring one up at the counter →</button></div>
           </sc-if>
-          <div style="display:flex;gap:14px"><a href="https://coffee.maplekiosk.ca/touch/kds-setup" target="_blank" style="font-size:13px;font-weight:700">⚙ Setup ↗</a><a href="https://coffee.maplekiosk.ca/pos/kitchen" target="_blank" style="font-size:13px;font-weight:700">Run the unnamed board ↗</a></div>
+          <div style="display:flex;gap:14px"><a href="https://coffee.maplekiosk.ca/touch/kds-setup" target="_blank" style="font-size:13px;font-weight:700"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:13px;height:13px;vertical-align:-2px;flex-shrink:0"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg> Setup <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:13px;height:13px;vertical-align:-2px;flex-shrink:0"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></a><a href="https://coffee.maplekiosk.ca/pos/kitchen" target="_blank" style="font-size:13px;font-weight:700">Run the unnamed board <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:13px;height:13px;vertical-align:-2px;flex-shrink:0"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></a></div>
         </sc-if>
         <sc-if value="{{ showCust }}" hint-placeholder-val="{{ false }}">
-          <div style="background:#fff8ec;border:1px solid #eadfc6;border-radius:12px;padding:10px 14px;font-size:12.5px;color:#6f6450;font-weight:600">👈 Tap a customer: the counter screen greets them with their status and points.</div>
+          <div style="background:#fff8ec;border:1px solid #eadfc6;border-radius:12px;padding:10px 14px;font-size:12.5px;color:#6f6450;font-weight:600">Tap a customer: the counter screen greets them with their status and points.</div>
           <div style="display:flex;gap:8px"><input value="{{ custQ }}" onChange="{{ setCustQ }}" placeholder="Search customers…" style="flex:1;background:#fffdfa;border:1px solid #e4dbc8;border-radius:10px;padding:11px 13px;font-family:inherit;font-size:14px;font-weight:600;color:#2f2a23"><button onClick="{{ addCust }}" style="background:#2f2a23;color:#f5f1e8;border:none;border-radius:10px;padding:0 14px;font-family:inherit;font-size:12.5px;font-weight:700;cursor:pointer">＋ New</button></div>
           <sc-for list="{{ custRows }}" as="cu" hint-placeholder-count="5">
             <button onClick="{{ cu.pick }}" style="{{ cu.style }}">
@@ -195,7 +195,7 @@ window.dispatchEvent(new Event('three-ready'));
   <sc-if value="{{ mobileWarn }}" hint-placeholder-val="{{ false }}">
     <div style="position:absolute;inset:0;background:rgba(43,36,28,.55);display:flex;align-items:center;justify-content:center;padding:24px;z-index:30">
       <div style="background:#fffdfa;border-radius:18px;padding:26px 22px;max-width:340px;text-align:center;box-shadow:0 20px 60px rgba(40,25,10,.35)">
-        <div style="font-size:34px">🖥️</div>
+        <div style="color:#b9432c"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:34px;height:34px;vertical-align:-2px;flex-shrink:0"><rect width="20" height="14" x="2" y="3" rx="2"/><line x1="8" x2="16" y1="21" y2="21"/><line x1="12" x2="12" y1="17" y2="21"/></svg></div>
         <div style="font-weight:800;font-size:17px;color:#2f2a23;margin-top:8px">Best on a computer</div>
         <div style="font-size:13.5px;color:#6f6450;font-weight:600;margin-top:6px;line-height:1.5">This interactive 3D demo works best with a mouse and a large screen. You can still explore it on your phone.</div>
         <button onClick="{{ dismissWarn }}" style="margin-top:16px;background:#b9432c;color:#fff;border:none;border-radius:99px;padding:11px 22px;font-family:inherit;font-size:14px;font-weight:700;cursor:pointer">Continue anyway</button>
@@ -235,7 +235,7 @@ class Component extends DCLogic {
   };
   refs2 = {};
   ref(name) { if (!this.refs2[name]) this.refs2[name] = React.createRef(); return this.refs2[name]; }
-  META = { menu: ['🍽','Menu Board'], promo: ['✨','Promo'], slide: ['🖼','Photo slideshow'] };
+  META = { menu: 'Menu Board', promo: 'Promo', slide: 'Photo slideshow' };
   PRODUCTS = [['☕','Latte',4.75,'#a05446'],['🥛','Flat White',4.95,'#8a6a4a'],['🧋','Matcha Latte',5.25,'#3e6b4f'],['🍁','Maple Latte',5.5,'#b9432c'],['🧊','Cold Brew',4.25,'#5a7d9a'],['☕','Drip',3.25,'#6f6450'],['🥐','Croissant',3.5,'#c9862c'],['🍪','Cookie',2.75,'#7a5a3a'],['🫖','Chai',4.85,'#996b2f']];
 
   componentDidMount() {
@@ -452,6 +452,7 @@ class Component extends DCLogic {
       const w = mount.clientWidth, h2 = mount.clientHeight;
       const mob = matchMedia('(max-width: 820px)').matches;
       if (mob !== this.state.mobile) this.setState({ mobile: mob });
+      cam.fov = w < h2 ? 45 : 30;
       renderer.setSize(w, h2); cam.aspect = w / h2; cam.updateProjectionMatrix(); this.applyOffset();
     };
     this.onResize(); window.addEventListener('resize', this.onResize);
@@ -588,6 +589,7 @@ class Component extends DCLogic {
     const now = performance.now(), el = now - this.t0;
     const vk = this.state.active || 'home';
     const v = { ...this.views[vk] };
+    if (cam.aspect < 1) v.d += vk === 'home' ? 9 : 1.5;
     if (vk === 'home') {
       if (this.props.autoOrbit ?? true) v.az += Math.sin(el / 9000) * 0.05;
       v.az += this.orb.az; v.el = Math.max(0.12, v.el + this.orb.el); v.d += this.orb.d;
@@ -621,7 +623,7 @@ class Component extends DCLogic {
       let label = 'nothing';
       if (s.tvs[s.curTv].screens.length) {
         const cs = this.currentScreen(s.tvs[s.curTv].screens, el + s.curTv * 1900);
-        label = this.META[cs.t][0] + ' ' + this.META[cs.t][1];
+        label = this.META[cs.t];
       }
       if (s.nowLabel !== label) this.setState({ nowLabel: label });
     }
@@ -881,7 +883,7 @@ class Component extends DCLogic {
     const pick = (k) => () => { this.setState({ active: k, hint: false, nowLabel: '' }); this.applyOffsetSoon(); };
     const list = this.activeList();
     const playlist = list.map((row, i) => ({
-      n: i + 1, emoji: META[row.t][0], label: META[row.t][1], sec: row.sec,
+      n: i + 1, label: META[row.t], sec: row.sec,
       setSec: (e) => { const v = parseInt(e.target.value) || 2; const L = [...this.activeList()]; L[i] = { ...L[i], sec: v }; this.setList(L); },
       up: () => { if (!i) return; const L = [...this.activeList()]; [L[i - 1], L[i]] = [L[i], L[i - 1]]; this.setList(L); },
       down: () => { const L = [...this.activeList()]; if (i >= L.length - 1) return; [L[i + 1], L[i]] = [L[i], L[i + 1]]; this.setList(L); },
@@ -896,9 +898,9 @@ class Component extends DCLogic {
     const tv = s.tvs[s.curTv];
     const kk = s.kiosks[s.curKiosk] || s.kiosks[0];
     const markerDefs = [
-      ['tv', 1, '📺 Wall TV', '#b9432c', '0s'], ['kiosk', 2, '🖥️ Self-order kiosks', '#b9432c', '.4s'],
-      ['pos', 3, '🧑‍🍳 Counter station', '#2f6b46', '.8s'], ['kds', 4, '🍳 Kitchen display', '#2f6b46', '1.2s'],
-      ['cust', 5, '🙋 Customer screen', '#c9862c', '1.6s']
+      ['tv', 1, 'Wall TV', '#b9432c', '0s'], ['kiosk', 2, 'Self-order kiosks', '#b9432c', '.4s'],
+      ['pos', 3, 'Counter station', '#2f6b46', '.8s'], ['kds', 4, 'Kitchen display', '#2f6b46', '1.2s'],
+      ['cust', 5, 'Customer screen', '#c9862c', '1.6s']
     ];
     const total = s.order.reduce((a, o) => a + o.qty * o.price, 0);
     // Quebec sales tax: GST 5% + QST 9.975%
@@ -931,7 +933,7 @@ class Component extends DCLogic {
       panelOpen: !!s.active,
       showTv: s.active === 'tv', showKiosk: s.active === 'kiosk', showPos: s.active === 'pos' && !s.pay, showPay: s.active === 'pos' && !!s.pay, showKds: s.active === 'kds', showCust: s.active === 'cust',
       showConfig: s.active === 'tv' || s.active === 'kiosk',
-      panelEmoji: { tv: '📺', kiosk: '🖥️', pos: '🧑‍🍳', kds: '🍳', cust: '👤' }[s.active] || '',
+      headTv: s.active === 'tv', headKiosk: s.active === 'kiosk', headPos: s.active === 'pos', headKds: s.active === 'kds', headCust: s.active === 'cust',
       panelTitle: { tv: 'Wall TVs', kiosk: 'Self-order kiosks', pos: 'Counter Station', kds: 'Kitchen displays', cust: 'Customers' }[s.active] || '',
       portalLink: { tv: 'https://coffee.maplekiosk.ca/touch/tv-setup', kiosk: 'https://coffee.maplekiosk.ca/touch/kiosk-setup', pos: 'https://coffee.maplekiosk.ca/coffee/today', kds: 'https://coffee.maplekiosk.ca/kds', cust: 'https://coffee.maplekiosk.ca/touch/customers' }[s.active] || '#',
       tvTabs: s.tvs.map((t, i) => ({ name: t.name, sub: t.screens.length + (t.screens.length === 1 ? ' screen' : ' screens'), style: tabStyle(i === s.curTv), pick: () => this.edit(() => ({ curTv: i })) })),
@@ -971,7 +973,7 @@ class Component extends DCLogic {
       orderRows: s.order.map((o, i) => ({ qty: o.qty, name: o.name, amt: (o.qty * o.price).toFixed(2), rm: () => this.edit(st => ({ order: st.order.filter((_, j) => j !== i) })) })),
       orderTotal: total.toFixed(2),
       charge: () => {
-        if (!s.order.length) { this.toast('Add an item first ☕'); return; }
+        if (!s.order.length) { this.toast('Add an item first'); return; }
         this.edit(() => ({ pay: { mode: 'card', cash: 0 } }));
       },
       clearOrder: () => this.edit(() => ({ order: [] })),
@@ -982,7 +984,7 @@ class Component extends DCLogic {
       payChange: Math.abs(cash - grand).toFixed(2),
       changeLabel: cash >= grand ? 'Change due' : 'Still owing',
       changeStyle: { fontFamily: 'inherit', fontSize: '19px', fontWeight: 800, color: cash >= grand ? '#2f6b46' : '#a05446' },
-      tenderTabs: [['card', '💳 Card'], ['cash', '💵 Cash']].map(([m, label]) => ({
+      tenderTabs: [['card', 'Card'], ['cash', 'Cash']].map(([m, label]) => ({
         label,
         style: {
           flex: 1, background: s.pay && s.pay.mode === m ? '#2f2a23' : '#fffdfa',
@@ -1002,14 +1004,14 @@ class Component extends DCLogic {
       cancelPay: () => this.edit(() => ({ pay: null })),
       completeLabel: s.pay && s.pay.mode === 'cash'
         ? (cash >= grand ? `Complete · change $${(cash - grand).toFixed(2)}` : `Take $${grand.toFixed(2)} cash`)
-        : `💳 Approve $${grand.toFixed(2)}`,
+        : `Approve $${grand.toFixed(2)}`,
       completeStyle: {
         flex: 1, background: canComplete ? '#b9432c' : '#e0d6c2', color: canComplete ? '#fff' : '#a99e88',
         border: 'none', borderRadius: '11px', padding: '12px', fontFamily: 'inherit', fontSize: '14px',
         fontWeight: 800, cursor: canComplete ? 'pointer' : 'not-allowed'
       },
       completePay: () => {
-        if (!canComplete) { this.toast('Not enough cash tendered 💵'); return; }
+        if (!canComplete) { this.toast('Not enough cash tendered'); return; }
         const paid = s.pay.mode === 'cash';
         const change = cash - grand;
         this.edit(st => ({
@@ -1017,18 +1019,18 @@ class Component extends DCLogic {
           order: [], orderNo: st.orderNo + 1, pay: null
         }));
         this.toast(paid
-          ? `Order #${s.orderNo} paid cash · change $${change.toFixed(2)} 💵`
-          : `Order #${s.orderNo} approved on card 💳`);
+          ? `Order #${s.orderNo} paid cash · change $${change.toFixed(2)}`
+          : `Order #${s.orderNo} approved on card`);
       },
       ticketRows: s.tickets.map((t2, i) => ({
         id: t2.id, time: this.fmtAge(t2.t0), lines: t2.lines,
         headStyle: { display: 'flex', justifyContent: 'space-between', padding: '9px 14px', fontSize: '13.5px', fontWeight: 800, color: '#fff', background: (Date.now() - t2.t0) / 1000 > 120 ? '#b9432c' : (Date.now() - t2.t0) / 1000 > 45 ? '#c9a227' : '#3e6b4f' },
-        bump: () => { this.edit(st => ({ tickets: st.tickets.filter((_, j) => j !== i) })); this.toast(`#${t2.id} bumped ✅`); }
+        bump: () => { this.edit(st => ({ tickets: st.tickets.filter((_, j) => j !== i) })); this.toast(`#${t2.id} bumped`); }
       })),
       noTickets: s.tickets.length === 0,
       jumpPos: pick('pos'),
       custQ: s.custQ, setCustQ: (e) => this.setState({ custQ: e.target.value }),
-      addCust: () => { this.edit(st => ({ customers: [...st.customers, { name: 'Walk-in Guest', phone: '-', tier: 'Member', orders: 0, pts: 0 }] })); this.toast('Customer added 👤'); },
+      addCust: () => { this.edit(st => ({ customers: [...st.customers, { name: 'Walk-in Guest', phone: '-', tier: 'Member', orders: 0, pts: 0 }] })); this.toast('Customer added'); },
       custRows: custFiltered.map(({ cu, i }) => ({
         name: cu.name, phone: cu.phone, orders: cu.orders, tier: cu.tier,
         init: cu.name.split(' ').map(x => x[0]).slice(0, 2).join('').toUpperCase(),

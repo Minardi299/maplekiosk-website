@@ -199,6 +199,34 @@
     }
   }
 
+  /* ===== Terms title underline sweep ===== */
+  @media (scripting: enabled) {
+    .terms-title::after {
+      content: "";
+      position: absolute;
+      inset: auto 0 -0.14em 0;
+      height: 4px;
+      border-radius: 2px;
+      background: var(--primary);
+      transform-origin: left;
+      scale: 0 1;
+      transition: scale 500ms var(--ease-out) 150ms;
+    }
+    [data-visible] .terms-title::after {
+      scale: 1 1;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .terms-title::after {
+        scale: 1 1;
+        opacity: 0;
+        transition: opacity 300ms var(--ease-out) 150ms;
+      }
+      [data-visible] .terms-title::after {
+        opacity: 1;
+      }
+    }
+  }
+
   /* ===== Money diagram flow pulse ===== */
   .flow-arrows {
     display: inline-flex;

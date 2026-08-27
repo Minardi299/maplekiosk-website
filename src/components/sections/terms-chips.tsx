@@ -1,11 +1,17 @@
 import { useI18n } from "@/lib/i18n"
+import { useVisibleOnce } from "@/lib/use-visible-once"
 
 export function TermsChips() {
   const { t } = useI18n()
+  const { ref, visible } = useVisibleOnce()
   return (
     <section className="site-container section">
-      <div className="flex max-w-3xl flex-col gap-10">
-        <h2 className="font-heading text-3xl font-semibold tracking-tight text-balance sm:text-[38px]">
+      <div
+        ref={ref}
+        data-visible={visible || undefined}
+        className="flex max-w-3xl flex-col gap-10"
+      >
+        <h2 className="terms-title relative w-fit font-heading text-3xl font-semibold tracking-tight text-balance sm:text-[38px]">
           {t.chips.title}
         </h2>
         <ol className="flex flex-col divide-y border-y">

@@ -16,7 +16,7 @@ export const vi: Strings = {
     },
     about: {
       title: "Về chúng tôi · MapleKiosk",
-      desc: "Thành lập tại Longueuil. Chúng tôi tự xây và tự lắp đặt.",
+      desc: "Thành lập tại Montreal. Chúng tôi tự xây và tự lắp đặt.",
     },
     salons: {
       title: "Tiệm nail & spa · MapleKiosk",
@@ -152,7 +152,7 @@ export const vi: Strings = {
   },
 
   chips: {
-    title: "Những điều khoản có thể viết bằng chữ to",
+    title: "Những điều khoản chúng tôi có thể hứa",
     items: [
       "Không hợp đồng",
       "Không cho thuê thiết bị",
@@ -163,7 +163,7 @@ export const vi: Strings = {
   },
 
   finalCta: {
-    title: "Thành lập tại Longueuil. Không hợp đồng. Chúng tôi tự đến lắp đặt.",
+    title: "Thành lập tại Montreal. Không hợp đồng. Chúng tôi tự đến lắp đặt.",
     sub: "Hai tuần dùng thử ngay tại quán. Nếu kiosk không tự trả được tiền cho chính nó, chúng tôi rút điện, và bạn không nợ gì cả.",
   },
 
@@ -361,9 +361,9 @@ export const vi: Strings = {
   },
 
   about: {
-    title: "Xây tại Longueuil. Lắp đặt bởi chính người viết ra nó.",
+    title: "Xây tại Montreal. Lắp đặt bởi chính người viết ra nó.",
     paras: [
-      "MapleKiosk được xây tại Longueuil bởi Minh: một lập trình viên tự viết phần mềm, tự nạp menu của bạn và tự đến lắp kiosk.",
+      "MapleKiosk được xây tại Montreal bởi Minh: một lập trình viên tự viết phần mềm, tự nạp menu của bạn và tự đến lắp kiosk.",
       "Sản phẩm đang chạy trong các quán trà sữa ở Mỹ. Các điểm lắp đặt đầu tiên trong vùng đang đến, vì vậy demo miễn phí và dùng thử không tốn gì.",
       "Các điều khoản. Không hợp đồng, không cho thuê, không ép gói thanh toán, tồn tại vì một lý do: chúng tôi muốn bạn ở lại vì bạn chọn ở lại.",
     ],

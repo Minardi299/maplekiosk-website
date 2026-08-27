@@ -16,7 +16,7 @@ export const fr: Strings = {
     },
     about: {
       title: "À propos · MapleKiosk",
-      desc: "Fondée à Longueuil. On la construit et on l'installe nous-mêmes.",
+      desc: "Fondée à Montreal. On la construit et on l'installe nous-mêmes.",
     },
     salons: {
       title: "Salons · MapleKiosk",
@@ -153,7 +153,7 @@ export const fr: Strings = {
   },
 
   chips: {
-    title: "Des conditions qu'on peut écrire en grosses lettres",
+    title: "Des conditions qu'on peut promettre",
     items: [
       "Pas de contrat",
       "Pas de location de terminal",
@@ -164,7 +164,7 @@ export const fr: Strings = {
   },
 
   finalCta: {
-    title: "Fondée à Longueuil. Pas de contrat. On vient l'installer nous-mêmes.",
+    title: "Fondée à Montreal. Pas de contrat. On vient l'installer nous-mêmes.",
     sub: "Deux semaines d'essai dans votre commerce. Si la borne ne se paie pas toute seule, on la débranche, et vous ne devez rien.",
   },
 
@@ -362,9 +362,9 @@ export const fr: Strings = {
   },
 
   about: {
-    title: "Construite à Longueuil. Installée par celui qui l'a écrite.",
+    title: "Construite à Montreal. Installée par celui qui l'a écrite.",
     paras: [
-      "MapleKiosk est construite à Longueuil par Minh : un développeur qui écrit le logiciel, charge votre menu et vient installer la borne lui-même.",
+      "MapleKiosk est construite à Montreal par Minh : un développeur qui écrit le logiciel, charge votre menu et vient installer la borne lui-même.",
       "Le produit tourne aujourd'hui dans des boutiques de thé aux perles aux États-Unis. Les premières installations locales s'en viennent, c'est pour ça que la démo est gratuite et que l'essai ne coûte rien.",
       "Les conditions. Pas de contrat, pas de location, pas de forfait de paiement, existent pour une raison : on préfère que vous restiez par choix.",
     ],

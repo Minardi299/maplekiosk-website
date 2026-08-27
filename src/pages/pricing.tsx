@@ -66,7 +66,6 @@ export default function PricingPage() {
           <p className="leading-relaxed text-muted-foreground">{p.buyBody}</p>
           <CtaLink
             href={`mailto:${SITE.email}`}
-            variant="outline"
             className="mt-auto self-start"
           >
             {p.buyCta}

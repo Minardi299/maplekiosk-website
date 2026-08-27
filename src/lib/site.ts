@@ -2,7 +2,7 @@
 export const SITE = {
   url: "https://maplekiosk.ca",
   name: "MapleKiosk",
-  place: "Longueuil, QC",
+  place: "Montreal, QC",
   phone: "[TÉLÉPHONE]",
   email: "[COURRIEL]",
   legalName: "MapleKiosk Inc.",

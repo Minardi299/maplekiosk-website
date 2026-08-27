@@ -52,7 +52,7 @@ export function MoneyDiagram() {
             <FlowBox at={0}>{d.you}</FlowBox>
             <FlowArrows at={1} />
             <span
-              className="flow-item min-w-40 flex-1 rounded-lg bg-secondary px-3.5 py-2.5 text-center leading-snug text-secondary-foreground"
+              className="flow-item min-w-40 flex-1 rounded-lg bg-ink px-3.5 py-2.5 text-center leading-snug text-ink-foreground"
               style={step(2)}
             >
               {d.othersBox}

@@ -16,6 +16,7 @@ html,body{margin:0;padding:0;background:#7ba3d6;overflow:hidden}
 a{color:#b9432c;text-decoration:none} a:hover{color:#8f2f1d;text-decoration:underline}
 @keyframes mkpulse{0%{transform:scale(1);opacity:.55}70%{transform:scale(2.1);opacity:0}100%{transform:scale(2.1);opacity:0}}
 @keyframes toastin{from{transform:translateY(12px);opacity:0}to{transform:translateY(0);opacity:1}}
+@keyframes drawerin{from{transform:translateX(100%)}to{transform:none}}
 input:focus{outline:2px solid #b9432c;outline-offset:1px}
 ::-webkit-scrollbar{width:8px}::-webkit-scrollbar-thumb{background:#d6cbb4;border-radius:4px}
 </style>
@@ -43,8 +44,9 @@ window.dispatchEvent(new Event('three-ready'));
   </sc-if>
   <sc-if value="{{ panelOpen }}" hint-placeholder-val="{{ false }}">
     <button onClick="{{ goBack }}" style="position:absolute;top:78px;left:20px;background:#fffdfa;border:1px solid #e4dbc8;border-radius:99px;padding:9px 18px;font-family:inherit;font-size:13px;font-weight:700;color:#2f2a23;cursor:pointer;box-shadow:0 4px 16px rgba(80,60,30,.14)">‹ Back to shop <span style="opacity:.5;font-weight:600">esc</span></button>
-    <div style="position:absolute;top:0;right:0;bottom:0;width:min(460px,44vw);background:#f5f1e8;border-left:1px solid #e4dbc8;box-shadow:-16px 0 50px rgba(60,45,20,.18);display:flex;flex-direction:column">
+    <div style="{{ panelStyle }}">
       <div style="padding:18px 22px 14px;border-bottom:1px solid #e4dbc8;display:flex;align-items:center;gap:12px">
+        <sc-if value="{{ isMobile }}" hint-placeholder-val="{{ false }}"><button onClick="{{ goBack }}" aria-label="Back to shop" style="background:#efe6d2;border:none;border-radius:10px;width:34px;height:34px;font-size:18px;color:#2f2a23;cursor:pointer;flex-shrink:0">‹</button></sc-if>
         <span style="font-size:24px">{{ panelEmoji }}</span>
         <div style="flex:1;min-width:0"><div style="font-weight:800;font-size:18px;color:#2f2a23">{{ panelTitle }}</div><a href="{{ portalLink }}" target="_blank" style="font-size:12px;font-weight:700">Open this page in the portal ↗</a></div>
         <sc-if value="{{ showConfig }}" hint-placeholder-val="{{ false }}"><button onClick="{{ save }}" style="background:#b9432c;color:#fff;border:none;border-radius:10px;padding:9px 14px;font-family:inherit;font-size:12.5px;font-weight:700;cursor:pointer">Save changes</button></sc-if>
@@ -190,6 +192,16 @@ window.dispatchEvent(new Event('three-ready'));
       </div>
     </div>
   </sc-if>
+  <sc-if value="{{ mobileWarn }}" hint-placeholder-val="{{ false }}">
+    <div style="position:absolute;inset:0;background:rgba(43,36,28,.55);display:flex;align-items:center;justify-content:center;padding:24px;z-index:30">
+      <div style="background:#fffdfa;border-radius:18px;padding:26px 22px;max-width:340px;text-align:center;box-shadow:0 20px 60px rgba(40,25,10,.35)">
+        <div style="font-size:34px">🖥️</div>
+        <div style="font-weight:800;font-size:17px;color:#2f2a23;margin-top:8px">Best on a computer</div>
+        <div style="font-size:13.5px;color:#6f6450;font-weight:600;margin-top:6px;line-height:1.5">This interactive 3D demo works best with a mouse and a large screen. You can still explore it on your phone.</div>
+        <button onClick="{{ dismissWarn }}" style="margin-top:16px;background:#b9432c;color:#fff;border:none;border-radius:99px;padding:11px 22px;font-family:inherit;font-size:14px;font-weight:700;cursor:pointer">Continue anyway</button>
+      </div>
+    </div>
+  </sc-if>
   <sc-if value="{{ toastOn }}" hint-placeholder-val="{{ false }}">
     <div style="position:absolute;bottom:28px;right:min(480px,46vw);background:#2f6b46;color:#fff;padding:11px 20px;border-radius:99px;font-size:13.5px;font-weight:700;box-shadow:0 8px 30px rgba(20,60,35,.35);animation:toastin .25s ease">{{ toastMsg }}</div>
   </sc-if>
@@ -198,7 +210,7 @@ window.dispatchEvent(new Event('three-ready'));
 <script type="text/x-dc" data-dc-script data-props="{&quot;autoOrbit&quot;: {&quot;editor&quot;: &quot;boolean&quot;, &quot;default&quot;: true, &quot;tsType&quot;: &quot;boolean&quot;, &quot;section&quot;: &quot;Demo behavior&quot;}, &quot;previewSpeed&quot;: {&quot;editor&quot;: &quot;range&quot;, &quot;default&quot;: 1, &quot;min&quot;: 0.5, &quot;max&quot;: 4, &quot;step&quot;: 0.5, &quot;unit&quot;: &quot;×&quot;, &quot;tsType&quot;: &quot;number&quot;, &quot;section&quot;: &quot;Demo behavior&quot;}}">
 class Component extends DCLogic {
   state = {
-    active: null, hint: true, toast: '', curTv: 0, tick: 0,
+    active: null, hint: true, toast: '', curTv: 0, tick: 0, mobile: false, mobileWarn: false,
     tvs: [
       { name: 'TV 1', screens: [{ t: 'menu', sec: 8 }, { t: 'promo', sec: 6 }] },
       { name: 'TV 2', screens: [{ t: 'promo', sec: 8 }] }
@@ -229,6 +241,7 @@ class Component extends DCLogic {
   componentDidMount() {
     const boot = () => this.initScene();
     if (window.THREE) boot(); else window.addEventListener('three-ready', boot, { once: true });
+    if (matchMedia('(max-width: 820px)').matches) this.setState({ mobile: true, mobileWarn: true });
     this.onKey = (e) => {
       if (e.key === 'Escape') { this.setState({ active: null }); this.applyOffsetSoon(); }
       const map = { 1: 'tv', 2: 'kiosk', 3: 'pos', 4: 'kds', 5: 'cust' };
@@ -437,6 +450,8 @@ class Component extends DCLogic {
 
     this.onResize = () => {
       const w = mount.clientWidth, h2 = mount.clientHeight;
+      const mob = matchMedia('(max-width: 820px)').matches;
+      if (mob !== this.state.mobile) this.setState({ mobile: mob });
       renderer.setSize(w, h2); cam.aspect = w / h2; cam.updateProjectionMatrix(); this.applyOffset();
     };
     this.onResize(); window.addEventListener('resize', this.onResize);
@@ -517,7 +532,7 @@ class Component extends DCLogic {
   applyOffset() {
     const mount = this.refs2.mount.current; if (!mount || !this.cam) return;
     const w = mount.clientWidth, h = mount.clientHeight;
-    if (this.state.active) { const P = Math.min(460, w * 0.44); this.cam.setViewOffset(w + P, h, P, 0, w, h); }
+    if (this.state.active && !this.state.mobile) { const P = Math.min(460, w * 0.44); this.cam.setViewOffset(w + P, h, P, 0, w, h); }
     else this.cam.clearViewOffset();
   }
   applyOffsetSoon() { setTimeout(() => this.applyOffset(), 0); }
@@ -900,6 +915,18 @@ class Component extends DCLogic {
         dotStyle: { position: 'absolute', inset: 0, borderRadius: '50%', background: col, color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 800, fontSize: '15px', boxShadow: '0 4px 14px rgba(60,35,15,.4)', border: '2px solid #fff' }
       })),
       goBack: () => { this.setState({ active: null }); this.applyOffsetSoon(); },
+      isMobile: s.mobile,
+      mobileWarn: s.mobileWarn,
+      dismissWarn: () => this.setState({ mobileWarn: false }),
+      panelStyle: {
+        position: 'absolute', top: 0, right: 0, bottom: 0,
+        width: s.mobile ? '100%' : 'min(460px,44vw)',
+        background: '#f5f1e8', borderLeft: '1px solid #e4dbc8',
+        boxShadow: '-16px 0 50px rgba(60,45,20,.18)',
+        display: 'flex', flexDirection: 'column',
+        animation: matchMedia('(prefers-reduced-motion: reduce)').matches
+          ? 'none' : 'drawerin .32s cubic-bezier(0.23, 1, 0.32, 1)'
+      },
       hintVisible: s.hint && !s.active,
       panelOpen: !!s.active,
       showTv: s.active === 'tv', showKiosk: s.active === 'kiosk', showPos: s.active === 'pos' && !s.pay, showPay: s.active === 'pos' && !!s.pay, showKds: s.active === 'kds', showCust: s.active === 'cust',

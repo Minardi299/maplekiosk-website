@@ -18,16 +18,29 @@ Repo: https://github.com/Minardi299/maplekiosk-website
 | `/` | The funnel: hero (problem) → industry router → money diagram → teach band → payments calculator → terms chips → final CTA |
 | `/apps` | Product components, framed as answers for the already-interested owner |
 | `/tarifs` | One price, buy-outright option, FAQ |
-| `/coffee` | Cafés & boba: boba hero, counter quote cards, line-cost calculator, morning timeline |
+| `/coffee` | Cafés & boba: boba hero, counter quote cards, line-cost calculator, the day timeline |
 | `/restaurants` | Restaurants & fast food: delivery-tablet pain, "86 the salmon" card, phone-assistant card |
 | `/salons` | Nail salons, spas & beauty shops: the AI phone assistant (MapleSPA door, footer link only) |
-| `/demo` | The only conversion page: book 15 minutes |
 | `/a-propos` | Founder trust page |
 | `/confidentialite`, `/conditions` | Legal, imported verbatim from maplekiosk.ca (see below) |
 
-Removed on purpose: `/calculateur` (the payments calculator lives on the home page) and `/fonctionnalites` (renamed to `/apps`). Old links hit the 404 page; no redirects.
+Removed on purpose: `/calculateur` (the payments calculator lives on the home page), `/fonctionnalites` (renamed to `/apps`), and `/demo` (the 3D demo replaced the booking form). Old links hit the 404 page; no redirects.
 
-`/shop-demo/index.html` is a standalone interactive 3D coffee-shop demo (static files in `public/shop-demo/`, imported from the Claude Design project "Interactive Coffee Shop Demo"). It is linked from `/coffee` and `/restaurants`, is English-only, and loads React, three.js, and a Google font from CDNs at runtime — it needs internet. Its 18 GLB props are KayKit "Restaurant Bits" (CC0). To update it, re-import the `.dc.html` from the design project; for the salon variant, copy the folder and edit.
+`/shop-demo/index.html` is a standalone interactive 3D coffee-shop demo (static files in `public/shop-demo/`, imported from the Claude Design project "Interactive Coffee Shop Demo"). It is English-only, and loads React, three.js, and a Google font from CDNs at runtime — it needs internet. Its 22 GLB props are KayKit "Restaurant Bits" (CC0). To update it, re-import the `.dc.html` from the design project; for the salon variant, copy the folder and edit.
+
+**Every "See how it works" button goes to this demo.** It is the site's one call to action. The demo is a static file outside the SPA, so links to it must carry react-router's `reloadDocument` prop — a plain `<Link>` is caught by the `*` route and renders the 404 page. The URL lives once, in `SITE.demoUrl` (`src/lib/site.ts`). The salon pages point at the coffee-shop demo until a salon variant exists.
+
+## The day timeline
+
+`src/components/sections/day-timeline.tsx` (strings under `day`) merges what used to be two sections: the feature grid and the morning timeline. Each beat carries a time, a named moment, the stakes, and the feature tags that answer it — so the section reads as a story top to bottom and scans as a feature list down the tag column.
+
+Rules for editing it:
+
+- Every beat states what goes wrong before it states what handles it. A beat with no stakes is a spec line, not a story beat.
+- Only tag features that exist. Features with no natural time of day (register integration, hosting) go in the `also` strip, not forced onto the clock.
+- It closes on a need-payoff question, not a statement. The question is the setup for the CTA below it.
+
+The `/apps` grid stays as it is — it serves the reader who is checking a list, not the one being persuaded.
 
 ## Content rules
 
@@ -50,7 +63,7 @@ All copy lives in `src/lib/strings/en.ts`, `fr.ts`, `vi.ts`, `ru.ts`.
 ## Commands
 
 - `pnpm dev` — dev server
-- `pnpm build` — type-check, build, prerender all 40 pages
+- `pnpm build` — type-check, build, prerender all 36 pages (9 pages × 4 languages)
 - `pnpm lint` — oxlint
 - `pnpm preview` — serve the build on port 4173
 
@@ -65,7 +78,7 @@ Same workflow setup as aloha-website and culac:
 ## Before launch
 
 1. Replace every bracketed placeholder: [TÉLÉPHONE], [COURRIEL], [BUSINESS NAME — BROSSARD], [PHOTO], [SCREENSHOT], the salons call recording. Search the string files for `[`. Pricing is now real, imported from maplekiosk.ca: MapleCoffee $39, MapleRES $49, MapleSPA $44 — USD, per app, monthly SaaS.
-2. Set real contact info in `src/lib/site.ts`. The demo form sends mail to `SITE.email`.
+2. Set real contact info in `src/lib/site.ts`. The only contact link left is "Contact us" on `/tarifs`, a `mailto:` to `SITE.email`. The footer also shows `SITE.phone` and `SITE.email`. Both are still `[COURRIEL]` and `[TÉLÉPHONE]`.
 3. Legal: `/conditions` (EULA) and `/confidentialite` (privacy policy) are imported verbatim from maplekiosk.ca, dated July 22, 2026, in `src/lib/legal.ts`. Flags for a lawyer: New York governing law for a Quebec market, no mention of Quebec's Law 25, English-only text (Bill 96 expects French-first), and the original's own "[Mailing address and phone number to be added]" bracket.
 4. English is the default language on request. Confirm this against Bill 96 advice before launch — the handoff's original rule was French first.
 5. The Bricolage/DM fonts have no Cyrillic subset. Russian pages fall back to the system font. Vietnamese body text uses Be Vietnam Pro.

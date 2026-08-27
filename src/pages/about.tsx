@@ -2,9 +2,10 @@ import { CtaLink } from "@/components/cta-link"
 import { PageMeta } from "@/components/page-meta"
 import { Placeholder } from "@/components/placeholder"
 import { useI18n } from "@/lib/i18n"
+import { SITE } from "@/lib/site"
 
 export default function AboutPage() {
-  const { t, path } = useI18n()
+  const { t } = useI18n()
   const a = t.about
   return (
     <>
@@ -19,7 +20,7 @@ export default function AboutPage() {
               {p}
             </p>
           ))}
-          <CtaLink to={path("/demo")} size="lg" className="mt-2 self-start">
+          <CtaLink to={SITE.demoUrl} reloadDocument size="lg" className="mt-2 self-start">
             {t.nav.cta}
           </CtaLink>
         </div>

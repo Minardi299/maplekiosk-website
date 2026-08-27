@@ -4,7 +4,6 @@ const pages = [
   "",
   "/apps",
   "/tarifs",
-  "/demo",
   "/a-propos",
   "/salons",
   "/coffee",

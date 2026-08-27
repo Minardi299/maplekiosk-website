@@ -2,9 +2,10 @@ import { CtaLink } from "@/components/cta-link"
 import { PageMeta } from "@/components/page-meta"
 import { FinalCta } from "@/components/sections/final-cta"
 import { useI18n } from "@/lib/i18n"
+import { SITE } from "@/lib/site"
 
 export default function RestaurantsPage() {
-  const { t, path } = useI18n()
+  const { t } = useI18n()
   const r = t.restaurants
   return (
     <>
@@ -22,8 +23,8 @@ export default function RestaurantsPage() {
             {t.hero.wedgeRest}
           </p>
           <div className="mt-1 flex flex-wrap gap-3.5">
-            <CtaLink to={path("/demo")} size="lg">
-              {t.router.cta}
+            <CtaLink to={SITE.demoUrl} reloadDocument size="lg">
+              {t.nav.cta}
             </CtaLink>
           </div>
         </div>
@@ -49,12 +50,6 @@ export default function RestaurantsPage() {
             </div>
           ))}
         </div>
-        <a
-          href="/shop-demo/index.html"
-          className="text-[15px] font-semibold text-primary hover:text-primary-hover"
-        >
-          {t.router.demoShop} →
-        </a>
       </section>
       <FinalCta />
     </>

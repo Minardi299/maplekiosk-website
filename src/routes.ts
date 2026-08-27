@@ -5,7 +5,6 @@ export default [
     index("pages/home.tsx"),
     route("apps", "pages/features.tsx"),
     route("tarifs", "pages/pricing.tsx"),
-    route("demo", "pages/demo.tsx"),
     route("a-propos", "pages/about.tsx"),
     route("salons", "pages/salons.tsx"),
     route("coffee", "pages/coffee.tsx"),

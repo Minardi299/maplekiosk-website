@@ -1,0 +1,58 @@
+import { FeatureTip } from "@/components/feature-tip"
+import {
+  Timeline,
+  TimelineContent,
+  TimelineDate,
+  TimelineHeader,
+  TimelineIndicator,
+  TimelineItem,
+  TimelineSeparator,
+  TimelineTitle,
+} from "@/components/reui/timeline"
+import { useI18n } from "@/lib/i18n"
+
+export function DayTimeline() {
+  const { t } = useI18n()
+  const d = t.day
+  return (
+    <section className="border-y bg-card">
+      <div className="site-container section flex flex-col gap-10">
+        <div className="flex max-w-2xl flex-col gap-3">
+          <h2 className="font-heading text-3xl font-semibold tracking-tight text-balance sm:text-[38px]">
+            {d.title}
+          </h2>
+          <p className="text-lg text-muted-foreground">{d.sub}</p>
+        </div>
+        {/* every step renders complete, so the rail reads as a finished day */}
+        <Timeline defaultValue={d.beats.length} className="max-w-2xl">
+          {d.beats.map((beat, i) => (
+            <TimelineItem key={beat.time} step={i + 1} className="not-last:pb-9">
+              <TimelineHeader>
+                <TimelineSeparator />
+                <TimelineDate className="font-mono text-base font-medium text-primary">
+                  {beat.time}
+                </TimelineDate>
+                <TimelineTitle className="font-heading text-xl font-semibold text-foreground">
+                  {beat.name}
+                </TimelineTitle>
+                <TimelineIndicator className="border-[3px] bg-background" />
+              </TimelineHeader>
+              <TimelineContent className="mt-2 flex flex-col gap-3.5 text-foreground">
+                <p className="text-lg leading-relaxed">{beat.text}</p>
+                <div className="flex flex-wrap gap-2">
+                  {beat.tags.map((tag) => (
+                    <FeatureTip
+                      key={tag.label}
+                      label={tag.label}
+                      detail={tag.detail}
+                    />
+                  ))}
+                </div>
+              </TimelineContent>
+            </TimelineItem>
+          ))}
+        </Timeline>
+      </div>
+    </section>
+  )
+}

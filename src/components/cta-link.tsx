@@ -13,20 +13,22 @@ export function CtaLink({
   variant = "primary",
   size = "md",
   className,
+  href,
+  to,
   ...props
-}: ComponentProps<typeof Link> & {
+}: Omit<ComponentProps<typeof Link>, "to"> & {
+  to?: ComponentProps<typeof Link>["to"]
   variant?: keyof typeof styles
   size?: "md" | "lg"
+  href?: string
 }) {
-  return (
-    <Link
-      {...props}
-      className={cn(
-        "inline-flex items-center justify-center rounded-lg text-center font-semibold transition-colors",
-        size === "lg" ? "px-7 py-4 text-base" : "px-5 py-3 text-[15px]",
-        styles[variant],
-        className,
-      )}
-    />
+  const cls = cn(
+    "inline-flex items-center justify-center rounded-lg text-center font-semibold transition-colors",
+    size === "lg" ? "px-7 py-4 text-base" : "px-5 py-3 text-[15px]",
+    styles[variant],
+    className,
   )
+  // href is for protocol links (mailto:, tel:) the router cannot resolve
+  if (href) return <a href={href} className={cls} {...props} />
+  return <Link to={to ?? ""} {...props} className={cls} />
 }

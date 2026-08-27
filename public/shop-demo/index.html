@@ -38,8 +38,7 @@ window.dispatchEvent(new Event('three-ready'));
   <div style="position:absolute;top:18px;right:20px"><a href="https://coffee.maplekiosk.ca/touch" target="_blank" style="background:#2f2a23;color:#f5f1e8;font-size:12.5px;font-weight:700;padding:10px 16px;border-radius:99px;display:inline-block">Open the real portal ↗</a></div>
   <sc-if value="{{ hintVisible }}" hint-placeholder-val="{{ true }}">
     <div style="position:absolute;bottom:24px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:8px;pointer-events:none">
-      <div style="background:rgba(43,36,28,.9);color:#f5f1e8;padding:11px 20px;border-radius:99px;font-size:13.5px;font-weight:600;box-shadow:0 8px 30px rgba(50,35,15,.3)">Tap a numbered spot — or click a device — to manage it in the portal</div>
-      <div style="background:rgba(43,36,28,.6);color:#e8ddc8;padding:6px 14px;border-radius:99px;font-size:11.5px;font-weight:600">🖱 drag to look around · scroll to zoom · keys 1–5 jump · Esc back</div>
+      <div style="background:rgba(43,36,28,.6);color:#e8ddc8;padding:6px 14px;border-radius:99px;font-size:11.5px;font-weight:600">Drag to look around · scroll to zoom · keys 1–5 jump · Esc back</div>
     </div>
   </sc-if>
   <sc-if value="{{ panelOpen }}" hint-placeholder-val="{{ false }}">
@@ -110,7 +109,7 @@ window.dispatchEvent(new Event('three-ready'));
           </div>
         </sc-if>
         <sc-if value="{{ showPos }}" hint-placeholder-val="{{ false }}">
-          <div style="background:#fff8ec;border:1px solid #eadfc6;border-radius:12px;padding:10px 14px;font-size:12.5px;color:#6f6450;font-weight:600">👈 Ring up an order — watch the register, the customer screen and the kitchen react in real time.</div>
+          <div style="background:#fff8ec;border:1px solid #eadfc6;border-radius:12px;padding:10px 14px;font-size:12.5px;color:#6f6450;font-weight:600">👈 Ring up an order: watch the register, the customer screen and the kitchen react in real time.</div>
           <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px">
             <sc-for list="{{ prodBtns }}" as="p" hint-placeholder-count="9"><button onClick="{{ p.add }}" style="{{ p.style }}"><span style="display:block;font-size:20px">{{ p.emoji }}</span><span style="display:block;font-size:12px;font-weight:800;color:#fff">{{ p.name }}</span><span style="display:block;font-size:11px;color:rgba(255,255,255,.85);font-weight:700">${{ p.price }}</span></button></sc-for>
           </div>
@@ -124,6 +123,39 @@ window.dispatchEvent(new Event('three-ready'));
           </div>
           <a href="https://coffee.maplekiosk.ca/coffee/today" target="_blank" style="font-size:13px;font-weight:700">Try the full counter station live ↗</a>
         </sc-if>
+        <sc-if value="{{ showPay }}" hint-placeholder-val="{{ false }}">
+          <div style="background:#fff8ec;border:1px solid #eadfc6;border-radius:12px;padding:10px 14px;font-size:12.5px;color:#6f6450;font-weight:600">👈 Take the payment: card, or cash with change due. The register and the customer screen follow along.</div>
+          <div style="background:#fffdfa;border:1px solid #e4dbc8;border-radius:14px;padding:14px;display:flex;flex-direction:column;gap:7px">
+            <div style="font-size:12px;font-weight:800;color:#8a7f6d;text-transform:uppercase;letter-spacing:.06em">Payment · order #{{ orderNo }}</div>
+            <sc-for list="{{ orderRows }}" as="r" hint-placeholder-count="1">
+              <div style="display:flex;align-items:center;gap:8px;font-size:14px;font-weight:700;color:#2f2a23"><span style="color:#b9432c">{{ r.qty }}×</span><span style="flex:1">{{ r.name }}</span><span style="color:#6f6450">${{ r.amt }}</span></div>
+            </sc-for>
+            <div style="display:flex;justify-content:space-between;font-size:13px;color:#6f6450;font-weight:600;border-top:1px dashed #e4dbc8;padding-top:7px"><span>Subtotal</span><span>${{ orderTotal }}</span></div>
+            <div style="display:flex;justify-content:space-between;font-size:13px;color:#6f6450;font-weight:600"><span>Sales tax (GST + QST)</span><span>${{ payTax }}</span></div>
+            <div style="display:flex;justify-content:space-between;font-size:16px;font-weight:800;color:#2f2a23"><span>Order total</span><span>${{ payTotal }}</span></div>
+          </div>
+          <div style="display:flex;gap:8px">
+            <sc-for list="{{ tenderTabs }}" as="t" hint-placeholder-count="2"><button onClick="{{ t.pick }}" style="{{ t.style }}">{{ t.label }}</button></sc-for>
+          </div>
+          <sc-if value="{{ payCash }}" hint-placeholder-val="{{ true }}">
+            <div style="display:flex;flex-direction:column;gap:8px">
+              <label style="font-size:12px;font-weight:800;color:#8a7f6d;text-transform:uppercase;letter-spacing:.06em">Cash tendered</label>
+              <div style="display:flex;gap:7px;flex-wrap:wrap">
+                <sc-for list="{{ cashBtns }}" as="b" hint-placeholder-count="6"><button onClick="{{ b.add }}" style="{{ b.style }}">{{ b.label }}</button></sc-for>
+              </div>
+              <div style="display:flex;gap:7px">
+                <button onClick="{{ exactCash }}" style="flex:1;background:#2f2a23;color:#f5f1e8;border:none;border-radius:10px;padding:10px;font-family:inherit;font-size:12.5px;font-weight:800;cursor:pointer">Exact</button>
+                <button onClick="{{ clearCash }}" style="flex:1;background:#efe6d2;color:#8a7f6d;border:none;border-radius:10px;padding:10px;font-family:inherit;font-size:12.5px;font-weight:700;cursor:pointer">Clear</button>
+              </div>
+              <div style="display:flex;justify-content:space-between;align-items:baseline;background:#f5f1e8;border-radius:10px;padding:10px 13px"><span style="font-size:12px;font-weight:800;color:#8a7f6d;text-transform:uppercase;letter-spacing:.06em">Received</span><span style="font-family:inherit;font-size:22px;font-weight:800;color:#2f2a23">${{ payReceived }}</span></div>
+              <div style="display:flex;justify-content:space-between;align-items:baseline;padding:0 13px"><span style="font-size:13px;font-weight:700;color:#6f6450">{{ changeLabel }}</span><span style="{{ changeStyle }}">${{ payChange }}</span></div>
+            </div>
+          </sc-if>
+          <div style="display:flex;gap:8px">
+            <button onClick="{{ completePay }}" style="{{ completeStyle }}">{{ completeLabel }}</button>
+            <button onClick="{{ cancelPay }}" style="background:#efe6d2;color:#6f6450;border:none;border-radius:11px;padding:12px 14px;font-family:inherit;font-size:13px;font-weight:700;cursor:pointer">Cancel</button>
+          </div>
+        </sc-if>
         <sc-if value="{{ showKds }}" hint-placeholder-val="{{ false }}">
           <div style="background:#fff8ec;border:1px solid #eadfc6;border-radius:12px;padding:10px 14px;font-size:12.5px;color:#6f6450;font-weight:600">👈 These tickets are live on the kitchen screen. Bump one when it's handed off.</div>
           <sc-for list="{{ ticketRows }}" as="tk" hint-placeholder-count="2">
@@ -131,7 +163,7 @@ window.dispatchEvent(new Event('three-ready'));
               <div style="{{ tk.headStyle }}"><span>#{{ tk.id }}</span><span>⏱ {{ tk.time }}</span></div>
               <div style="padding:10px 14px;display:flex;flex-direction:column;gap:4px">
                 <sc-for list="{{ tk.lines }}" as="l" hint-placeholder-count="1"><span style="font-size:13.5px;font-weight:700;color:#2f2a23">{{ l }}</span></sc-for>
-                <button onClick="{{ tk.bump }}" style="margin-top:6px;background:#2f6b46;color:#fff;border:none;border-radius:10px;padding:9px;font-family:inherit;font-size:13px;font-weight:800;cursor:pointer">✅ Bump — handed off</button>
+                <button onClick="{{ tk.bump }}" style="margin-top:6px;background:#2f6b46;color:#fff;border:none;border-radius:10px;padding:9px;font-family:inherit;font-size:13px;font-weight:800;cursor:pointer">✅ Bump: handed off</button>
               </div>
             </div>
           </sc-for>
@@ -141,7 +173,7 @@ window.dispatchEvent(new Event('three-ready'));
           <div style="display:flex;gap:14px"><a href="https://coffee.maplekiosk.ca/touch/kds-setup" target="_blank" style="font-size:13px;font-weight:700">⚙ Setup ↗</a><a href="https://coffee.maplekiosk.ca/pos/kitchen" target="_blank" style="font-size:13px;font-weight:700">Run the unnamed board ↗</a></div>
         </sc-if>
         <sc-if value="{{ showCust }}" hint-placeholder-val="{{ false }}">
-          <div style="background:#fff8ec;border:1px solid #eadfc6;border-radius:12px;padding:10px 14px;font-size:12.5px;color:#6f6450;font-weight:600">👈 Tap a customer — the counter screen greets them with their status and points.</div>
+          <div style="background:#fff8ec;border:1px solid #eadfc6;border-radius:12px;padding:10px 14px;font-size:12.5px;color:#6f6450;font-weight:600">👈 Tap a customer: the counter screen greets them with their status and points.</div>
           <div style="display:flex;gap:8px"><input value="{{ custQ }}" onChange="{{ setCustQ }}" placeholder="Search customers…" style="flex:1;background:#fffdfa;border:1px solid #e4dbc8;border-radius:10px;padding:11px 13px;font-family:inherit;font-size:14px;font-weight:600;color:#2f2a23"><button onClick="{{ addCust }}" style="background:#2f2a23;color:#f5f1e8;border:none;border-radius:10px;padding:0 14px;font-family:inherit;font-size:12.5px;font-weight:700;cursor:pointer">＋ New</button></div>
           <sc-for list="{{ custRows }}" as="cu" hint-placeholder-count="5">
             <button onClick="{{ cu.pick }}" style="{{ cu.style }}">
@@ -178,7 +210,7 @@ class Component extends DCLogic {
       { name: 'Noah Bell', phone: '(647) 555-2002', tier: 'Silver', orders: 9, pts: 220 },
       { name: 'Tung', phone: '(418) 717-3979', tier: 'Member', orders: 1, pts: 10 }
     ],
-    selCust: -1, custQ: '',
+    selCust: -1, custQ: '', pay: null,
     nowLabel: ''
   };
   refs2 = {};
@@ -257,7 +289,7 @@ class Component extends DCLogic {
     const shT = new T.CanvasTexture(shC);
     const blob = new T.Mesh(new T.PlaneGeometry(26, 22), new T.MeshBasicMaterial({ map: shT, transparent: true, depthWrite: false }));
     blob.rotation.x = -Math.PI / 2; blob.position.y = -1.45; scene.add(blob);
-    // walls (interior cream, exterior terracotta) — face order [+x,-x,+y,-y,+z,-z]
+    // walls (interior cream, exterior terracotta), face order [+x,-x,+y,-y,+z,-z]
     box(15, 5.5, 0.45, EXT, 0, 2.53, -5.78, { cast: false, mats: [mat(EXT), mat(EXT), mat(EXT, 0.6), mat(EXT), mat(INT, 0.85), mat(EXT)] });
     box(0.45, 5.5, 12, EXT, -7.28, 2.53, 0, { cast: false, mats: [mat(INT2, 0.85), mat(EXT), mat(EXT, 0.6), mat(EXT), mat(EXT), mat(EXT)] });
     box(15, 0.55, 0.5, '#b9432c', 0, 0.1, -5.76, { cast: false });
@@ -389,7 +421,7 @@ class Component extends DCLogic {
     if (!window.GLTFLoader) return;
     const loader = new window.GLTFLoader();
     const load = (n) => new Promise((res, rej) => loader.load('models/' + n + '.glb', g => res(g.scene), undefined, rej));
-    const names = ['cabinet', 'cabinet2', 'sink', 'fridge', 'oven', 'stove', 'tableSmall', 'chair', 'chair2', 'menu', 'plate', 'plateSmall', 'pot', 'pan', 'bowl', 'crate', 'crateBuns', 'cuttingBoard', 'dishrack', 'counterA', 'hood', 'ketchup', 'mustard', 'foodDinner'];
+    const names = ['cabinet', 'cabinet2', 'sink', 'fridge', 'oven', 'stove', 'tableSmall', 'chair', 'chair2', 'menu', 'plate', 'plateSmall', 'pot', 'pan', 'bowl', 'crate', 'crateBuns', 'cuttingBoard', 'dishrack', 'counterA', 'hood', 'foodDinner'];
     const lib = {};
     await Promise.all(names.map(async n => { try { lib[n] = await load(n); } catch (e) { console.warn('model failed:', n, e); } }));
     const place = (n, h, x, z, ry = 0, y = 0) => {
@@ -418,7 +450,7 @@ class Component extends DCLogic {
     place('oven', 1.12, -6.3, -1.2, Math.PI / 2);
     place('hood', 0.95, -6.55, -1.15, Math.PI / 2, 2.35);
     place('fridge', 2.25, -6.25, -4.4, Math.PI / 2);
-    // café seating — real tables and chairs
+    // café seating: real tables and chairs
     [[4.9, 2.6, 0.2], [-2.4, 4.3, -0.4], [1.5, 4.6, 0.6]].forEach(([x, z, ry]) => {
       place('tableSmall', 1.05, x, z, ry);
       place('chair', 1.0, x + 0.78, z + 0.2, ry - 1.9);
@@ -429,8 +461,6 @@ class Component extends DCLogic {
     place('plate', 0.07, 1.7, 0.55, 0, 1.21);
     place('cuttingBoard', 0.06, 3.2, 0.45, 0.4, 1.21);
     place('bowl', 0.1, 2.05, 0.35, 0.3, 1.21);
-    place('ketchup', 0.26, 5.05, 2.75, 0.3, 1.034);
-    place('mustard', 0.26, 5.18, 2.6, -0.5, 1.034);
     // pastry case contents (on the counter slab)
     place('plateSmall', 0.05, 3.55, 0.15, 0.2, 1.21);
     place('foodDinner', 0.26, 3.95, 0.3, -0.4, 1.21);
@@ -504,7 +534,8 @@ class Component extends DCLogic {
     const kcs = this.currentScreen(s.kiosk.screens, el + 2500);
     const kKey = kcs.t + kcs.i + (kcs.t === 'slide' ? photoIdx : '') + s.photos.length;
     if (this.lastKeys.kiosk !== kKey) { this.lastKeys.kiosk = kKey; this.drawScreen(this.kioskTex, kcs.t, photoIdx, true); }
-    const oKey = s.order.map(o => o.name + o.qty).join(',') + '#' + s.orderNo;
+    const oKey = s.order.map(o => o.name + o.qty).join(',') + '#' + s.orderNo
+      + '|' + (s.pay ? s.pay.mode + s.pay.cash : 'none');
     if (this.lastKeys.pos !== oKey) { this.lastKeys.pos = oKey; this.drawPos(); }
     const cKey = oKey + '|' + s.selCust;
     if (this.lastKeys.cust !== cKey) { this.lastKeys.cust = cKey; this.drawCust(); }
@@ -578,23 +609,101 @@ class Component extends DCLogic {
   drawPos() {
     const { ctx, c } = this.posTex, W = c.width, H = c.height;
     const s = this.state;
+    if (s.pay) return this.drawPay(ctx, W, H, s);
+    const panelX = W * 0.52, panelW = W - panelX;
     ctx.fillStyle = '#f5f1e8'; ctx.fillRect(0, 0, W, H);
-    ctx.fillStyle = '#fffdfa'; ctx.fillRect(0, 0, W * 0.44, H);
-    ctx.fillStyle = '#2f2a23'; ctx.font = '800 26px Manrope, sans-serif'; ctx.textAlign = 'left';
-    ctx.fillText('Order #' + s.orderNo, 18, 40);
-    ctx.font = '600 21px Manrope, sans-serif';
-    if (s.order.length) {
-      s.order.slice(0, 5).forEach((o, i) => { ctx.fillStyle = '#6f6450'; ctx.fillText(`${o.qty}× ${o.name}`, 18, 84 + i * 34); });
-      const tot = s.order.reduce((a, o) => a + o.qty * o.price, 0).toFixed(2);
-      ctx.fillStyle = '#b9432c'; ctx.fillRect(14, H - 66, W * 0.44 - 28, 48);
-      ctx.fillStyle = '#fff'; ctx.font = '800 23px Manrope, sans-serif'; ctx.fillText('Charge $' + tot, 24, H - 34);
-    } else { ctx.fillStyle = '#b9a98c'; ctx.fillText('No items yet…', 18, 84); }
+    // product buttons (left)
     this.PRODUCTS.slice(0, 9).forEach((p, i) => {
-      ctx.fillStyle = p[3]; this.rr(ctx, W * 0.47 + (i % 3) * (W * 0.175), 20 + Math.floor(i / 3) * 110, W * 0.16, 94, 10); ctx.fill();
+      const x = 12 + (i % 3) * (W * 0.164), y = 20 + Math.floor(i / 3) * 110;
+      ctx.fillStyle = p[3]; this.rr(ctx, x, y, W * 0.152, 94, 10); ctx.fill();
       ctx.font = '34px serif'; ctx.textAlign = 'center';
-      ctx.fillText(p[0], W * 0.47 + (i % 3) * (W * 0.175) + W * 0.08, 76 + Math.floor(i / 3) * 110);
+      ctx.fillText(p[0], x + W * 0.076, y + 52);
       ctx.textAlign = 'left';
     });
+    // order panel (right)
+    ctx.fillStyle = '#fffdfa'; ctx.fillRect(panelX, 0, panelW, H);
+    ctx.fillStyle = '#e4dbc8'; ctx.fillRect(panelX, 0, 3, H);
+    ctx.fillStyle = '#2f2a23'; ctx.font = '800 26px Manrope, sans-serif'; ctx.textAlign = 'left';
+    ctx.fillText('Order #' + s.orderNo, panelX + 18, 40);
+    if (s.order.length) {
+      const nameLeft = panelX + 52, nameRight = W - 76;
+      s.order.slice(0, 5).forEach((o, i) => {
+        const y = 84 + i * 34;
+        ctx.font = '800 19px Manrope, sans-serif'; ctx.fillStyle = '#b9432c';
+        ctx.fillText(`${o.qty}×`, panelX + 16, y);
+        ctx.font = '600 19px Manrope, sans-serif'; ctx.fillStyle = '#2f2a23';
+        let name = o.name;
+        while (name.length > 3 && ctx.measureText(name).width > nameRight - nameLeft) {
+          name = name.slice(0, -1);
+        }
+        ctx.fillText(name === o.name ? name : name.slice(0, -1) + '…', nameLeft, y);
+        ctx.textAlign = 'right'; ctx.fillStyle = '#6f6450';
+        ctx.fillText('$' + (o.qty * o.price).toFixed(2), W - 16, y);
+        ctx.textAlign = 'left';
+      });
+      if (s.order.length > 5) {
+        ctx.font = '600 18px Manrope, sans-serif'; ctx.fillStyle = '#b9a98c';
+        ctx.fillText(`+${s.order.length - 5} more`, panelX + 18, 84 + 5 * 34);
+      }
+      const tot = s.order.reduce((a, o) => a + o.qty * o.price, 0).toFixed(2);
+      ctx.fillStyle = '#b9432c'; ctx.fillRect(panelX + 14, H - 66, panelW - 28, 48);
+      ctx.fillStyle = '#fff'; ctx.font = '800 23px Manrope, sans-serif';
+      ctx.fillText('Charge $' + tot, panelX + 24, H - 34);
+    } else {
+      ctx.font = '600 21px Manrope, sans-serif'; ctx.fillStyle = '#b9a98c';
+      ctx.fillText('No items yet…', panelX + 18, 84);
+    }
+    this.posTex.tex.needsUpdate = true;
+  }
+  drawPay(ctx, W, H, s) {
+    const sub = s.order.reduce((a, o) => a + o.qty * o.price, 0);
+    const tax = sub * 0.14975, grand = sub + tax, cash = s.pay.cash;
+    const isCash = s.pay.mode === 'cash';
+    ctx.fillStyle = '#f5f1e8'; ctx.fillRect(0, 0, W, H);
+    ctx.fillStyle = '#2f2a23'; ctx.fillRect(0, 0, W, 54);
+    ctx.fillStyle = '#f5f1e8'; ctx.font = '800 24px Manrope, sans-serif'; ctx.textAlign = 'left';
+    ctx.fillText('Payment · order #' + s.orderNo, 18, 36);
+    // left: totals
+    ctx.font = '600 20px Manrope, sans-serif';
+    const line = (label, val, y, bold) => {
+      ctx.font = (bold ? '800 23px' : '600 20px') + ' Manrope, sans-serif';
+      ctx.fillStyle = bold ? '#2f2a23' : '#6f6450';
+      ctx.textAlign = 'left'; ctx.fillText(label, 18, y);
+      ctx.textAlign = 'right'; ctx.fillText('$' + val.toFixed(2), W * 0.46, y);
+      ctx.textAlign = 'left';
+    };
+    line('Subtotal', sub, 100);
+    line('Sales tax', tax, 134);
+    ctx.strokeStyle = '#ddd3bd'; ctx.beginPath(); ctx.moveTo(18, 150); ctx.lineTo(W * 0.46, 150); ctx.stroke();
+    line('Total', grand, 186, true);
+    // right: tender
+    const rx = W * 0.54;
+    ctx.fillStyle = '#fffdfa'; ctx.fillRect(rx - 14, 54, W - rx + 14, H - 54);
+    ctx.fillStyle = isCash ? '#2f6b46' : '#b9432c';
+    this.rr(ctx, rx, 76, W - rx - 18, 44, 10); ctx.fill();
+    ctx.fillStyle = '#fff'; ctx.font = '800 21px Manrope, sans-serif'; ctx.textAlign = 'center';
+    ctx.fillText(isCash ? '💵 Cash' : '💳 Card', rx + (W - rx - 18) / 2, 105);
+    ctx.textAlign = 'left';
+    if (isCash) {
+      ctx.fillStyle = '#8a7f6d'; ctx.font = '800 15px Manrope, sans-serif';
+      ctx.fillText('RECEIVED', rx, 152);
+      ctx.fillStyle = '#2f2a23'; ctx.font = '800 30px Manrope, sans-serif';
+      ctx.textAlign = 'right'; ctx.fillText('$' + cash.toFixed(2), W - 18, 152); ctx.textAlign = 'left';
+      const enough = cash >= grand;
+      ctx.fillStyle = '#8a7f6d'; ctx.font = '800 15px Manrope, sans-serif';
+      ctx.fillText(enough ? 'CHANGE DUE' : 'STILL OWING', rx, 200);
+      ctx.fillStyle = enough ? '#2f6b46' : '#a05446'; ctx.font = '800 30px Manrope, sans-serif';
+      ctx.textAlign = 'right'; ctx.fillText('$' + Math.abs(cash - grand).toFixed(2), W - 18, 200); ctx.textAlign = 'left';
+    } else {
+      ctx.fillStyle = '#6f6450'; ctx.font = '600 19px Manrope, sans-serif';
+      ctx.fillText('Present card on', rx, 160);
+      ctx.fillText('the terminal…', rx, 188);
+    }
+    ctx.fillStyle = '#b9432c'; ctx.fillRect(14, H - 62, W - 28, 46);
+    ctx.fillStyle = '#fff'; ctx.font = '800 23px Manrope, sans-serif'; ctx.textAlign = 'center';
+    ctx.fillText('Total to pay  $' + grand.toFixed(2), W / 2, H - 31);
+    ctx.textAlign = 'left';
+    this.posTex.tex.needsUpdate = true;
   }
   drawCust() {
     const { ctx, c } = this.custTex, W = c.width, H = c.height;
@@ -605,8 +714,23 @@ class Component extends DCLogic {
       ctx.fillStyle = '#f5f1e8'; ctx.font = '800 30px Manrope, sans-serif'; ctx.fillText('Your order', W / 2, 46);
       ctx.font = '600 24px Manrope, sans-serif'; ctx.fillStyle = '#d9cbb0';
       s.order.slice(0, 3).forEach((o, i) => ctx.fillText(`${o.qty}× ${o.name}  $${(o.qty * o.price).toFixed(2)}`, W / 2, 92 + i * 38));
-      const tot = s.order.reduce((a, o) => a + o.qty * o.price, 0).toFixed(2);
-      ctx.fillStyle = '#d9a05e'; ctx.font = '800 34px Manrope, sans-serif'; ctx.fillText('Total  $' + tot, W / 2, H - 46);
+      const sub = s.order.reduce((a, o) => a + o.qty * o.price, 0);
+      if (s.pay) {
+        const grand = sub * 1.14975;
+        ctx.fillStyle = '#d9a05e'; ctx.font = '800 32px Manrope, sans-serif';
+        ctx.fillText('Total due  $' + grand.toFixed(2), W / 2, H - 76);
+        if (s.pay.mode === 'cash' && s.pay.cash > 0) {
+          const diff = s.pay.cash - grand;
+          ctx.fillStyle = diff >= 0 ? '#8fae8a' : '#d98a7a'; ctx.font = '700 26px Manrope, sans-serif';
+          ctx.fillText(diff >= 0 ? 'Change  $' + diff.toFixed(2) : 'Owing  $' + (-diff).toFixed(2), W / 2, H - 34);
+        } else {
+          ctx.fillStyle = '#b9a98c'; ctx.font = '700 24px Manrope, sans-serif';
+          ctx.fillText(s.pay.mode === 'cash' ? 'Cash payment' : 'Tap or insert card', W / 2, H - 34);
+        }
+      } else {
+        ctx.fillStyle = '#d9a05e'; ctx.font = '800 34px Manrope, sans-serif';
+        ctx.fillText('Total  $' + sub.toFixed(2), W / 2, H - 46);
+      }
     } else if (s.selCust >= 0) {
       const cu = s.customers[s.selCust];
       ctx.fillStyle = '#d9a05e'; ctx.font = '800 26px Manrope, sans-serif'; ctx.fillText('✨ ' + cu.tier + (cu.tier === 'VIP' ? '' : ' Member'), W / 2, 60);
@@ -675,6 +799,10 @@ class Component extends DCLogic {
       ['cust', 5, '🙋 Customer screen', '#c9862c', '1.6s']
     ];
     const total = s.order.reduce((a, o) => a + o.qty * o.price, 0);
+    // Quebec sales tax: GST 5% + QST 9.975%
+    const tax = total * 0.14975, grand = total + tax;
+    const cash = s.pay ? s.pay.cash : 0;
+    const canComplete = !!s.pay && (s.pay.mode === 'card' || cash >= grand);
     const tierCol = { VIP: '#b9432c', Gold: '#c9862c', Silver: '#8a8a8a', Member: '#2f6b46' };
     const custFiltered = s.customers.map((cu, i) => ({ cu, i })).filter(({ cu }) => cu.name.toLowerCase().includes(s.custQ.toLowerCase()));
     return {
@@ -687,7 +815,7 @@ class Component extends DCLogic {
       goBack: () => { this.setState({ active: null }); this.applyOffsetSoon(); },
       hintVisible: s.hint && !s.active,
       panelOpen: !!s.active,
-      showTv: s.active === 'tv', showKiosk: s.active === 'kiosk', showPos: s.active === 'pos', showKds: s.active === 'kds', showCust: s.active === 'cust',
+      showTv: s.active === 'tv', showKiosk: s.active === 'kiosk', showPos: s.active === 'pos' && !s.pay, showPay: s.active === 'pos' && !!s.pay, showKds: s.active === 'kds', showCust: s.active === 'cust',
       showConfig: s.active === 'tv' || s.active === 'kiosk',
       panelEmoji: { tv: '📺', kiosk: '🖥️', pos: '🧑‍🍳', kds: '🍳', cust: '👤' }[s.active] || '',
       panelTitle: { tv: 'Wall TVs', kiosk: 'Kiosk setup', pos: 'Counter Station', kds: 'Kitchen displays', cust: 'Customers' }[s.active] || '',
@@ -726,13 +854,54 @@ class Component extends DCLogic {
       orderTotal: total.toFixed(2),
       charge: () => {
         if (!s.order.length) { this.toast('Add an item first ☕'); return; }
-        this.edit(st => ({
-          tickets: [...st.tickets, { id: st.orderNo, lines: st.order.map(o => `${o.qty}× ${o.name}`), t0: Date.now() }],
-          order: [], orderNo: st.orderNo + 1
-        }));
-        this.toast(`Order #${s.orderNo} paid · sent to the kitchen 🍳`);
+        this.edit(() => ({ pay: { mode: 'card', cash: 0 } }));
       },
       clearOrder: () => this.edit(() => ({ order: [] })),
+      payTax: tax.toFixed(2),
+      payTotal: grand.toFixed(2),
+      payReceived: cash.toFixed(2),
+      payCash: s.pay && s.pay.mode === 'cash',
+      payChange: Math.abs(cash - grand).toFixed(2),
+      changeLabel: cash >= grand ? 'Change due' : 'Still owing',
+      changeStyle: { fontFamily: 'inherit', fontSize: '19px', fontWeight: 800, color: cash >= grand ? '#2f6b46' : '#a05446' },
+      tenderTabs: [['card', '💳 Card'], ['cash', '💵 Cash']].map(([m, label]) => ({
+        label,
+        style: {
+          flex: 1, background: s.pay && s.pay.mode === m ? '#2f2a23' : '#fffdfa',
+          color: s.pay && s.pay.mode === m ? '#f5f1e8' : '#2f2a23',
+          border: s.pay && s.pay.mode === m ? '1px solid #2f2a23' : '1px solid #e4dbc8',
+          borderRadius: '11px', padding: '11px', fontFamily: 'inherit', fontSize: '13.5px', fontWeight: 800, cursor: 'pointer'
+        },
+        pick: () => this.edit(st => ({ pay: { ...st.pay, mode: m, cash: m === 'card' ? 0 : st.pay.cash } }))
+      })),
+      cashBtns: [1, 5, 10, 20, 50, 100].map((v) => ({
+        label: '$' + v.toFixed(2),
+        style: { background: '#fffdfa', border: '1px solid #e4dbc8', borderRadius: '10px', padding: '9px 13px', fontFamily: 'inherit', fontSize: '13px', fontWeight: 800, color: '#2f2a23', cursor: 'pointer' },
+        add: () => this.edit(st => ({ pay: { ...st.pay, cash: st.pay.cash + v } }))
+      })),
+      exactCash: () => this.edit(st => ({ pay: { ...st.pay, cash: grand } })),
+      clearCash: () => this.edit(st => ({ pay: { ...st.pay, cash: 0 } })),
+      cancelPay: () => this.edit(() => ({ pay: null })),
+      completeLabel: s.pay && s.pay.mode === 'cash'
+        ? (cash >= grand ? `Complete · change $${(cash - grand).toFixed(2)}` : `Take $${grand.toFixed(2)} cash`)
+        : `💳 Approve $${grand.toFixed(2)}`,
+      completeStyle: {
+        flex: 1, background: canComplete ? '#b9432c' : '#e0d6c2', color: canComplete ? '#fff' : '#a99e88',
+        border: 'none', borderRadius: '11px', padding: '12px', fontFamily: 'inherit', fontSize: '14px',
+        fontWeight: 800, cursor: canComplete ? 'pointer' : 'not-allowed'
+      },
+      completePay: () => {
+        if (!canComplete) { this.toast('Not enough cash tendered 💵'); return; }
+        const paid = s.pay.mode === 'cash';
+        const change = cash - grand;
+        this.edit(st => ({
+          tickets: [...st.tickets, { id: st.orderNo, lines: st.order.map(o => `${o.qty}× ${o.name}`), t0: Date.now() }],
+          order: [], orderNo: st.orderNo + 1, pay: null
+        }));
+        this.toast(paid
+          ? `Order #${s.orderNo} paid cash · change $${change.toFixed(2)} 💵`
+          : `Order #${s.orderNo} approved on card 💳`);
+      },
       ticketRows: s.tickets.map((t2, i) => ({
         id: t2.id, time: this.fmtAge(t2.t0), lines: t2.lines,
         headStyle: { display: 'flex', justifyContent: 'space-between', padding: '9px 14px', fontSize: '13.5px', fontWeight: 800, color: '#fff', background: (Date.now() - t2.t0) / 1000 > 120 ? '#b9432c' : (Date.now() - t2.t0) / 1000 > 45 ? '#c9a227' : '#3e6b4f' },
@@ -741,7 +910,7 @@ class Component extends DCLogic {
       noTickets: s.tickets.length === 0,
       jumpPos: pick('pos'),
       custQ: s.custQ, setCustQ: (e) => this.setState({ custQ: e.target.value }),
-      addCust: () => { this.edit(st => ({ customers: [...st.customers, { name: 'Walk-in Guest', phone: '—', tier: 'Member', orders: 0, pts: 0 }] })); this.toast('Customer added 👤'); },
+      addCust: () => { this.edit(st => ({ customers: [...st.customers, { name: 'Walk-in Guest', phone: '-', tier: 'Member', orders: 0, pts: 0 }] })); this.toast('Customer added 👤'); },
       custRows: custFiltered.map(({ cu, i }) => ({
         name: cu.name, phone: cu.phone, orders: cu.orders, tier: cu.tier,
         init: cu.name.split(' ').map(x => x[0]).slice(0, 2).join('').toUpperCase(),

@@ -2,9 +2,10 @@ import { useState } from "react"
 import { CtaLink } from "@/components/cta-link"
 import { Slider } from "@/components/sections/calculator"
 import { useI18n } from "@/lib/i18n"
+import { SITE } from "@/lib/site"
 
 export function LineCost() {
-  const { t, path, money } = useI18n()
+  const { t, money } = useI18n()
   const c = t.lineCost
   const [walkouts, setWalkouts] = useState(5)
   const [ticket, setTicket] = useState(8)
@@ -60,7 +61,7 @@ export function LineCost() {
           <p className="text-[15px] leading-relaxed text-muted-foreground">
             {c.honest}
           </p>
-          <CtaLink to={path("/demo")}>{c.cta}</CtaLink>
+          <CtaLink to={SITE.demoUrl} reloadDocument>{c.cta}</CtaLink>
         </div>
       </div>
     </section>

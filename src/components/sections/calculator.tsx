@@ -1,6 +1,7 @@
 import { useState } from "react"
 import { CtaLink } from "@/components/cta-link"
 import { useI18n } from "@/lib/i18n"
+import { SITE } from "@/lib/site"
 
 export function Slider({
   id,
@@ -44,7 +45,7 @@ export function Slider({
 }
 
 export function Calculator({ intro }: { intro?: string }) {
-  const { t, path, money, lang } = useI18n()
+  const { t, money, lang } = useI18n()
   const c = t.calc
   const [volume, setVolume] = useState(20000)
   const [debit, setDebit] = useState(50)
@@ -144,7 +145,7 @@ export function Calculator({ intro }: { intro?: string }) {
                 </>
               )}
             </p>
-            <CtaLink to={path("/demo")}>{c.cta}</CtaLink>
+            <CtaLink to={SITE.demoUrl} reloadDocument>{c.cta}</CtaLink>
           </div>
         </div>
       </div>

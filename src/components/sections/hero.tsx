@@ -1,8 +1,9 @@
 import { CtaLink } from "@/components/cta-link"
 import { useI18n } from "@/lib/i18n"
+import { SITE } from "@/lib/site"
 
 export function Hero() {
-  const { t, path } = useI18n()
+  const { t } = useI18n()
   const ticket = t.hero.ticket
   return (
     <section className="bg-ink text-ink-foreground">
@@ -16,7 +17,7 @@ export function Hero() {
             {t.hero.wedgeRest}
           </p>
           <div className="mt-1 flex flex-wrap gap-3.5">
-            <CtaLink to={path("/demo")} size="lg">
+            <CtaLink to={SITE.demoUrl} reloadDocument size="lg">
               {t.nav.cta}
             </CtaLink>
           </div>

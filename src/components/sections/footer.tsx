@@ -7,7 +7,6 @@ export function Footer() {
   const product = [
     { to: "/apps", label: t.nav.features },
     { to: "/tarifs", label: t.nav.pricing },
-    { to: "/demo", label: t.footer.demo },
     { to: "/a-propos", label: t.nav.about },
   ]
   const linkClass = "text-muted-foreground hover:text-primary"

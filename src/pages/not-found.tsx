@@ -1,6 +1,7 @@
 import { CtaLink } from "@/components/cta-link"
 import { PageMeta } from "@/components/page-meta"
 import { useI18n } from "@/lib/i18n"
+import { SITE } from "@/lib/site"
 
 export default function NotFoundPage() {
   const { t, path } = useI18n()
@@ -14,8 +15,8 @@ export default function NotFoundPage() {
         <p className="text-lg text-muted-foreground">{t.notFound.text}</p>
         <div className="mt-2 flex flex-wrap justify-center gap-3.5">
           <CtaLink to={path("/")}>{t.notFound.back}</CtaLink>
-          <CtaLink to={path("/demo")} variant="outline">
-            {t.hero.ctaSecondary}
+          <CtaLink to={SITE.demoUrl} reloadDocument variant="outline">
+            {t.nav.cta}
           </CtaLink>
         </div>
       </div>

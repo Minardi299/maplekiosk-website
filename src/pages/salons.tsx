@@ -2,18 +2,16 @@ import { CtaLink } from "@/components/cta-link"
 import { PageMeta } from "@/components/page-meta"
 import { Placeholder } from "@/components/placeholder"
 import { useI18n } from "@/lib/i18n"
+import { SITE } from "@/lib/site"
 
 export default function SalonsPage() {
-  const { t, path } = useI18n()
+  const { t } = useI18n()
   const s = t.salons
   return (
     <>
       <PageMeta title={t.meta.salons.title} desc={t.meta.salons.desc} />
       <section className="bg-ink text-ink-foreground">
         <div className="site-container flex max-w-4xl flex-col gap-6 py-14 sm:py-16 lg:py-20">
-          <span className="font-mono text-xs tracking-[0.1em] text-ink-muted uppercase">
-            {s.kicker}
-          </span>
           <h1 className="font-heading text-4xl leading-[1.12] font-semibold tracking-tight text-balance sm:text-5xl lg:text-[54px]">
             {s.title}
           </h1>
@@ -21,8 +19,8 @@ export default function SalonsPage() {
             {s.sub}
           </p>
           <div className="mt-1 flex flex-wrap gap-3.5">
-            <CtaLink to={path("/demo")} size="lg">
-              {t.router.cta}
+            <CtaLink to={SITE.demoUrl} reloadDocument size="lg">
+              {t.nav.cta}
             </CtaLink>
           </div>
         </div>
@@ -55,8 +53,8 @@ export default function SalonsPage() {
           <p className="text-[15px] leading-relaxed text-muted-foreground">
             {s.disclosure}
           </p>
-          <CtaLink to={path("/demo")} size="lg" className="mt-2 self-start">
-            {t.router.cta}
+          <CtaLink to={SITE.demoUrl} reloadDocument size="lg" className="mt-2 self-start">
+            {t.nav.cta}
           </CtaLink>
         </div>
       </section>

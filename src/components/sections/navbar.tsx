@@ -103,7 +103,7 @@ export function Navbar() {
           ))}
           <LangSwitch />
           <CtaLink
-            to={path("/demo")}
+            to={SITE.demoUrl} reloadDocument
             className="px-4 py-2.5 text-sm whitespace-nowrap"
           >
             {t.nav.cta}
@@ -134,7 +134,7 @@ export function Navbar() {
             <div className="mt-3 flex flex-col items-start gap-4 border-t pt-4">
               <LangSwitch />
               <CtaLink
-                to={path("/demo")}
+                to={SITE.demoUrl} reloadDocument
                 className="w-full px-4 py-2.5 text-sm"
               >
                 {t.nav.cta}

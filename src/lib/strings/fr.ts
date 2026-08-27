@@ -3,47 +3,43 @@ import type { Strings } from "../i18n"
 export const fr: Strings = {
   meta: {
     home: {
-      title: "MapleKiosk — Gardez votre caisse. Ajoutez la borne.",
+      title: "MapleKiosk · Gardez votre caisse. Ajoutez la borne.",
       desc: "Borne de commande pour salons de thé et comptoirs rapides à Montréal et sur la Rive-Sud. Sans contrat, 0 % sur vos ventes.",
     },
     features: {
-      title: "Applications — MapleKiosk",
+      title: "Applications · MapleKiosk",
       desc: "Borne, station comptoir, écran cuisine, menus télé, livraison dans une seule file, fidélité.",
     },
     pricing: {
-      title: "Tarifs — MapleKiosk",
+      title: "Tarifs · MapleKiosk",
       desc: "Un prix par application, SaaS ou sur site. Sans contrat, annulez n'importe quel mois, ou achetez-la une fois pour toutes.",
     },
-    demo: {
-      title: "Réserver une démo — MapleKiosk",
-      desc: "15 minutes. Votre menu, sur une vraie borne.",
-    },
     about: {
-      title: "À propos — MapleKiosk",
+      title: "À propos · MapleKiosk",
       desc: "Fondée à Longueuil. On la construit et on l'installe nous-mêmes.",
     },
     salons: {
-      title: "Salons — MapleKiosk",
-      desc: "Un assistant téléphonique pour salons d'ongles, spas et instituts de beauté — il répond, guide et réserve pendant que vos mains travaillent.",
+      title: "Salons · MapleKiosk",
+      desc: "Un assistant téléphonique pour salons d'ongles, spas et instituts de beauté : il répond, guide et réserve pendant que vos mains travaillent.",
     },
     coffee: {
-      title: "Cafés & boba — MapleKiosk",
+      title: "Cafés & boba · MapleKiosk",
       desc: "Borne de commande pour cafés, salons de thé aux perles et comptoirs de restauration rapide.",
     },
     restaurants: {
-      title: "Restaurants et restauration rapide — MapleKiosk",
-      desc: "Borne et écran de cuisine pour restaurants et comptoirs à emporter — la livraison dans une seule file.",
+      title: "Restaurants et restauration rapide · MapleKiosk",
+      desc: "Borne et écran de cuisine pour restaurants et comptoirs à emporter, avec la livraison dans une seule file.",
     },
     privacy: {
-      title: "Confidentialité — MapleKiosk",
+      title: "Confidentialité · MapleKiosk",
       desc: "Politique de confidentialité.",
     },
     terms: {
-      title: "Conditions — MapleKiosk",
+      title: "Conditions · MapleKiosk",
       desc: "Conditions d'utilisation.",
     },
     notFound: {
-      title: "Page introuvable — MapleKiosk",
+      title: "Page introuvable · MapleKiosk",
       desc: "Page introuvable.",
     },
   },
@@ -52,7 +48,7 @@ export const fr: Strings = {
     features: "Applications",
     pricing: "Tarifs",
     about: "À propos",
-    cta: "Chargez mon menu dans une démo gratuite",
+    cta: "Voyez comment ça marche",
   },
 
   hero: {
@@ -60,8 +56,7 @@ export const fr: Strings = {
       "Pendant qu'un client choisit ses perles, trois autres regardent la file.",
     wedgeStrong: "Gardez votre caisse. Ajoutez la borne.",
     wedgeRest:
-      " Si elle ne se paie pas toute seule, on la débranche — et vous ne devez rien.",
-    ctaSecondary: "15 minutes, mardi à 14 h",
+      " Si elle ne se paie pas toute seule, on la débranche, et vous ne devez rien.",
     ticket: {
       name: "Thé au lait taro · L",
       num: "№ 042",
@@ -75,30 +70,28 @@ export const fr: Strings = {
       totalLabel: "Total",
       total: "7,50 $",
       caption:
-        "Commandé par le client, envoyé au bar tel quel — pendant que la file avance.",
+        "Commandé par le client, envoyé au bar tel quel, pendant que la file avance.",
     },
   },
 
   router: {
     title: "Trois comptoirs, trois matins différents",
     sub: "Choisissez le vôtre.",
-    cta: "Réserver 15 minutes",
-    demoShop: "Visitez la boutique démo",
     doors: [
       {
         label: "Salons de thé & cafés",
-        hook: "« 50 % sucre, moins de glace, perles en extra » — et la file avance.",
+        hook: "« 50 % sucre, moins de glace, perles en extra. » Et la file avance.",
         body: "La borne prend les commandes sur mesure et les envoie au bar telles quelles.",
       },
       {
         label: "Comptoirs & pour emporter",
-        hook: "Le téléphone sonne, la tablette bipe, la file s'allonge — et vous avez deux mains.",
+        hook: "Le téléphone sonne, la tablette bipe, la file s'allonge, et vous avez deux mains.",
         body: "Borne, comptoir et livraison tombent dans une seule file de préparation.",
       },
       {
         label: "Salle à manger",
         hook: "Le bip du DoorDash coupe votre service. Encore.",
-        body: "Uber Eats et DoorDash arrivent à l'écran de cuisine — fini le mur de tablettes.",
+        body: "Uber Eats et DoorDash arrivent à l'écran de cuisine. Fini le mur de tablettes.",
       },
     ],
   },
@@ -106,28 +99,28 @@ export const fr: Strings = {
   diagram: {
     title: "Où va votre argent",
     sub: "Eux, ils s'assoient sur votre argent. Nous, on reste à côté.",
-    othersTag: "LES AUTRES — SQUARE · TOAST · CLOVER",
-    usTag: "NOUS — MAPLEKIOSK",
+    othersTag: "LES AUTRES : SQUARE · TOAST · CLOVER",
+    usTag: "NOUS : MAPLEKIOSK",
     you: "Vous",
     bank: "Banque",
-    othersBox: "Leur plateforme : logiciel + matériel + votre argent — un seul bloc",
+    othersBox: "Leur plateforme : logiciel + matériel + votre argent, un seul bloc",
     othersNote:
       "Chaque paiement passe par eux : ~2,5 % sur chaque carte de crédit, marge cachée dans le taux. Quitter = nouveau matériel, données perdues.",
-    acqBox: "Votre acquéreur — votre taux négocié",
-    usBox: "MapleKiosk — logiciel seulement · 0 % sur vos ventes",
+    acqBox: "Votre acquéreur, votre taux négocié",
+    usBox: "MapleKiosk : logiciel seulement · 0 % sur vos ventes",
     usNote:
-      "Votre entente de paiement reste entre vous et votre acquéreur. On ne touche jamais à votre argent — et on ne prélève aucune commission.",
+      "Votre entente de paiement reste entre vous et votre acquéreur. On ne touche jamais à votre argent, et on ne prélève aucune commission.",
   },
 
   teach: {
-    pre: "Un logiciel de caisse « gratuit », ça n'existe pas. Le prix est caché dans le taux — environ 2,5 % de chaque vente, pour toujours. Nous, on affiche le nôtre : ",
+    pre: "Un logiciel de caisse « gratuit », ça n'existe pas. Le prix est caché dans le taux : environ 2,5 % de chaque vente, pour toujours. Nous, on affiche le nôtre : ",
     zero: "0 %",
     post: ".",
   },
 
   calc: {
     title: "Ce que vos paiements vous coûtent vraiment",
-    sub: "Entrez vos chiffres. On compare — honnêtement, même quand ce n'est pas en notre faveur.",
+    sub: "Entrez vos chiffres. On compare honnêtement, même quand ce n'est pas en notre faveur.",
     volume: "Ventes par carte, par mois",
     debit: "Part en débit Interac",
     ticket: "Panier moyen",
@@ -137,13 +130,13 @@ export const fr: Strings = {
     acq: "Votre propre acquéreur",
     honestTitle: "Notre avis honnête :",
     honestBody:
-      " à votre volume, le taux fixe de Square est probablement votre meilleure option — les frais fixes d'un compte d'acquéreur mangeraient l'économie. On vous le dira aussi en personne.",
+      " à votre volume, le taux fixe de Square est probablement votre meilleure option : les frais fixes d'un compte d'acquéreur mangeraient l'économie. On vous le dira aussi en personne.",
     saveTitle: "Économie estimée :",
     saveBody:
-      " par mois avec votre propre entente — parce que nous ne prélevons aucune commission sur vos paiements.",
+      " par mois avec votre propre entente, parce que nous ne prélevons aucune commission sur vos paiements.",
     disclaimer:
-      "Tarifs affichés de Square (2,5 % crédit ; 0,75 % + 7 ¢ débit). Clover n'affiche pas de tarifs canadiens — nous estimons avec son tarif américain en personne (2,3 % + 10 ¢). « Votre propre acquéreur » = exemple d'entente interchange-plus typique pour un petit commerçant (1,3 à 1,8 % sur le crédit ; 8 ¢ par transaction débit ; frais fixes d'environ 60 $/mois inclus). Chiffres indicatifs — apportez un relevé pour le calcul réel.",
-    cta: "Apportez un relevé — on vérifie ces chiffres pour vrai",
+      "Tarifs affichés de Square (2,5 % crédit ; 0,75 % + 7 ¢ débit). Clover n'affiche pas de tarifs canadiens, donc nous estimons avec son tarif américain en personne (2,3 % + 10 ¢). « Votre propre acquéreur » = exemple d'entente interchange-plus typique pour un petit commerçant (1,3 à 1,8 % sur le crédit ; 8 ¢ par transaction débit ; frais fixes d'environ 60 $/mois inclus). Chiffres indicatifs. Apportez un relevé pour le calcul réel.",
+    cta: "Apportez un relevé et on vérifie ces chiffres pour vrai",
   },
 
   lineCost: {
@@ -153,10 +146,10 @@ export const fr: Strings = {
     days: "Jours d'ouverture par mois",
     resultTag: "VENTES PERDUES ESTIMÉES PAR MOIS",
     payoff:
-      "Si la borne rattrapait ne serait-ce qu'une partie de ces commandes pendant que la file avance — qu'est-ce que ça changerait à la fin du mois ?",
+      "Si la borne rattrapait ne serait-ce qu'une partie de ces commandes pendant que la file avance, qu'est-ce que ça changerait à la fin du mois ?",
     honest:
-      "Si ce chiffre est petit, une borne ne se paiera pas toute seule — et on vous le dira aussi.",
-    cta: "Apportez ces chiffres — on les vérifie pour vrai",
+      "Si ce chiffre est petit, une borne ne se paiera pas toute seule, et on vous le dira aussi.",
+    cta: "Apportez ces chiffres et on les vérifie pour vrai",
   },
 
   chips: {
@@ -172,7 +165,7 @@ export const fr: Strings = {
 
   finalCta: {
     title: "Fondée à Longueuil. Pas de contrat. On vient l'installer nous-mêmes.",
-    sub: "Deux semaines d'essai dans votre commerce. Si la borne ne se paie pas toute seule, on la débranche — et vous ne devez rien.",
+    sub: "Deux semaines d'essai dans votre commerce. Si la borne ne se paie pas toute seule, on la débranche, et vous ne devez rien.",
   },
 
   footer: {
@@ -180,7 +173,6 @@ export const fr: Strings = {
       "Une famille d'applications d'affaires et des services d'IA abordables, conçus avec soin au Canada pour ceux qui font vivre les petites entreprises.",
     product: "Produit",
     legal: "Légal",
-    demo: "Réserver une démo",
     industries: "Secteurs",
     nails: "Salons d'ongles et de beauté",
     restaurants: "Restaurants et restauration rapide",
@@ -192,14 +184,13 @@ export const fr: Strings = {
   },
 
   coffee: {
-    kicker: "On parle le langage du comptoir",
     title: "Votre menu n'est pas un seul bouton. Votre caisse non plus.",
     intro:
-      "Une caisse générique a été conçue pour un prix, une pression. Une commande de boba ou de café, c'est une pile de choix — format, sucre, glace, lait, garnitures — qui vous arrive en plein rush. La borne est conçue exactement pour ça.",
+      "Une caisse générique a été conçue pour un prix, une pression. Une commande de boba ou de café, c'est une pile de choix (format, sucre, glace, lait, garnitures) qui vous arrive en plein rush. La borne est conçue exactement pour ça.",
     quotes: [
       {
         q: "« 50 % sucre, moins de glace, perles en extra ? »",
-        body: "Des options qui reflètent votre vrai menu — niveaux de sucre et de glace, format, chaud ou froid, changements de lait et garnitures — tarifées et envoyées au bar automatiquement.",
+        body: "Des options qui reflètent votre vrai menu (niveaux de sucre et de glace, format, chaud ou froid, changements de lait et garnitures), tarifées et envoyées au bar automatiquement.",
       },
       {
         q: "« Prochaine commande prête ! »",
@@ -207,18 +198,18 @@ export const fr: Strings = {
       },
       {
         q: "« Achetez-en 9, le 10e offert ? »",
-        body: "Cartes à tampons numériques, points et promos que les habitués utilisent vraiment — aucune carte à perdre, aucun calcul à la caisse.",
+        body: "Cartes à tampons numériques, points et promos que les habitués utilisent vraiment. Aucune carte à perdre, aucun calcul à la caisse.",
       },
     ],
   },
 
   restaurants: {
     title: "Le bip du DoorDash coupe votre service. Encore.",
-    sub: "Uber Eats et DoorDash arrivent à l'écran de cuisine — fini le mur de tablettes.",
-    bandTitle: "Coup de feu ou mardi tranquille — la cuisine lit une seule file.",
+    sub: "Uber Eats et DoorDash arrivent à l'écran de cuisine. Fini le mur de tablettes.",
+    bandTitle: "Coup de feu ou mardi tranquille : la cuisine lit une seule file.",
     quotes: [
       {
-        q: "Le téléphone sonne, la tablette bipe, la file s'allonge — et vous avez deux mains.",
+        q: "Le téléphone sonne, la tablette bipe, la file s'allonge, et vous avez deux mains.",
         body: "Borne, comptoir et livraison tombent dans une seule file de préparation.",
       },
       {
@@ -226,8 +217,8 @@ export const fr: Strings = {
         body: "Marquez un article en rupture une seule fois et il devient grisé sur la borne et vos menus télé, instantanément.",
       },
       {
-        q: "Le téléphone sonne en plein service — une table pour quatre, samedi.",
-        body: "Un assistant répond à chaque appel, en français ou en anglais, répond aux questions et réserve la table — pendant que vous continuez le service.",
+        q: "Le téléphone sonne en plein service : une table pour quatre, samedi.",
+        body: "Un assistant répond à chaque appel, en français ou en anglais, répond aux questions et réserve la table, pendant que vous continuez le service.",
       },
     ],
   },
@@ -239,7 +230,7 @@ export const fr: Strings = {
     blocks: [
       {
         title: "La borne",
-        body: "Modificateurs complets — sucre, glace, format, laits, garnitures. Chaque choix est facturé au bon prix et envoyé au bar tel quel. Côté client en français, anglais, vietnamien et russe.",
+        body: "Modificateurs complets : sucre, glace, format, laits, garnitures. Chaque choix est facturé au bon prix et envoyé au bar tel quel. Côté client en français, anglais, vietnamien et russe.",
       },
       {
         title: "La station comptoir",
@@ -247,7 +238,7 @@ export const fr: Strings = {
       },
       {
         title: "L'écran de cuisine (KDS)",
-        body: "Les commandes en séquence — borne, comptoir et livraison dans une seule file.",
+        body: "Les commandes en séquence : borne, comptoir et livraison dans une seule file.",
       },
       {
         title: "La livraison, une seule file",
@@ -263,41 +254,74 @@ export const fr: Strings = {
       },
       {
         title: "Ça se branche sur votre caisse",
-        body: "Intégration Clover aujourd'hui — votre caisse reste votre caisse. [VÉRIFIER la liste exacte d'intégrations avant publication]",
+        body: "Intégration Clover aujourd'hui. Votre caisse reste votre caisse. [VÉRIFIER la liste exacte d'intégrations avant publication]",
       },
       {
         title: "Chez vous ou chez nous",
         body: "Infonuagique, ou installée sur place. Achetez-la une fois pour toutes si vous préférez.",
       },
     ],
-    timelineTitle: "Une matinée au comptoir",
-    timeline: [
+  },
+
+  day: {
+    title: "De l'ouverture au rush à la fermeture, comme ça se passe vraiment",
+    sub: "Une journée de café, et la partie de MapleCoffee qui porte chaque heure.",
+    beats: [
       {
         time: "7 h",
-        text: "Ouverture. Les téléviseurs et la borne s'allument avec le menu du jour.",
+        name: "Ouverture et préparation",
+        tags: [
+          { label: "Menus sur TV", detail: "Vos écrans télé lisent le même menu que la borne et le comptoir. Changez un prix ou masquez un article une fois, et tous les écrans du commerce suivent." },
+          { label: "Poste comptoir", detail: "Favoris en une touche, combos enregistrés et options rapides gardent la file en mouvement. Comptant, carte, sans contact et code QR, avec le pourboire à l'écran." },
+        ],
+        text: "Un seul écran règle le menu du jour partout : les téléviseurs, la borne, le comptoir. Les articles épuisés d'hier soir reviennent avant l'ouverture.",
       },
       {
         time: "8 h 15",
-        text: "Le rush. La borne prend les commandes sur mesure, le comptoir encaisse, le bar lit une seule file.",
+        name: "Le rush du matin",
+        tags: [
+          { label: "La borne", detail: "Niveaux de sucre et de glace, format, chaud ou froid, changements de lait, et garnitures comme les perles, la gelée et la mousse de fromage. Chaque choix est tarifé et imprimé au bar exactement comme commandé." },
+          { label: "Écran cuisine", detail: "Les commandes arrivent aux écrans du bar et de la cuisine dans l'ordre, avec le bouton « terminé » et des billets clairs, pour que rien ne se perde dans le rush." },
+        ],
+        text: "Deux clients commandent à la borne pendant que vous tirez les shots. « 50 % sucre, moins de glace, extra perles » arrive au bar écrit exactement comme ça, dans l'ordre où c'est entré.",
       },
       {
         time: "11 h 30",
-        text: "Les commandes à l'avance et la livraison tombent dans la même file que le comptoir.",
+        name: "Commandes à l'avance et livraison",
+        tags: [
+          { label: "Livraison, une seule file", detail: "Les commandes Uber Eats et DoorDash tombent sur le même écran que les clients au comptoir. Le bar travaille une seule file au lieu de trois tablettes." },
+        ],
+        text: "Uber Eats et DoorDash cessent d'être une deuxième tablette. Leurs billets tombent dans la même file que les clients au comptoir. Aucune boisson ne double la file.",
       },
       {
         time: "14 h",
-        text: "Heure creuse. Rupture de stock sur tous les écrans, en un geste.",
+        name: "L'heure creuse",
+        tags: [
+          { label: "Ruptures synchronisées", detail: "Marquez un article épuisé une seule fois. Il devient gris sur la borne, les écrans télé et le comptoir au même moment, pour que personne ne vende ce que vous ne pouvez pas faire." },
+          { label: "Fidélité", detail: "Tampons numériques, points et promos qui ramènent les habitués. Tout est suivi à la caisse, sans carte à poinçonner ni à perdre." },
+        ],
+        text: "Le lait d'avoine est fini. Une touche le grise sur la borne, les téléviseurs et le comptoir en même temps. Pas de remboursement, pas d'excuses au bar. Les timbres des habitués continuent de compter.",
       },
       {
         time: "20 h",
-        text: "Fermeture. Les chiffres de la journée sur un seul écran.",
+        name: "Fermeture et remise à zéro",
+        tags: [
+          { label: "Une journée, un écran", detail: "Les totaux du comptoir, de la borne et de la livraison arrivent sur un seul écran à la fermeture. Vous lisez la journée à un seul endroit au lieu de trois." },
+        ],
+        text: "Comptoir, borne et livraison ferment sur un seul écran au lieu de trois.",
       },
     ],
+    alsoTitle: "Aussi dans la boîte",
+    also: [
+      "Se connecte à votre caisse. Clover aujourd'hui, et la vôtre reste la vôtre",
+      "Chez vous ou chez nous : infonuagique, ou installé sur place",
+    ],
+    question: "Lequel de ces cinq moments vous coûte le plus en ce moment ?",
   },
 
   pricing: {
     title: "Un prix par application. SaaS ou sur site.",
-    sub: "Chaque application MapleKiosk est offerte de deux façons — hébergée par nous (SaaS, facturée mensuellement) ou installée sur vos propres serveurs (sur site, licence unique). Choisissez par application et combinez à votre guise.",
+    sub: "Chaque application MapleKiosk est offerte de deux façons : hébergée par nous (SaaS, facturée mensuellement) ou installée sur vos propres serveurs (sur site, licence unique). Choisissez par application et combinez à votre guise.",
     per: "/mois",
     apps: [
       { name: "MapleCoffee", price: "39 $", tag: "" },
@@ -320,7 +344,7 @@ export const fr: Strings = {
       },
       {
         q: "Mes paiements passent-ils par vous ?",
-        a: "Non. Jamais. Votre entente de paiement reste entre vous et votre acquéreur — voyez le calculateur.",
+        a: "Non. Jamais. Votre entente de paiement reste entre vous et votre acquéreur, voyez le calculateur.",
       },
       {
         q: "Combien de temps pour l'installation ?",
@@ -332,64 +356,47 @@ export const fr: Strings = {
       },
       {
         q: "L'essai de deux semaines, comment ça marche ?",
-        a: "Deux semaines dans votre commerce. Si la borne ne se paie pas toute seule, on la débranche — et vous ne devez rien.",
+        a: "Deux semaines dans votre commerce. Si la borne ne se paie pas toute seule, on la débranche, et vous ne devez rien.",
       },
     ],
-  },
-
-  demo: {
-    title: "15 minutes. Votre menu, sur une vraie borne.",
-    sub: "On charge votre menu avant de venir — vous jouez avec, vous décidez. Mardi ou mercredi après le rush, c'est parfait.",
-    form: {
-      name: "Nom",
-      business: "Commerce",
-      area: "Quartier ou ville",
-      phone: "Téléphone (texto ok)",
-      slot: "Créneau souhaité",
-      submit: "Réservez mes 15 minutes",
-    },
-    orText: "Ou textez ",
-    orEmail: "Ou écrivez à ",
-    photo: "[PHOTO — le fondateur à un comptoir]",
   },
 
   about: {
     title: "Construite à Longueuil. Installée par celui qui l'a écrite.",
     paras: [
-      "MapleKiosk est construite à Longueuil par Minh — un développeur qui écrit le logiciel, charge votre menu et vient installer la borne lui-même.",
-      "Le produit tourne aujourd'hui dans des boutiques de thé aux perles aux États-Unis. Les premières installations locales s'en viennent — c'est pour ça que la démo est gratuite et que l'essai ne coûte rien.",
-      "Les conditions — pas de contrat, pas de location, pas de forfait de paiement — existent pour une raison : on préfère que vous restiez par choix.",
+      "MapleKiosk est construite à Longueuil par Minh : un développeur qui écrit le logiciel, charge votre menu et vient installer la borne lui-même.",
+      "Le produit tourne aujourd'hui dans des boutiques de thé aux perles aux États-Unis. Les premières installations locales s'en viennent, c'est pour ça que la démo est gratuite et que l'essai ne coûte rien.",
+      "Les conditions. Pas de contrat, pas de location, pas de forfait de paiement, existent pour une raison : on préfère que vous restiez par choix.",
     ],
     photo: "[PHOTO]",
   },
 
   salons: {
-    kicker: "Pour salons d'ongles, spas et instituts de beauté",
     title: "Le téléphone sonne. Vos mains sont dans l'acrylique.",
     sub: "Un assistant répond à chaque appel, en français ou en anglais, guide la cliente dans vos services et réserve le créneau. Il apparaît dans votre horaire. Votre technicienne ne s'arrête jamais.",
     bandTitle: "Vos mains restent sur la cliente. L'assistant prend les appels.",
     quotes: [
       {
         q: "« Une place pour deux, samedi après-midi ? »",
-        body: "L'assistant vérifie votre horaire, répond comme un humain et réserve le créneau — il apparaît dans votre calendrier.",
+        body: "L'assistant vérifie votre horaire, répond comme un humain et réserve le créneau, il apparaît dans votre calendrier.",
       },
       {
         q: "Pas de réponse ? Elle réserve au prochain salon sur Google.",
-        body: "Chaque appel est pris, en français ou en anglais — en pleine pose, en plein soin, en plein rush.",
+        body: "Chaque appel est pris, en français ou en anglais : en pleine pose, en plein soin, en plein rush.",
       },
       {
         q: "« C'est combien, un remplissage gel ? »",
-        body: "Il connaît vos services et vos prix, et il répond — puis propose la réservation.",
+        body: "Il connaît vos services et vos prix, et il répond, puis propose la réservation.",
       },
     ],
-    recording: "[ENREGISTREMENT — un vrai appel de 30 secondes, à produire]",
+    recording: "[ENREGISTREMENT : un vrai appel de 30 secondes, à produire]",
     disclosure:
       "L'assistant est automatisé et le dit au début de chaque appel. Le traitement des appels est en révision pour la Loi 25 avant le lancement.",
   },
 
   notFound: {
     title: "Cette page n'est pas au menu.",
-    text: "Revenez à l'accueil — ou mieux, réservez les 15 minutes.",
+    text: "Revenez à l'accueil, ou mieux, essayez la borne vous-même.",
     back: "Retour à l'accueil",
   },
 }

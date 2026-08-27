@@ -595,7 +595,7 @@ class Component extends DCLogic {
     const photoIdx = Math.floor(el / 3000) % Math.max(1, s.photos.length);
     this.tvTexes.forEach((tx, i) => {
       const tvi = s.tvs[i];
-      if (!tvi) {
+      if (!tvi || !tvi.screens.length) {
         if (this.lastKeys['tv' + i] !== 'off') { this.lastKeys['tv' + i] = 'off'; this.drawOff(tx); }
         return;
       }
@@ -604,13 +604,16 @@ class Component extends DCLogic {
       if (this.lastKeys['tv' + i] !== key) { this.lastKeys['tv' + i] = key; this.drawScreen(tx, cs.t, photoIdx, false); }
     });
     if (s.active === 'tv' && s.tvs[s.curTv]) {
-      const cs = this.currentScreen(s.tvs[s.curTv].screens, el + s.curTv * 1900);
-      const label = this.META[cs.t][0] + ' ' + this.META[cs.t][1];
+      let label = 'nothing';
+      if (s.tvs[s.curTv].screens.length) {
+        const cs = this.currentScreen(s.tvs[s.curTv].screens, el + s.curTv * 1900);
+        label = this.META[cs.t][0] + ' ' + this.META[cs.t][1];
+      }
       if (s.nowLabel !== label) this.setState({ nowLabel: label });
     }
     this.kioskTexes.forEach((tx, i) => {
       const ki = s.kiosks[i];
-      if (!ki) {
+      if (!ki || !ki.screens.length) {
         if (this.lastKeys['kiosk' + i] !== 'off') { this.lastKeys['kiosk' + i] = 'off'; this.drawOff(tx); }
         return;
       }

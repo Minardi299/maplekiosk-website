@@ -4,7 +4,7 @@ export const SITE = {
   name: "MapleKiosk",
   place: "Montreal, QC",
   phone: "[TÉLÉPHONE]",
-  email: "[COURRIEL]",
+  email: "minh@maplekiosk.ca",
   legalName: "MapleKiosk Inc.",
   // static file outside the SPA — link with reloadDocument so the router doesn't swallow it
   demoUrl: "/shop-demo/index.html",

@@ -172,7 +172,6 @@ export const vi: Strings = {
       "Một bộ ứng dụng doanh nghiệp và dịch vụ AI vừa túi tiền, được xây dựng cẩn thận tại Canada cho những người giữ cho doanh nghiệp nhỏ vận hành.",
     product: "Sản phẩm",
     legal: "Pháp lý",
-    industries: "Ngành nghề",
     nails: "Tiệm nail & làm đẹp",
     restaurants: "Nhà hàng & đồ ăn nhanh",
     coffee: "Cà phê & Trà sữa",

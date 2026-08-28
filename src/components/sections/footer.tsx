@@ -8,12 +8,14 @@ export function Footer() {
     { to: "/apps", label: t.nav.features },
     { to: "/tarifs", label: t.nav.pricing },
     { to: "/a-propos", label: t.nav.about },
+    { to: "/salons", label: t.footer.nails },
+    { to: "/restaurants", label: t.footer.restaurants },
   ]
   const linkClass = "text-muted-foreground hover:text-primary"
   return (
     <footer className="border-t bg-muted">
       <div className="site-container flex flex-col gap-10 py-12">
-        <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-[1.5fr_1fr_1fr_0.8fr]">
+        <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-[1.5fr_1fr_0.8fr]">
           <div className="flex max-w-xs flex-col gap-4">
             <img
               src="/MapleKiosk_rectangle.png"
@@ -31,15 +33,6 @@ export function Footer() {
                 {l.label}
               </Link>
             ))}
-          </div>
-          <div className="flex flex-col gap-2.5 text-sm">
-            <h5 className="mb-1 font-semibold">{t.footer.industries}</h5>
-            <Link to={path("/salons")} className={linkClass}>
-              {t.footer.nails}
-            </Link>
-            <Link to={path("/restaurants")} className={linkClass}>
-              {t.footer.restaurants}
-            </Link>
           </div>
           <div className="flex flex-col gap-2.5 text-sm">
             <h5 className="mb-1 font-semibold">{t.footer.legal}</h5>

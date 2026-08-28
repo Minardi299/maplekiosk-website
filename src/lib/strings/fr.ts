@@ -173,7 +173,6 @@ export const fr: Strings = {
       "Une famille d'applications d'affaires et des services d'IA abordables, conçus avec soin au Canada pour ceux qui font vivre les petites entreprises.",
     product: "Produit",
     legal: "Légal",
-    industries: "Secteurs",
     nails: "Salons d'ongles et de beauté",
     restaurants: "Restaurants et restauration rapide",
     coffee: "Cafés & boba",

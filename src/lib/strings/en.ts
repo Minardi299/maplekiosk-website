@@ -161,7 +161,6 @@ export const en = {
       "A family of business apps and affordable AI services, thoughtfully built in Canada for the people who keep small business running.",
     product: "Product",
     legal: "Legal",
-    industries: "Industries",
     nails: "Nail & Beauty Salons",
     restaurants: "Restaurants & Fast Food",
     coffee: "Cafés & Boba",

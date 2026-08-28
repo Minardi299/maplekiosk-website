@@ -5,6 +5,7 @@
 @import "@fontsource-variable/dm-sans";
 @import "@fontsource/dm-mono/400.css";
 @import "@fontsource/dm-mono/500.css";
+@import "@fontsource/caveat/600.css";
 @import "@fontsource/be-vietnam-pro/400.css";
 @import "@fontsource/be-vietnam-pro/500.css";
 @import "@fontsource/be-vietnam-pro/600.css";
@@ -225,6 +226,15 @@
         opacity: 1;
       }
     }
+  }
+
+  /* ===== Handwriting for the physical vignettes ===== */
+  .hand {
+    font-family: 'Caveat', cursive;
+  }
+  /* Caveat has no Vietnamese subset */
+  html:lang(vi) .hand {
+    font-family: 'Be Vietnam Pro', sans-serif;
   }
 
   /* ===== Kitchen ticket rail reveal ===== */

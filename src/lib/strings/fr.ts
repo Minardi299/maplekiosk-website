@@ -207,9 +207,15 @@ export const fr: Strings = {
     title: "Le bip du DoorDash coupe votre service. Encore.",
     sub: "Uber Eats et DoorDash arrivent à l'écran de cuisine. Fini le mur de tablettes.",
     bandTitle: "Coup de feu ou mardi tranquille : la cuisine lit une seule file.",
-    moreTitle: "Deux soucis de moins pendant le service",
+    moreTitle: "Deux choses de moins sur votre planche",
+    vig: {
+      padTag: "Réservation", padTime: "18 h 42",
+      padL1: "Tran — 4 personnes", padL2: "samedi 19 h ✓ confirmé", padL3: "demande la banquette",
+      padStamp: "Pris par l'assistant",
+      loyTitle: "Carte fidélité", loyTag: "Chez vous · depuis 2019", loyTenth: "10ᵉ",
+      loyNote: "Le 10ᵉ est offert — sauf que celle-ci ne se perd jamais dans un manteau.",
+    },
     kds: {
-      railRight: "Écran de cuisine · en direct",
       tickets: [
         { no: "041", src: "Kiosque", l1: "Poulet croustillant · combo", l2: "Sans oignons · extra sauce", status: "Prêt" },
         { no: "042", src: "Comptoir", l1: "Poutine classique · L", l2: "« Prochaine commande prête ! »", status: "En préparation" },

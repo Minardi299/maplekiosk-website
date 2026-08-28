@@ -196,8 +196,14 @@ export const en = {
     sub: "Uber Eats and DoorDash arrive on the kitchen screen. No more tablet wall.",
     bandTitle: "Dinner rush or slow Tuesday: the kitchen reads one queue.",
     moreTitle: "Two more things off your plate",
+    vig: {
+      padTag: "Reservation", padTime: "6:42 pm",
+      padL1: "Tran — party of 4", padL2: "Saturday 7 pm ✓ confirmed", padL3: "asks for the booth",
+      padStamp: "Taken by the assistant",
+      loyTitle: "Loyalty card", loyTag: "Your place · since 2019", loyTenth: "10th",
+      loyNote: "The 10th is free — except this one never gets lost in a coat pocket.",
+    },
     kds: {
-      railRight: "Kitchen screen · live",
       tickets: [
         { no: "041", src: "Kiosk", l1: "Crispy chicken · combo", l2: "No onions · extra sauce", status: "Ready" },
         { no: "042", src: "Counter", l1: "Classic poutine · L", l2: "“Next order up!”", status: "In prep" },

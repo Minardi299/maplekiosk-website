@@ -12,6 +12,7 @@ export default function RestaurantsPage() {
   const r = t.restaurants
   const { ref: railRef, visible } = useVisibleOnce()
   const moreQuotes = [r.quotes[2], t.coffee.quotes[2]]
+  const v = r.vig
   const SRC = [
     "bg-primary text-primary-foreground",
     "bg-secondary text-secondary-foreground",
@@ -54,9 +55,6 @@ export default function RestaurantsPage() {
           data-visible={visible || undefined}
           className="kds-rail flex flex-col"
         >
-          <div className="flex justify-end pb-2.5 font-mono text-[11px] tracking-[0.08em] uppercase">
-            <span className="text-primary">{r.kds.railRight}</span>
-          </div>
           <div className="h-1 rounded-full bg-ink" />
           <div className="grid gap-6 pt-6 md:grid-cols-2 lg:grid-cols-4 lg:pt-0">
             {r.kds.tickets.map((tk, i) => (
@@ -114,20 +112,89 @@ export default function RestaurantsPage() {
             {r.moreTitle}
           </h2>
         </div>
-        <div className="grid gap-6 md:grid-cols-2">
-          {moreQuotes.map((quote) => (
-            <div
-              key={quote.q}
-              className="flex flex-col gap-3.5 rounded-2xl border bg-card p-7"
-            >
-              <p className="font-heading text-xl leading-snug font-semibold text-balance">
-                {quote.q}
-              </p>
-              <p className="text-[15px] leading-relaxed text-muted-foreground">
-                {quote.body}
+        <div className="grid gap-x-10 gap-y-12 md:grid-cols-2 lg:gap-x-14">
+          <div className="flex flex-col gap-5">
+            <div className="w-full max-w-[340px] -rotate-[1.5deg] drop-shadow-[0_16px_24px_rgba(29,33,48,0.22)]">
+              <div className="overflow-hidden rounded border border-[#e3ddc9] bg-[#fdfbf4] bg-[url('/paper-texture-cream.png')] [background-size:256px_256px]">
+                <div className="flex justify-around px-4 pt-2.5">
+                  {Array.from({ length: 7 }).map((_, i) => (
+                    <span
+                      key={i}
+                      className="size-[9px] rounded-full border border-[#d5cdb4] bg-background shadow-[inset_0_1px_1px_rgba(58,47,36,0.25)]"
+                    />
+                  ))}
+                </div>
+                <div className="flex flex-col gap-0.5 px-5 pt-3.5 pb-5">
+                  <div className="mb-2.5 flex items-baseline justify-between gap-3 border-b-2 border-primary pb-1.5 font-mono text-[11px]">
+                    <span className="tracking-[0.14em] text-primary uppercase">
+                      {v.padTag}
+                    </span>
+                    <span className="text-[#8a8472] uppercase">{v.padTime}</span>
+                  </div>
+                  <div className="hand border-b border-[#e3ddc9] pb-0.5 text-[26px] leading-[1.45] text-[#2b2820]">
+                    {v.padL1}
+                  </div>
+                  <div className="hand border-b border-[#e3ddc9] pb-0.5 text-[26px] leading-[1.45] text-[#2b2820]">
+                    {v.padL2}
+                  </div>
+                  <div className="hand border-b border-[#e3ddc9] pb-0.5 text-[22px] leading-[1.45] text-[#8a8472]">
+                    {v.padL3}
+                  </div>
+                  <div className="mt-2.5 flex justify-end">
+                    <span className="-rotate-[4deg] rounded border-[1.5px] border-primary px-2.5 py-1 font-mono text-[10px] tracking-[0.1em] text-primary uppercase">
+                      {v.padStamp}
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="flex max-w-[380px] flex-col gap-1.5">
+              <span className="text-[16.5px] font-bold">{moreQuotes[0].q}</span>
+              <p className="text-[14.5px] leading-relaxed text-muted-foreground">
+                {moreQuotes[0].body}
               </p>
             </div>
-          ))}
+          </div>
+          <div className="flex flex-col gap-5">
+            <div className="w-full max-w-[360px] rotate-[1.2deg] drop-shadow-[0_16px_24px_rgba(29,33,48,0.22)]">
+              <div className="flex flex-col gap-4 rounded-lg border border-background/20 bg-ink bg-[url('/paper-texture.png')] bg-blend-soft-light p-6 text-ink-foreground shadow-[inset_0_1px_0_rgba(248,249,251,0.12),inset_0_-1px_0_rgba(0,0,0,0.3)] [background-size:256px_256px]">
+                <div className="flex items-baseline justify-between gap-3">
+                  <span className="font-heading text-[17px] font-bold">
+                    {v.loyTitle}
+                  </span>
+                  <span className="font-mono text-[10.5px] tracking-[0.1em] text-ink-faint uppercase">
+                    {v.loyTag}
+                  </span>
+                </div>
+                <div className="flex flex-wrap gap-2">
+                  {Array.from({ length: 7 }).map((_, i) => (
+                    <span
+                      key={i}
+                      className="size-9 rounded-full border-2 border-primary-hover bg-primary shadow-[inset_0_2px_3px_rgba(0,0,0,0.35)]"
+                    />
+                  ))}
+                  <span className="flex size-9 items-center justify-center rounded-full border-2 border-dashed border-ink-faint font-mono text-xs text-ink-muted">
+                    8
+                  </span>
+                  <span className="flex size-9 items-center justify-center rounded-full border-2 border-dashed border-ink-faint font-mono text-xs text-ink-muted">
+                    9
+                  </span>
+                  <span className="flex size-9 items-center justify-center rounded-full bg-background font-mono text-[9.5px] font-medium text-ink">
+                    {v.loyTenth}
+                  </span>
+                </div>
+                <span className="text-[13px] leading-normal text-ink-muted">
+                  {v.loyNote}
+                </span>
+              </div>
+            </div>
+            <div className="flex max-w-[380px] flex-col gap-1.5">
+              <span className="text-[16.5px] font-bold">{moreQuotes[1].q}</span>
+              <p className="text-[14.5px] leading-relaxed text-muted-foreground">
+                {moreQuotes[1].body}
+              </p>
+            </div>
+          </div>
         </div>
       </section>
       <DayTimeline />

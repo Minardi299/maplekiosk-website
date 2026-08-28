@@ -200,8 +200,8 @@ export const en = {
       padL1: "Tran — party of 4", padL2: "Saturday 7 pm ✓ confirmed", padL3: "asks for the booth",
       padStamp: "Taken by the assistant",
       loyTitle: "Loyalty card", loyTag: "Your place · since 2019", loyTenth: "10th",
-      loyNote: "The 10th is free — except this one never gets lost in a coat pocket.",
-      bizName: "Your Place", stampsWord: "Stamps",
+      stampsWord: "Stamps",
+      restName: "MapleKiosk restaurant",
       scan: "Scan at the till or the kiosk", custName: "Tran Nguyen",
     },
     kds: {

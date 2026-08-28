@@ -202,11 +202,16 @@ export default function RestaurantsPage() {
                     <div className="flex flex-col gap-2 rounded-xl bg-ink p-3.5 text-ink-foreground">
                       <div className="flex items-center gap-2">
                         <span className="flex size-6 shrink-0 items-center justify-center rounded-full bg-primary text-[11px] font-bold">
-                          {v.bizName[0]}
+                          {v.restName[0]}
                         </span>
-                        <span className="truncate text-[13px] font-semibold">
-                          {v.bizName} · {v.loyTitle}
-                        </span>
+                        <div className="flex min-w-0 flex-col">
+                          <span className="truncate text-[14px] leading-tight font-bold">
+                            {v.custName}
+                          </span>
+                          <span className="truncate font-mono text-[8px] tracking-[0.1em] text-ink-faint uppercase">
+                            {v.restName}
+                          </span>
+                        </div>
                       </div>
                       <span className="font-mono text-[9px] tracking-[0.14em] text-ink-faint uppercase">
                         {v.stampsWord}
@@ -281,9 +286,9 @@ export default function RestaurantsPage() {
                   </div>
                   <div className="flex flex-col gap-3 rounded-2xl bg-ink bg-[url('/paper-texture.png')] bg-blend-soft-light p-4 text-ink-foreground [background-size:256px_256px]">
                     <div className="flex flex-col">
-                      <span className="font-heading text-[16px] font-bold">{v.loyTitle}</span>
+                      <span className="font-heading text-[19px] font-bold">{v.custName}</span>
                       <span className="font-mono text-[9px] tracking-[0.1em] text-ink-faint uppercase">
-                        {v.loyTag}
+                        {v.restName}
                       </span>
                     </div>
                     <span className="font-mono text-[9px] tracking-[0.14em] text-ink-faint uppercase">
@@ -294,9 +299,6 @@ export default function RestaurantsPage() {
                       <span className="text-base text-ink-muted">/ 9</span>
                     </div>
                     <div className="h-[3px] rounded-full bg-primary" />
-                    <span className="text-[12.5px] leading-normal text-ink-muted">
-                      {v.loyNote}
-                    </span>
                     <div className="flex flex-col items-center gap-1.5 rounded-xl bg-white p-3">
                       <Qr className="size-32 text-[#16181c]" />
                       <span className="text-center font-mono text-[8.5px] tracking-[0.12em] text-ink/60 uppercase">

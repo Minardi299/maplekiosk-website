@@ -211,8 +211,8 @@ export const ru: Strings = {
       padL1: "Тран — 4 гостя", padL2: "суббота 19:00 ✓ подтверждено", padL3: "просит диванчик",
       padStamp: "Принял ассистент",
       loyTitle: "Карта лояльности", loyTag: "Ваше место · с 2019", loyTenth: "10-й",
-      loyNote: "10-й — в подарок. Только эта карта никогда не теряется в кармане пальто.",
-      bizName: "Ваше место", stampsWord: "Штампы",
+      stampsWord: "Штампы",
+      restName: "Ресторан MapleKiosk",
       scan: "Сканируйте на кассе или в киоске", custName: "Tran Nguyen",
     },
     kds: {

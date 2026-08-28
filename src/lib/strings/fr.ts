@@ -212,8 +212,8 @@ export const fr: Strings = {
       padL1: "Tran — 4 personnes", padL2: "samedi 19 h ✓ confirmé", padL3: "demande la banquette",
       padStamp: "Pris par l'assistant",
       loyTitle: "Carte fidélité", loyTag: "Chez vous · depuis 2019", loyTenth: "10ᵉ",
-      loyNote: "Le 10ᵉ est offert — sauf que celle-ci ne se perd jamais dans un manteau.",
-      bizName: "Chez Vous", stampsWord: "Tampons",
+      stampsWord: "Tampons",
+      restName: "Restaurant MapleKiosk",
       scan: "Scannez à la caisse ou au kiosque", custName: "Tran Nguyen",
     },
     kds: {

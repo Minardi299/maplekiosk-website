@@ -206,6 +206,7 @@ export const vi: Strings = {
     title: "Tiếng bíp DoorDash lại cắt ngang giờ phục vụ. Lần nữa.",
     sub: "Uber Eats và DoorDash hiện thẳng lên màn hình bếp. Không còn dàn tablet.",
     bandTitle: "Giờ cao điểm hay tối vắng khách, bếp chỉ đọc một hàng chờ.",
+    moreTitle: "Thêm hai việc bạn không phải lo",
     quotes: [
       {
         q: "Điện thoại reo, tablet kêu, hàng chờ dài thêm, mà bạn chỉ có hai tay.",
@@ -264,7 +265,7 @@ export const vi: Strings = {
 
   day: {
     title: "Từ mở cửa đến giờ cao điểm rồi chốt ngày, đúng như thực tế",
-    sub: "Một ngày ở quán, và phần MapleCoffee gánh từng giờ.",
+    sub: "Một ngày phục vụ, và phần MapleKiosk gánh từng giờ.",
     beats: [
       {
         time: "7:00",
@@ -282,7 +283,7 @@ export const vi: Strings = {
           { label: "Kiosk", detail: "Mức đường và đá, kích cỡ, nóng hay lạnh, đổi sữa, và topping như trân châu, thạch và kem phô mai. Mỗi lựa chọn được tính giá và in ra quầy pha đúng như đã đặt." },
           { label: "Màn hình bếp", detail: "Đơn đến màn hình quầy pha và bếp theo thứ tự, có nút báo xong và phiếu rõ ràng, để không đơn nào thất lạc trong giờ cao điểm." },
         ],
-        text: "Hai khách đặt ở kiosk trong khi bạn pha shot. “50% đường, ít đá, thêm trân châu” đến quầy pha đúng như vậy, theo thứ tự đã nhận.",
+        text: "Hai khách đặt ở kiosk trong khi tay bạn đang bận. “50% đường, ít đá” hay “không hành, thêm sốt” đến bếp đúng như vậy, theo thứ tự đã nhận.",
       },
       {
         time: "11:30",
@@ -290,7 +291,7 @@ export const vi: Strings = {
         tags: [
           { label: "Giao hàng, một hàng chờ", detail: "Đơn Uber Eats và DoorDash rơi vào cùng màn hình với khách tại quầy. Quầy pha làm một hàng chờ thay vì ba chiếc tablet." },
         ],
-        text: "Uber Eats và DoorDash thôi là chiếc tablet thứ hai. Phiếu của họ rơi vào cùng hàng chờ với khách tại quầy. Không ly nào chen hàng.",
+        text: "Uber Eats và DoorDash thôi là chiếc tablet thứ hai. Phiếu của họ rơi vào cùng hàng chờ với khách tại quầy. Không đơn nào chen hàng.",
       },
       {
         time: "14:00",
@@ -299,7 +300,7 @@ export const vi: Strings = {
           { label: "Đồng bộ hết món", detail: "Đánh dấu hết món một lần. Nó chuyển xám trên kiosk, màn hình TV và quầy cùng lúc, để không ai bán thứ bạn không làm được." },
           { label: "Tích điểm", detail: "Tem số, điểm và khuyến mãi đưa khách quen quay lại. Tất cả được ghi ngay tại quầy, không có thẻ nào để bấm lỗ hay làm mất." },
         ],
-        text: "Hết sữa yến mạch. Một chạm làm mờ nó trên kiosk, TV và quầy cùng lúc. Không hoàn tiền, không phải xin lỗi ở quầy pha. Tem của khách quen vẫn tiếp tục cộng.",
+        text: "Hết sữa yến mạch. Một chạm làm mờ nó trên kiosk, TV và quầy cùng lúc. Không hoàn tiền, không phải xin lỗi ở quầy. Tem của khách quen vẫn tiếp tục cộng.",
       },
       {
         time: "20:00",

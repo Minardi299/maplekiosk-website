@@ -8,7 +8,8 @@ import { SITE } from "@/lib/site"
 export default function RestaurantsPage() {
   const { t } = useI18n()
   const r = t.restaurants
-  const quotes = [t.coffee.quotes[1], r.quotes[2], t.coffee.quotes[2]]
+  const queueQuotes = [r.quotes[0], t.coffee.quotes[1], r.quotes[1]]
+  const moreQuotes = [r.quotes[2], t.coffee.quotes[2]]
   return (
     <>
       <PageMeta title={t.meta.restaurants.title} desc={t.meta.restaurants.desc} />
@@ -34,7 +35,27 @@ export default function RestaurantsPage() {
           </h2>
         </div>
         <div className="grid gap-6 md:grid-cols-3">
-          {quotes.map((quote) => (
+          {queueQuotes.map((quote) => (
+            <div
+              key={quote.q}
+              className="flex flex-col gap-3.5 rounded-2xl border bg-card p-7"
+            >
+              <p className="font-heading text-xl leading-snug font-semibold text-balance">
+                {quote.q}
+              </p>
+              <p className="text-[15px] leading-relaxed text-muted-foreground">
+                {quote.body}
+              </p>
+            </div>
+          ))}
+        </div>
+        <div className="mt-2 flex max-w-2xl flex-col gap-3">
+          <h2 className="font-heading text-3xl font-semibold tracking-tight text-balance sm:text-[38px]">
+            {r.moreTitle}
+          </h2>
+        </div>
+        <div className="grid gap-6 md:grid-cols-2">
+          {moreQuotes.map((quote) => (
             <div
               key={quote.q}
               className="flex flex-col gap-3.5 rounded-2xl border bg-card p-7"

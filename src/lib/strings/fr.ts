@@ -207,6 +207,7 @@ export const fr: Strings = {
     title: "Le bip du DoorDash coupe votre service. Encore.",
     sub: "Uber Eats et DoorDash arrivent à l'écran de cuisine. Fini le mur de tablettes.",
     bandTitle: "Coup de feu ou mardi tranquille : la cuisine lit une seule file.",
+    moreTitle: "Deux soucis de moins pendant le service",
     quotes: [
       {
         q: "Le téléphone sonne, la tablette bipe, la file s'allonge, et vous avez deux mains.",
@@ -265,7 +266,7 @@ export const fr: Strings = {
 
   day: {
     title: "De l'ouverture au rush à la fermeture, comme ça se passe vraiment",
-    sub: "Une journée de café, et la partie de MapleCoffee qui porte chaque heure.",
+    sub: "Une journée de service, et la partie de MapleKiosk qui porte chaque heure.",
     beats: [
       {
         time: "7 h",
@@ -283,7 +284,7 @@ export const fr: Strings = {
           { label: "La borne", detail: "Niveaux de sucre et de glace, format, chaud ou froid, changements de lait, et garnitures comme les perles, la gelée et la mousse de fromage. Chaque choix est tarifé et imprimé au bar exactement comme commandé." },
           { label: "Écran cuisine", detail: "Les commandes arrivent aux écrans du bar et de la cuisine dans l'ordre, avec le bouton « terminé » et des billets clairs, pour que rien ne se perde dans le rush." },
         ],
-        text: "Deux clients commandent à la borne pendant que vous tirez les shots. « 50 % sucre, moins de glace, extra perles » arrive au bar écrit exactement comme ça, dans l'ordre où c'est entré.",
+        text: "Deux clients commandent à la borne pendant que vous avez les mains pleines. « 50 % sucre, moins de glace » ou « sans oignons, extra sauce » arrive en cuisine écrit exactement comme ça, dans l'ordre où c'est entré.",
       },
       {
         time: "11 h 30",
@@ -291,7 +292,7 @@ export const fr: Strings = {
         tags: [
           { label: "Livraison, une seule file", detail: "Les commandes Uber Eats et DoorDash tombent sur le même écran que les clients au comptoir. Le bar travaille une seule file au lieu de trois tablettes." },
         ],
-        text: "Uber Eats et DoorDash cessent d'être une deuxième tablette. Leurs billets tombent dans la même file que les clients au comptoir. Aucune boisson ne double la file.",
+        text: "Uber Eats et DoorDash cessent d'être une deuxième tablette. Leurs billets tombent dans la même file que les clients au comptoir. Aucune commande ne double la file.",
       },
       {
         time: "14 h",
@@ -300,7 +301,7 @@ export const fr: Strings = {
           { label: "Ruptures synchronisées", detail: "Marquez un article épuisé une seule fois. Il devient gris sur la borne, les écrans télé et le comptoir au même moment, pour que personne ne vende ce que vous ne pouvez pas faire." },
           { label: "Fidélité", detail: "Tampons numériques, points et promos qui ramènent les habitués. Tout est suivi à la caisse, sans carte à poinçonner ni à perdre." },
         ],
-        text: "Le lait d'avoine est fini. Une touche le grise sur la borne, les téléviseurs et le comptoir en même temps. Pas de remboursement, pas d'excuses au bar. Les timbres des habitués continuent de compter.",
+        text: "Le lait d'avoine est fini. Une touche le grise sur la borne, les téléviseurs et le comptoir en même temps. Pas de remboursement, pas d'excuses au comptoir. Les timbres des habitués continuent de compter.",
       },
       {
         time: "20 h",

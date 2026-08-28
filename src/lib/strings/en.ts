@@ -195,6 +195,7 @@ export const en = {
     title: "The DoorDash beep interrupts your service. Again.",
     sub: "Uber Eats and DoorDash arrive on the kitchen screen. No more tablet wall.",
     bandTitle: "Dinner rush or slow Tuesday: the kitchen reads one queue.",
+    moreTitle: "Two more things off your plate",
     quotes: [
       {
         q: "The phone rings, the tablet beeps, the line grows, and you have two hands.",
@@ -253,7 +254,7 @@ export const en = {
 
   day: {
     title: "Open to rush to reset: the way it really runs",
-    sub: "One café day, and the part of MapleCoffee that carries each hour.",
+    sub: "One service day, and the part of MapleKiosk that carries each hour.",
     beats: [
       {
         time: "7:00",
@@ -269,9 +270,9 @@ export const en = {
         name: "The morning rush",
         tags: [
           { label: "The kiosk", detail: "Sugar and ice levels, size, hot or cold, milk swaps, and toppings like pearls, jelly and cheese foam. Each one priced and printed to the bar exactly as ordered." },
-          { label: "Kitchen screen", detail: "Orders reach the barista and kitchen screens in sequence, with bump-when-done and clear tickets, so nothing gets lost in the rush." },
+          { label: "Kitchen screen", detail: "Orders reach the bar and kitchen screens in sequence, with bump-when-done and clear tickets, so nothing gets lost in the rush." },
         ],
-        text: "Two people order at the kiosk while you pull shots. “Half sugar, less ice, extra pearls” reaches the bar written exactly that way, in the order it was rung.",
+        text: "Two people order at the kiosk while your hands are full. “Half sugar, less ice” or “no onions, extra sauce” reaches the kitchen written exactly that way, in the order it was rung.",
       },
       {
         time: "11:30",
@@ -279,7 +280,7 @@ export const en = {
         tags: [
           { label: "Delivery, one queue", detail: "Uber Eats and DoorDash orders drop onto the same screen as walk-ins, so the bar works one queue instead of three tablets." },
         ],
-        text: "Uber Eats and DoorDash stop being a second tablet. Their tickets fall into the same bar queue as the walk-ins, so nobody's drink jumps the line.",
+        text: "Uber Eats and DoorDash stop being a second tablet. Their tickets fall into the same prep queue as the walk-ins, so nobody's order jumps the line.",
       },
       {
         time: "14:00",
@@ -288,7 +289,7 @@ export const en = {
           { label: "Sold-out sync", detail: "Mark an item sold out once. It greys out on the kiosk, the TV boards and the counter at the same moment, so nobody sells what you cannot make." },
           { label: "Loyalty", detail: "Digital stamps, points and promos that bring regulars back. All tracked at the till, with no card to punch or lose." },
         ],
-        text: "The oat milk runs out. One tap greys it out on the kiosk, the TVs and the counter at once. No refunds, no apologies at the bar. Regulars' stamps keep counting.",
+        text: "The oat milk runs out. One tap greys it out on the kiosk, the TVs and the counter at once. No refunds, no apologies at the counter. Regulars' stamps keep counting.",
       },
       {
         time: "20:00",

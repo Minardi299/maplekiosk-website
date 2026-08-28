@@ -254,11 +254,6 @@
     }
   }
   @media (scripting: enabled) {
-    .kds-rail .kds-stem {
-      transform-origin: top;
-      scale: 1 0;
-      transition: scale 150ms var(--ease-out) calc(var(--step) * 150ms);
-    }
     .kds-rail .kds-ticket {
       opacity: 0;
       translate: 0 -8px;
@@ -278,9 +273,6 @@
       scale: 0 1;
       transition: scale 300ms var(--ease-out) 1s;
     }
-    .kds-rail[data-visible] .kds-stem {
-      scale: 1 1;
-    }
     .kds-rail[data-visible] .kds-ticket {
       opacity: 1;
       translate: 0 0;
@@ -293,10 +285,6 @@
       scale: 1 1;
     }
     @media (prefers-reduced-motion: reduce) {
-      .kds-rail .kds-stem {
-        scale: 1 1;
-        transition: none;
-      }
       .kds-rail .kds-ticket {
         translate: 0 0;
         transition: opacity 300ms var(--ease-out);

@@ -161,7 +161,7 @@ export default function RestaurantsPage() {
         <div className="grid gap-x-10 gap-y-12 md:grid-cols-2 lg:gap-x-14">
           <div className="flex flex-col gap-5">
             <div className="w-full max-w-[470px] -rotate-[1.5deg] drop-shadow-[0_16px_24px_rgba(29,33,48,0.22)]">
-              <div className="overflow-hidden rounded border border-[#e3ddc9] bg-[#fdfbf4] bg-[url('/paper-texture-cream.png')] [background-size:256px_256px]">
+              <div className="overflow-hidden rounded border border-[#e3ddc9] bg-[#fdfbf4]">
                 <div className="flex justify-around px-6 pt-3.5">
                   {Array.from({ length: 7 }).map((_, i) => (
                     <span
@@ -253,7 +253,7 @@ export default function RestaurantsPage() {
               </div>
               {/* physical card behind, right */}
               <div className="absolute top-40 right-0 w-[240px] rotate-[9deg] drop-shadow-[0_16px_24px_rgba(29,33,48,0.22)]">
-                <div className="flex flex-col gap-2.5 rounded-lg border border-background/20 bg-ink bg-[url('/paper-texture.png')] bg-blend-soft-light p-4 text-ink-foreground shadow-[inset_0_1px_0_rgba(248,249,251,0.12),inset_0_-1px_0_rgba(0,0,0,0.3)] [background-size:256px_256px]">
+                <div className="flex flex-col gap-2.5 rounded-lg border border-background/20 bg-ink p-4 text-ink-foreground shadow-[inset_0_1px_0_rgba(248,249,251,0.12),inset_0_-1px_0_rgba(0,0,0,0.3)]">
                   <div className="flex flex-col">
                     <span className="font-heading text-[15px] font-bold">{v.loyTitle}</span>
                     <span className="font-mono text-[8.5px] tracking-[0.1em] text-ink-faint uppercase">
@@ -304,7 +304,7 @@ export default function RestaurantsPage() {
                       {v.custName[0]}
                     </span>
                   </div>
-                  <div className="flex flex-col gap-3 rounded-2xl bg-ink bg-[url('/paper-texture.png')] bg-blend-soft-light p-4 text-ink-foreground [background-size:256px_256px]">
+                  <div className="flex flex-col gap-3 rounded-2xl bg-ink p-4 text-ink-foreground">
                     <div className="flex flex-col">
                       <span className="font-heading text-[19px] font-bold">{v.custName}</span>
                       <span className="font-mono text-[9px] tracking-[0.1em] text-ink-faint uppercase">

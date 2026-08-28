@@ -196,6 +196,19 @@ export const en = {
     sub: "Uber Eats and DoorDash arrive on the kitchen screen. No more tablet wall.",
     bandTitle: "Dinner rush or slow Tuesday: the kitchen reads one queue.",
     moreTitle: "Two more things off your plate",
+    kds: {
+      railLeft: "Kiosk + counter + Uber Eats + DoorDash → one queue",
+      railRight: "Kitchen screen · live",
+      tickets: [
+        { no: "041", src: "Kiosk", l1: "Crispy chicken · combo", l2: "No onions · extra sauce", status: "Ready" },
+        { no: "042", src: "Counter", l1: "Classic poutine · L", l2: "“Next order up!”", status: "In prep" },
+        { no: "043", src: "Uber Eats", l1: "2 × salmon poke bowl", l2: "No more tablet wall", status: "Waiting" },
+      ],
+      soldQuote: "“86”",
+      soldBadge: "Sold out",
+      soldItem: "Grilled salmon",
+      soldBody: "Marked sold out once — greyed out on the kiosk and the TV menus instantly.",
+    },
     quotes: [
       {
         q: "The phone rings, the tablet beeps, the line grows, and you have two hands.",

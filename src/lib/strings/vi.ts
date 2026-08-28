@@ -207,6 +207,19 @@ export const vi: Strings = {
     sub: "Uber Eats và DoorDash hiện thẳng lên màn hình bếp. Không còn dàn tablet.",
     bandTitle: "Giờ cao điểm hay tối vắng khách, bếp chỉ đọc một hàng chờ.",
     moreTitle: "Thêm hai việc bạn không phải lo",
+    kds: {
+      railLeft: "Kiosk + quầy + Uber Eats + DoorDash → một hàng chờ",
+      railRight: "Màn hình bếp · trực tiếp",
+      tickets: [
+        { no: "041", src: "Kiosk", l1: "Gà giòn · combo", l2: "Không hành · thêm sốt", status: "Xong" },
+        { no: "042", src: "Quầy", l1: "Poutine cổ điển · L", l2: "“Đơn tiếp theo!”", status: "Đang làm" },
+        { no: "043", src: "Uber Eats", l1: "2 × bát poké cá hồi", l2: "Hết cảnh tường tablet", status: "Đang chờ" },
+      ],
+      soldQuote: "“86”",
+      soldBadge: "Hết món",
+      soldItem: "Cá hồi nướng",
+      soldBody: "Đánh dấu hết món một lần — mờ ngay trên kiosk và menu TV.",
+    },
     quotes: [
       {
         q: "Điện thoại reo, tablet kêu, hàng chờ dài thêm, mà bạn chỉ có hai tay.",

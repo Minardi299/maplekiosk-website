@@ -208,6 +208,19 @@ export const fr: Strings = {
     sub: "Uber Eats et DoorDash arrivent à l'écran de cuisine. Fini le mur de tablettes.",
     bandTitle: "Coup de feu ou mardi tranquille : la cuisine lit une seule file.",
     moreTitle: "Deux soucis de moins pendant le service",
+    kds: {
+      railLeft: "Kiosque + comptoir + Uber Eats + DoorDash → une seule file",
+      railRight: "Écran de cuisine · en direct",
+      tickets: [
+        { no: "041", src: "Kiosque", l1: "Poulet croustillant · combo", l2: "Sans oignons · extra sauce", status: "Prêt" },
+        { no: "042", src: "Comptoir", l1: "Poutine classique · L", l2: "« Prochaine commande prête ! »", status: "En préparation" },
+        { no: "043", src: "Uber Eats", l1: "2 × bol poké saumon", l2: "Fini le mur de tablettes", status: "En attente" },
+      ],
+      soldQuote: "« 86 »",
+      soldBadge: "Épuisé",
+      soldItem: "Saumon grillé",
+      soldBody: "Marqué épuisé une fois — grisé sur le kiosque et les menus TV instantanément.",
+    },
     quotes: [
       {
         q: "Le téléphone sonne, la tablette bipe, la file s'allonge, et vous avez deux mains.",

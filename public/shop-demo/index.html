@@ -43,7 +43,7 @@ window.dispatchEvent(new Event('three-ready'));
     </div>
   </sc-if>
   <sc-if value="{{ panelOpen }}" hint-placeholder-val="{{ false }}">
-    <button onClick="{{ goBack }}" style="position:absolute;top:78px;left:20px;background:#fffdfa;border:1px solid #e4dbc8;border-radius:99px;padding:9px 18px;font-family:inherit;font-size:13px;font-weight:700;color:#2f2a23;cursor:pointer;box-shadow:0 4px 16px rgba(80,60,30,.14)">‹ Back to shop <span style="opacity:.5;font-weight:600">esc</span></button>
+    <button onClick="{{ goBack }}" style="position:absolute;top:18px;left:20px;background:#fffdfa;border:1px solid #e4dbc8;border-radius:99px;padding:9px 18px;font-family:inherit;font-size:13px;font-weight:700;color:#2f2a23;cursor:pointer;box-shadow:0 4px 16px rgba(80,60,30,.14)">‹ Back to shop <span style="opacity:.5;font-weight:600">esc</span></button>
     <div style="{{ panelStyle }}">
       <div style="padding:18px 22px 14px;border-bottom:1px solid #e4dbc8;display:flex;align-items:center;gap:12px">
         <sc-if value="{{ isMobile }}" hint-placeholder-val="{{ false }}"><button onClick="{{ goBack }}" aria-label="Back to shop" style="background:#efe6d2;border:none;border-radius:10px;width:34px;height:34px;font-size:18px;color:#2f2a23;cursor:pointer;flex-shrink:0">‹</button></sc-if>

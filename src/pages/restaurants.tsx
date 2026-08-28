@@ -1,17 +1,20 @@
+import type { CSSProperties } from "react"
 import { CtaLink } from "@/components/cta-link"
 import { PageMeta } from "@/components/page-meta"
 import { DayTimeline } from "@/components/sections/day-timeline"
 import { FinalCta } from "@/components/sections/final-cta"
 import { useI18n } from "@/lib/i18n"
+import { useVisibleOnce } from "@/lib/use-visible-once"
 import { SITE } from "@/lib/site"
 
 export default function RestaurantsPage() {
   const { t } = useI18n()
   const r = t.restaurants
+  const { ref: railRef, visible } = useVisibleOnce()
   const moreQuotes = [r.quotes[2], t.coffee.quotes[2]]
   const STATUS = [
     { dot: "bg-primary", text: "text-primary" },
-    { dot: "bg-ink", text: "text-foreground" },
+    { dot: "kds-live bg-ink", text: "text-foreground" },
     { dot: "border-[1.5px] border-muted-foreground", text: "text-muted-foreground" },
   ]
   return (
@@ -41,7 +44,11 @@ export default function RestaurantsPage() {
             {r.quotes[0].q} {r.quotes[0].body}
           </p>
         </div>
-        <div className="flex flex-col">
+        <div
+          ref={railRef}
+          data-visible={visible || undefined}
+          className="kds-rail flex flex-col"
+        >
           <div className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1 pb-2.5 font-mono text-[11px] tracking-[0.08em] uppercase">
             <span>{r.kds.railLeft}</span>
             <span className="text-primary">{r.kds.railRight}</span>
@@ -49,11 +56,15 @@ export default function RestaurantsPage() {
           <div className="h-1 rounded-full bg-ink" />
           <div className="grid gap-6 pt-6 md:grid-cols-2 lg:grid-cols-4 lg:pt-0">
             {r.kds.tickets.map((tk, i) => (
-              <div key={tk.no} className="flex flex-col">
-                <div className="mx-auto hidden h-6 w-1.5 bg-ink lg:block" />
-                <div className="flex flex-1 flex-col gap-3 rounded-xl border bg-card p-5 shadow-sm">
+              <div
+                key={tk.no}
+                className="flex flex-col"
+                style={{ "--step": i } as CSSProperties}
+              >
+                <div className="kds-stem mx-auto hidden h-6 w-1.5 bg-ink lg:block" />
+                <div className="kds-ticket flex flex-1 flex-col gap-3 rounded-xl border bg-card p-5 shadow-sm">
                   <div className="flex items-center justify-between gap-2">
-                    <span className="font-mono text-sm">№ {tk.no}</span>
+                    <span className="font-mono text-sm">#{tk.no}</span>
                     <span className="rounded-md bg-muted px-2 py-0.5 font-mono text-[11px] tracking-[0.08em] uppercase">
                       {tk.src}
                     </span>
@@ -71,9 +82,9 @@ export default function RestaurantsPage() {
                 </div>
               </div>
             ))}
-            <div className="flex flex-col">
-              <div className="mx-auto hidden h-6 w-1.5 bg-ink lg:block" />
-              <div className="flex flex-1 flex-col gap-3 rounded-xl bg-ink p-5 text-ink-foreground">
+            <div className="flex flex-col" style={{ "--step": 3 } as CSSProperties}>
+              <div className="kds-stem mx-auto hidden h-6 w-1.5 bg-ink lg:block" />
+              <div className="kds-ticket flex flex-1 flex-col gap-3 rounded-xl bg-ink p-5 text-ink-foreground">
                 <div className="flex items-center justify-between gap-2">
                   <span className="font-heading text-lg font-semibold">
                     {r.kds.soldQuote}
@@ -82,8 +93,8 @@ export default function RestaurantsPage() {
                     {r.kds.soldBadge}
                   </span>
                 </div>
-                <div className="text-[15px] font-medium text-ink-muted line-through">
-                  {r.kds.soldItem}
+                <div className="text-[15px] font-medium text-ink-muted">
+                  <span className="kds-strike relative">{r.kds.soldItem}</span>
                 </div>
                 <p className="text-sm leading-relaxed text-ink-muted">
                   {r.kds.soldBody}

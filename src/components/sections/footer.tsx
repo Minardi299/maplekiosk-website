@@ -40,9 +40,6 @@ export function Footer() {
             <Link to={path("/restaurants")} className={linkClass}>
               {t.footer.restaurants}
             </Link>
-            <Link to={path("/coffee")} className={linkClass}>
-              {t.footer.coffee}
-            </Link>
           </div>
           <div className="flex flex-col gap-2.5 text-sm">
             <h5 className="mb-1 font-semibold">{t.footer.legal}</h5>

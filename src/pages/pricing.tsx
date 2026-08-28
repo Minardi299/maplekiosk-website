@@ -10,7 +10,7 @@ export default function PricingPage() {
   const { t, path } = useI18n()
   const p = t.pricing
   const doors = [
-    { to: "/coffee", label: t.footer.coffee },
+    { to: "/restaurants", label: t.footer.coffee },
     { to: "/restaurants", label: t.footer.restaurants },
     { to: "/salons", label: t.footer.nails },
   ]

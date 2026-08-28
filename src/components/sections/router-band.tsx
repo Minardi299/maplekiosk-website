@@ -13,7 +13,7 @@ export function RouterBand() {
           <p className="text-lg text-muted-foreground">{t.router.sub}</p>
         </div>
         <div className="grid gap-6 md:grid-cols-3">
-          {t.router.doors.map((door, i) => (
+          {t.router.doors.map((door) => (
             <div
               key={door.label}
               className="flex flex-col gap-3.5 rounded-2xl border bg-card p-7"
@@ -28,10 +28,10 @@ export function RouterBand() {
                 {door.body}
               </p>
               <Link
-                to={path(i === 0 ? "/coffee" : "/restaurants")}
+                to={path("/restaurants")}
                 className="mt-auto pt-1 text-[15px] font-semibold text-primary hover:text-primary-hover"
               >
-                {i === 0 ? t.footer.coffee : t.footer.restaurants} →
+                {t.footer.restaurants} →
               </Link>
             </div>
           ))}

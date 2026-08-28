@@ -212,9 +212,9 @@ export const fr: Strings = {
       padL1: "Tran — 4 personnes", padL2: "samedi 19 h ✓ confirmé", padL3: "demande la banquette",
       padStamp: "Pris par l'assistant",
       loyTitle: "Carte fidélité", loyTag: "Chez vous · depuis 2019", loyTenth: "10ᵉ",
-      stampsWord: "Tampons",
+     
       restName: "Restaurant MapleKiosk",
-      scan: "Scannez à la caisse ou au kiosque", custName: "Tran Nguyen",
+      custName: "Tran Nguyen",
     },
     kds: {
       tickets: [

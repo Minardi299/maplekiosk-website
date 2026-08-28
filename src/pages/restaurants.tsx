@@ -7,31 +7,42 @@ import { useI18n } from "@/lib/i18n"
 import { useVisibleOnce } from "@/lib/use-visible-once"
 import { SITE } from "@/lib/site"
 
+// real QR for https://starb.ca (version 2, ECC M), generated offline
+const QR_ROWS = [
+  "1111111011001111001111111",
+  "1000001010010111001000001",
+  "1011101011001110001011101",
+  "1011101001110011101011101",
+  "1011101010000101001011101",
+  "1000001000111110001000001",
+  "1111111010101010101111111",
+  "0000000001100010000000000",
+  "1001111111000111110010111",
+  "0010110011101011010111110",
+  "1011011000011011101101001",
+  "1100010000110011111001111",
+  "0001011010010111101000001",
+  "1110110010101001100010010",
+  "1100001110100011101011111",
+  "1011000100001111011101101",
+  "1010001001111000111110110",
+  "0000000010110000100010110",
+  "1111111010001110101010001",
+  "1000001010010100100010001",
+  "1011101010110101111110001",
+  "1011101011101100011000011",
+  "1011101000110101000011111",
+  "1000001001111100011110111",
+  "1111111011011100110001001",
+]
 function Qr({ className }: { className?: string }) {
-  const N = 21
-  let seed = 41
-  const rnd = () => (seed = (seed * 1103515245 + 12345) & 0x7fffffff) / 0x7fffffff
-  const cells: [number, number][] = []
-  for (let row = 0; row < N; row++)
-    for (let col = 0; col < N; col++) {
-      const finder =
-        (col < 7 && row < 7) || (col > N - 8 && row < 7) || (col < 7 && row > N - 8)
-      if (!finder && rnd() < 0.45) cells.push([col, row])
-    }
-  const finder = (x: number, y: number) => (
-    <g key={`${x}${y}`}>
-      <path d={`M${x} ${y}h7v7h-7z M${x + 1} ${y + 1}h5v5h-5z`} fillRule="evenodd" />
-      <rect x={x + 2} y={y + 2} width="3" height="3" />
-    </g>
-  )
   return (
-    <svg viewBox="0 0 21 21" className={className} fill="currentColor" shapeRendering="crispEdges" aria-hidden>
-      {cells.map(([x, y]) => (
-        <rect key={`${x}-${y}`} x={x} y={y} width="1" height="1" />
-      ))}
-      {finder(0, 0)}
-      {finder(14, 0)}
-      {finder(0, 14)}
+    <svg viewBox="0 0 25 25" className={className} fill="currentColor" shapeRendering="crispEdges" aria-hidden>
+      {QR_ROWS.flatMap((row, y) =>
+        [...row].map((cell, x) =>
+          cell === "1" ? <rect key={`${x}-${y}`} x={x} y={y} width="1" height="1" /> : null,
+        ),
+      )}
     </svg>
   )
 }
@@ -149,34 +160,34 @@ export default function RestaurantsPage() {
         </div>
         <div className="grid gap-x-10 gap-y-12 md:grid-cols-2 lg:gap-x-14">
           <div className="flex flex-col gap-5">
-            <div className="w-full max-w-[340px] -rotate-[1.5deg] drop-shadow-[0_16px_24px_rgba(29,33,48,0.22)]">
+            <div className="w-full max-w-[470px] -rotate-[1.5deg] drop-shadow-[0_16px_24px_rgba(29,33,48,0.22)]">
               <div className="overflow-hidden rounded border border-[#e3ddc9] bg-[#fdfbf4] bg-[url('/paper-texture-cream.png')] [background-size:256px_256px]">
-                <div className="flex justify-around px-4 pt-2.5">
+                <div className="flex justify-around px-6 pt-3.5">
                   {Array.from({ length: 7 }).map((_, i) => (
                     <span
                       key={i}
-                      className="size-[9px] rounded-full border border-[#d5cdb4] bg-background shadow-[inset_0_1px_1px_rgba(58,47,36,0.25)]"
+                      className="size-3 rounded-full border border-[#d5cdb4] bg-background shadow-[inset_0_1px_1px_rgba(58,47,36,0.25)]"
                     />
                   ))}
                 </div>
-                <div className="flex flex-col gap-0.5 px-5 pt-3.5 pb-5">
-                  <div className="mb-2.5 flex items-baseline justify-between gap-3 border-b-2 border-primary pb-1.5 font-mono text-[11px]">
+                <div className="flex flex-col gap-1 px-7 pt-5 pb-7">
+                  <div className="mb-3.5 flex items-baseline justify-between gap-3 border-b-2 border-primary pb-2 font-mono text-[13px]">
                     <span className="tracking-[0.14em] text-primary uppercase">
                       {v.padTag}
                     </span>
                     <span className="text-[#8a8472] uppercase">{v.padTime}</span>
                   </div>
-                  <div className="hand border-b border-[#e3ddc9] pb-0.5 text-[26px] leading-[1.45] text-[#2b2820]">
+                  <div className="hand border-b border-[#e3ddc9] pb-1 text-4xl leading-[1.45] text-[#2b2820]">
                     {v.padL1}
                   </div>
-                  <div className="hand border-b border-[#e3ddc9] pb-0.5 text-[26px] leading-[1.45] text-[#2b2820]">
+                  <div className="hand border-b border-[#e3ddc9] pb-1 text-4xl leading-[1.45] text-[#2b2820]">
                     {v.padL2}
                   </div>
-                  <div className="hand border-b border-[#e3ddc9] pb-0.5 text-[22px] leading-[1.45] text-[#8a8472]">
+                  <div className="hand border-b border-[#e3ddc9] pb-1 text-3xl leading-[1.45] text-[#8a8472]">
                     {v.padL3}
                   </div>
-                  <div className="mt-2.5 flex justify-end">
-                    <span className="-rotate-[4deg] rounded border-[1.5px] border-primary px-2.5 py-1 font-mono text-[10px] tracking-[0.1em] text-primary uppercase">
+                  <div className="mt-4 flex justify-end">
+                    <span className="-rotate-[4deg] rounded border-2 border-primary px-3.5 py-1.5 font-mono text-xs tracking-[0.1em] text-primary uppercase">
                       {v.padStamp}
                     </span>
                   </div>
@@ -213,20 +224,30 @@ export default function RestaurantsPage() {
                           </span>
                         </div>
                       </div>
-                      <span className="font-mono text-[9px] tracking-[0.14em] text-ink-faint uppercase">
-                        {v.stampsWord}
-                      </span>
                       <div className="flex items-baseline gap-1">
                         <span className="text-2xl font-bold">7</span>
                         <span className="text-sm text-ink-muted">/ 9</span>
                       </div>
-                      <div className="h-[3px] rounded-full bg-primary" />
+                      <div className="flex flex-wrap gap-1.5">
+                        {Array.from({ length: 7 }).map((_, i) => (
+                          <span
+                            key={i}
+                            className="size-5 rounded-full border-2 border-primary-hover bg-primary shadow-[inset_0_2px_3px_rgba(0,0,0,0.35)]"
+                          />
+                        ))}
+                        <span className="flex size-5 items-center justify-center rounded-full border-2 border-dashed border-ink-faint font-mono text-[9px] text-ink-muted">
+                          8
+                        </span>
+                        <span className="flex size-5 items-center justify-center rounded-full border-2 border-dashed border-ink-faint font-mono text-[9px] text-ink-muted">
+                          9
+                        </span>
+                        <span className="flex size-5 items-center justify-center rounded-full bg-background font-mono text-[7px] font-medium text-ink">
+                          {v.loyTenth}
+                        </span>
+                      </div>
                       <div className="flex justify-center rounded-md bg-white px-2 py-1.5">
                         <Barcode className="h-7 w-32 text-[#16181c]" />
                       </div>
-                      <span className="text-center font-mono text-[8px] tracking-[0.12em] text-ink-faint uppercase">
-                        {v.scan}
-                      </span>
                     </div>
                   </div>
                 </div>
@@ -260,8 +281,8 @@ export default function RestaurantsPage() {
                   <span className="text-right font-mono text-[10.5px] tracking-[0.14em] uppercase">
                     {v.custName}
                   </span>
-                  <div className="flex flex-col items-center gap-1 rounded-md bg-white p-2">
-                    <Qr className="size-16 text-[#16181c]" />
+                  <div className="flex justify-center rounded-md bg-white px-2 py-2">
+                    <Barcode className="h-8 w-40 text-[#16181c]" />
                   </div>
                 </div>
               </div>
@@ -291,19 +312,29 @@ export default function RestaurantsPage() {
                         {v.restName}
                       </span>
                     </div>
-                    <span className="font-mono text-[9px] tracking-[0.14em] text-ink-faint uppercase">
-                      {v.stampsWord}
-                    </span>
                     <div className="flex items-baseline gap-1">
                       <span className="text-3xl font-bold">7</span>
                       <span className="text-base text-ink-muted">/ 9</span>
                     </div>
-                    <div className="h-[3px] rounded-full bg-primary" />
-                    <div className="flex flex-col items-center gap-1.5 rounded-xl bg-white p-3">
-                      <Qr className="size-32 text-[#16181c]" />
-                      <span className="text-center font-mono text-[8.5px] tracking-[0.12em] text-ink/60 uppercase">
-                        {v.scan}
+                    <div className="flex flex-wrap gap-2">
+                      {Array.from({ length: 7 }).map((_, i) => (
+                        <span
+                          key={i}
+                          className="size-7 rounded-full border-2 border-primary-hover bg-primary shadow-[inset_0_2px_3px_rgba(0,0,0,0.35)]"
+                        />
+                      ))}
+                      <span className="flex size-7 items-center justify-center rounded-full border-2 border-dashed border-ink-faint font-mono text-[11px] text-ink-muted">
+                        8
                       </span>
+                      <span className="flex size-7 items-center justify-center rounded-full border-2 border-dashed border-ink-faint font-mono text-[11px] text-ink-muted">
+                        9
+                      </span>
+                      <span className="flex size-7 items-center justify-center rounded-full bg-background font-mono text-[8.5px] font-medium text-ink">
+                        {v.loyTenth}
+                      </span>
+                    </div>
+                    <div className="flex justify-center rounded-xl bg-white p-3">
+                      <Qr className="size-32 text-[#16181c]" />
                     </div>
                   </div>
                   <span className="mx-auto mt-1 h-1 w-24 rounded-full bg-[#16181c]" />

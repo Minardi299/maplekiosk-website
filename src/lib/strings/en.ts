@@ -201,6 +201,8 @@ export const en = {
       padStamp: "Taken by the assistant",
       loyTitle: "Loyalty card", loyTag: "Your place · since 2019", loyTenth: "10th",
       loyNote: "The 10th is free — except this one never gets lost in a coat pocket.",
+      bizName: "Your Place", stampsWord: "Stamps",
+      scan: "Scan at the till or the kiosk", custName: "Tran Nguyen",
     },
     kds: {
       tickets: [

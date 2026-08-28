@@ -212,6 +212,8 @@ export const ru: Strings = {
       padStamp: "Принял ассистент",
       loyTitle: "Карта лояльности", loyTag: "Ваше место · с 2019", loyTenth: "10-й",
       loyNote: "10-й — в подарок. Только эта карта никогда не теряется в кармане пальто.",
+      bizName: "Ваше место", stampsWord: "Штампы",
+      scan: "Сканируйте на кассе или в киоске", custName: "Tran Nguyen",
     },
     kds: {
       tickets: [

@@ -213,6 +213,8 @@ export const fr: Strings = {
       padStamp: "Pris par l'assistant",
       loyTitle: "Carte fidélité", loyTag: "Chez vous · depuis 2019", loyTenth: "10ᵉ",
       loyNote: "Le 10ᵉ est offert — sauf que celle-ci ne se perd jamais dans un manteau.",
+      bizName: "Chez Vous", stampsWord: "Tampons",
+      scan: "Scannez à la caisse ou au kiosque", custName: "Tran Nguyen",
     },
     kds: {
       tickets: [

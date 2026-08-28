@@ -212,6 +212,8 @@ export const vi: Strings = {
       padStamp: "Trợ lý đã nhận",
       loyTitle: "Thẻ tích điểm", loyTag: "Quán của bạn · từ 2019", loyTenth: "10",
       loyNote: "Ly thứ 10 miễn phí — và thẻ này không bao giờ bị bỏ quên trong túi áo.",
+      bizName: "Quán Của Bạn", stampsWord: "Tem",
+      scan: "Quét tại quầy hoặc kiosk", custName: "Tran Nguyen",
     },
     kds: {
       tickets: [

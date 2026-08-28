@@ -191,7 +191,7 @@ export default function RestaurantsPage() {
             </div>
           </div>
           <div className="flex flex-col gap-5">
-            <div className="relative h-[560px] w-full max-w-[460px]">
+            <div className="relative h-[600px] w-full max-w-[500px]">
               {/* Android behind, left */}
               <div className="absolute top-10 left-0 w-[200px] -rotate-[8deg] rounded-[30px] bg-[#16181c] p-1.5 drop-shadow-[0_16px_24px_rgba(29,33,48,0.28)]">
                 <div className="relative h-[400px] overflow-hidden rounded-[24px] bg-white">
@@ -227,7 +227,7 @@ export default function RestaurantsPage() {
                 </div>
               </div>
               {/* physical card behind, right */}
-              <div className="absolute top-28 right-0 w-[230px] rotate-[7deg] drop-shadow-[0_16px_24px_rgba(29,33,48,0.22)]">
+              <div className="absolute top-40 right-0 w-[240px] rotate-[9deg] drop-shadow-[0_16px_24px_rgba(29,33,48,0.22)]">
                 <div className="flex flex-col gap-2.5 rounded-lg border border-background/20 bg-ink bg-[url('/paper-texture.png')] bg-blend-soft-light p-4 text-ink-foreground shadow-[inset_0_1px_0_rgba(248,249,251,0.12),inset_0_-1px_0_rgba(0,0,0,0.3)] [background-size:256px_256px]">
                   <div className="flex flex-col">
                     <span className="font-heading text-[15px] font-bold">{v.loyTitle}</span>
@@ -252,7 +252,7 @@ export default function RestaurantsPage() {
                       {v.loyTenth}
                     </span>
                   </div>
-                  <span className="font-mono text-[10.5px] tracking-[0.14em] uppercase">
+                  <span className="text-right font-mono text-[10.5px] tracking-[0.14em] uppercase">
                     {v.custName}
                   </span>
                   <div className="flex flex-col items-center gap-1 rounded-md bg-white p-2">
@@ -261,7 +261,7 @@ export default function RestaurantsPage() {
                 </div>
               </div>
               {/* iPhone in front */}
-              <div className="absolute top-0 left-1/2 z-10 w-[270px] -translate-x-1/2 rotate-[2deg] rounded-[44px] bg-[#16181c] p-[7px] drop-shadow-[0_24px_40px_rgba(29,33,48,0.35)]">
+              <div className="absolute top-0 left-[46%] z-10 w-[270px] -translate-x-1/2 rotate-[2deg] rounded-[44px] bg-[#16181c] p-[7px] drop-shadow-[0_24px_40px_rgba(29,33,48,0.35)]">
                 <div className="flex flex-col gap-3 overflow-hidden rounded-[37px] bg-white px-4 pt-3.5 pb-2.5">
                   <div className="relative flex items-center justify-between">
                     <span className="text-[13px] font-semibold">18:42</span>
@@ -286,23 +286,14 @@ export default function RestaurantsPage() {
                         {v.loyTag}
                       </span>
                     </div>
-                    <div className="flex flex-wrap gap-2">
-                      {Array.from({ length: 7 }).map((_, i) => (
-                        <span
-                          key={i}
-                          className="size-7 rounded-full border-2 border-primary-hover bg-primary shadow-[inset_0_2px_3px_rgba(0,0,0,0.35)]"
-                        />
-                      ))}
-                      <span className="flex size-7 items-center justify-center rounded-full border-2 border-dashed border-ink-faint font-mono text-[11px] text-ink-muted">
-                        8
-                      </span>
-                      <span className="flex size-7 items-center justify-center rounded-full border-2 border-dashed border-ink-faint font-mono text-[11px] text-ink-muted">
-                        9
-                      </span>
-                      <span className="flex size-7 items-center justify-center rounded-full bg-background font-mono text-[8.5px] font-medium text-ink">
-                        {v.loyTenth}
-                      </span>
+                    <span className="font-mono text-[9px] tracking-[0.14em] text-ink-faint uppercase">
+                      {v.stampsWord}
+                    </span>
+                    <div className="flex items-baseline gap-1">
+                      <span className="text-3xl font-bold">7</span>
+                      <span className="text-base text-ink-muted">/ 9</span>
                     </div>
+                    <div className="h-[3px] rounded-full bg-primary" />
                     <span className="text-[12.5px] leading-normal text-ink-muted">
                       {v.loyNote}
                     </span>

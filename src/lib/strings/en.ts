@@ -195,6 +195,8 @@ export const en = {
     title: "The DoorDash beep interrupts your service. Again.",
     sub: "Uber Eats and DoorDash arrive on the kitchen screen. No more tablet wall.",
     bandTitle: "Dinner rush or slow Tuesday: the kitchen reads one queue.",
+    phoneTitle: "Every call gets answered. Not by you.",
+    walletTitle: "The punch card lives in their phone now.",
     vig: {
       padTag: "Reservation", padTime: "6:42 pm",
       padL1: "Tran — party of 4", padL2: "Saturday 7 pm ✓ confirmed", padL3: "asks for the booth",

@@ -97,9 +97,6 @@ export default function RestaurantsPage() {
       </section>
       <section className="site-container section flex flex-col gap-14 lg:gap-20">
         <div className="grid items-center gap-8 lg:grid-cols-2 lg:gap-16">
-          <h2 className="font-heading text-3xl font-semibold tracking-tight text-balance sm:text-[38px] lg:order-2">
-            {r.bandTitle}
-          </h2>
           <div
             ref={railRef}
             data-visible={visible || undefined}
@@ -155,6 +152,14 @@ export default function RestaurantsPage() {
               </div>
             </div>
           </div>
+          <div className="flex flex-col gap-3">
+            <h2 className="font-heading text-2xl font-semibold text-balance">
+              {r.bandTitle}
+            </h2>
+            <p className="max-w-md text-base leading-relaxed text-muted-foreground">
+              {r.quotes[0].body}
+            </p>
+          </div>
         </div>
         <div className="grid items-center gap-8 lg:grid-cols-2 lg:gap-16">
           <div className="w-full max-w-[470px] -rotate-[1.5deg] drop-shadow-[0_16px_24px_rgba(29,33,48,0.22)] lg:order-2">
@@ -191,9 +196,14 @@ export default function RestaurantsPage() {
               </div>
             </div>
           </div>
-          <p className="max-w-md text-base leading-relaxed text-muted-foreground">
-            {moreQuotes[0].body}
-          </p>
+          <div className="flex flex-col gap-3">
+            <h2 className="font-heading text-2xl font-semibold text-balance">
+              {r.phoneTitle}
+            </h2>
+            <p className="max-w-md text-base leading-relaxed text-muted-foreground">
+              {moreQuotes[0].body}
+            </p>
+          </div>
         </div>
         <div className="grid items-center gap-8 lg:grid-cols-2 lg:gap-16">
           <div className="relative h-[600px] w-full max-w-[500px]">
@@ -335,9 +345,14 @@ export default function RestaurantsPage() {
               </div>
             </div>
           </div>
-          <p className="max-w-md text-base leading-relaxed text-muted-foreground">
-            {moreQuotes[1].body}
-          </p>
+          <div className="flex flex-col gap-3">
+            <h2 className="font-heading text-2xl font-semibold text-balance">
+              {r.walletTitle}
+            </h2>
+            <p className="max-w-md text-base leading-relaxed text-muted-foreground">
+              {moreQuotes[1].body}
+            </p>
+          </div>
         </div>
       </section>
       <DayTimeline />

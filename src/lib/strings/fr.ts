@@ -206,7 +206,9 @@ export const fr: Strings = {
   restaurants: {
     title: "Le bip du DoorDash coupe votre service. Encore.",
     sub: "Uber Eats et DoorDash arrivent à l'écran de cuisine. Fini le mur de tablettes.",
-    bandTitle: "Coup de feu ou mardi tranquille : la cuisine lit une seule file.",
+    bandTitle: "Coup de feu ou mardi tranquille : la cuisine lit une seule file.",
+    phoneTitle: "Chaque appel est pris. Pas par vous.",
+    walletTitle: "La carte à tampons est maintenant dans leur téléphone.",
     vig: {
       padTag: "Réservation", padTime: "18 h 42",
       padL1: "Tran — 4 personnes", padL2: "samedi 19 h ✓ confirmé", padL3: "demande la banquette",

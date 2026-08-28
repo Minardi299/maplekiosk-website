@@ -197,7 +197,6 @@ export const en = {
     bandTitle: "Dinner rush or slow Tuesday: the kitchen reads one queue.",
     moreTitle: "Two more things off your plate",
     kds: {
-      railLeft: "Kiosk + counter + Uber Eats + DoorDash → one queue",
       railRight: "Kitchen screen · live",
       tickets: [
         { no: "041", src: "Kiosk", l1: "Crispy chicken · combo", l2: "No onions · extra sauce", status: "Ready" },

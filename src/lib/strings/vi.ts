@@ -208,7 +208,6 @@ export const vi: Strings = {
     bandTitle: "Giờ cao điểm hay tối vắng khách, bếp chỉ đọc một hàng chờ.",
     moreTitle: "Thêm hai việc bạn không phải lo",
     kds: {
-      railLeft: "Kiosk + quầy + Uber Eats + DoorDash → một hàng chờ",
       railRight: "Màn hình bếp · trực tiếp",
       tickets: [
         { no: "041", src: "Kiosk", l1: "Gà giòn · combo", l2: "Không hành · thêm sốt", status: "Xong" },

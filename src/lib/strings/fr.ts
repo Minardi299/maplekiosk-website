@@ -59,7 +59,7 @@ export const fr: Strings = {
       " Si elle ne se paie pas toute seule, on la débranche, et vous ne devez rien.",
     ticket: {
       name: "Thé au lait taro · L",
-      num: "№ 042",
+      num: "#042",
       rows: [
         { label: "Format large", price: "5,50 $" },
         { label: "Sucre 50 % · moins de glace", price: "incl." },
@@ -209,7 +209,6 @@ export const fr: Strings = {
     bandTitle: "Coup de feu ou mardi tranquille : la cuisine lit une seule file.",
     moreTitle: "Deux soucis de moins pendant le service",
     kds: {
-      railLeft: "Kiosque + comptoir + Uber Eats + DoorDash → une seule file",
       railRight: "Écran de cuisine · en direct",
       tickets: [
         { no: "041", src: "Kiosque", l1: "Poulet croustillant · combo", l2: "Sans oignons · extra sauce", status: "Prêt" },

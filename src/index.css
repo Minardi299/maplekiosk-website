@@ -256,6 +256,13 @@
         opacity 300ms var(--ease-out) calc(var(--step) * 150ms + 100ms),
         translate 300ms var(--ease-out) calc(var(--step) * 150ms + 100ms);
     }
+    .kds-rail .kds-src {
+      opacity: 0;
+      scale: 0.6;
+      transition:
+        opacity 200ms var(--ease-out) calc(var(--step) * 150ms + 250ms),
+        scale 200ms var(--ease-out) calc(var(--step) * 150ms + 250ms);
+    }
     .kds-rail .kds-strike::after {
       transform-origin: left;
       scale: 0 1;
@@ -268,6 +275,10 @@
       opacity: 1;
       translate: 0 0;
     }
+    .kds-rail[data-visible] .kds-src {
+      opacity: 1;
+      scale: 1;
+    }
     .kds-rail[data-visible] .kds-strike::after {
       scale: 1 1;
     }
@@ -278,6 +289,10 @@
       }
       .kds-rail .kds-ticket {
         translate: 0 0;
+        transition: opacity 300ms var(--ease-out);
+      }
+      .kds-rail .kds-src {
+        scale: 1;
         transition: opacity 300ms var(--ease-out);
       }
       .kds-rail .kds-strike::after {

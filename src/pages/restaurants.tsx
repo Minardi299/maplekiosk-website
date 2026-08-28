@@ -12,6 +12,11 @@ export default function RestaurantsPage() {
   const r = t.restaurants
   const { ref: railRef, visible } = useVisibleOnce()
   const moreQuotes = [r.quotes[2], t.coffee.quotes[2]]
+  const SRC = [
+    "bg-primary text-primary-foreground",
+    "bg-secondary text-secondary-foreground",
+    "bg-ink text-ink-foreground",
+  ]
   const STATUS = [
     { dot: "bg-primary", text: "text-primary" },
     { dot: "kds-live bg-ink", text: "text-foreground" },
@@ -49,8 +54,7 @@ export default function RestaurantsPage() {
           data-visible={visible || undefined}
           className="kds-rail flex flex-col"
         >
-          <div className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1 pb-2.5 font-mono text-[11px] tracking-[0.08em] uppercase">
-            <span>{r.kds.railLeft}</span>
+          <div className="flex justify-end pb-2.5 font-mono text-[11px] tracking-[0.08em] uppercase">
             <span className="text-primary">{r.kds.railRight}</span>
           </div>
           <div className="h-1 rounded-full bg-ink" />
@@ -65,7 +69,9 @@ export default function RestaurantsPage() {
                 <div className="kds-ticket flex flex-1 flex-col gap-3 rounded-xl border bg-card p-5 shadow-sm">
                   <div className="flex items-center justify-between gap-2">
                     <span className="font-mono text-sm">#{tk.no}</span>
-                    <span className="rounded-md bg-muted px-2 py-0.5 font-mono text-[11px] tracking-[0.08em] uppercase">
+                    <span
+                      className={`kds-src rounded-md px-2 py-0.5 font-mono text-[11px] font-medium tracking-[0.08em] uppercase ${SRC[i]}`}
+                    >
                       {tk.src}
                     </span>
                   </div>

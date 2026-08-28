@@ -206,7 +206,6 @@ export const vi: Strings = {
     title: "Tiếng bíp DoorDash lại cắt ngang giờ phục vụ. Lần nữa.",
     sub: "Uber Eats và DoorDash hiện thẳng lên màn hình bếp. Không còn dàn tablet.",
     bandTitle: "Giờ cao điểm hay tối vắng khách, bếp chỉ đọc một hàng chờ.",
-    moreTitle: "Thêm hai việc bạn không phải lo",
     vig: {
       padTag: "Đặt bàn", padTime: "18:42",
       padL1: "Tran — 4 người", padL2: "thứ bảy 19 h ✓ đã xác nhận", padL3: "xin ngồi băng ghế",

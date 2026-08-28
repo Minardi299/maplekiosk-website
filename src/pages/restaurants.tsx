@@ -46,9 +46,6 @@ export default function RestaurantsPage() {
           <h2 className="font-heading text-3xl font-semibold tracking-tight text-balance sm:text-[38px]">
             {r.bandTitle}
           </h2>
-          <p className="text-lg text-muted-foreground sm:text-[19px]">
-            {r.quotes[0].q} {r.quotes[0].body}
-          </p>
         </div>
         <div
           ref={railRef}
@@ -106,11 +103,6 @@ export default function RestaurantsPage() {
               </div>
             </div>
           </div>
-        </div>
-        <div className="mt-2 flex max-w-2xl flex-col gap-3">
-          <h2 className="font-heading text-3xl font-semibold tracking-tight text-balance sm:text-[38px]">
-            {r.moreTitle}
-          </h2>
         </div>
         <div className="grid gap-x-10 gap-y-12 md:grid-cols-2 lg:gap-x-14">
           <div className="flex flex-col gap-5">

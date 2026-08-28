@@ -207,7 +207,6 @@ export const fr: Strings = {
     title: "Le bip du DoorDash coupe votre service. Encore.",
     sub: "Uber Eats et DoorDash arrivent à l'écran de cuisine. Fini le mur de tablettes.",
     bandTitle: "Coup de feu ou mardi tranquille : la cuisine lit une seule file.",
-    moreTitle: "Deux choses de moins sur votre planche",
     vig: {
       padTag: "Réservation", padTime: "18 h 42",
       padL1: "Tran — 4 personnes", padL2: "samedi 19 h ✓ confirmé", padL3: "demande la banquette",

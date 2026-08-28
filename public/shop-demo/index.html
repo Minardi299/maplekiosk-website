@@ -35,7 +35,7 @@ window.dispatchEvent(new Event('three-ready'));
       <div ref="{{ mk.mref }}" onClick="{{ mk.pick }}" style="position:absolute;left:0;top:0;pointer-events:auto;cursor:pointer;width:0;height:0"><div style="position:relative;transform:translate(-50%,-50%);display:flex;flex-direction:column;align-items:center;gap:7px"><div style="position:relative;width:34px;height:34px"><div style="{{ mk.pulseStyle }}"></div><div style="{{ mk.dotStyle }}">{{ mk.n }}</div></div><div style="background:rgba(43,36,28,.88);color:#f5f1e8;font-size:12px;font-weight:700;padding:4px 10px;border-radius:99px;white-space:nowrap">{{ mk.label }}</div></div></div>
     </sc-for>
   </div>
-  <a href="/coffee" style="position:absolute;top:18px;left:20px;background:#fffdfa;border:1px solid #e4dbc8;border-radius:99px;padding:10px 18px;font-size:13px;font-weight:700;color:#2f2a23;display:inline-flex;align-items:center;gap:6px;box-shadow:0 6px 24px rgba(80,60,30,.12);text-decoration:none">‹ Back to site</a>
+  <sc-if value="{{ siteBackVisible }}" hint-placeholder-val="{{ true }}"><a href="/coffee" style="position:absolute;top:18px;left:20px;background:#fffdfa;border:1px solid #e4dbc8;border-radius:99px;padding:10px 18px;font-size:13px;font-weight:700;color:#2f2a23;display:inline-flex;align-items:center;gap:6px;box-shadow:0 6px 24px rgba(80,60,30,.12);text-decoration:none">‹ Back to site</a></sc-if>
   <div style="position:absolute;top:18px;right:20px"><a href="https://coffee.maplekiosk.ca/touch" target="_blank" style="background:#2f2a23;color:#f5f1e8;font-size:12.5px;font-weight:700;padding:10px 16px;border-radius:99px;display:inline-block">Open the real portal <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:13px;height:13px;vertical-align:-2px;flex-shrink:0"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></a></div>
   <sc-if value="{{ hintVisible }}" hint-placeholder-val="{{ true }}">
     <div style="position:absolute;bottom:24px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:8px;pointer-events:none">
@@ -917,6 +917,7 @@ class Component extends DCLogic {
         dotStyle: { position: 'absolute', inset: 0, borderRadius: '50%', background: col, color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 800, fontSize: '15px', boxShadow: '0 4px 14px rgba(60,35,15,.4)', border: '2px solid #fff' }
       })),
       goBack: () => { this.setState({ active: null }); this.applyOffsetSoon(); },
+      siteBackVisible: !s.active,
       isMobile: s.mobile,
       mobileWarn: s.mobileWarn,
       dismissWarn: () => this.setState({ mobileWarn: false }),

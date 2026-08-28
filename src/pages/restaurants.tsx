@@ -195,7 +195,6 @@ export default function RestaurantsPage() {
               </div>
             </div>
             <div className="flex max-w-[380px] flex-col gap-1.5">
-              <span className="text-[16.5px] font-bold">{moreQuotes[0].q}</span>
               <p className="text-[14.5px] leading-relaxed text-muted-foreground">
                 {moreQuotes[0].body}
               </p>
@@ -342,7 +341,6 @@ export default function RestaurantsPage() {
               </div>
             </div>
             <div className="flex max-w-[380px] flex-col gap-1.5">
-              <span className="text-[16.5px] font-bold">{moreQuotes[1].q}</span>
               <p className="text-[14.5px] leading-relaxed text-muted-foreground">
                 {moreQuotes[1].body}
               </p>

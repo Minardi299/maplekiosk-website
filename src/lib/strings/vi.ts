@@ -97,7 +97,7 @@ export const vi: Strings = {
 
   groupsBand: {
     title: "Từ một quầy đến cả chuỗi của bạn",
-    body: "Bạn có nhiều hơn một chi nhánh? Một menu đẩy đi mọi nơi, một màn hình doanh thu, và vẫn 0% trên tất cả.",
+    body: "Bạn có nhiều hơn một chi nhánh? Một menu đẩy đi mọi nơi, một màn hình doanh thu, và vẫn 0% trên doanh thu.",
     link: "MapleKiosk cho chuỗi cửa hàng",
   },
 

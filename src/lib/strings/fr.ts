@@ -97,7 +97,7 @@ export const fr: Strings = {
 
   groupsBand: {
     title: "D'un comptoir à tout votre groupe",
-    body: "Plus d'un emplacement ? Un menu poussé partout, une seule vue des ventes, et toujours 0 % dessus.",
+    body: "Plus d'un emplacement ? Un menu poussé partout, une seule vue des ventes, et toujours 0 % sur vos ventes.",
     link: "MapleKiosk pour les groupes",
   },
 

@@ -86,7 +86,7 @@ export const en = {
 
   groupsBand: {
     title: "From one counter to your whole group",
-    body: "Running more than one location? One menu pushed everywhere, one view of sales, and still 0% of them.",
+    body: "Running more than one location? One menu pushed everywhere, one view of sales, and still 0% of your sales.",
     link: "MapleKiosk for groups",
   },
 

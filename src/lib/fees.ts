@@ -14,4 +14,4 @@ export function fees(volume: number, debit: number, ticket: number) {
 }
 
 export const VOLUME_MIN = 5000
-export const VOLUME_MAX = 80000
+export const VOLUME_MAX = 300000

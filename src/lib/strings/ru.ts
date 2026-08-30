@@ -143,7 +143,7 @@ export const ru: Strings = {
     perLocation: "на точку",
     totalAcross: "Итого для {n} точек",
     saveAcross: " Для {n} точек это {amount} в месяц.",
-    chartTag: "КОМИССИИ ПО МЕСЯЧНОМУ ОБЪЁМУ",
+    chartTag: "ОЦЕНКА ЭКОНОМИИ В МЕСЯЦ",
     chartAlt:
       "График оценки месячных комиссий по объёму продаж по картам: Square и Clover — линии, ваш собственный эквайер — полоса.",
     disclaimer:

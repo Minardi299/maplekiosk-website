@@ -132,7 +132,7 @@ export const en = {
     perLocation: "per location",
     totalAcross: "Total across {n} locations",
     saveAcross: " Across {n} locations, that is {amount} per month.",
-    chartTag: "FEES VS MONTHLY CARD VOLUME",
+    chartTag: "ESTIMATED SAVINGS PER MONTH",
     chartAlt:
       "Chart of estimated monthly fees against monthly card volume: Square and Clover as lines, your own acquirer as a band.",
     disclaimer:

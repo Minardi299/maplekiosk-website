@@ -143,7 +143,7 @@ export const vi: Strings = {
     perLocation: "mỗi chi nhánh",
     totalAcross: "Tổng cho {n} chi nhánh",
     saveAcross: " Với {n} chi nhánh, tức là {amount} mỗi tháng.",
-    chartTag: "PHÍ THEO DOANH THU MỖI THÁNG",
+    chartTag: "TIẾT KIỆM ƯỚC TÍNH MỖI THÁNG",
     chartAlt:
       "Biểu đồ phí ước tính mỗi tháng theo doanh thu quẹt thẻ: Square và Clover là đường, acquirer riêng của bạn là dải.",
     disclaimer:

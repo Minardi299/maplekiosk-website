@@ -55,12 +55,12 @@ export function Calculator({ intro }: { intro?: string }) {
   const [locations, setLocations] = useState(1)
 
   // per-location math; the multiplier never flips the honest branch
-  const { square, clover, acqLow, acqHigh } = fees(volume, debit, ticket)
+  const { square, acqLow, acqHigh } = fees(volume, debit, ticket)
   const squareWins = square <= acqHigh
   const savings = `${money(Math.max(0, square - acqHigh))} – ${money(Math.max(0, square - acqLow))}`
   const savingsTotal = `${money(Math.max(0, Math.round(square - acqHigh)) * locations)} – ${money(Math.max(0, Math.round(square - acqLow)) * locations)}`
   const pct =
-    lang === "en" || lang === "vi" ? `${debit}%` : `${debit} %`
+    lang === "en" || lang === "vi" ? `${debit}%` : `${debit} %`
 
   return (
     <section id="calculateur" className="bg-ink text-ink-foreground">
@@ -117,65 +117,42 @@ export function Calculator({ intro }: { intro?: string }) {
               {c.disclaimer}
             </p>
           </div>
-          <div className="flex flex-col gap-5 rounded-2xl bg-background p-7 text-foreground sm:p-9">
-            <div className="flex flex-wrap items-baseline justify-between gap-2 font-mono text-xs tracking-[0.1em] text-muted-foreground">
-              <span>{c.resultTag}</span>
-              {locations > 1 && <span>{c.perLocation}</span>}
-            </div>
-            <div className="flex flex-col gap-3.5">
-              <div className="flex items-baseline justify-between border-b pb-3">
-                <span className="text-base">{c.square}</span>
-                <span className="font-mono text-[22px]">{money(square)}</span>
+          <div className="flex flex-col gap-6 rounded-2xl bg-background p-6 text-foreground sm:p-9">
+            <div className="flex flex-col gap-1.5">
+              <div className="font-mono text-xs tracking-[0.1em] text-muted-foreground">
+                {c.chartTag}
               </div>
-              <div className="flex items-baseline justify-between border-b pb-3">
-                <span className="text-base">{c.clover}</span>
-                <span className="font-mono text-[22px]">{money(clover)}</span>
-              </div>
-              <div className="flex items-baseline justify-between gap-4">
-                <span className="text-base font-semibold text-primary">
-                  {c.acq}
-                </span>
-                <span className="font-mono text-[22px] whitespace-nowrap text-primary">
-                  {money(acqLow)} – {money(acqHigh)}
-                </span>
-              </div>
-              {locations > 1 && (
-                <div className="flex items-baseline justify-between gap-4 border-t pt-3">
-                  <span className="text-base font-semibold">
-                    {c.totalAcross.replace("{n}", String(locations))}
-                  </span>
-                  <span className="font-mono text-[22px] whitespace-nowrap">
-                    {money(Math.round(acqLow) * locations)} –{" "}
-                    {money(Math.round(acqHigh) * locations)}
-                  </span>
-                </div>
-              )}
-            </div>
-            <p className="rounded-lg bg-muted p-4 text-[15px] leading-relaxed">
               {squareWins ? (
-                <>
+                <p className="text-[15px] leading-relaxed">
                   <strong>{c.honestTitle}</strong>
                   {c.honestBody}
-                </>
+                </p>
               ) : (
                 <>
-                  <strong>{c.saveTitle}</strong> {savings}
-                  {c.saveBody}
-                  {locations > 1 &&
-                    c.saveAcross
-                      .replace("{n}", String(locations))
-                      .replace("{amount}", savingsTotal)}
+                  <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
+                    <span className="font-mono text-3xl tracking-tight text-chart-1">
+                      {locations > 1 ? savingsTotal : savings}
+                    </span>
+                    {locations > 1 && (
+                      <span className="text-sm text-muted-foreground">
+                        {c.totalAcross.replace("{n}", String(locations))}
+                      </span>
+                    )}
+                  </div>
+                  <p className="text-sm leading-relaxed text-muted-foreground">
+                    {c.saveBody.trim()}
+                  </p>
                 </>
               )}
-            </p>
+            </div>
+            <FeeChart
+              volume={volume}
+              debit={debit}
+              ticket={ticket}
+              locations={locations}
+            />
             <CtaLink to={SITE.demoUrl} reloadDocument>{c.cta}</CtaLink>
           </div>
-        </div>
-        <div className="hidden flex-col gap-5 rounded-2xl bg-background p-7 text-foreground sm:flex sm:p-9">
-          <div className="font-mono text-xs tracking-[0.1em] text-muted-foreground">
-            {c.chartTag}
-          </div>
-          <FeeChart volume={volume} debit={debit} ticket={ticket} />
         </div>
       </div>
     </section>

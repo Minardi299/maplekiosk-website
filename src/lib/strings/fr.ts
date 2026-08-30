@@ -143,7 +143,7 @@ export const fr: Strings = {
     perLocation: "par emplacement",
     totalAcross: "Total pour {n} emplacements",
     saveAcross: " Pour {n} emplacements, c'est {amount} par mois.",
-    chartTag: "FRAIS SELON LE VOLUME MENSUEL",
+    chartTag: "ÉCONOMIE ESTIMÉE PAR MOIS",
     chartAlt:
       "Graphique des frais mensuels estimés selon le volume de ventes par carte : Square et Clover en courbes, votre propre acquéreur en bande.",
     disclaimer:

@@ -77,11 +77,12 @@
     --border: oklch(0.922 0 0);
     --input: oklch(0.922 0 0);
     --ring: oklch(0.708 0 0);
-    --chart-1: oklch(0.87 0 0);
-    --chart-2: oklch(0.556 0 0);
-    --chart-3: oklch(0.439 0 0);
-    --chart-4: oklch(0.371 0 0);
-    --chart-5: oklch(0.269 0 0);
+    /* categorical series colors, CVD-validated against the light surface */
+    --chart-1: #27803a;
+    --chart-2: #1971c2;
+    --chart-3: #f59f00;
+    --chart-4: #9c36b5;
+    --chart-5: #e8590c;
     --radius: 0.625rem;
     --ink: oklch(0.205 0 0);
     --ink-foreground: oklch(0.985 0 0);

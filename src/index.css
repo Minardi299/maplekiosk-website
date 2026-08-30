@@ -44,6 +44,11 @@
     --color-ink-foreground: var(--ink-foreground);
     --color-ink-muted: var(--ink-muted);
     --color-ink-faint: var(--ink-faint);
+    --color-chart-1: var(--chart-1);
+    --color-chart-2: var(--chart-2);
+    --color-chart-3: var(--chart-3);
+    --color-chart-4: var(--chart-4);
+    --color-chart-5: var(--chart-5);
     --radius-sm: calc(var(--radius) * 0.6);
     --radius-md: calc(var(--radius) * 0.8);
     --radius-lg: var(--radius);
@@ -54,30 +59,34 @@
 }
 
 :root {
-    --background: #f8f9fb;
-    --foreground: #1d1a17;
-    --card: #ffffff;
-    --card-foreground: #1d1a17;
-    --popover: #ffffff;
-    --popover-foreground: #1d1a17;
-    --primary: #af1e2d;
-    --primary-hover: #8c1723;
-    --primary-foreground: #ffffff;
-    --secondary: #1d1a17;
-    --secondary-foreground: #f8f9fb;
-    --muted: #e9edf4;
-    --muted-foreground: #5d6372;
-    --accent: #e9edf4;
-    --accent-foreground: #1d1a17;
+    --background: oklch(1 0 0);
+    --foreground: oklch(0.145 0 0);
+    --card: oklch(1 0 0);
+    --card-foreground: oklch(0.145 0 0);
+    --popover: oklch(1 0 0);
+    --popover-foreground: oklch(0.145 0 0);
+    --primary: oklch(0.205 0 0);
+    --primary-foreground: oklch(0.985 0 0);
+    --secondary: oklch(0.97 0 0);
+    --secondary-foreground: oklch(0.205 0 0);
+    --muted: oklch(0.97 0 0);
+    --muted-foreground: oklch(0.556 0 0);
+    --accent: oklch(0.97 0 0);
+    --accent-foreground: oklch(0.205 0 0);
     --destructive: oklch(0.577 0.245 27.325);
-    --border: rgb(29 26 23 / 0.12);
-    --input: rgb(29 26 23 / 0.15);
-    --ring: #af1e2d;
+    --border: oklch(0.922 0 0);
+    --input: oklch(0.922 0 0);
+    --ring: oklch(0.708 0 0);
+    --chart-1: oklch(0.87 0 0);
+    --chart-2: oklch(0.556 0 0);
+    --chart-3: oklch(0.439 0 0);
+    --chart-4: oklch(0.371 0 0);
+    --chart-5: oklch(0.269 0 0);
     --radius: 0.625rem;
-    --ink: #171d52;
-    --ink-foreground: #f8f9fb;
-    --ink-muted: #aab4dd;
-    --ink-faint: #8791c4;
+    --ink: oklch(0.205 0 0);
+    --ink-foreground: oklch(0.985 0 0);
+    --ink-muted: oklch(0.708 0 0);
+    --ink-faint: oklch(0.556 0 0);
     --container-max: 75rem;
     --header-height: 4.5rem;
 }

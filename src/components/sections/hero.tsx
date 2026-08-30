@@ -17,7 +17,7 @@ export function Hero() {
             {t.hero.wedgeRest}
           </p>
           <div className="mt-1 flex flex-wrap gap-3.5">
-            <CtaLink to={SITE.demoUrl} reloadDocument size="lg">
+            <CtaLink to={SITE.demoUrl} reloadDocument variant="inverted" size="lg">
               {t.nav.cta}
             </CtaLink>
           </div>

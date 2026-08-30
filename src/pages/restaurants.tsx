@@ -3,6 +3,7 @@ import { CtaLink } from "@/components/cta-link"
 import { PageMeta } from "@/components/page-meta"
 import { DayTimeline } from "@/components/sections/day-timeline"
 import { FinalCta } from "@/components/sections/final-cta"
+import { Insights } from "@/components/sections/insights"
 import { useI18n } from "@/lib/i18n"
 import { useVisibleOnce } from "@/lib/use-visible-once"
 import { SITE } from "@/lib/site"
@@ -89,7 +90,7 @@ export default function RestaurantsPage() {
             {r.sub}
           </p>
           <div className="mt-1 flex flex-wrap gap-3.5">
-            <CtaLink to={SITE.demoUrl} reloadDocument size="lg">
+            <CtaLink to={SITE.demoUrl} reloadDocument variant="inverted" size="lg">
               {t.nav.cta}
             </CtaLink>
           </div>
@@ -138,7 +139,7 @@ export default function RestaurantsPage() {
                     <span className="font-heading text-lg font-semibold">
                       {r.kds.soldQuote}
                     </span>
-                    <span className="rounded-md bg-primary px-2 py-0.5 font-mono text-[11px] tracking-[0.08em] text-primary-foreground uppercase">
+                    <span className="rounded-md bg-ink-foreground px-2 py-0.5 font-mono text-[11px] tracking-[0.08em] text-ink uppercase">
                       {r.kds.soldBadge}
                     </span>
                   </div>
@@ -236,7 +237,7 @@ export default function RestaurantsPage() {
                       {Array.from({ length: 7 }).map((_, i) => (
                         <span
                           key={i}
-                          className="size-5 rounded-full border-2 border-primary-hover bg-primary shadow-[inset_0_2px_3px_rgba(0,0,0,0.35)]"
+                          className="size-5 rounded-full border-2 border-ink-foreground/70 bg-ink-foreground shadow-[inset_0_2px_3px_rgba(0,0,0,0.2)]"
                         />
                       ))}
                       <span className="flex size-5 items-center justify-center rounded-full border-2 border-dashed border-ink-faint font-mono text-[9px] text-ink-muted">
@@ -269,7 +270,7 @@ export default function RestaurantsPage() {
                   {Array.from({ length: 7 }).map((_, i) => (
                     <span
                       key={i}
-                      className="size-6 rounded-full border-2 border-primary-hover bg-primary shadow-[inset_0_2px_3px_rgba(0,0,0,0.35)]"
+                      className="size-6 rounded-full border-2 border-ink-foreground/70 bg-ink-foreground shadow-[inset_0_2px_3px_rgba(0,0,0,0.2)]"
                     />
                   ))}
                   <span className="flex size-6 items-center justify-center rounded-full border-2 border-dashed border-ink-faint font-mono text-[10px] text-ink-muted">
@@ -324,7 +325,7 @@ export default function RestaurantsPage() {
                     {Array.from({ length: 7 }).map((_, i) => (
                       <span
                         key={i}
-                        className="size-7 rounded-full border-2 border-primary-hover bg-primary shadow-[inset_0_2px_3px_rgba(0,0,0,0.35)]"
+                        className="size-7 rounded-full border-2 border-ink-foreground/70 bg-ink-foreground shadow-[inset_0_2px_3px_rgba(0,0,0,0.2)]"
                       />
                     ))}
                     <span className="flex size-7 items-center justify-center rounded-full border-2 border-dashed border-ink-faint font-mono text-[11px] text-ink-muted">
@@ -355,6 +356,7 @@ export default function RestaurantsPage() {
           </div>
         </div>
       </section>
+      <Insights />
       <DayTimeline />
       <FinalCta title={t.day.question} notes={t.day.also} />
     </>

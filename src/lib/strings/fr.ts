@@ -4,7 +4,7 @@ export const fr: Strings = {
   meta: {
     home: {
       title: "MapleKiosk · Gardez votre caisse. Ajoutez la borne.",
-      desc: "Borne de commande pour salons de thé et comptoirs rapides à Montréal et sur la Rive-Sud. Sans contrat, 0 % sur vos ventes.",
+      desc: "Bornes de commande pour comptoirs rapides et groupes multi-emplacements à Montréal et sur la Rive-Sud. Sans contrat, 0 % sur vos ventes.",
     },
     features: {
       title: "Applications · MapleKiosk",
@@ -22,9 +22,9 @@ export const fr: Strings = {
       title: "Salons · MapleKiosk",
       desc: "Un assistant téléphonique pour salons d'ongles, spas et instituts de beauté : il répond, guide et réserve pendant que vos mains travaillent.",
     },
-    coffee: {
-      title: "Cafés & boba · MapleKiosk",
-      desc: "Borne de commande pour cafés, salons de thé aux perles et comptoirs de restauration rapide.",
+    groups: {
+      title: "Groupes et franchises · MapleKiosk",
+      desc: "Un seul système pour 3 à 25 emplacements : menus poussés partout d'un coup, une seule vue des ventes, et votre propre acquéreur à chaque comptoir.",
     },
     restaurants: {
       title: "Restaurants et restauration rapide · MapleKiosk",
@@ -52,8 +52,7 @@ export const fr: Strings = {
   },
 
   hero: {
-    title:
-      "Pendant qu'un client choisit ses perles, trois autres regardent la file.",
+    title: "À chaque rush, quelqu'un regarde la file et repart.",
     wedgeStrong: "Gardez votre caisse. Ajoutez la borne.",
     wedgeRest:
       " Si elle ne se paie pas toute seule, on la débranche, et vous ne devez rien.",
@@ -96,6 +95,12 @@ export const fr: Strings = {
     ],
   },
 
+  groupsBand: {
+    title: "D'un comptoir à tout votre groupe",
+    body: "Plus d'un emplacement ? Un menu poussé partout, une seule vue des ventes, et toujours 0 % dessus.",
+    link: "MapleKiosk pour les groupes",
+  },
+
   diagram: {
     title: "Où va votre argent",
     sub: "Eux, ils s'assoient sur votre argent. Nous, on reste à côté.",
@@ -134,6 +139,13 @@ export const fr: Strings = {
     saveTitle: "Économie estimée :",
     saveBody:
       " par mois avec votre propre entente, parce que nous ne prélevons aucune commission sur vos paiements.",
+    locations: "Emplacements",
+    perLocation: "par emplacement",
+    totalAcross: "Total pour {n} emplacements",
+    saveAcross: " Pour {n} emplacements, c'est {amount} par mois.",
+    chartTag: "FRAIS SELON LE VOLUME MENSUEL",
+    chartAlt:
+      "Graphique des frais mensuels estimés selon le volume de ventes par carte : Square et Clover en courbes, votre propre acquéreur en bande.",
     disclaimer:
       "Tarifs affichés de Square (2,5 % crédit ; 0,75 % + 7 ¢ débit). Clover n'affiche pas de tarifs canadiens, donc nous estimons avec son tarif américain en personne (2,3 % + 10 ¢). « Votre propre acquéreur » = exemple d'entente interchange-plus typique pour un petit commerçant (1,3 à 1,8 % sur le crédit ; 8 ¢ par transaction débit ; frais fixes d'environ 60 $/mois inclus). Chiffres indicatifs. Apportez un relevé pour le calcul réel.",
     cta: "Apportez un relevé et on vérifie ces chiffres pour vrai",
@@ -160,6 +172,7 @@ export const fr: Strings = {
       "Pas de forfait de paiement imposé",
       "Annulez n'importe quel mois",
       "Achetez-la une fois pour toutes, si vous préférez",
+      "Système d'enregistrement des ventes certifié par Revenu Québec (MEV-WEB)",
     ],
   },
 
@@ -170,8 +183,9 @@ export const fr: Strings = {
 
   footer: {
     tagline:
-      "Une famille d'applications d'affaires et des services d'IA abordables, conçus avec soin au Canada pour ceux qui font vivre les petites entreprises.",
+      "Des applications d'affaires et des services d'IA concrets, conçus au Canada pour la restauration et les salons — d'un seul comptoir à un groupe multi-emplacements.",
     product: "Produit",
+    groups: "Groupes et franchises",
     legal: "Légal",
     nails: "Salons d'ongles et de beauté",
     restaurants: "Restaurants et restauration rapide",
@@ -242,6 +256,81 @@ export const fr: Strings = {
         body: "Un assistant répond à chaque appel, en français ou en anglais, répond aux questions et réserve la table, pendant que vous continuez le service.",
       },
     ],
+  },
+
+  insights: {
+    title: "Les chiffres que vous n'avez jamais le temps de sortir",
+    body: "MapleKiosk tient le compte pendant que vous servez : heures de pointe, articles les plus populaires, temps de commande moyens. Pas des données pour des données — des décisions : mettez la deuxième caisse à l'heure qui en a vraiment besoin, et retirez l'article que personne ne commande.",
+    tag: "APERÇUS",
+    hoursLabel: "Commandes par heure",
+    topLabel: "Les plus commandés aujourd'hui",
+    topItems: ["Thé au lait taro · L", "Poutine classique", "Poulet croustillant · combo"],
+    avgLabel: "Temps de commande moyen",
+    avgValue: "3 min 40 s",
+  },
+
+  groups: {
+    title: "Ce qui marche à un comptoir casse à cinq.",
+    sub: "Un seul système pour tous vos emplacements — et vous gardez votre propre acquéreur, et votre taux négocié, à chacun d'eux.",
+    cta: "Parlez au fondateur",
+    mailSubject: "MapleKiosk pour notre groupe",
+    pains: [
+      {
+        label: "Menus",
+        hook: "Changez le menu une fois. Tous les commerces suivent.",
+        body: "Un changement de prix ou un nouvel article atteint chaque borne, chaque poste comptoir et chaque écran télé du groupe au même moment. Pas de tournée commerce par commerce, pas de versions qui divergent.",
+      },
+      {
+        label: "Rapports",
+        hook: "Une seule vue des ventes, pas une connexion par commerce.",
+        body: "Chaque emplacement rapporte dans la même vue. Lisez la journée du groupe à un seul endroit, puis ouvrez un seul commerce quand un chiffre cloche.",
+      },
+      {
+        label: "Personnel au rush",
+        hook: "La caisse de plus au rush — fois chaque emplacement.",
+        body: "Une borne prend les commandes pendant le rush à chaque commerce. La ligne de coûts qui se multiplie le plus vite dans un groupe, c'est celle que la borne absorbe.",
+      },
+      {
+        label: "Déploiement",
+        hook: "Ouvrez le prochain emplacement en jours, pas en semaines.",
+        body: "Vos menus, vos prix et votre fidélité vivent déjà dans le système. Un nouveau commerce, c'est du matériel et une visite d'installation, pas un projet logiciel.",
+      },
+    ],
+    insightsTitle: "Gérez les commerces où vous n'êtes pas",
+    insightsBody:
+      "Le tableau de bord met chaque emplacement côte à côte : heures de pointe, articles les plus populaires, temps de commande moyens. Mettez la deuxième caisse à l'heure qui en a besoin, et retirez l'article que personne ne commande — dans un commerce que vous visitez une fois par semaine.",
+    proofTitle: "Conçu pour le Québec. Éprouvé aux États-Unis.",
+    proofPoints: [
+      "Système d'enregistrement des ventes certifié par Revenu Québec (MEV-WEB) — certificat [NUMÉRO]",
+      "Interface d'abord en français, pour les clients et le personnel",
+      "Le débit Interac dans le calcul des frais, pas une réflexion après coup",
+      "On installe nous-mêmes, sur place, autour de vos heures de service",
+      "Construite à Montreal. Éprouvée dans [N] emplacements aux États-Unis — [salons, boutiques de boba et restaurants]",
+    ],
+    proofStats:
+      "[X] M$ de commandes passées par MapleKiosk. De [A] à [B] emplacements en [N] mois.",
+    partnerTag: "L'OFFRE PARTENAIRE DE CONCEPTION",
+    partnerTitle: "On prend un partenaire de conception par segment. Voici l'entente.",
+    partnerPoints: [
+      {
+        title: "Un pilote de 90 jours",
+        body: "On équipe 1 ou 2 de vos emplacements pendant 90 jours.",
+      },
+      {
+        title: "Des mesures convenues avant le départ",
+        body: "On s'entend d'avance sur les mesures de succès : part des commandes à la borne et panier moyen.",
+      },
+      {
+        title: "Un prix de déploiement fixé d'avance",
+        body: "Si le pilote atteint les mesures, le reste des emplacements se déploie au prix convenu avant le début du pilote.",
+      },
+      {
+        title: "S'il les rate, on s'en va",
+        body: "On débranche, et vous ne devez rien. Les mêmes conditions que chaque installation.",
+      },
+    ],
+    ctaTitle: "La prochaine étape, c'est une conversation, pas un kiosque de démo.",
+    ctaSub: "Écrivez directement au fondateur. La personne qui écrit le logiciel répond — et installe.",
   },
 
   features: {
@@ -386,7 +475,7 @@ export const fr: Strings = {
     title: "Construite à Montreal. Installée par celui qui l'a écrite.",
     paras: [
       "MapleKiosk est construite à Montreal par Minh : un développeur qui écrit le logiciel, charge votre menu et vient installer la borne lui-même.",
-      "Le produit tourne aujourd'hui dans des boutiques de thé aux perles aux États-Unis. Les premières installations locales s'en viennent, c'est pour ça que la démo est gratuite et que l'essai ne coûte rien.",
+      "Le produit tourne aujourd'hui dans des salons, des boutiques de boba et des restaurants aux États-Unis, y compris des groupes multi-emplacements. Les premières installations québécoises s'en viennent, c'est pour ça que la démo est gratuite et que l'essai ne coûte rien.",
       "Les conditions. Pas de contrat, pas de location, pas de forfait de paiement, existent pour une raison : on préfère que vous restiez par choix.",
     ],
     photo: "[PHOTO]",

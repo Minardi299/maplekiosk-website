@@ -4,7 +4,10 @@ import { cn } from "@/lib/utils"
 
 const styles = {
   primary:
-    "bg-primary text-primary-foreground hover:bg-primary-hover",
+    "bg-primary text-primary-foreground hover:bg-primary/90",
+  // for dark (bg-ink) bands, where bg-primary would disappear
+  inverted:
+    "bg-ink-foreground text-ink hover:bg-ink-foreground/90",
   outline:
     "border border-border bg-background text-foreground hover:bg-muted hover:text-foreground",
 }

@@ -34,7 +34,7 @@ export function FeatureTip({
       <Popover.Trigger
         onPointerEnter={onEnter}
         onPointerLeave={onLeave}
-        className="cursor-pointer rounded-md border-[1.5px] border-secondary px-2.5 py-1 font-mono text-[11px] tracking-[0.06em] uppercase transition-colors hover:border-primary hover:text-primary focus-visible:border-primary focus-visible:ring-3 focus-visible:ring-ring/30 focus-visible:outline-none data-[popup-open]:border-primary data-[popup-open]:text-primary"
+        className="cursor-pointer rounded-md border-[1.5px] border-border px-2.5 py-1 font-mono text-[11px] tracking-[0.06em] uppercase transition-colors hover:border-primary hover:text-primary focus-visible:border-primary focus-visible:ring-3 focus-visible:ring-ring/30 focus-visible:outline-none data-[popup-open]:border-primary data-[popup-open]:text-primary"
       >
         {label}
       </Popover.Trigger>

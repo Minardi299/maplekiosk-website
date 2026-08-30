@@ -6,7 +6,8 @@ Repo: https://github.com/Minardi299/maplekiosk-website
 ## Stack
 
 - React Router 7, SPA mode with prerender (same setup as aloha-website and culac)
-- Tailwind CSS 4. All design tokens live in `src/index.css`
+- Tailwind CSS 4. All design tokens live in `src/index.css`. The colors are the default shadcn neutral palette; `--ink` is the dark band color, remapped to neutral near-black
+- Recharts 3.8.0 (pinned) through the shadcn `chart` component, for the calculator fee chart
 - Fonts: Bricolage Grotesque (headings), DM Sans (body), DM Mono (numbers)
 - pnpm, pinned by the `packageManager` field in `package.json`
 - Brand assets (`public/favicon.ico`, `public/MapleKiosk_rectangle.png`) come from maplekiosk.ca
@@ -18,13 +19,13 @@ Repo: https://github.com/Minardi299/maplekiosk-website
 | `/` | The funnel: hero (problem) → industry router → money diagram → teach band → payments calculator → terms chips → final CTA |
 | `/apps` | Product components, framed as answers for the already-interested owner |
 | `/tarifs` | One price, buy-outright option, FAQ |
-| `/coffee` | Cafés & boba: boba hero, counter quote cards, line-cost calculator, the day timeline |
-| `/restaurants` | Restaurants & fast food: delivery-tablet pain, "86 the salmon" card, phone-assistant card |
+| `/restaurants` | Cafés, boba, restaurants & fast food in one page (merged on purpose — they use the same apps): counter pain, ticket vignettes, the day timeline |
 | `/salons` | Nail salons, spas & beauty shops: the AI phone assistant (MapleSPA door, footer link only) |
+| `/groupes` | Multi-location groups (3–25 locations): multiplication pains, insights, Quebec proof, the design-partner offer, mailto CTA (footer link + homepage band, not in the nav) |
 | `/a-propos` | Founder trust page |
 | `/confidentialite`, `/conditions` | Legal, imported verbatim from maplekiosk.ca (see below) |
 
-Removed on purpose: `/calculateur` (the payments calculator lives on the home page), `/fonctionnalites` (renamed to `/apps`), and `/demo` (the 3D demo replaced the booking form). Old links hit the 404 page; no redirects.
+Removed on purpose: `/calculateur` (the payments calculator lives on the home page), `/fonctionnalites` (renamed to `/apps`), `/demo` (the 3D demo replaced the booking form), and `/coffee` (merged into `/restaurants` — cafés and restaurants use the same apps). Old links hit the 404 page; no redirects.
 
 `/shop-demo/index.html` is a standalone interactive 3D coffee-shop demo (static files in `public/shop-demo/`, imported from the Claude Design project "Interactive Coffee Shop Demo"). It is English-only, and loads React, three.js, and a Google font from CDNs at runtime — it needs internet. Its 22 GLB props are KayKit "Restaurant Bits" (CC0). To update it, re-import the `.dc.html` from the design project; for the salon variant, copy the folder and edit.
 
@@ -84,7 +85,10 @@ Same workflow setup as aloha-website and culac:
 5. The Bricolage/DM fonts have no Cyrillic subset. Russian pages fall back to the system font. Vietnamese body text uses Be Vietnam Pro.
 6. `/salons` is built out and linked from the footer Industries column. The handoff still requires a Law 25 review of call handling and a real 30-second call recording before this page goes live.
 7. hreflang alternate links point to `https://maplekiosk.ca`. Update `SITE.url` in `src/lib/site.ts` if the domain changes.
-8. The line-cost calculator on `/coffee` has no "don't buy" threshold yet. Prices are known now ($39–49/mo), so a threshold can be added when wanted.
+8. The line-cost calculator (`src/components/sections/line-cost.tsx`) lost its page in the `/coffee` merge and is now used nowhere. Re-add it to `/restaurants` or delete the file. It also has no "don't buy" threshold yet; prices are known now ($39–49/mo).
+9. Insights gate: confirm that each insights metric is live in the product (rush hours, most popular items, average ticket times). Cut the copy for each metric that is not live. The metrics appear on `/restaurants` (insights section) and `/groupes`.
+10. Replace the proof-stat placeholders on `/groupes` and in the string files: [N] US locations, [$X]M in orders through the software, the growth window (from [A] to [B] locations in [N] months), and the WEB-SRM certificate number [NUMÉRO]. Growth stats stay cumulative, and count locations, not clients. Prefer outcome stats when real numbers exist: [X]% larger average ticket on kiosk orders, [UPTIME]% uptime, [$X]M in orders.
+11. Get written permission from 2–3 US clients for reference calls before you publish traction stats.
 
 ## Deploy
 

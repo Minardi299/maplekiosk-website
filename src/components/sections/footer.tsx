@@ -10,6 +10,7 @@ export function Footer() {
     { to: "/a-propos", label: t.nav.about },
     { to: "/salons", label: t.footer.nails },
     { to: "/restaurants", label: t.footer.restaurants },
+    { to: "/groupes", label: t.footer.groups },
   ]
   const linkClass = "text-muted-foreground hover:text-primary"
   return (

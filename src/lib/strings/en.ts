@@ -2,7 +2,7 @@ export const en = {
   meta: {
     home: {
       title: "MapleKiosk · Keep your register. Add the kiosk.",
-      desc: "Self-order kiosk for tea shops and quick-service counters in Montreal and the South Shore. No contract, 0% of your sales.",
+      desc: "Self-order kiosks for quick-service counters and multi-location groups in Montreal and the South Shore. No contract, 0% of your sales.",
     },
     features: {
       title: "Apps · MapleKiosk",
@@ -20,9 +20,9 @@ export const en = {
       title: "Salons · MapleKiosk",
       desc: "A phone assistant for nail salons, spas, and beauty shops: it answers, guides, and books while your hands are busy.",
     },
-    coffee: {
-      title: "Cafés & boba · MapleKiosk",
-      desc: "Self-order kiosk for cafés, boba tea shops, and fast-food counters.",
+    groups: {
+      title: "Groups & franchises · MapleKiosk",
+      desc: "One system for 3–25 locations: menus pushed to every store at once, one view of sales, and your own acquirer at every counter.",
     },
     restaurants: {
       title: "Restaurants & fast food · MapleKiosk",
@@ -41,7 +41,7 @@ export const en = {
   },
 
   hero: {
-    title: "While one customer picks their pearls, three more are watching the line.",
+    title: "Every rush, someone looks at the line and walks out.",
     wedgeStrong: "Keep your register. Add the kiosk.",
     wedgeRest:
       " If it doesn't pay for itself, we unplug it, and you owe nothing.",
@@ -84,6 +84,12 @@ export const en = {
     ],
   },
 
+  groupsBand: {
+    title: "From one counter to your whole group",
+    body: "Running more than one location? One menu pushed everywhere, one view of sales, and still 0% of them.",
+    link: "MapleKiosk for groups",
+  },
+
   diagram: {
     title: "Where your money goes",
     sub: "They sit on your money. We stay beside it.",
@@ -122,6 +128,13 @@ export const en = {
     saveTitle: "Estimated savings:",
     saveBody:
       " per month with your own agreement, because we take no commission on your payments.",
+    locations: "Locations",
+    perLocation: "per location",
+    totalAcross: "Total across {n} locations",
+    saveAcross: " Across {n} locations, that is {amount} per month.",
+    chartTag: "FEES VS MONTHLY CARD VOLUME",
+    chartAlt:
+      "Chart of estimated monthly fees against monthly card volume: Square and Clover as lines, your own acquirer as a band.",
     disclaimer:
       "Published rates for Square (2.5% credit; 0.75% + 7¢ debit). Clover publishes no Canadian rates, so we estimate with its published US in-person rate (2.3% + 10¢). “Your own acquirer” = a typical interchange-plus deal for a small merchant (1.3–1.8% on credit; 8¢ per debit transaction; about $60/month in fixed fees included). Estimates only. Bring a statement for the real math.",
     cta: "Bring a statement and we'll check these numbers for real",
@@ -148,6 +161,7 @@ export const en = {
       "No forced payment bundle",
       "Cancel any month",
       "Buy it outright, if you prefer",
+      "Certified by Revenu Québec (WEB-SRM)",
     ],
   },
 
@@ -158,8 +172,9 @@ export const en = {
 
   footer: {
     tagline:
-      "A family of business apps and affordable AI services, thoughtfully built in Canada for the people who keep small business running.",
+      "Business apps and practical AI services, built in Canada for food-service and beauty operators — from one counter to a multi-location group.",
     product: "Product",
+    groups: "Groups & franchises",
     legal: "Legal",
     nails: "Nail & Beauty Salons",
     restaurants: "Restaurants & Fast Food",
@@ -230,6 +245,81 @@ export const en = {
         body: "An assistant answers every call in French or English, handles the questions, and books the table, while you keep plating.",
       },
     ],
+  },
+
+  insights: {
+    title: "The numbers you never have time to pull",
+    body: "MapleKiosk keeps score while you serve: rush hours, most popular items, average ticket times. Not data for the sake of data — decisions: schedule the second cashier for the hour that actually needs it, and cut the item nobody orders.",
+    tag: "INSIGHTS",
+    hoursLabel: "Orders by hour",
+    topLabel: "Most ordered today",
+    topItems: ["Taro milk tea · L", "Classic poutine", "Crispy chicken combo"],
+    avgLabel: "Average ticket time",
+    avgValue: "3m 40s",
+  },
+
+  groups: {
+    title: "What works at one counter breaks at five.",
+    sub: "One system for every location — and you keep your own acquirer, and your own negotiated rate, at each of them.",
+    cta: "Talk to the founder",
+    mailSubject: "MapleKiosk for our group",
+    pains: [
+      {
+        label: "Menus",
+        hook: "Change the menu once. Every store follows.",
+        body: "A price change or a new item reaches every kiosk, counter station, and TV board in the group at the same moment. No store-by-store round, no version drift.",
+      },
+      {
+        label: "Reporting",
+        hook: "One view of sales, not one login per store.",
+        body: "Every location reports into the same view. Read the group's day in one place, then open a single store when a number looks off.",
+      },
+      {
+        label: "Rush staffing",
+        hook: "The extra cashier at rush — times every location.",
+        body: "A kiosk takes orders through the rush at each store. The cost line that multiplies fastest across a group is the one the kiosk absorbs.",
+      },
+      {
+        label: "Rollout",
+        hook: "Open the next location in days, not weeks.",
+        body: "Your menus, pricing, and loyalty already live in the system. A new store is hardware and an install visit, not a software project.",
+      },
+    ],
+    insightsTitle: "Run the stores you are not standing in",
+    insightsBody:
+      "The insights dashboard puts every location side by side: rush hours, most popular items, average ticket times. Schedule the second cashier for the hour that needs it, and cut the item nobody orders — at a store you visit once a week.",
+    proofTitle: "Built for Quebec. Proven in the United States.",
+    proofPoints: [
+      "Certified by Revenu Québec (WEB-SRM) — certificate [NUMÉRO]",
+      "French-first interface, for customers and staff",
+      "Interac debit in the fee math, not an afterthought",
+      "We install it ourselves, on site, around your service hours",
+      "Built in Montreal. Proven in [N] locations across the United States — [salons, boba shops, and restaurants]",
+    ],
+    proofStats:
+      "[$X]M in orders placed through MapleKiosk. From [A] to [B] locations in [N] months.",
+    partnerTag: "THE DESIGN PARTNER OFFER",
+    partnerTitle: "We take one design partner per segment. Here is the deal.",
+    partnerPoints: [
+      {
+        title: "A 90-day pilot",
+        body: "We run 1–2 of your locations for 90 days.",
+      },
+      {
+        title: "Metrics agreed before the start",
+        body: "We agree on the success metrics up front: kiosk share of orders and average ticket.",
+      },
+      {
+        title: "A rollout price fixed in advance",
+        body: "If the pilot hits the metrics, the remaining locations roll out at a price agreed before the pilot began.",
+      },
+      {
+        title: "If it misses, we leave",
+        body: "We unplug, and you owe nothing. Same terms as every install.",
+      },
+    ],
+    ctaTitle: "The next step is a conversation, not a demo booth.",
+    ctaSub: "Email the founder directly. The person who writes the software answers — and installs.",
   },
 
   features: {
@@ -374,7 +464,7 @@ export const en = {
     title: "Built in Montreal. Installed by the person who wrote it.",
     paras: [
       "MapleKiosk is built in Montreal by Minh: a developer who writes the software, loads your menu, and comes to install the kiosk himself.",
-      "The product runs today in bubble-tea shops in the United States. The first local installs are next, that's why the demo is free and the trial costs nothing.",
+      "The product runs today in salons, boba shops, and restaurants across the United States, including multi-location groups. The first Quebec installs are next, that's why the demo is free and the trial costs nothing.",
       "The terms. No contract, no lease, no payment bundle, exist for one reason: we'd rather you stay by choice.",
     ],
     photo: "[PHOTO]",

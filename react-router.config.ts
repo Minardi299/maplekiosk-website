@@ -6,8 +6,8 @@ const pages = [
   "/tarifs",
   "/a-propos",
   "/salons",
-  "/coffee",
   "/restaurants",
+  "/groupes",
   "/confidentialite",
   "/conditions",
 ]

@@ -29,7 +29,7 @@ export function RouterBand() {
               </p>
               <Link
                 to={path("/restaurants")}
-                className="mt-auto pt-1 text-[15px] font-semibold text-primary hover:text-primary-hover"
+                className="mt-auto pt-1 text-[15px] font-semibold text-primary underline-offset-4 hover:underline"
               >
                 {t.footer.restaurants} →
               </Link>

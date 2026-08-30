@@ -4,7 +4,7 @@ export const vi: Strings = {
   meta: {
     home: {
       title: "MapleKiosk · Giữ máy tính tiền. Thêm kiosk.",
-      desc: "Kiosk tự đặt món cho quán trà sữa và quầy phục vụ nhanh ở Montréal và Bờ Nam. Không hợp đồng, 0% trên doanh thu.",
+      desc: "Kiosk tự đặt món cho quầy phục vụ nhanh và chuỗi nhiều chi nhánh ở Montréal và Bờ Nam. Không hợp đồng, 0% trên doanh thu.",
     },
     features: {
       title: "Ứng dụng · MapleKiosk",
@@ -22,9 +22,9 @@ export const vi: Strings = {
       title: "Tiệm nail & spa · MapleKiosk",
       desc: "Trợ lý điện thoại cho tiệm nail, spa và cửa hàng làm đẹp: trả lời, tư vấn và đặt lịch trong khi tay bạn đang bận.",
     },
-    coffee: {
-      title: "Cà phê & trà sữa · MapleKiosk",
-      desc: "Kiosk tự đặt món cho quán cà phê, tiệm trà sữa và quầy thức ăn nhanh.",
+    groups: {
+      title: "Chuỗi & nhượng quyền · MapleKiosk",
+      desc: "Một hệ thống cho 3–25 chi nhánh: đổi menu một lần cho mọi cửa hàng, một màn hình doanh thu, và acquirer riêng của bạn ở từng quầy.",
     },
     restaurants: {
       title: "Nhà hàng & đồ ăn nhanh · MapleKiosk",
@@ -52,7 +52,7 @@ export const vi: Strings = {
   },
 
   hero: {
-    title: "Một khách còn đang chọn trân châu, ba khách phía sau đã nhìn hàng chờ.",
+    title: "Mỗi giờ cao điểm, lại có khách nhìn hàng chờ rồi bỏ đi.",
     wedgeStrong: "Giữ máy tính tiền của bạn. Thêm kiosk.",
     wedgeRest:
       " Nếu kiosk không tự trả được tiền cho chính nó, chúng tôi rút điện, và bạn không nợ gì cả.",
@@ -95,6 +95,12 @@ export const vi: Strings = {
     ],
   },
 
+  groupsBand: {
+    title: "Từ một quầy đến cả chuỗi của bạn",
+    body: "Bạn có nhiều hơn một chi nhánh? Một menu đẩy đi mọi nơi, một màn hình doanh thu, và vẫn 0% trên tất cả.",
+    link: "MapleKiosk cho chuỗi cửa hàng",
+  },
+
   diagram: {
     title: "Tiền của bạn đi đâu",
     sub: "Họ ngồi trên tiền của bạn. Chúng tôi đứng bên cạnh.",
@@ -133,6 +139,13 @@ export const vi: Strings = {
     saveTitle: "Tiết kiệm ước tính:",
     saveBody:
       " mỗi tháng với hợp đồng riêng của bạn, vì chúng tôi không thu hoa hồng trên thanh toán của bạn.",
+    locations: "Số chi nhánh",
+    perLocation: "mỗi chi nhánh",
+    totalAcross: "Tổng cho {n} chi nhánh",
+    saveAcross: " Với {n} chi nhánh, tức là {amount} mỗi tháng.",
+    chartTag: "PHÍ THEO DOANH THU MỖI THÁNG",
+    chartAlt:
+      "Biểu đồ phí ước tính mỗi tháng theo doanh thu quẹt thẻ: Square và Clover là đường, acquirer riêng của bạn là dải.",
     disclaimer:
       "Phí niêm yết của Square (2.5% thẻ tín dụng; 0.75% + 7¢ thẻ ghi nợ). Clover không niêm yết phí tại Canada, nên chúng tôi ước tính theo mức phí tại quầy ở Mỹ của họ (2.3% + 10¢). “Acquirer riêng của bạn” = một hợp đồng interchange-plus điển hình cho cửa hàng nhỏ (1.3–1.8% thẻ tín dụng; 8¢ mỗi giao dịch ghi nợ; đã gồm khoảng $60/tháng phí cố định). Chỉ là ước tính. Mang theo sao kê để tính con số thật.",
     cta: "Mang theo một bản sao kê và chúng tôi kiểm tra những con số này cho thật",
@@ -159,6 +172,7 @@ export const vi: Strings = {
       "Không ép gói thanh toán",
       "Hủy bất cứ tháng nào",
       "Mua đứt, nếu bạn muốn",
+      "Được Revenu Québec chứng nhận (WEB-SRM)",
     ],
   },
 
@@ -169,8 +183,9 @@ export const vi: Strings = {
 
   footer: {
     tagline:
-      "Một bộ ứng dụng doanh nghiệp và dịch vụ AI vừa túi tiền, được xây dựng cẩn thận tại Canada cho những người giữ cho doanh nghiệp nhỏ vận hành.",
+      "Ứng dụng doanh nghiệp và dịch vụ AI thiết thực, xây dựng tại Canada cho ngành ăn uống và làm đẹp — từ một quầy hàng đến chuỗi nhiều chi nhánh.",
     product: "Sản phẩm",
+    groups: "Chuỗi & nhượng quyền",
     legal: "Pháp lý",
     nails: "Tiệm nail & làm đẹp",
     restaurants: "Nhà hàng & đồ ăn nhanh",
@@ -241,6 +256,81 @@ export const vi: Strings = {
         body: "Trợ lý trả lời mọi cuộc gọi bằng tiếng Pháp hoặc tiếng Anh, giải đáp thắc mắc và đặt bàn, trong khi bạn vẫn phục vụ.",
       },
     ],
+  },
+
+  insights: {
+    title: "Những con số bạn chưa bao giờ có thời gian xem",
+    body: "MapleKiosk ghi lại mọi thứ trong khi bạn phục vụ: giờ cao điểm, món bán chạy nhất, thời gian trung bình mỗi đơn. Không phải dữ liệu cho có — mà là quyết định: xếp thêm thu ngân đúng giờ thật sự cần, và bỏ món không ai gọi.",
+    tag: "SỐ LIỆU",
+    hoursLabel: "Đơn theo giờ",
+    topLabel: "Bán chạy nhất hôm nay",
+    topItems: ["Trà sữa khoai môn · L", "Poutine cổ điển", "Gà giòn · combo"],
+    avgLabel: "Thời gian trung bình mỗi đơn",
+    avgValue: "3p 40s",
+  },
+
+  groups: {
+    title: "Cách làm hiệu quả ở một quầy sẽ gãy khi có năm quầy.",
+    sub: "Một hệ thống cho mọi chi nhánh — và bạn giữ acquirer riêng, với mức phí tự thương lượng, ở từng nơi.",
+    cta: "Nói chuyện với người sáng lập",
+    mailSubject: "MapleKiosk cho chuỗi của chúng tôi",
+    pains: [
+      {
+        label: "Menu",
+        hook: "Đổi menu một lần. Mọi cửa hàng làm theo.",
+        body: "Một lần đổi giá hay thêm món mới đến mọi kiosk, máy thu ngân và màn hình TV trong chuỗi cùng lúc. Không phải đi từng cửa hàng, không lệch phiên bản.",
+      },
+      {
+        label: "Báo cáo",
+        hook: "Một màn hình doanh thu, không phải mỗi cửa hàng một tài khoản.",
+        body: "Mọi chi nhánh báo về cùng một màn hình. Đọc cả chuỗi ở một chỗ, rồi mở từng cửa hàng khi có con số bất thường.",
+      },
+      {
+        label: "Nhân sự giờ cao điểm",
+        hook: "Thêm một thu ngân giờ cao điểm — nhân với từng chi nhánh.",
+        body: "Kiosk nhận đơn suốt giờ cao điểm ở từng cửa hàng. Khoản chi nhân lên nhanh nhất trong một chuỗi chính là khoản kiosk gánh thay.",
+      },
+      {
+        label: "Mở rộng",
+        hook: "Mở chi nhánh mới trong vài ngày, không phải vài tuần.",
+        body: "Menu, giá và chương trình tích điểm đã có sẵn trong hệ thống. Cửa hàng mới chỉ cần thiết bị và một buổi lắp đặt, không phải một dự án phần mềm.",
+      },
+    ],
+    insightsTitle: "Quản lý những cửa hàng bạn không đứng ở đó",
+    insightsBody:
+      "Bảng số liệu đặt mọi chi nhánh cạnh nhau: giờ cao điểm, món bán chạy nhất, thời gian trung bình mỗi đơn. Xếp thêm thu ngân đúng giờ cần, và bỏ món không ai gọi — cho cửa hàng bạn chỉ ghé mỗi tuần một lần.",
+    proofTitle: "Xây cho Québec. Chứng minh tại Mỹ.",
+    proofPoints: [
+      "Được Revenu Québec chứng nhận (WEB-SRM) — chứng chỉ [NUMÉRO]",
+      "Giao diện ưu tiên tiếng Pháp, cho khách và nhân viên",
+      "Thẻ ghi nợ Interac nằm sẵn trong phép tính phí, không phải thêm vào sau",
+      "Chúng tôi tự lắp đặt, tại chỗ, tránh giờ bán hàng của bạn",
+      "Xây tại Montreal. Đã chạy tại [N] chi nhánh trên khắp nước Mỹ — [tiệm nail, trà sữa và nhà hàng]",
+    ],
+    proofStats:
+      "[$X]M giá trị đơn hàng đặt qua MapleKiosk. Từ [A] lên [B] chi nhánh trong [N] tháng.",
+    partnerTag: "CHƯƠNG TRÌNH ĐỐI TÁC THIẾT KẾ",
+    partnerTitle: "Mỗi ngành, chúng tôi chỉ nhận một đối tác thiết kế. Thỏa thuận như sau.",
+    partnerPoints: [
+      {
+        title: "Thí điểm 90 ngày",
+        body: "Chúng tôi triển khai 1–2 chi nhánh của bạn trong 90 ngày.",
+      },
+      {
+        title: "Chốt tiêu chí trước khi bắt đầu",
+        body: "Hai bên thống nhất trước tiêu chí thành công: tỷ lệ đơn qua kiosk và hóa đơn trung bình.",
+      },
+      {
+        title: "Giá triển khai chốt từ trước",
+        body: "Nếu thí điểm đạt tiêu chí, các chi nhánh còn lại triển khai theo mức giá đã chốt trước khi bắt đầu.",
+      },
+      {
+        title: "Không đạt, chúng tôi rút",
+        body: "Chúng tôi rút điện, và bạn không nợ gì cả. Điều khoản giống mọi lần lắp đặt.",
+      },
+    ],
+    ctaTitle: "Bước tiếp theo là một cuộc trò chuyện, không phải gian hàng demo.",
+    ctaSub: "Gửi email thẳng cho người sáng lập. Người viết phần mềm sẽ trả lời — và đến lắp đặt.",
   },
 
   features: {
@@ -385,7 +475,7 @@ export const vi: Strings = {
     title: "Xây tại Montreal. Lắp đặt bởi chính người viết ra nó.",
     paras: [
       "MapleKiosk được xây tại Montreal bởi Minh: một lập trình viên tự viết phần mềm, tự nạp menu của bạn và tự đến lắp kiosk.",
-      "Sản phẩm đang chạy trong các quán trà sữa ở Mỹ. Các điểm lắp đặt đầu tiên trong vùng đang đến, vì vậy demo miễn phí và dùng thử không tốn gì.",
+      "Sản phẩm đang chạy trong các tiệm nail, quán trà sữa và nhà hàng trên khắp nước Mỹ, gồm cả chuỗi nhiều chi nhánh. Các điểm lắp đặt đầu tiên ở Québec đang đến, vì vậy demo miễn phí và dùng thử không tốn gì.",
       "Các điều khoản. Không hợp đồng, không cho thuê, không ép gói thanh toán, tồn tại vì một lý do: chúng tôi muốn bạn ở lại vì bạn chọn ở lại.",
     ],
     photo: "[ẢNH]",

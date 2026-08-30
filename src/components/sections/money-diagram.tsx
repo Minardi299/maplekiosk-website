@@ -19,7 +19,7 @@ function FlowArrows({ at }: { at: number }) {
 function FlowBox({ at, children }: { at: number; children: string }) {
   return (
     <span
-      className="flow-item rounded-lg border-[1.5px] border-secondary px-3.5 py-2.5"
+      className="flow-item rounded-lg border-[1.5px] border-border px-3.5 py-2.5"
       style={step(at)}
     >
       {children}
@@ -73,7 +73,7 @@ export function MoneyDiagram() {
               <FlowBox at={0}>{d.you}</FlowBox>
               <FlowArrows at={1} />
               <span
-                className="flow-item min-w-40 flex-1 rounded-lg border-[1.5px] border-secondary px-3.5 py-2.5 text-center leading-snug"
+                className="flow-item min-w-40 flex-1 rounded-lg border-[1.5px] border-border px-3.5 py-2.5 text-center leading-snug"
                 style={step(2)}
               >
                 {d.acqBox}

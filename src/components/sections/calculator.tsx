@@ -1,5 +1,7 @@
 import { useState } from "react"
 import { CtaLink } from "@/components/cta-link"
+import { FeeChart } from "@/components/sections/fee-chart"
+import { fees, VOLUME_MAX, VOLUME_MIN } from "@/lib/fees"
 import { useI18n } from "@/lib/i18n"
 import { SITE } from "@/lib/site"
 
@@ -50,18 +52,13 @@ export function Calculator({ intro }: { intro?: string }) {
   const [volume, setVolume] = useState(20000)
   const [debit, setDebit] = useState(50)
   const [ticket, setTicket] = useState(8)
+  const [locations, setLocations] = useState(1)
 
-  const d = debit / 100
-  const credit = volume * (1 - d)
-  const debitAmt = volume * d
-  const debitTx = ticket > 0 ? debitAmt / ticket : 0
-  const allTx = ticket > 0 ? volume / ticket : 0
-  const square = credit * 0.025 + debitAmt * 0.0075 + debitTx * 0.07
-  const clover = volume * 0.023 + allTx * 0.1
-  const acqLow = credit * 0.013 + debitTx * 0.08 + 60
-  const acqHigh = credit * 0.018 + debitTx * 0.08 + 60
+  // per-location math; the multiplier never flips the honest branch
+  const { square, clover, acqLow, acqHigh } = fees(volume, debit, ticket)
   const squareWins = square <= acqHigh
   const savings = `${money(Math.max(0, square - acqHigh))} – ${money(Math.max(0, square - acqLow))}`
+  const savingsTotal = `${money(Math.max(0, Math.round(square - acqHigh)) * locations)} – ${money(Math.max(0, Math.round(square - acqLow)) * locations)}`
   const pct =
     lang === "en" || lang === "vi" ? `${debit}%` : `${debit} %`
 
@@ -81,8 +78,8 @@ export function Calculator({ intro }: { intro?: string }) {
               label={c.volume}
               value={volume}
               display={money(volume)}
-              min={5000}
-              max={80000}
+              min={VOLUME_MIN}
+              max={VOLUME_MAX}
               step={1000}
               onChange={setVolume}
             />
@@ -106,13 +103,24 @@ export function Calculator({ intro }: { intro?: string }) {
               step={1}
               onChange={setTicket}
             />
+            <Slider
+              id="calc-locations"
+              label={c.locations}
+              value={locations}
+              display={String(locations)}
+              min={1}
+              max={20}
+              step={1}
+              onChange={setLocations}
+            />
             <p className="text-[12.5px] leading-relaxed text-ink-faint">
               {c.disclaimer}
             </p>
           </div>
           <div className="flex flex-col gap-5 rounded-2xl bg-background p-7 text-foreground sm:p-9">
-            <div className="font-mono text-xs tracking-[0.1em] text-muted-foreground">
-              {c.resultTag}
+            <div className="flex flex-wrap items-baseline justify-between gap-2 font-mono text-xs tracking-[0.1em] text-muted-foreground">
+              <span>{c.resultTag}</span>
+              {locations > 1 && <span>{c.perLocation}</span>}
             </div>
             <div className="flex flex-col gap-3.5">
               <div className="flex items-baseline justify-between border-b pb-3">
@@ -131,6 +139,17 @@ export function Calculator({ intro }: { intro?: string }) {
                   {money(acqLow)} – {money(acqHigh)}
                 </span>
               </div>
+              {locations > 1 && (
+                <div className="flex items-baseline justify-between gap-4 border-t pt-3">
+                  <span className="text-base font-semibold">
+                    {c.totalAcross.replace("{n}", String(locations))}
+                  </span>
+                  <span className="font-mono text-[22px] whitespace-nowrap">
+                    {money(Math.round(acqLow) * locations)} –{" "}
+                    {money(Math.round(acqHigh) * locations)}
+                  </span>
+                </div>
+              )}
             </div>
             <p className="rounded-lg bg-muted p-4 text-[15px] leading-relaxed">
               {squareWins ? (
@@ -142,11 +161,21 @@ export function Calculator({ intro }: { intro?: string }) {
                 <>
                   <strong>{c.saveTitle}</strong> {savings}
                   {c.saveBody}
+                  {locations > 1 &&
+                    c.saveAcross
+                      .replace("{n}", String(locations))
+                      .replace("{amount}", savingsTotal)}
                 </>
               )}
             </p>
             <CtaLink to={SITE.demoUrl} reloadDocument>{c.cta}</CtaLink>
           </div>
+        </div>
+        <div className="hidden flex-col gap-5 rounded-2xl bg-background p-7 text-foreground sm:flex sm:p-9">
+          <div className="font-mono text-xs tracking-[0.1em] text-muted-foreground">
+            {c.chartTag}
+          </div>
+          <FeeChart volume={volume} debit={debit} ticket={ticket} />
         </div>
       </div>
     </section>

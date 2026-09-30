@@ -34,7 +34,7 @@ export function FeatureTip({
       <Popover.Trigger
         onPointerEnter={onEnter}
         onPointerLeave={onLeave}
-        className="cursor-pointer rounded-md border-[1.5px] border-border px-2.5 py-1 font-mono text-[11px] tracking-[0.06em] uppercase transition-colors hover:border-primary hover:text-primary focus-visible:border-primary focus-visible:ring-3 focus-visible:ring-ring/30 focus-visible:outline-none data-[popup-open]:border-primary data-[popup-open]:text-primary"
+        className="cursor-pointer rounded-[4px] border-[1.5px] border-border bg-card px-2.5 py-1 font-mono text-[11px] tracking-[0.06em] uppercase transition-colors hover:border-primary hover:text-primary focus-visible:border-primary focus-visible:ring-3 focus-visible:ring-ring/30 focus-visible:outline-none data-[popup-open]:border-primary data-[popup-open]:text-primary"
       >
         {label}
       </Popover.Trigger>
@@ -43,7 +43,7 @@ export function FeatureTip({
           <Popover.Popup
             onPointerEnter={onEnter}
             onPointerLeave={onLeave}
-            className="max-w-[19rem] origin-(--transform-origin) rounded-xl border bg-popover p-4 text-[14px] leading-relaxed text-popover-foreground shadow-lg transition-[scale,opacity] duration-150 ease-out data-[starting-style]:scale-95 data-[starting-style]:opacity-0 data-[ending-style]:scale-95 data-[ending-style]:opacity-0 motion-reduce:data-[starting-style]:scale-100 motion-reduce:data-[ending-style]:scale-100"
+            className="max-w-[19rem] origin-(--transform-origin) border-[1.5px] border-foreground bg-popover p-4 text-[14px] leading-relaxed text-popover-foreground transition-[scale,opacity] duration-150 ease-out data-[starting-style]:scale-95 data-[starting-style]:opacity-0 data-[ending-style]:scale-95 data-[ending-style]:opacity-0 motion-reduce:data-[starting-style]:scale-100 motion-reduce:data-[ending-style]:scale-100"
           >
             {detail}
           </Popover.Popup>

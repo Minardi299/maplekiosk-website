@@ -7,11 +7,11 @@ export default function PrivacyPage() {
   return (
     <>
       <PageMeta title={t.meta.privacy.title} desc={t.meta.privacy.desc} />
-      <section className="site-container section mx-auto flex max-w-3xl flex-col gap-2">
-        <h1 className="font-heading text-4xl font-semibold tracking-tight text-balance">
+      <section className="site-container section mx-auto flex max-w-3xl flex-col gap-3">
+        <h1 className="font-heading text-[40px] leading-[1.05] font-[650] tracking-[-0.02em] text-balance sm:text-5xl">
           {PRIVACY_TITLE}
         </h1>
-        <p className="text-muted-foreground">{PRIVACY_DATE}</p>
+        <p className="font-mono text-[12px] tracking-[0.06em] text-muted-foreground uppercase">{PRIVACY_DATE}</p>
         <div
           className="legal-prose mt-6"
           dangerouslySetInnerHTML={{ __html: PRIVACY_HTML }}

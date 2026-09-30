@@ -9,6 +9,8 @@ export default [
     route("salons", "pages/salons.tsx"),
     route("restaurants", "pages/restaurants.tsx"),
     route("groupes", "pages/groups.tsx"),
+    route("booking", "pages/booking.tsx"),
+    route("demo", "pages/demo.tsx"),
     route("confidentialite", "pages/privacy.tsx"),
     route("conditions", "pages/terms.tsx"),
     route("*", "pages/not-found.tsx"),

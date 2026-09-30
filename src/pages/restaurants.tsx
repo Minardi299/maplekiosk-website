@@ -1,12 +1,15 @@
-import type { CSSProperties } from "react"
 import { CtaLink } from "@/components/cta-link"
+import { IsoPlan } from "@/components/iso/iso-plan"
+import { restaurantPlan } from "@/components/iso/scenes/restaurant"
 import { PageMeta } from "@/components/page-meta"
+import { useRestaurantModules } from "@/components/plan-screens/restaurant"
 import { DayTimeline } from "@/components/sections/day-timeline"
 import { FinalCta } from "@/components/sections/final-cta"
 import { Insights } from "@/components/sections/insights"
+import { ArrowLink, headingClass } from "@/components/ui-kit"
 import { useI18n } from "@/lib/i18n"
-import { useVisibleOnce } from "@/lib/use-visible-once"
 import { SITE } from "@/lib/site"
+import { cn } from "@/lib/utils"
 
 // real QR for https://starb.ca (version 2, ECC M), generated offline
 const QR_ROWS = [
@@ -63,9 +66,10 @@ function Barcode({ className }: { className?: string }) {
 }
 
 export default function RestaurantsPage() {
-  const { t } = useI18n()
+  const { t, path } = useI18n()
   const r = t.restaurants
-  const { ref: railRef, visible } = useVisibleOnce()
+  const p = r.plan
+  const modules = useRestaurantModules()
   const moreQuotes = [r.quotes[2], t.coffee.quotes[2]]
   const v = r.vig
   const SRC = [
@@ -81,41 +85,48 @@ export default function RestaurantsPage() {
   return (
     <>
       <PageMeta title={t.meta.restaurants.title} desc={t.meta.restaurants.desc} />
-      <section className="bg-ink text-ink-foreground">
-        <div className="site-container flex max-w-4xl flex-col gap-6 py-14 sm:py-16 lg:py-20">
-          <h1 className="font-heading text-4xl leading-[1.12] font-semibold tracking-tight text-balance sm:text-5xl lg:text-[54px]">
-            {r.title}
-          </h1>
-          <p className="max-w-[34em] text-lg leading-relaxed sm:text-[21px]">
-            {r.sub}
-          </p>
-          <div className="mt-1 flex flex-wrap gap-3.5">
-            <CtaLink to={SITE.demoUrl} reloadDocument variant="inverted" size="lg">
-              {t.nav.cta}
-            </CtaLink>
+      <section className="site-container grid gap-6 pt-10 pb-10 sm:pt-14 lg:grid-cols-[1.2fr_0.8fr] lg:items-end lg:gap-14 lg:pt-20">
+        <div className="flex flex-col gap-5">
+          <h1 className={cn(headingClass, "sm:text-5xl lg:text-[58px]")}>{r.title}</h1>
+        </div>
+        <div className="flex flex-col items-start gap-5">
+          <p className="text-lg leading-relaxed sm:text-[19px]">{r.sub}</p>
+          <CtaLink to={path(SITE.demoUrl)} size="lg">
+            {t.nav.cta} <span aria-hidden>→</span>
+          </CtaLink>
+        </div>
+      </section>
+      <section className="site-container pb-16 lg:pb-20">
+        <IsoPlan
+          scene={restaurantPlan}
+          modules={modules}
+          s={{ ...p, ...t.planUi }}
+          demoTo={path(SITE.demoUrl)}
+          ariaLabel={p.aria}
+        />
+      </section>
+      <section className="border-y border-foreground bg-card">
+        <div className="site-container flex flex-wrap items-center justify-between gap-x-10 gap-y-4 py-8">
+          <div className="flex max-w-2xl flex-col gap-1.5">
+            <h2 className="font-heading text-2xl font-[650] tracking-[-0.015em]">{t.groupsBand.title}</h2>
+            <p className="text-[15px] leading-relaxed text-muted-foreground">{t.groupsBand.body}</p>
+            <p className="text-[12.5px] text-muted-foreground">{t.zeroNote}</p>
           </div>
+          <ArrowLink to={path("/groupes")}>{t.groupsBand.link}</ArrowLink>
         </div>
       </section>
       <section className="site-container section flex flex-col gap-14 lg:gap-20">
         <div className="grid items-center gap-8 lg:grid-cols-2 lg:gap-16">
-          <div
-            ref={railRef}
-            data-visible={visible || undefined}
-            className="kds-rail flex flex-col"
-          >
-            <div className="h-1 rounded-full bg-ink" />
+          <div className="flex flex-col">
+            <div className="h-1 bg-ink" />
             <div className="grid gap-6 pt-6 md:grid-cols-2">
               {r.kds.tickets.map((tk, i) => (
-                <div
-                  key={tk.no}
-                  className="flex flex-col"
-                  style={{ "--step": i } as CSSProperties}
-                >
-                  <div className="kds-ticket flex flex-1 flex-col gap-3 rounded-xl border bg-card p-5 shadow-sm">
+                <div key={tk.no} className="flex flex-col">
+                  <div className="flex flex-1 flex-col gap-3 border-[1.5px] border-foreground bg-card p-5">
                     <div className="flex items-center justify-between gap-2">
                       <span className="font-mono text-sm">#{tk.no}</span>
                       <span
-                        className={`kds-src rounded-md px-2 py-0.5 font-mono text-[11px] font-medium tracking-[0.08em] uppercase ${SRC[i]}`}
+                        className={`rounded-[4px] px-2 py-0.5 font-mono text-[11px] font-medium tracking-[0.08em] uppercase ${SRC[i]}`}
                       >
                         {tk.src}
                       </span>
@@ -133,13 +144,13 @@ export default function RestaurantsPage() {
                   </div>
                 </div>
               ))}
-              <div className="flex flex-col" style={{ "--step": 3 } as CSSProperties}>
-                <div className="kds-ticket flex flex-1 flex-col gap-3 rounded-xl bg-ink p-5 text-ink-foreground">
+              <div className="flex flex-col">
+                <div className="flex flex-1 flex-col gap-3 bg-ink p-5 text-ink-foreground">
                   <div className="flex items-center justify-between gap-2">
                     <span className="font-heading text-lg font-semibold">
                       {r.kds.soldQuote}
                     </span>
-                    <span className="rounded-md bg-ink-foreground px-2 py-0.5 font-mono text-[11px] tracking-[0.08em] text-ink uppercase">
+                    <span className="rounded-[4px] bg-primary px-2 py-0.5 font-mono text-[11px] tracking-[0.08em] text-white uppercase">
                       {r.kds.soldBadge}
                     </span>
                   </div>
@@ -153,23 +164,24 @@ export default function RestaurantsPage() {
               </div>
             </div>
           </div>
-          <div className="flex flex-col gap-3">
-            <h2 className="font-heading text-2xl font-semibold text-balance">
+          <div className="flex flex-col gap-3 border-t-2 border-foreground pt-5">
+            <span className="font-mono text-[13px] text-primary">01</span>
+            <h2 className="font-heading text-[28px] leading-[1.08] font-[650] tracking-[-0.02em] text-balance sm:text-[34px]">
               {r.bandTitle}
             </h2>
-            <p className="max-w-md text-base leading-relaxed text-muted-foreground">
+            <p className="max-w-md text-[17px] leading-relaxed text-muted-foreground">
               {r.quotes[0].body}
             </p>
           </div>
         </div>
         <div className="grid items-center gap-8 lg:grid-cols-2 lg:gap-16">
-          <div className="w-full max-w-[470px] -rotate-[1.5deg] drop-shadow-[0_16px_24px_rgba(29,33,48,0.22)] lg:order-2">
-            <div className="overflow-hidden rounded border border-[#e3ddc9] bg-[#fdfbf4]">
+          <div className="w-full max-w-[470px] -rotate-[1.5deg] lg:order-2">
+            <div className="overflow-hidden border-[1.5px] border-foreground bg-card">
               <div className="flex justify-around px-6 pt-3.5">
                 {Array.from({ length: 7 }).map((_, i) => (
                   <span
                     key={i}
-                    className="size-3 rounded-full border border-[#d5cdb4] bg-background shadow-[inset_0_1px_1px_rgba(58,47,36,0.25)]"
+                    className="size-3 rounded-full border border-foreground bg-background"
                   />
                 ))}
               </div>
@@ -178,15 +190,15 @@ export default function RestaurantsPage() {
                   <span className="tracking-[0.14em] text-primary uppercase">
                     {v.padTag}
                   </span>
-                  <span className="text-[#8a8472] uppercase">{v.padTime}</span>
+                  <span className="text-muted-foreground uppercase">{v.padTime}</span>
                 </div>
-                <div className="hand border-b border-[#e3ddc9] pb-1 text-4xl leading-[1.45] text-[#2b2820]">
+                <div className="hand border-b border-border pb-1 text-4xl leading-[1.45] text-foreground">
                   {v.padL1}
                 </div>
-                <div className="hand border-b border-[#e3ddc9] pb-1 text-4xl leading-[1.45] text-[#2b2820]">
+                <div className="hand border-b border-border pb-1 text-4xl leading-[1.45] text-foreground">
                   {v.padL2}
                 </div>
-                <div className="hand border-b border-[#e3ddc9] pb-1 text-3xl leading-[1.45] text-[#8a8472]">
+                <div className="hand border-b border-border pb-1 text-3xl leading-[1.45] text-muted-foreground">
                   {v.padL3}
                 </div>
                 <div className="mt-4 flex justify-end">
@@ -197,11 +209,12 @@ export default function RestaurantsPage() {
               </div>
             </div>
           </div>
-          <div className="flex flex-col gap-3">
-            <h2 className="font-heading text-2xl font-semibold text-balance">
+          <div className="flex flex-col gap-3 border-t-2 border-foreground pt-5">
+            <span className="font-mono text-[13px] text-primary">02</span>
+            <h2 className="font-heading text-[28px] leading-[1.08] font-[650] tracking-[-0.02em] text-balance sm:text-[34px]">
               {r.phoneTitle}
             </h2>
-            <p className="max-w-md text-base leading-relaxed text-muted-foreground">
+            <p className="max-w-md text-[17px] leading-relaxed text-muted-foreground">
               {moreQuotes[0].body}
             </p>
           </div>
@@ -209,9 +222,9 @@ export default function RestaurantsPage() {
         <div className="grid items-center gap-8 lg:grid-cols-2 lg:gap-16">
           <div className="relative h-[600px] w-full max-w-[500px]">
             {/* Android behind, left */}
-            <div className="absolute top-10 left-0 w-[200px] -rotate-[8deg] rounded-[30px] bg-[#16181c] p-1.5 drop-shadow-[0_16px_24px_rgba(29,33,48,0.28)]">
+            <div className="absolute top-10 left-0 w-[200px] -rotate-[8deg] rounded-[30px] bg-ink p-1.5">
               <div className="relative h-[400px] overflow-hidden rounded-[24px] bg-white">
-                <span className="absolute top-2 left-1/2 size-2.5 -translate-x-1/2 rounded-full bg-[#16181c]" />
+                <span className="absolute top-2 left-1/2 size-2.5 -translate-x-1/2 rounded-full bg-ink" />
                 <div className="flex flex-col gap-2.5 p-4 pt-7">
                   <span className="font-mono text-[11px]">18:42</span>
                   <span className="text-lg font-bold">Wallet</span>
@@ -251,14 +264,14 @@ export default function RestaurantsPage() {
                       </span>
                     </div>
                     <div className="flex justify-center rounded-md bg-white px-2 py-1.5">
-                      <Barcode className="h-7 w-32 text-[#16181c]" />
+                      <Barcode className="h-7 w-32 text-ink" />
                     </div>
                   </div>
                 </div>
               </div>
             </div>
             {/* physical card behind, right */}
-            <div className="absolute top-40 right-0 w-[240px] rotate-[9deg] drop-shadow-[0_16px_24px_rgba(29,33,48,0.22)]">
+            <div className="absolute top-40 right-0 w-[240px] rotate-[9deg]">
               <div className="flex flex-col gap-2.5 rounded-lg border border-background/20 bg-ink p-4 text-ink-foreground shadow-[inset_0_1px_0_rgba(248,249,251,0.12),inset_0_-1px_0_rgba(0,0,0,0.3)]">
                 <div className="flex flex-col">
                   <span className="font-heading text-[15px] font-bold">{v.loyTitle}</span>
@@ -287,16 +300,16 @@ export default function RestaurantsPage() {
                   {v.custName}
                 </span>
                 <div className="flex justify-center rounded-md bg-white px-2 py-2">
-                  <Barcode className="h-8 w-40 text-[#16181c]" />
+                  <Barcode className="h-8 w-40 text-ink" />
                 </div>
               </div>
             </div>
             {/* iPhone in front */}
-            <div className="absolute top-0 left-[46%] z-10 w-[270px] -translate-x-1/2 rotate-[2deg] rounded-[44px] bg-[#16181c] p-[7px] drop-shadow-[0_24px_40px_rgba(29,33,48,0.35)]">
+            <div className="absolute top-0 left-[46%] z-10 w-[270px] -translate-x-1/2 rotate-[2deg] rounded-[44px] bg-ink p-[7px] outline-[1.5px] outline-offset-0 outline-background">
               <div className="flex flex-col gap-3 overflow-hidden rounded-[37px] bg-white px-4 pt-3.5 pb-2.5">
                 <div className="relative flex items-center justify-between">
                   <span className="text-[13px] font-semibold">18:42</span>
-                  <span className="absolute left-1/2 flex h-6 w-[84px] -translate-x-1/2 items-center justify-end rounded-full bg-[#16181c] pr-2">
+                  <span className="absolute left-1/2 flex h-6 w-[84px] -translate-x-1/2 items-center justify-end rounded-full bg-ink pr-2">
                     <span className="size-2 rounded-full bg-[#2e3340]" />
                   </span>
                   <span className="flex gap-1">
@@ -339,18 +352,19 @@ export default function RestaurantsPage() {
                     </span>
                   </div>
                   <div className="flex justify-center rounded-xl bg-white p-3">
-                    <Qr className="size-32 text-[#16181c]" />
+                    <Qr className="size-32 text-ink" />
                   </div>
                 </div>
-                <span className="mx-auto mt-1 h-1 w-24 rounded-full bg-[#16181c]" />
+                <span className="mx-auto mt-1 h-1 w-24 rounded-full bg-ink" />
               </div>
             </div>
           </div>
-          <div className="flex flex-col gap-3">
-            <h2 className="font-heading text-2xl font-semibold text-balance">
+          <div className="flex flex-col gap-3 border-t-2 border-foreground pt-5">
+            <span className="font-mono text-[13px] text-primary">03</span>
+            <h2 className="font-heading text-[28px] leading-[1.08] font-[650] tracking-[-0.02em] text-balance sm:text-[34px]">
               {r.walletTitle}
             </h2>
-            <p className="max-w-md text-base leading-relaxed text-muted-foreground">
+            <p className="max-w-md text-[17px] leading-relaxed text-muted-foreground">
               {moreQuotes[1].body}
             </p>
           </div>

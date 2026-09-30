@@ -40,15 +40,14 @@
     --color-card: var(--card);
     --color-foreground: var(--foreground);
     --color-background: var(--background);
+    --color-amber: var(--amber);
+    --color-chart-1: var(--chart-1);
+    --color-chart-2: var(--chart-2);
+    --color-chart-5: var(--chart-5);
     --color-ink: var(--ink);
     --color-ink-foreground: var(--ink-foreground);
     --color-ink-muted: var(--ink-muted);
     --color-ink-faint: var(--ink-faint);
-    --color-chart-1: var(--chart-1);
-    --color-chart-2: var(--chart-2);
-    --color-chart-3: var(--chart-3);
-    --color-chart-4: var(--chart-4);
-    --color-chart-5: var(--chart-5);
     --radius-sm: calc(var(--radius) * 0.6);
     --radius-md: calc(var(--radius) * 0.8);
     --radius-lg: var(--radius);
@@ -58,37 +57,39 @@
     --radius-4xl: calc(var(--radius) * 2.6);
 }
 
+/* ===== Palette: maplekiosk.ca colors ===== */
 :root {
-    --background: oklch(1 0 0);
-    --foreground: oklch(0.145 0 0);
-    --card: oklch(1 0 0);
-    --card-foreground: oklch(0.145 0 0);
-    --popover: oklch(1 0 0);
-    --popover-foreground: oklch(0.145 0 0);
-    --primary: oklch(0.205 0 0);
-    --primary-foreground: oklch(0.985 0 0);
-    --secondary: oklch(0.97 0 0);
-    --secondary-foreground: oklch(0.205 0 0);
-    --muted: oklch(0.97 0 0);
-    --muted-foreground: oklch(0.556 0 0);
-    --accent: oklch(0.97 0 0);
-    --accent-foreground: oklch(0.205 0 0);
-    --destructive: oklch(0.577 0.245 27.325);
-    --border: oklch(0.922 0 0);
-    --input: oklch(0.922 0 0);
-    --ring: oklch(0.708 0 0);
-    /* categorical series colors, CVD-validated against the light surface */
-    --chart-1: #27803a;
-    --chart-2: #1971c2;
-    --chart-3: #f59f00;
-    --chart-4: #9c36b5;
-    --chart-5: #e8590c;
-    --radius: 0.625rem;
-    --ink: oklch(0.205 0 0);
-    --ink-foreground: oklch(0.985 0 0);
-    --ink-muted: oklch(0.708 0 0);
-    --ink-faint: oklch(0.556 0 0);
-    --container-max: 75rem;
+    --background: #faf7f2;
+    --foreground: #1d1a17;
+    --card: #ffffff;
+    --card-foreground: #1d1a17;
+    --popover: #ffffff;
+    --popover-foreground: #1d1a17;
+    --primary: #c0392b;
+    --primary-hover: #a8291b;
+    --primary-foreground: #ffffff;
+    --secondary: #f3ede4;
+    --secondary-foreground: #1d1a17;
+    --muted: #f3ede4;
+    --muted-foreground: #6b645c;
+    --accent: #f3ede4;
+    --accent-foreground: #1d1a17;
+    --destructive: #a8291b;
+    --border: #e8e1d7;
+    --input: #e8e1d7;
+    --ring: #c0392b;
+    --amber: #e07b4a;
+    --radius: 0.375rem;
+    --ink: #1d1a17;
+    --ink-foreground: #faf7f2;
+    --ink-muted: #cfc6ba;
+    --ink-faint: #a39a8e;
+    --tint: #f6ddd8;
+    /* fee chart: acquirer band, Clover, Square */
+    --chart-1: #c0392b;
+    --chart-2: #6b645c;
+    --chart-5: #1d1a17;
+    --container-max: 82rem;
     --header-height: 4.5rem;
 }
 
@@ -113,16 +114,11 @@
     background: var(--primary);
     color: #fff;
   }
-  input[type="range"] {
-    accent-color: var(--primary);
-    width: 100%;
-    cursor: pointer;
-  }
 }
 
 @layer components {
   .site-container {
-    @apply mx-auto w-full px-5 sm:px-8 lg:px-10;
+    @apply mx-auto w-full px-4 sm:px-8 lg:px-12;
     max-width: var(--container-max);
   }
   .section {
@@ -130,10 +126,10 @@
     scroll-margin-top: var(--header-height);
   }
   .legal-prose {
-    @apply text-[15px] leading-relaxed;
+    @apply text-[15.5px] leading-relaxed;
   }
   .legal-prose h2 {
-    @apply font-heading mt-10 mb-3 text-2xl font-semibold tracking-tight;
+    @apply font-heading mt-12 mb-3 border-t border-foreground pt-4 text-2xl font-semibold tracking-tight;
   }
   .legal-prose h3 {
     @apply font-heading mt-6 mb-2 text-lg font-semibold;
@@ -150,9 +146,50 @@
     @apply my-1.5;
   }
   .legal-prose a[href] {
-    @apply text-primary underline;
+    @apply text-primary underline underline-offset-4;
   }
-  /* ===== FAQ accordion open/close ===== */
+
+  /* ===== Range inputs: ink track, square red thumb ===== */
+  .range {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100%;
+    height: 28px;
+    background: transparent;
+    cursor: pointer;
+  }
+  .range::-webkit-slider-runnable-track {
+    height: 2px;
+    background: var(--ink);
+  }
+  .range::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 20px;
+    height: 20px;
+    margin-top: -9px;
+    background: var(--primary);
+    border: 2px solid #fff;
+    outline: 1px solid var(--ink);
+    border-radius: 3px;
+  }
+  .range::-moz-range-track {
+    height: 2px;
+    background: var(--ink);
+  }
+  .range::-moz-range-thumb {
+    width: 18px;
+    height: 18px;
+    background: var(--primary);
+    border: 2px solid #fff;
+    outline: 1px solid var(--ink);
+    border-radius: 3px;
+  }
+  .range:focus-visible {
+    outline: 2px solid var(--ring);
+    outline-offset: 4px;
+  }
+
+  /* ===== FAQ rows open/close ===== */
   /* Chromium-only for now; other browsers keep the instant snap */
   .faq-item::details-content {
     interpolate-size: allow-keywords;
@@ -173,6 +210,108 @@
       transition:
         opacity 200ms var(--ease-out),
         content-visibility 200ms allow-discrete;
+    }
+  }
+
+  /* ===== Isometric drawings ===== */
+  .iso-svg {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+  .iso-svg * {
+    vector-effect: non-scaling-stroke;
+  }
+
+  /* ===== Module board: tiles drop into their slots ===== */
+  .board .tile {
+    opacity: 0;
+    transform: translateY(-26px);
+    transition:
+      transform 320ms cubic-bezier(0.3, 1.35, 0.5, 1),
+      opacity 140ms linear;
+  }
+  .board .slot {
+    transition: opacity 160ms linear;
+  }
+  .board[data-on~="kds"] [data-tile="kds"],
+  .board[data-on~="kiosk"] [data-tile="kiosk"],
+  .board[data-on~="tv"] [data-tile="tv"],
+  .board[data-on~="delivery"] [data-tile="delivery"],
+  .board[data-on~="ai"] [data-tile="ai"],
+  .board[data-on~="profiles"] [data-tile="profiles"],
+  .board[data-on~="loyalty"] [data-tile="loyalty"],
+  .board[data-on~="checkout"] [data-tile="checkout"] {
+    opacity: 1;
+    transform: none;
+  }
+  .board[data-on~="kds"] [data-slot="kds"],
+  .board[data-on~="kiosk"] [data-slot="kiosk"],
+  .board[data-on~="tv"] [data-slot="tv"],
+  .board[data-on~="delivery"] [data-slot="delivery"],
+  .board[data-on~="ai"] [data-slot="ai"],
+  .board[data-on~="profiles"] [data-slot="profiles"],
+  .board[data-on~="loyalty"] [data-slot="loyalty"],
+  .board[data-on~="checkout"] [data-slot="checkout"] {
+    opacity: 0;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .board .tile {
+      transform: none;
+      transition: opacity 140ms linear;
+    }
+  }
+
+  /* ===== Plans: the selected module turns maple red ===== */
+  .iso-plan .o {
+    cursor: pointer;
+  }
+  .iso-plan .o,
+  .iso-plan .o * {
+    transition:
+      fill 160ms var(--ease-out),
+      stroke 160ms var(--ease-out);
+  }
+  .iso-plan :is([data-active="1"] .o1, [data-active="2"] .o2, [data-active="3"] .o3, [data-active="4"] .o4, [data-active="5"] .o5, [data-active="6"] .o6, [data-active="7"] .o7, [data-active="8"] .o8, [data-active="9"] .o9, [data-active="10"] .o10) {
+    &,
+    & * {
+      stroke: var(--primary);
+    }
+    &[data-k="furn"] .f-t,
+    &[data-k="base"] .f-t,
+    &[data-k="sand"] .f-t {
+      fill: var(--tint);
+    }
+    &[data-k="furn"] :is(.f-l, .f-r),
+    &[data-k="base"] :is(.f-l, .f-r),
+    &[data-k="sand"] :is(.f-l, .f-r) {
+      fill: #ecc4bc;
+    }
+    &[data-k="screen"] .f-t {
+      fill: var(--primary);
+    }
+    &[data-k="screen"] :is(.f-l, .f-r) {
+      fill: var(--primary-hover);
+    }
+  }
+
+  .iso-plan :is([data-active="1"] .p1, [data-active="2"] .p2, [data-active="3"] .p3, [data-active="4"] .p4, [data-active="5"] .p5, [data-active="6"] .p6, [data-active="7"] .p7, [data-active="8"] .p8, [data-active="9"] .p9, [data-active="10"] .p10) {
+    & line {
+      stroke: var(--primary);
+    }
+    & circle {
+      fill: var(--primary);
+    }
+  }
+
+  /* ===== Money diagram: the money path flows ===== */
+  .money-path {
+    stroke-dasharray: 6 6;
+    animation: money-flow 1.1s linear infinite;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .money-path {
+      animation: none;
     }
   }
 
@@ -210,34 +349,6 @@
     }
   }
 
-  /* ===== Terms title underline sweep ===== */
-  @media (scripting: enabled) {
-    .terms-title::after {
-      content: "";
-      position: absolute;
-      inset: auto 0 -0.14em 0;
-      height: 4px;
-      border-radius: 2px;
-      background: var(--primary);
-      transform-origin: left;
-      scale: 0 1;
-      transition: scale 500ms var(--ease-out) 150ms;
-    }
-    [data-visible] .terms-title::after {
-      scale: 1 1;
-    }
-    @media (prefers-reduced-motion: reduce) {
-      .terms-title::after {
-        scale: 1 1;
-        opacity: 0;
-        transition: opacity 300ms var(--ease-out) 150ms;
-      }
-      [data-visible] .terms-title::after {
-        opacity: 1;
-      }
-    }
-  }
-
   /* ===== Handwriting for the physical vignettes ===== */
   .hand {
     font-family: 'Caveat', cursive;
@@ -247,148 +358,31 @@
     font-family: 'Be Vietnam Pro', sans-serif;
   }
 
-  /* ===== Kitchen ticket rail reveal ===== */
+  /* ===== Kitchen tickets ===== */
   .kds-strike::after {
     content: "";
     position: absolute;
     inset: 50% 0 auto 0;
     height: 1.5px;
-    background: var(--ink-muted);
+    background: currentColor;
   }
   .kds-live {
-    animation: flow-pulse 2.4s linear infinite;
+    animation: live-pulse 2.4s linear infinite;
   }
   @media (prefers-reduced-motion: reduce) {
     .kds-live {
       animation: none;
     }
   }
-  @media (scripting: enabled) {
-    .kds-rail .kds-ticket {
-      opacity: 0;
-      translate: 0 -8px;
-      transition:
-        opacity 300ms var(--ease-out) calc(var(--step) * 150ms + 100ms),
-        translate 300ms var(--ease-out) calc(var(--step) * 150ms + 100ms);
-    }
-    .kds-rail .kds-src {
-      opacity: 0;
-      scale: 0.6;
-      transition:
-        opacity 200ms var(--ease-out) calc(var(--step) * 150ms + 250ms),
-        scale 200ms var(--ease-out) calc(var(--step) * 150ms + 250ms);
-    }
-    .kds-rail .kds-strike::after {
-      transform-origin: left;
-      scale: 0 1;
-      transition: scale 300ms var(--ease-out) 1s;
-    }
-    .kds-rail[data-visible] .kds-ticket {
-      opacity: 1;
-      translate: 0 0;
-    }
-    .kds-rail[data-visible] .kds-src {
-      opacity: 1;
-      scale: 1;
-    }
-    .kds-rail[data-visible] .kds-strike::after {
-      scale: 1 1;
-    }
-    @media (prefers-reduced-motion: reduce) {
-      .kds-rail .kds-ticket {
-        translate: 0 0;
-        transition: opacity 300ms var(--ease-out);
-      }
-      .kds-rail .kds-src {
-        scale: 1;
-        transition: opacity 300ms var(--ease-out);
-      }
-      .kds-rail .kds-strike::after {
-        scale: 1 1;
-        transition: none;
-      }
-    }
-  }
+}
 
-  /* ===== Money diagram flow pulse ===== */
-  .flow-arrows {
-    display: inline-flex;
-    gap: 2.5px;
-    font-size: 1.25rem;
-    line-height: 1;
-    font-weight: 600;
-    color: var(--muted-foreground);
-  }
-  .flow-arrows > span {
-    opacity: 0.25;
-    animation: flow-pulse 1.2s linear infinite;
-  }
-  .flow-arrows > span:nth-child(2) {
-    animation-delay: 150ms;
-  }
-  .flow-arrows > span:nth-child(3) {
-    animation-delay: 300ms;
-  }
-  @media (prefers-reduced-motion: reduce) {
-    .flow-arrows > span {
-      animation: none;
-      opacity: 0.6;
-    }
-  }
-
-  /* ===== Money diagram flow reveal ===== */
-  @media (scripting: enabled) {
-    .money-flow .flow-item {
-      opacity: 0;
-      translate: -6px 0;
-      transition:
-        opacity 300ms var(--ease-out) calc(var(--step) * 100ms),
-        translate 300ms var(--ease-out) calc(var(--step) * 100ms);
-    }
-    .money-flow .flow-branch {
-      opacity: 0;
-      translate: 0 -4px;
-      transition:
-        opacity 300ms var(--ease-out) calc(var(--step) * 100ms),
-        translate 300ms var(--ease-out) calc(var(--step) * 100ms);
-    }
-    .money-flow .flow-drop {
-      transform-origin: top;
-      scale: 1 0;
-      transition: scale 200ms var(--ease-out) calc(var(--step) * 100ms);
-    }
-    .money-flow[data-visible] .flow-item,
-    .money-flow[data-visible] .flow-branch {
-      opacity: 1;
-      translate: 0 0;
-    }
-    .money-flow[data-visible] .flow-drop {
-      scale: 1 1;
-    }
-    @media (prefers-reduced-motion: reduce) {
-      .money-flow .flow-item,
-      .money-flow .flow-branch {
-        translate: 0 0;
-        transition: opacity 300ms var(--ease-out);
-      }
-      .money-flow .flow-drop {
-        scale: 1 1;
-        transition: none;
-      }
-    }
-  }
-
-  /* Zigzag tear along the bottom edge, cut with a mask */
-  .receipt-tear {
-    --tooth: 14px;
-    -webkit-mask: conic-gradient(from -45deg at bottom, #0000, #000 1deg 89deg, #0000 90deg)
-      50% / var(--tooth) 100%;
-    mask: conic-gradient(from -45deg at bottom, #0000, #000 1deg 89deg, #0000 90deg)
-      50% / var(--tooth) 100%;
+@keyframes money-flow {
+  to {
+    stroke-dashoffset: -12;
   }
 }
 
-@keyframes flow-pulse {
+@keyframes live-pulse {
   0% {
     opacity: 0.25;
   }

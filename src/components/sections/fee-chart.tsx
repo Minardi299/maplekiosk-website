@@ -201,24 +201,26 @@ export function FeeChart({
   const xMax = useTweenedNumber(xTarget, reduced)
   const yMax = useTweenedNumber(yTarget, reduced)
 
-  const markerPct = Math.min(1, volume / xMax)
   return (
     <div className="flex flex-col gap-3">
-      <div className="flex flex-wrap justify-end gap-x-5 gap-y-1.5 text-[13px] text-muted-foreground">
-        <span className="flex items-center gap-2">
-          <span className="h-3 w-4 rounded-xs bg-chart-1/40" />
-          {c.acq}
-        </span>
-        <span className="flex items-center gap-2">
-          <span className="h-0.5 w-4 rounded-full bg-chart-5" />
-          {c.square}
-        </span>
-        <span className="flex items-center gap-2">
-          <span className="w-4 border-t-2 border-dashed border-chart-2" />
-          {c.clover}
-        </span>
+      <div className="flex flex-wrap items-baseline justify-between gap-x-5 gap-y-1.5 text-[13px] text-muted-foreground">
+        <span className="text-xs">{c.axisY}</span>
+        <div className="flex flex-wrap gap-x-5 gap-y-1.5">
+          <span className="flex items-center gap-2">
+            <span className="h-3 w-4 rounded-xs bg-chart-1/40" />
+            {c.acq}
+          </span>
+          <span className="flex items-center gap-2">
+            <span className="h-0.5 w-4 rounded-full bg-chart-5" />
+            {c.square}
+          </span>
+          <span className="flex items-center gap-2">
+            <span className="w-4 border-t-2 border-dashed border-chart-2" />
+            {c.clover}
+          </span>
+        </div>
       </div>
-      <div className="relative" aria-label={c.chartAlt}>
+      <div aria-label={c.chartAlt}>
         <Plot
           data={data}
           xMax={xMax}
@@ -228,13 +230,12 @@ export function FeeChart({
           reduced={reduced}
           money={money}
         />
-        <div
-          aria-hidden="true"
-          className="pointer-events-none absolute inset-y-0 border-l border-dashed border-foreground/50"
-          style={{
-            left: `calc(${Y_AXIS_WIDTH}px + ${markerPct} * (100% - ${Y_AXIS_WIDTH}px))`,
-          }}
-        />
+      </div>
+      <div
+        className="text-center text-xs text-muted-foreground"
+        style={{ paddingLeft: Y_AXIS_WIDTH }}
+      >
+        {c.axisX}
       </div>
     </div>
   )

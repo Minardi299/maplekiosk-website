@@ -10,6 +10,7 @@ import {
   TimelineSeparator,
   TimelineTitle,
 } from "@/components/reui/timeline"
+import { SectionHead } from "@/components/ui-kit"
 import { useI18n } from "@/lib/i18n"
 import { useVisibleOnce } from "@/lib/use-visible-once"
 
@@ -18,14 +19,9 @@ export function DayTimeline() {
   const d = t.day
   const { ref: railRef, visible } = useVisibleOnce()
   return (
-    <section className="border-y bg-card">
+    <section className="border-y border-foreground bg-card">
       <div className="site-container section flex flex-col gap-10">
-        <div className="flex max-w-2xl flex-col gap-3">
-          <h2 className="font-heading text-3xl font-semibold tracking-tight text-balance sm:text-[38px]">
-            {d.title}
-          </h2>
-          <p className="text-lg text-muted-foreground">{d.sub}</p>
-        </div>
+        <SectionHead title={d.title} sub={d.sub} />
         {/* every step renders complete, so the rail reads as a finished day */}
         <div
           ref={railRef}
@@ -45,7 +41,7 @@ export function DayTimeline() {
                   <TimelineDate className="font-mono text-base font-medium text-primary">
                     {beat.time}
                   </TimelineDate>
-                  <TimelineTitle className="font-heading text-xl font-semibold text-foreground">
+                  <TimelineTitle className="font-heading text-[22px] font-[650] tracking-[-0.015em] text-foreground">
                     {beat.name}
                   </TimelineTitle>
                   <TimelineIndicator className="border-[3px] bg-background" />

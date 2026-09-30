@@ -4,57 +4,55 @@ import { SITE } from "@/lib/site"
 
 export function Footer() {
   const { t, path } = useI18n()
-  const product = [
-    { to: "/apps", label: t.nav.features },
-    { to: "/tarifs", label: t.nav.pricing },
-    { to: "/a-propos", label: t.nav.about },
-    { to: "/salons", label: t.footer.nails },
-    { to: "/restaurants", label: t.footer.restaurants },
-    { to: "/groupes", label: t.footer.groups },
+  const columns = [
+    {
+      title: t.footer.product,
+      links: [
+        { to: "/apps", label: t.nav.features },
+        { to: "/tarifs", label: t.nav.pricing },
+        { to: SITE.demoUrl, label: t.footer.demo },
+        { to: "/a-propos", label: t.nav.about },
+      ],
+    },
+    {
+      title: t.footer.industries,
+      links: [...t.nav.menu, { to: "/groupes", label: t.footer.groups }],
+    },
+    {
+      title: t.footer.legal,
+      links: [
+        { to: "/confidentialite", label: t.footer.privacy },
+        { to: "/conditions", label: t.footer.terms },
+      ],
+    },
   ]
-  const linkClass = "text-muted-foreground hover:text-primary"
   return (
-    <footer className="border-t bg-muted">
-      <div className="site-container flex flex-col gap-10 py-12">
-        <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-[1.5fr_1fr_0.8fr]">
-          <div className="flex max-w-xs flex-col gap-4">
-            <img
-              src="/MapleKiosk_rectangle.png"
-              alt={SITE.name}
-              className="h-10 w-auto self-start"
-            />
-            <p className="text-sm leading-relaxed text-muted-foreground">
-              {t.footer.tagline}
-            </p>
+    <footer className="bg-background">
+      <div className="site-container flex flex-col gap-10 pt-14 pb-7">
+        <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-[1.4fr_1fr_1fr_1fr]">
+          <div className="flex max-w-xs flex-col gap-3.5">
+            <img src="/MapleKiosk_rectangle.png" alt={SITE.name} className="h-12 w-auto self-start" />
+            <p className="text-sm leading-relaxed text-muted-foreground">{t.footer.tagline}</p>
           </div>
-          <div className="flex flex-col gap-2.5 text-sm">
-            <h5 className="mb-1 font-semibold">{t.footer.product}</h5>
-            {product.map((l) => (
-              <Link key={l.to} to={path(l.to)} className={linkClass}>
-                {l.label}
-              </Link>
-            ))}
-          </div>
-          <div className="flex flex-col gap-2.5 text-sm">
-            <h5 className="mb-1 font-semibold">{t.footer.legal}</h5>
-            <Link to={path("/confidentialite")} className={linkClass}>
-              {t.footer.privacy}
-            </Link>
-            <Link to={path("/conditions")} className={linkClass}>
-              {t.footer.terms}
-            </Link>
-          </div>
+          {columns.map((col) => (
+            <div key={col.title} className="flex flex-col gap-2.5 text-[14.5px]">
+              <h2 className="mb-1 font-mono text-[11.5px] font-medium tracking-[0.08em] text-muted-foreground uppercase">
+                {col.title}
+              </h2>
+              {col.links.map((l) => (
+                <Link key={l.to} to={path(l.to)} className="w-fit hover:text-primary">
+                  {l.label}
+                </Link>
+              ))}
+            </div>
+          ))}
         </div>
-        <div className="flex flex-wrap items-baseline gap-x-6 gap-y-2.5 border-t pt-6 text-[13.5px] text-muted-foreground">
+        <div className="flex flex-wrap justify-between gap-x-6 gap-y-2 border-t border-foreground pt-3.5 font-mono text-[11.5px] tracking-[0.07em] text-muted-foreground uppercase">
           <span>
-            © {new Date().getFullYear()} {SITE.legalName} {t.footer.rights}
+            © {new Date().getFullYear()} {SITE.legalName} · {t.footer.madeIn}
           </span>
-          <span>{t.footer.madeIn}</span>
-          <span className="rounded-md bg-background px-2 py-0.5 font-mono text-xs">
-            {SITE.phone}
-          </span>
-          <span className="rounded-md bg-background px-2 py-0.5 font-mono text-xs">
-            {SITE.email}
+          <span>
+            <a href={`mailto:${SITE.email}`} className="hover:text-primary">{SITE.email}</a>
           </span>
         </div>
       </div>

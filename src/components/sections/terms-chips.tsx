@@ -1,37 +1,28 @@
+import { pad2, SectionHead } from "@/components/ui-kit"
 import { useI18n } from "@/lib/i18n"
-import { useVisibleOnce } from "@/lib/use-visible-once"
 
 export function TermsChips() {
   const { t } = useI18n()
-  const { ref, visible } = useVisibleOnce()
+  const items = t.chips.items
+  const half = Math.ceil(items.length / 2)
   return (
     <section className="site-container section">
-      <div
-        ref={ref}
-        data-visible={visible || undefined}
-        className="flex max-w-3xl flex-col gap-10"
-      >
-        <h2 className="terms-title relative w-fit font-heading text-3xl font-semibold tracking-tight text-balance sm:text-[38px]">
-          {t.chips.title}
-        </h2>
-        <ol className="flex flex-col divide-y">
-          {t.chips.items.map((chip, i) => (
-            <li
-              key={chip}
-              className="flex items-baseline gap-5 py-6 sm:gap-8 sm:py-7"
-            >
-              <span
-                aria-hidden="true"
-                className="font-mono text-sm tabular-nums text-primary sm:text-base"
-              >
-                {String(i + 1).padStart(2, "0")}
-              </span>
-              <span className="font-heading text-[26px] leading-[1.15] font-semibold tracking-tight text-balance sm:text-[34px]">
-                {chip}
-              </span>
-            </li>
-          ))}
-        </ol>
+      <SectionHead title={t.chips.title} />
+      <div className="mt-10 grid border-t-2 border-foreground lg:grid-cols-2 lg:gap-x-14">
+        {[items.slice(0, half), items.slice(half)].map((col, c) => (
+          <ol key={c} start={c * half + 1}>
+            {col.map((item, i) => (
+              <li key={item} className="flex items-baseline gap-5 border-b border-border py-5 sm:gap-6">
+                <span aria-hidden className="font-mono text-[13px] text-primary">
+                  {pad2(c * half + i + 1)}
+                </span>
+                <span className="font-heading text-[26px] leading-[1.1] font-[650] tracking-[-0.018em] text-balance sm:text-[30px]">
+                  {item}
+                </span>
+              </li>
+            ))}
+          </ol>
+        ))}
       </div>
     </section>
   )
